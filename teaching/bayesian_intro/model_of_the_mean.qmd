@@ -1,0 +1,67 @@
+---
+title: "Model of the Mean"
+subtitle: "Start simple to get the basic building blocks first."
+date: last-modified
+date-format: "D MMM YYYY, HH:mm:ss"
+image: "resources/model-of-the-mean-hero.webp"
+format:
+  html:
+    embed-resources: true
+    toc: true
+    toc-collapse: 3
+---
+
+![](resources/model-of-the-mean-hero.webp){fig-align="center" width="50%"}
+
+```{r}
+#| include: false
+
+suppressPackageStartupMessages({
+  library(ggdag)
+  library(diggity)
+})
+
+basedir <- sub("(.*realgoodresearch/realgoodresearch).*", "\\1", getwd())
+
+outdir <- file.path(
+  basedir,
+  "wd",
+  "teaching",
+  "bayesian_intro",
+  "model_of_the_mean"
+)
+if (!dir.exists(outdir)) {
+  dir.create(outdir, showWarnings = FALSE, recursive = TRUE)
+}
+```
+
+
+
+
+## Introduction
+
+We will start with simple model so that we can focus on the Bayesian implementation rather than the statistical details. Our goal is to simply estimate the mean of a dataset. We will develop a stochastic simulation to generate the data, write a Stan model that estimates the mean, and use Markov chain Monte Carlo to explore the posterior distribution to fit the model. We will then take a look at some basic model diagnostics to confirm that our results are robust. 
+
+## The model 
+
+Before we get into the code, let's imagine that we are trying to estimate the average of hourly temperature readings from your home town. Do you have ideas for potential statistical models (a.k.a. probability distributions) that would be appropriate?  
+
+> Hint: What probability distribution accommodates continuous numbers with values that could theoretically range from negative infinity to positive infinity? 
+
+**Write down the statistical model that you suggest before clicking below to see my suggestion.** Be sure to include the data $y$, the mean $\mu$, the likelihood (i.e. probability distribution), any other parameters needed for the model, and the priors. 
+
+<details>
+<summary>Click here to see the model</summary>
+$$
+\begin{aligned}
+y_i &\sim normal(\mu, \sigma) \\
+\\
+\mu &\sim normal(0, 1) \\
+\sigma &\sim uniform(0, 1000)
+\end{aligned}
+$$
+</details>
+
+We use a normal distribution for the likelihood (i.e. data generating process) because it has an appropriate range of support for temperature data ($-\infty$ to $+\infty$), and it is appropriate for continuous numbers. Notice that we indexed the data $y_i$ because we will have more than one observation of temperature. The normal distribution has two parameters (mean $\mu$ and standard deviation $\sigma$) and we need to include them both. Finally, we specified priors for each parameter. 
+
+

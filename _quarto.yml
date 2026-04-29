@@ -35,7 +35,9 @@ website:
         - text: "Getting Started" 
           href: teaching/bayesian_intro/getting_started.qmd
         - section: "The Basics"
-          contents: []
+          contents: 
+          - text: "Model of the mean"
+            href: teaching/bayesian_intro/model_of_the_mean.qmd
         - section: "Going Further"
           contents:
           - text: "Synthetic Controls"

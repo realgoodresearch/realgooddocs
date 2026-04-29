@@ -27,6 +27,8 @@ suppressPackageStartupMessages({
   library(tidybayes)
   library(ggplot2)
   library(DT)
+  library(tidysynth)
+  library(dplyr)
 })
 
 basedir <- sub("(.*realgoodresearch/realgoodresearch).*", "\\1", getwd())
@@ -71,9 +73,6 @@ In the figure below, we can see that the synthetic control predictions in the pr
 #| message: false
 #| warning: false
 #| cache: true
-
-library(tidysynth)
-library(dplyr)
 
 data("smoking")
 
