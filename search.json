@@ -1,40 +1,17 @@
 [
   {
-    "objectID": "teaching/bayesian_intro/getting_started.html",
-    "href": "teaching/bayesian_intro/getting_started.html",
-    "title": "Getting Started",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Real Good Docs",
     "section": "",
-    "text": "Let’s make sure you have everything you need to get off to a good start!\nThe tutorials included in this Bayesian Intro will provide hands-on experience with Bayesian modelling for beginners using free and open source software–Stan and R. We use Stan because it is fast, flexible, well documented, and supported by an active community of developers and users (see Reading section). Note that we use R, but Stan also has support for Python, Julia, MATLAB, and command line interfaces, among others (see Stan Toolkit).",
-    "crumbs": [
-      "Getting Started"
-    ]
-  },
-  {
-    "objectID": "teaching/bayesian_intro/getting_started.html#software",
-    "href": "teaching/bayesian_intro/getting_started.html#software",
-    "title": "Getting Started",
-    "section": "Software",
-    "text": "Software\nBefore we get started, let’s make sure that you have the right software installed on your computer. If you want to skip the installation and simply read along with the exercises, you can go ahead to the next section(s) now. When you’re ready to run code on your own computer, just come back to this page to find links to the required software.\nYou will need the following software to be able to run the example code on your own computer:\n\nR and RStudio or Positron (or your favourite R IDE)\n\nGetting Started with CmdStanR. (Note: Be sure to complete the Introduction and Installing CmdStan sections).",
-    "crumbs": [
-      "Getting Started"
-    ]
-  },
-  {
-    "objectID": "teaching/bayesian_intro/getting_started.html#sec-reading",
-    "href": "teaching/bayesian_intro/getting_started.html#sec-reading",
-    "title": "Getting Started",
-    "section": "Reading",
-    "text": "Reading\n\nBayesian Statistics\n\nStatistical Rethinking Lectures (and book) by Richard McElreath\n\nBayes Rules! by Johnson, Ott, and Dogucu.\n\n\n\nStan Software\n\nIntroductory Stan tutorials, videos, and podcasts\n\nStan Documentation\n\nStan User Forums\n\nStan Case Studies\n\nStan website (collects all of the above together, with some deeper-dive materials as well)\n\nStan Toolkit\n\n\n\nBooks\n\nGelman A, Carlin JB, Stern HS, Dunson DB, Vehtari A, Rubin D. 2015. Bayesian Data Analysis. Chapman & Hall/CRC Texts in Statistical Science. https://sites.stat.columbia.edu/gelman/book/BDA3.pdf\n\nMcElreath R. 2015. Statistical Rethinking: A Bayesian course with examples in R and Stan. Chapman & Hall/CRC Texts in Statistical Science. https://civil.colorado.edu/~balajir/CVEN6833/bayes-resources/RM-StatRethink-Bayes.pdf\n\nLambert B. A student’s guide to Bayesian statistics. Sage. https://study.sagepub.com/lambert.\n\nHobbs NT, Hooten MB. 2015. Bayesian Models: A statistical primer for ecologists. Princeton University Press. Request full text pdf from authors via ResearchGate: https://www.researchgate.net/publication/283813602_Bayesian_Models_A_Statistical_Primer_for_Ecologists.",
-    "crumbs": [
-      "Getting Started"
-    ]
+    "text": "These docs help you dive deeper into innovative data and methods that we use across our projects."
   },
   {
     "objectID": "teaching/bayesian_intro/synthetic_controls.html#introduction",
     "href": "teaching/bayesian_intro/synthetic_controls.html#introduction",
     "title": "Synthetic Controls",
     "section": "Introduction",
-    "text": "Introduction\nImagine an alternate reality in which Russia’s large scale invasion of Ukraine never happened. Or where the British referendum vote had rejected Brexit. Would global migration patterns look different in these alternate realities?\nIn this exercise, we will learn how to develop Bayesian synthetic control models to infer migration under these alternative scenarios and compare them to observed migration to asses the effect of these world events.\n\nBackground\nSynthetic control models are really just a fancy weighted average.\nWe have a timeseries of observations from our “treated unit” with observations before and after some intervention date. This could be an economic indicator before and after a policy change, for example. We want a model that can estimate what we would have observed in the post-intervention period if there had been no intervention. We do that by taking a weighted average of observations from untreated units in our “donor pool”. The “donors” could be countries where no policy change was introduced.\nEstimating the weights is the real trick. We need to find weights for our weighted average that reproduce the pre-intervention observations in the treated country based on observations from the donor countries. These weights are often determined through optimisation algorithms, but we’re going to learn how to estimate them statistically in a Bayesian context. This has some advantages in terms of estimating uncertainty as well as flexibility to specify different models depending on the characteristics of our data.\n\n\nTraditional synthetic controls\nWe can see a nice (non-Bayesian) synthetic controls model from the example analysis for the tidysynth R package (see here). The example is based on a study from Abadie, Diamond, and Hainmueller (2010) which evaluated the impact that a large-scale tobacco control program in California had on cigarette sales. The model uses cigaratte sales in “donor” states to estimate what the trend would have been in California without the tobacco law.\nIn the figure below, we can see that the synthetic control predictions in the pre-intervetion period look quite close to reality which gives us confidence that the weighted average is working well. The observed cigarette sales declined significantly compared to the synthetic control in the post-intervention period which indicates to us that the 1988 California law was successful in reducing tobacco sales.\n\n\nShow the R code\nlibrary(tidysynth)\nlibrary(dplyr)\n\ndata(\"smoking\")\n\nsmoking_out &lt;-\n  smoking %&gt;%\n\n  # initial the synthetic control object\n  synthetic_control(\n    outcome = cigsale, # outcome\n    unit = state, # unit index in the panel data\n    time = year, # time index in the panel data\n    i_unit = \"California\", # unit where the intervention occurred\n    i_time = 1988, # time period when the intervention occurred\n    generate_placebos = T # generate placebo synthetic controls (for inference)\n  ) %&gt;%\n\n  # Generate the aggregate predictors used to fit the weights\n\n  # average log income, retail price of cigarettes, and proportion of the\n  # population between 15 and 24 years of age from 1980 - 1988\n  generate_predictor(\n    time_window = 1980:1988,\n    ln_income = mean(lnincome, na.rm = T),\n    ret_price = mean(retprice, na.rm = T),\n    youth = mean(age15to24, na.rm = T)\n  ) %&gt;%\n\n  # average beer consumption in the donor pool from 1984 - 1988\n  generate_predictor(\n    time_window = 1984:1988,\n    beer_sales = mean(beer, na.rm = T)\n  ) %&gt;%\n\n  # Lagged cigarette sales\n  generate_predictor(time_window = 1975, cigsale_1975 = cigsale) %&gt;%\n  generate_predictor(time_window = 1980, cigsale_1980 = cigsale) %&gt;%\n  generate_predictor(time_window = 1988, cigsale_1988 = cigsale) %&gt;%\n\n  # Generate the fitted weights for the synthetic control\n  generate_weights(\n    optimization_window = 1970:1988, # time to use in the optimization task\n    margin_ipop = .02,\n    sigf_ipop = 7,\n    bound_ipop = 6 # optimizer options\n  ) %&gt;%\n\n  # Generate the synthetic control\n  generate_control()\n\n# Plotting the result\nsmoking_out %&gt;% plot_trends()\n\n\n\n\n\n\n\n\n\n\nThis example analysis used covariates (age and beer sales) along with lagged effects that we will not explore in our Bayesian synthetic controls, although they could be implemented as extensions to the models we will develop below.",
+    "text": "Introduction\nImagine an alternate reality in which Russia’s large scale invasion of Ukraine never happened. Or where the British referendum vote had rejected Brexit. Would global migration patterns look different in these alternate realities?\nIn this exercise, we will learn how to develop Bayesian synthetic control models to infer migration under these alternative scenarios and compare them to observed migration to asses the effect of these world events.\n\nBackground\nSynthetic control models are really just a fancy weighted average.\nWe have a timeseries of observations from our “treated unit” with observations before and after some intervention date. This could be an economic indicator before and after a policy change, for example. We want a model that can estimate what we would have observed in the post-intervention period if there had been no intervention. We do that by taking a weighted average of observations from untreated units in our “donor pool”. The “donors” could be countries where no policy change was introduced.\nEstimating the weights is the real trick. We need to find weights for our weighted average that reproduce the pre-intervention observations in the treated country based on observations from the donor countries. These weights are often determined through optimisation algorithms, but we’re going to learn how to estimate them statistically in a Bayesian context. This has some advantages in terms of estimating uncertainty as well as flexibility to specify different models depending on the characteristics of our data.\n\n\nTraditional synthetic controls\nWe can see a nice (non-Bayesian) synthetic controls model from the example analysis for the tidysynth R package (see here). The example is based on a study from Abadie et al. (2010) which evaluated the impact that a large-scale tobacco control program in California had on cigarette sales. The model uses cigaratte sales in “donor” states to estimate what the trend would have been in California without the tobacco law.\nIn the figure below, we can see that the synthetic control predictions in the pre-intervetion period look quite close to reality which gives us confidence that the weighted average is working well. The observed cigarette sales declined significantly compared to the synthetic control in the post-intervention period which indicates to us that the 1988 California law was successful in reducing tobacco sales.\n\n\nShow the R code\nlibrary(tidysynth)\nlibrary(dplyr)\n\ndata(\"smoking\")\n\nsmoking_out &lt;-\n  smoking %&gt;%\n\n  # initial the synthetic control object\n  synthetic_control(\n    outcome = cigsale, # outcome\n    unit = state, # unit index in the panel data\n    time = year, # time index in the panel data\n    i_unit = \"California\", # unit where the intervention occurred\n    i_time = 1988, # time period when the intervention occurred\n    generate_placebos = T # generate placebo synthetic controls (for inference)\n  ) %&gt;%\n\n  # Generate the aggregate predictors used to fit the weights\n\n  # average log income, retail price of cigarettes, and proportion of the\n  # population between 15 and 24 years of age from 1980 - 1988\n  generate_predictor(\n    time_window = 1980:1988,\n    ln_income = mean(lnincome, na.rm = T),\n    ret_price = mean(retprice, na.rm = T),\n    youth = mean(age15to24, na.rm = T)\n  ) %&gt;%\n\n  # average beer consumption in the donor pool from 1984 - 1988\n  generate_predictor(\n    time_window = 1984:1988,\n    beer_sales = mean(beer, na.rm = T)\n  ) %&gt;%\n\n  # Lagged cigarette sales\n  generate_predictor(time_window = 1975, cigsale_1975 = cigsale) %&gt;%\n  generate_predictor(time_window = 1980, cigsale_1980 = cigsale) %&gt;%\n  generate_predictor(time_window = 1988, cigsale_1988 = cigsale) %&gt;%\n\n  # Generate the fitted weights for the synthetic control\n  generate_weights(\n    optimization_window = 1970:1988, # time to use in the optimization task\n    margin_ipop = .02,\n    sigf_ipop = 7,\n    bound_ipop = 6 # optimizer options\n  ) %&gt;%\n\n  # Generate the synthetic control\n  generate_control()\n\n# Plotting the result\nsmoking_out %&gt;% plot_trends()\n\n\n\n\n\n\n\n\n\n\nThis example analysis used covariates (age and beer sales) along with lagged effects that we will not explore in our Bayesian synthetic controls, although they could be implemented as extensions to the models we will develop below.",
     "crumbs": [
       "Going Further",
       "Synthetic Controls"
@@ -107,18 +84,34 @@
     ]
   },
   {
-    "objectID": "teaching/index.html",
-    "href": "teaching/index.html",
-    "title": "Teaching",
+    "objectID": "teaching/bayesian_intro/getting_started.html",
+    "href": "teaching/bayesian_intro/getting_started.html",
+    "title": "Getting Started",
     "section": "",
-    "text": "Bayesian Intro\n\n\nAn introduction to Bayesian statistics for applied research.\n\n\n\n\n\n\n\n\nFeb 26, 2026\n\n\n\n\n\nNo matching items"
+    "text": "Let’s make sure you have everything you need to get off to a good start!\nThe tutorials included in this Bayesian Intro will provide hands-on experience with Bayesian modelling for beginners using free and open source software–Stan and R. We use Stan because it is fast, flexible, well documented, and supported by an active community of developers and users (see Reading section). Note that we use R, but Stan also has support for Python, Julia, MATLAB, and command line interfaces, among others (see Stan Toolkit).",
+    "crumbs": [
+      "Getting Started"
+    ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Real Good Docs",
-    "section": "",
-    "text": "These docs help you dive deeper into innovative data and methods that we use across our projects."
+    "objectID": "teaching/bayesian_intro/getting_started.html#software",
+    "href": "teaching/bayesian_intro/getting_started.html#software",
+    "title": "Getting Started",
+    "section": "Software",
+    "text": "Software\nBefore we get started, let’s make sure that you have the right software installed on your computer. If you want to skip the installation and simply read along with the exercises, you can go ahead to the next section(s) now. When you’re ready to run code on your own computer, just come back to this page to find links to the required software.\nYou will need the following software to be able to run the example code on your own computer:\n\nR and RStudio or Positron (or your favourite R IDE)\n\nGetting Started with CmdStanR. (Note: Be sure to complete the Introduction and Installing CmdStan sections).",
+    "crumbs": [
+      "Getting Started"
+    ]
+  },
+  {
+    "objectID": "teaching/bayesian_intro/getting_started.html#sec-reading",
+    "href": "teaching/bayesian_intro/getting_started.html#sec-reading",
+    "title": "Getting Started",
+    "section": "Reading",
+    "text": "Reading\n\nBayesian Statistics\n\nStatistical Rethinking Lectures (and book) by Richard McElreath\n\nBayes Rules! by Johnson, Ott, and Dogucu.\n\n\n\nStan Software\n\nIntroductory Stan tutorials, videos, and podcasts\n\nStan Documentation\n\nStan User Forums\n\nStan Case Studies\n\nStan website (collects all of the above together, with some deeper-dive materials as well)\n\nStan Toolkit\n\n\n\nBooks\n\nGelman A, Carlin JB, Stern HS, Dunson DB, Vehtari A, Rubin D. 2015. Bayesian Data Analysis. Chapman & Hall/CRC Texts in Statistical Science. https://sites.stat.columbia.edu/gelman/book/BDA3.pdf\n\nMcElreath R. 2015. Statistical Rethinking: A Bayesian course with examples in R and Stan. Chapman & Hall/CRC Texts in Statistical Science. https://civil.colorado.edu/~balajir/CVEN6833/bayes-resources/RM-StatRethink-Bayes.pdf\n\nLambert B. A student’s guide to Bayesian statistics. Sage. https://study.sagepub.com/lambert.\n\nHobbs NT, Hooten MB. 2015. Bayesian Models: A statistical primer for ecologists. Princeton University Press. Request full text pdf from authors via ResearchGate: https://www.researchgate.net/publication/283813602_Bayesian_Models_A_Statistical_Primer_for_Ecologists.",
+    "crumbs": [
+      "Getting Started"
+    ]
   },
   {
     "objectID": "teaching/bayesian_intro/overview.html",
@@ -135,9 +128,16 @@
     "href": "teaching/bayesian_intro/toc.html",
     "title": "Table of Contents",
     "section": "",
-    "text": "Bayesian Intro\n\n\n\n\n\n\n\n\n\nFeb 26, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nGetting Started\n\n\n\n\n\n\n\n\n\nFeb 26, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nSynthetic Controls\n\n\n\n\n\n\n\n\n\nFeb 26, 2026\n\n\n\n\n\n\nNo matching items",
+    "text": "Bayesian Intro\n\n\n\n\n\n\n\n\n\nApr 29, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nGetting Started\n\n\n\n\n\n\n\n\n\nApr 29, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nSynthetic Controls\n\n\n\n\n\n\n\n\n\nApr 29, 2026\n\n\n\n\n\n\nNo matching items",
     "crumbs": [
       "Table of Contents"
     ]
+  },
+  {
+    "objectID": "teaching/index.html",
+    "href": "teaching/index.html",
+    "title": "Teaching",
+    "section": "",
+    "text": "Bayesian Intro\n\n\nAn introduction to Bayesian statistics for applied research.\n\n\n\n\n\n\n\n\nApr 29, 2026\n\n\n\n\n\nNo matching items"
   }
 ]
