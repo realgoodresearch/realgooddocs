@@ -11,12 +11,16 @@ website:
     type: dark 
     border: true
     right:
+      - href: https://data.realgoodresearch.com
+        text: Data
+      - href: https://docs.realgoodresearch.com
+        text: Docs
       - href: https://github.com/realgoodresearch
         target: _blank
-        text: GitHub
+        text: Code
       - href: https://realgoodresearch.com
         target: _blank
-        text: Real Good Research
+        text: Home
     left:
       - text: "Teaching"
         href: teaching/index.qmd
