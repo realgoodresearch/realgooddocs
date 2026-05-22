@@ -3,6 +3,7 @@ project:
 
 website:
   title: "Real Good Docs"
+  favicon: assets/images/logo/favicon.ico
   page-navigation: true
   search: true
 
