@@ -4,7 +4,37 @@
     "href": "index.html",
     "title": "Real Good Docs",
     "section": "",
-    "text": "These docs help you dive deeper into innovative data and methods that we use across our projects."
+    "text": "WarningNotice\n\n\n\nThis site is currently under construction. Some pages and features may be incomplete while we continue building."
+  },
+  {
+    "objectID": "teaching/bayesian_intro/getting_started.html",
+    "href": "teaching/bayesian_intro/getting_started.html",
+    "title": "Getting Started",
+    "section": "",
+    "text": "Let’s make sure you have everything you need to get off to a good start!\nThe tutorials included in this Bayesian Intro will provide hands-on experience with Bayesian modelling for beginners using free and open source software–Stan and R. We use Stan because it is fast, flexible, well documented, and supported by an active community of developers and users (see Reading section). Note that we use R, but Stan also has support for Python, Julia, MATLAB, and command line interfaces, among others (see Stan Toolkit).",
+    "crumbs": [
+      "Getting Started"
+    ]
+  },
+  {
+    "objectID": "teaching/bayesian_intro/getting_started.html#software",
+    "href": "teaching/bayesian_intro/getting_started.html#software",
+    "title": "Getting Started",
+    "section": "Software",
+    "text": "Software\nBefore we get started, let’s make sure that you have the right software installed on your computer. If you want to skip the installation and simply read along with the exercises, you can go ahead to the next section(s) now. When you’re ready to run code on your own computer, just come back to this page to find links to the required software.\nYou will need the following software to be able to run the example code on your own computer:\n\nR and RStudio or Positron (or your favourite R IDE)\n\nGetting Started with CmdStanR. (Note: Be sure to complete the Introduction and Installing CmdStan sections).",
+    "crumbs": [
+      "Getting Started"
+    ]
+  },
+  {
+    "objectID": "teaching/bayesian_intro/getting_started.html#sec-reading",
+    "href": "teaching/bayesian_intro/getting_started.html#sec-reading",
+    "title": "Getting Started",
+    "section": "Reading",
+    "text": "Reading\n\nBayesian Statistics\n\nStatistical Rethinking Lectures (and book) by Richard McElreath\n\nBayes Rules! by Johnson, Ott, and Dogucu.\n\n\n\nStan Software\n\nIntroductory Stan tutorials, videos, and podcasts\n\nStan Documentation\n\nStan User Forums\n\nStan Case Studies\n\nStan website (collects all of the above together, with some deeper-dive materials as well)\n\nStan Toolkit\n\n\n\nBooks\n\nGelman A, Carlin JB, Stern HS, Dunson DB, Vehtari A, Rubin D. 2015. Bayesian Data Analysis. Chapman & Hall/CRC Texts in Statistical Science. https://sites.stat.columbia.edu/gelman/book/BDA3.pdf\n\nMcElreath R. 2015. Statistical Rethinking: A Bayesian course with examples in R and Stan. Chapman & Hall/CRC Texts in Statistical Science. https://civil.colorado.edu/~balajir/CVEN6833/bayes-resources/RM-StatRethink-Bayes.pdf\n\nLambert B. A student’s guide to Bayesian statistics. Sage. https://study.sagepub.com/lambert.\n\nHobbs NT, Hooten MB. 2015. Bayesian Models: A statistical primer for ecologists. Princeton University Press. Request full text pdf from authors via ResearchGate: https://www.researchgate.net/publication/283813602_Bayesian_Models_A_Statistical_Primer_for_Ecologists.",
+    "crumbs": [
+      "Getting Started"
+    ]
   },
   {
     "objectID": "teaching/bayesian_intro/synthetic_controls.html#introduction",
@@ -84,33 +114,20 @@
     ]
   },
   {
-    "objectID": "teaching/bayesian_intro/getting_started.html",
-    "href": "teaching/bayesian_intro/getting_started.html",
-    "title": "Getting Started",
+    "objectID": "teaching/index.html",
+    "href": "teaching/index.html",
+    "title": "Teaching",
     "section": "",
-    "text": "Let’s make sure you have everything you need to get off to a good start!\nThe tutorials included in this Bayesian Intro will provide hands-on experience with Bayesian modelling for beginners using free and open source software–Stan and R. We use Stan because it is fast, flexible, well documented, and supported by an active community of developers and users (see Reading section). Note that we use R, but Stan also has support for Python, Julia, MATLAB, and command line interfaces, among others (see Stan Toolkit).",
-    "crumbs": [
-      "Getting Started"
-    ]
+    "text": "Bayesian Intro\n\n\nAn introduction to Bayesian statistics for applied research.\n\n\n\n\n\n\n\n\nMay 22, 2026\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "teaching/bayesian_intro/getting_started.html#software",
-    "href": "teaching/bayesian_intro/getting_started.html#software",
-    "title": "Getting Started",
-    "section": "Software",
-    "text": "Software\nBefore we get started, let’s make sure that you have the right software installed on your computer. If you want to skip the installation and simply read along with the exercises, you can go ahead to the next section(s) now. When you’re ready to run code on your own computer, just come back to this page to find links to the required software.\nYou will need the following software to be able to run the example code on your own computer:\n\nR and RStudio or Positron (or your favourite R IDE)\n\nGetting Started with CmdStanR. (Note: Be sure to complete the Introduction and Installing CmdStan sections).",
+    "objectID": "teaching/bayesian_intro/toc.html",
+    "href": "teaching/bayesian_intro/toc.html",
+    "title": "Table of Contents",
+    "section": "",
+    "text": "Bayesian Intro\n\n\n\n\n\n\n\n\n\nMay 22, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nGetting Started\n\n\n\n\n\n\n\n\n\nMay 22, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nSynthetic Controls\n\n\n\n\n\n\n\n\n\nMay 22, 2026\n\n\n\n\n\n\nNo matching items",
     "crumbs": [
-      "Getting Started"
-    ]
-  },
-  {
-    "objectID": "teaching/bayesian_intro/getting_started.html#sec-reading",
-    "href": "teaching/bayesian_intro/getting_started.html#sec-reading",
-    "title": "Getting Started",
-    "section": "Reading",
-    "text": "Reading\n\nBayesian Statistics\n\nStatistical Rethinking Lectures (and book) by Richard McElreath\n\nBayes Rules! by Johnson, Ott, and Dogucu.\n\n\n\nStan Software\n\nIntroductory Stan tutorials, videos, and podcasts\n\nStan Documentation\n\nStan User Forums\n\nStan Case Studies\n\nStan website (collects all of the above together, with some deeper-dive materials as well)\n\nStan Toolkit\n\n\n\nBooks\n\nGelman A, Carlin JB, Stern HS, Dunson DB, Vehtari A, Rubin D. 2015. Bayesian Data Analysis. Chapman & Hall/CRC Texts in Statistical Science. https://sites.stat.columbia.edu/gelman/book/BDA3.pdf\n\nMcElreath R. 2015. Statistical Rethinking: A Bayesian course with examples in R and Stan. Chapman & Hall/CRC Texts in Statistical Science. https://civil.colorado.edu/~balajir/CVEN6833/bayes-resources/RM-StatRethink-Bayes.pdf\n\nLambert B. A student’s guide to Bayesian statistics. Sage. https://study.sagepub.com/lambert.\n\nHobbs NT, Hooten MB. 2015. Bayesian Models: A statistical primer for ecologists. Princeton University Press. Request full text pdf from authors via ResearchGate: https://www.researchgate.net/publication/283813602_Bayesian_Models_A_Statistical_Primer_for_Ecologists.",
-    "crumbs": [
-      "Getting Started"
+      "Table of Contents"
     ]
   },
   {
@@ -122,22 +139,5 @@
     "crumbs": [
       "Welcome"
     ]
-  },
-  {
-    "objectID": "teaching/bayesian_intro/toc.html",
-    "href": "teaching/bayesian_intro/toc.html",
-    "title": "Table of Contents",
-    "section": "",
-    "text": "Bayesian Intro\n\n\n\n\n\n\n\n\n\nApr 29, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nGetting Started\n\n\n\n\n\n\n\n\n\nApr 29, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nSynthetic Controls\n\n\n\n\n\n\n\n\n\nApr 29, 2026\n\n\n\n\n\n\nNo matching items",
-    "crumbs": [
-      "Table of Contents"
-    ]
-  },
-  {
-    "objectID": "teaching/index.html",
-    "href": "teaching/index.html",
-    "title": "Teaching",
-    "section": "",
-    "text": "Bayesian Intro\n\n\nAn introduction to Bayesian statistics for applied research.\n\n\n\n\n\n\n\n\nApr 29, 2026\n\n\n\n\n\nNo matching items"
   }
 ]

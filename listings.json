@@ -1,16 +1,16 @@
 [
   {
+    "listing": "/teaching/index.html",
+    "items": [
+      "/teaching/bayesian_intro/overview.html"
+    ]
+  },
+  {
     "listing": "/teaching/bayesian_intro/toc.html",
     "items": [
       "/teaching/bayesian_intro/overview.html",
       "/teaching/bayesian_intro/getting_started.html",
       "/teaching/bayesian_intro/synthetic_controls.html"
-    ]
-  },
-  {
-    "listing": "/teaching/index.html",
-    "items": [
-      "/teaching/bayesian_intro/overview.html"
     ]
   }
 ]
