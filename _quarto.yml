@@ -19,7 +19,6 @@ website:
         target: _blank
         text: Code
       - href: https://realgoodresearch.com
-        target: _blank
         text: Home
     left:
       - text: "Teaching"
