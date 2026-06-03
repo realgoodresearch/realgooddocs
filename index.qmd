@@ -1,10 +1,15 @@
 ---
 title: "Real Good Docs"
-subtitle: "Innovations and discoveries behind Real Good Research."
+subtitle: "Documenting and teaching the innovations behind Real Good Research."
 ---
 
 ::: {.inset-center}
-These docs help you dive deeper into innovative data and methods that we use across our projects.
 
 :::
 
+::: {.callout-warning}
+## Notice
+This site is currently under construction. Some pages and features may be incomplete while we continue building.
+:::
+
+![](assets/images/work-in-progress.png)
