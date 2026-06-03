@@ -22,21 +22,26 @@ install_if_missing <- function(packages) {
   }
 }
 
+get_description_packages <- function(path = "DESCRIPTION") {
+  desc <- read.dcf(path)[1, ]
+  fields <- c("Imports", "Depends", "LinkingTo", "Suggests")
+  packages <- character()
+
+  for (field in fields) {
+    value <- desc[[field]]
+    if (!is.na(value) && nzchar(value)) {
+      field_packages <- strsplit(value, ",")[[1]]
+      field_packages <- trimws(field_packages)
+      field_packages <- sub("\\s*\\(.*\\)$", "", field_packages)
+      packages <- c(packages, field_packages)
+    }
+  }
+
+  unique(packages[nzchar(packages) & packages != "R"])
+}
+
 # list of required R packages
-pkgs <- c(
-  "cmdstanr",
-  "posterior",
-  "bayesplot",
-  "tidyr",
-  "tidybayes",
-  "tibble",
-  "dplyr",
-  "ggplot2",
-  "DT",
-  "tidysynth",
-  "ggdag",
-  "diggity"
-)
+pkgs <- get_description_packages()
 
 # install R packages
 install_if_missing(pkgs)
@@ -51,7 +56,7 @@ install_if_missing(pkgs)
 # check_cmdstan_toolchain()
 
 # # if needed, download and run the Rtools45 installer from here:
-# # https://cran.rstudio.com/bin/windows/Rtools/rtools45/rtools.html
+# # https://cran.rstudio.com/bin/windows/Rtools/rtools.html
 
 # # install CmdStan
 # install_cmdstan(cores = 2)
