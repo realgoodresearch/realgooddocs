@@ -7,6 +7,16 @@
     "text": "WarningNotice\n\n\n\nThis site is currently under construction. Some pages and features may be incomplete while we continue building."
   },
   {
+    "objectID": "teaching/bayesian_intro/toc.html",
+    "href": "teaching/bayesian_intro/toc.html",
+    "title": "Table of Contents",
+    "section": "",
+    "text": "Bayesian Intro\n\n\n\n\n\n\n\n\n\nJun 3, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nGetting Started\n\n\n\n\n\n\n\n\n\nJun 3, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nSynthetic Controls\n\n\n\n\n\n\n\n\n\nJun 3, 2026\n\n\n\n\n\n\nNo matching items",
+    "crumbs": [
+      "Table of Contents"
+    ]
+  },
+  {
     "objectID": "teaching/bayesian_intro/getting_started.html",
     "href": "teaching/bayesian_intro/getting_started.html",
     "title": "Getting Started",
@@ -35,6 +45,13 @@
     "crumbs": [
       "Getting Started"
     ]
+  },
+  {
+    "objectID": "teaching/index.html",
+    "href": "teaching/index.html",
+    "title": "Teaching",
+    "section": "",
+    "text": "Bayesian Intro\n\n\nAn introduction to Bayesian statistics for applied research.\n\n\n\n\n\n\n\n\nJun 3, 2026\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "teaching/bayesian_intro/synthetic_controls.html#introduction",
@@ -111,23 +128,6 @@
     "crumbs": [
       "Going Further",
       "Synthetic Controls"
-    ]
-  },
-  {
-    "objectID": "teaching/index.html",
-    "href": "teaching/index.html",
-    "title": "Teaching",
-    "section": "",
-    "text": "Bayesian Intro\n\n\nAn introduction to Bayesian statistics for applied research.\n\n\n\n\n\n\n\n\nMay 22, 2026\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "teaching/bayesian_intro/toc.html",
-    "href": "teaching/bayesian_intro/toc.html",
-    "title": "Table of Contents",
-    "section": "",
-    "text": "Bayesian Intro\n\n\n\n\n\n\n\n\n\nMay 22, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nGetting Started\n\n\n\n\n\n\n\n\n\nMay 22, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nSynthetic Controls\n\n\n\n\n\n\n\n\n\nMay 22, 2026\n\n\n\n\n\n\nNo matching items",
-    "crumbs": [
-      "Table of Contents"
     ]
   },
   {
