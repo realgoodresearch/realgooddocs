@@ -33,16 +33,12 @@ jobs:
         with:
           cache-version: 1
 
-      - name: Install CmdStan
-        shell: Rscript {0}
-        run: |
-          if (is.na(tryCatch(cmdstanr::cmdstan_version(), error = function(e) NA_character_))) {
-            cmdstanr::install_cmdstan(cores = max(1, parallel::detectCores() - 1))
-          }
+      - name: Render site
+        run: quarto render
 
-      - name: Render and Publish
-        uses: quarto-dev/quarto-actions/publish@v2
+      - name: Publish to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          target: gh-pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+          publish_branch: gh-pages

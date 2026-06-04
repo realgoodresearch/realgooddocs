@@ -28,12 +28,14 @@ get_description_packages <- function(path = "DESCRIPTION") {
   packages <- character()
 
   for (field in fields) {
-    value <- desc[[field]]
-    if (!is.na(value) && nzchar(value)) {
-      field_packages <- strsplit(value, ",")[[1]]
-      field_packages <- trimws(field_packages)
-      field_packages <- sub("\\s*\\(.*\\)$", "", field_packages)
-      packages <- c(packages, field_packages)
+    if (field %in% names(desc)) {
+      value <- desc[[field]]
+      if (!is.na(value) && nzchar(value)) {
+        field_packages <- strsplit(value, ",")[[1]]
+        field_packages <- trimws(field_packages)
+        field_packages <- sub("\\s*\\(.*\\)$", "", field_packages)
+        packages <- c(packages, field_packages)
+      }
     }
   }
 
