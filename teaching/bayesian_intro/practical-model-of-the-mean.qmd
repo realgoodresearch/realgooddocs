@@ -1,9 +1,9 @@
 ---
-title: "Model of the Mean"
+title: "Practical Tutorial: Model of the Mean"
 subtitle: "Start simple to get the basic building blocks first."
 date: last-modified
 date-format: "D MMM YYYY, HH:mm:ss"
-image: "resources/model-of-the-mean-hero.webp"
+image: "resources/practical-model-of-the-mean-hero.webp"
 format:
   html:
     embed-resources: true
@@ -11,14 +11,13 @@ format:
     toc-collapse: 3
 ---
 
-![](resources/model-of-the-mean-hero.webp){fig-align="center" width="50%"}
+![](resources/practical-model-of-the-mean-hero.webp){fig-align="center" width="50%"}
 
 ```{r}
 #| include: false
-
 suppressPackageStartupMessages({
   library(ggdag)
-  library(diggity)
+  library(dagitty)
 })
 
 basedir <- sub("(.*realgoodresearch/realgoodresearch).*", "\\1", getwd())

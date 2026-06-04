@@ -1,9 +1,9 @@
 ---
-title: "Synthetic Controls"
+title: "Practical Tutorial: Synthetic Controls"
 subtitle: "Assess treatment effects by comparing real history to an alternate reality without the treatment."
 date: last-modified
 date-format: "D MMM YYYY, HH:mm:ss"
-image: "resources/synthetic-controls-hero.webp"
+image: "resources/practical-synthetic-controls-hero.webp"
 format:
   html:
     embed-resources: true
@@ -11,7 +11,7 @@ format:
     toc-collapse: 3
 ---
 
-![](resources/synthetic-controls-hero.webp){fig-align="center" width="50%"}
+![](resources/practical-synthetic-controls-hero.webp){fig-align="center" width="50%"}
 
 ```{r}
 #| include: false

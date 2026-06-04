@@ -38,21 +38,26 @@ website:
         - text: "Table of Contents"
           href: teaching/bayesian_intro/toc.qmd
         - text: "Getting Started" 
-          href: teaching/bayesian_intro/getting_started.qmd
-        - section: "The Basics"
+          href: teaching/bayesian_intro/getting-started.qmd
+        - section: "Lecture Slides"
           contents: 
-          - text: "Model of the mean"
-            href: teaching/bayesian_intro/model_of_the_mean.qmd
-        - section: "Going Further"
+          - text: "Intro to Bayesian Inference"
+            href: teaching/bayesian_intro/lecture-intro-to-bayesian-inference.qmd
+          - text: "GLMs and Hierarchical Models"
+            href: teaching/bayesian_intro/lecture-glm-and-hierarchical-models.qmd
+        - section: "Practical Tutorials"
           contents:
+          - text: "Model of the mean"
+            href: teaching/bayesian_intro/practical-model-of-the-mean.qmd
           - text: "Synthetic Controls"
-            href: teaching/bayesian_intro/synthetic_controls.qmd
+            href: teaching/bayesian_intro/practical-synthetic-controls.qmd
 
 format:
   html:
     theme: 
       - cosmo
       - custom-theme.scss
+    include-in-header: assets/pdf-viewer-head.html
     include-after-body: _footer.html
     toc: true
     number-sections: false

@@ -8,7 +8,7 @@ Imports:
     bayesplot,
     cmdstanr,
     dplyr,
-    diggity,
+    dagitty,
     DT,
     ggdag,
     ggplot2,

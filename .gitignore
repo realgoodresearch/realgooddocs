@@ -1,7 +1,7 @@
 /.quarto/
 /docs/
 /_site/
-/wd/
+**/wd/
 *_cache/
 *_files/
 site_libs/

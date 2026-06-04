@@ -1,0 +1,48 @@
+---
+title: "Lecture Slides: GLM and Hierarchical Models"
+subtitle: "Building a foundation of flexible modelling frameworks"
+date: last-modified
+date-format: "D MMM YYYY, HH:mm:ss"
+image: "resources/lecture-glm-and-hierarchical-models-hero.webp"
+format:
+  html:
+    embed-resources: true
+    toc: true
+    toc-collapse: 3
+resources:
+  - resources/lecture-glm-and-hierarchical-models.pdf
+execute:
+  freeze: false
+---
+
+These lecture slides extend on the fundamentals to include flexible modelling frameworks of generalised linear models and hierarchical models. 
+
+The slides are intended to be accompanied by in-person lecture and discussion, but we include them here for reference and self-study.
+
+```{=html}
+<div class="pdf-page-viewer" data-file="resources/lecture-glm-and-hierarchical-models.pdf" data-start="2" data-page="1" tabindex="0" aria-label="Lecture GLM and Hierarchical Models PDF viewer">
+  <div class="pdf-page-viewer-toolbar">
+    <button class="pdf-prev-page" type="button" aria-label="Previous slide" title="Previous slide">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>
+      <span class="pdf-sr-only">Previous slide</span>
+    </button>
+    <div class="pdf-page-status">Loading...</div>
+    <button class="pdf-next-page" type="button" aria-label="Next slide" title="Next slide">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+      <span class="pdf-sr-only">Next slide</span>
+    </button>
+    <a class="pdf-download-pdf" href="resources/lecture-glm-and-hierarchical-models.pdf" download aria-label="Download PDF" title="Download PDF">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"></path><path d="M7 10l5 5 5-5"></path><path d="M5 21h14"></path></svg>
+      <span class="pdf-sr-only">Download PDF</span>
+    </a>
+    <button class="pdf-expand-viewer" type="button" aria-label="Expand viewer" title="Expand viewer">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5"></path><path d="M16 3h5v5"></path><path d="M21 16v5h-5"></path><path d="M3 16v5h5"></path><path d="M9 3L3 9"></path><path d="M15 3l6 6"></path><path d="M9 21l-6-6"></path><path d="M15 21l6-6"></path></svg>
+      <span class="pdf-sr-only">Expand viewer</span>
+    </button>
+  </div>
+  <div class="pdf-canvas-wrap">
+    <canvas class="pdf-canvas"></canvas>
+    <div class="pdf-message">Loading PDF...</div>
+  </div>
+</div>
+```
