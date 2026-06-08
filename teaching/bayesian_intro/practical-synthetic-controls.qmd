@@ -1,6 +1,7 @@
 ---
 title: "Practical Tutorial: Synthetic Controls"
 subtitle: "Assess treatment effects by comparing real history to an alternate reality without the treatment."
+author: "Doug Leasure"
 date: last-modified
 date-format: "D MMM YYYY, HH:mm:ss"
 image: "resources/practical-synthetic-controls-hero.webp"
@@ -15,7 +16,6 @@ format:
 
 ```{r}
 #| include: false
-
 suppressPackageStartupMessages({
   library(tools)
   library(cmdstanr)
@@ -73,7 +73,6 @@ In the figure below, we can see that the synthetic control predictions in the pr
 #| message: false
 #| warning: false
 #| cache: true
-
 data("smoking")
 
 smoking_out <-
@@ -141,7 +140,6 @@ Before we get started, we have a few quick housekeeping items to get out of the 
 ```{r}
 #| echo: true
 #| eval: false
-
 library(cmdstanr)
 library(bayesplot)
 library(posterior)
@@ -162,7 +160,6 @@ If you don't have any of the other R packages, you can install them with this co
 #| eval: false
 #| code-fold: true
 #| code-summary: "Show the R code"
-
 pkgs <- c(
   "tools",
   "bayesplot",
@@ -185,7 +182,6 @@ Let's also go ahead and setup our working directory and output directory:
 ```{r}
 #| echo: true
 #| eval: false
-
 outdir <- file.path(getwd(), "synthetic_controls")
 dir.create(outdir, recursive = TRUE)
 ```
@@ -202,7 +198,6 @@ Now we'll download the data into our working directory and load it into our R en
 #| echo: true
 #| message: false
 #| output: false
-
 # filename to save the data
 dat_filename <- file.path(outdir, "international_migration_flow.csv")
 
@@ -225,7 +220,6 @@ So you can get a better idea of what we're working with, let's take a quick look
 #| echo: false
 #| message: false
 #| cache: true
-
 datatable(
   dat %>%
     filter(
@@ -326,7 +320,6 @@ Save this Stan model code into a file named **poisson.stan** in the `outdir` tha
 ```{r}
 #| label: write-stan-file
 #| include: false
-
 stan_code <- "
 data {
   int<lower=1> T; // Total number of months
@@ -426,7 +419,6 @@ Let's just plot that to get an idea of the change in migration from Ukraine to G
 #| label: ua-de-data-plot
 #| code-fold: true
 #| code-summary: "Show the R code"
-
 plot_data <- data.frame(
   month = 1:length(y_treated),
   migration_count = y_treated
@@ -560,7 +552,6 @@ Now let's compile and run the model:
 #| output: false
 #| warning: false
 #| message: false
-
 # compile the stan model
 mod <- cmdstan_model(file.path(outdir, "poisson.stan"))
 
@@ -588,7 +579,6 @@ Before looking at the substantive results, we need to do a quick sanity check ju
 #| code-summary: "Show the R code"
 #| message: false
 #| warning: false
-
 draws <- fit_po$draws()
 pars <- c("alpha", paste0("weights[", sample(1:md$K, 11), "]"))
 
@@ -605,7 +595,6 @@ These traceplots look great, but we need to check the r-hat statistic for each p
 #| message: false
 #| warning: false
 #| cache: true
-
 # get fit summary
 fit_summary <- fit_po$summary()
 
@@ -635,7 +624,6 @@ Now that we have confidence that the MCMC chains are converged, we'll plot the s
 #| code-summary: "Show the R code"
 #| message: false
 #| warning: false
-
 # extract the posterior predictions for y_synthetic
 draws_df <- fit_po$draws(
   variables = "y_synthetic",
@@ -698,7 +686,6 @@ One problem is that the prediction intervals for the synthetic control appear to
 #| code-summary: "Show the R code"
 #| message: false
 #| warning: false
-
 # get prediction intervals
 predictive_intervals <- fit_po$draws("y_synthetic", format = "df") %>%
   spread_draws(y_synthetic[t]) %>%
@@ -804,7 +791,6 @@ Save this Stan model code into a file named **negbin.stan** in the `outdir` that
 ```{r}
 #| label: write-stan-file-negbin
 #| include: false
-
 stan_code <- "
 data {
   int<lower=1> T; // Total number of months
@@ -858,7 +844,6 @@ We just need to update our initials generator function to include our new parame
 #| output: false
 #| warning: false
 #| message: false
-
 # function to generate initials
 init_generator <- function(md = md, chain_id = 1) {
   result <- list(
@@ -901,7 +886,6 @@ As always, we first need to confirm that the MCMC chains have converged and chec
 #| code-summary: "Show the R code"
 #| message: false
 #| warning: false
-
 draws <- fit_nb$draws()
 pars <- c("alpha", "phi", paste0("weights[", sample(1:md$K, 10), "]"))
 
@@ -918,7 +902,6 @@ Traceplots look good... check.
 #| message: false
 #| warning: false
 #| cache: true
-
 # get fit summary
 fit_summary <- fit_nb$summary()
 
@@ -951,7 +934,6 @@ Let's take a look out our results to see if we have better coverage of predictio
 #| code-summary: "Show the R code"
 #| message: false
 #| warning: false
-
 # extract the posterior predictions for y_synthetic
 draws_df <- fit_nb$draws(
   variables = "y_synthetic",
@@ -1012,7 +994,6 @@ It now appears that we have good coverage in addition to fairly good fit in the 
 #| code-summary: "Show the R code"
 #| message: false
 #| warning: false
-
 # get prediction intervals
 predictive_intervals <- fit_nb$draws("y_synthetic", format = "df") %>%
   spread_draws(y_synthetic[t]) %>%
@@ -1092,7 +1073,6 @@ Next, let's take a look to see if individual donor countries were particularly h
 #| code-summary: "Show the R code"
 #| message: false
 #| warning: false
-
 # How many donors to plot
 top_x <- 15
 
@@ -1242,7 +1222,6 @@ Save this Stan model code into a file named **shrinkage.stan** in the `outdir` t
 ```{r}
 #| label: write-stan-file-shrinkage
 #| include: false
-
 stan_code <- "
 // bayesian synthetic controls
 // negative binomial likelihood
@@ -1309,7 +1288,6 @@ Again, we just update our initials generating function to include the new parame
 #| output: false
 #| warning: false
 #| message: false
-
 # function to generate initials
 init_generator <- function(md = md, chain_id = 1) {
   result <- list(
@@ -1352,7 +1330,6 @@ fit_sh$save_object(file.path(outdir, "fit_shrinkage.rds"))
 #| code-summary: "Show the R code"
 #| message: false
 #| warning: false
-
 draws <- fit_sh$draws()
 pars <- c("alpha", "phi", paste0("weights[", sample(1:md$K, 10), "]"))
 
@@ -1369,7 +1346,6 @@ Traceplots look good... check.
 #| message: false
 #| warning: false
 #| cache: true
-
 # get fit summary
 fit_summary <- fit_sh$summary()
 
@@ -1402,7 +1378,6 @@ Now, the first thing we notice in our plot of the synthetic control versus reali
 #| code-summary: "Show the R code"
 #| message: false
 #| warning: false
-
 # extract the posterior predictions for y_synthetic
 draws_df <- fit_sh$draws(
   variables = "y_synthetic",
@@ -1463,7 +1438,6 @@ We see that we still have good coverage of prediction intervals, although it is 
 #| code-summary: "Show the R code"
 #| message: false
 #| warning: false
-
 # get prediction intervals
 predictive_intervals <- fit_sh$draws("y_synthetic", format = "df") %>%
   spread_draws(y_synthetic[t]) %>%
@@ -1507,7 +1481,6 @@ When we look at the contribution of the top 10 donors, we can see that now the p
 #| code-summary: "Show the R code"
 #| message: false
 #| warning: false
-
 # How many donors to plot
 top_x <- 10
 

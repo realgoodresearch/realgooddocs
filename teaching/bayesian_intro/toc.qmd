@@ -8,6 +8,7 @@ listing:
         - getting-started.qmd
         - lecture-intro-to-bayesian-inference.qmd
         - practical-model-of-the-mean.qmd
+        - practical-mcmc-toy.qmd
         - lecture-glm-and-hierarchical-models.qmd
         - practical-synthetic-controls.qmd
 ---

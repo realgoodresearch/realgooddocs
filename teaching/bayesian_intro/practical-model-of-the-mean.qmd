@@ -1,6 +1,7 @@
 ---
 title: "Practical Tutorial: Model of the Mean"
 subtitle: "Start simple to get the basic building blocks first."
+author: "Doug Leasure"
 date: last-modified
 date-format: "D MMM YYYY, HH:mm:ss"
 image: "resources/practical-model-of-the-mean-hero.webp"
