@@ -20,20 +20,23 @@ suppressPackageStartupMessages({
   library(ggdag)
   library(dagitty)
   library(ggplot2)
+  library(here)
 })
 
-basedir <- sub("(.*realgoodresearch/realgoodresearch).*", "\\1", getwd())
+basedir <- here::here()
 
-outdir <- file.path(
+wd <- file.path(
   basedir,
   "wd",
   "teaching",
   "bayesian_intro",
   "model_of_the_mean"
 )
-if (!dir.exists(outdir)) {
-  dir.create(outdir, showWarnings = FALSE, recursive = TRUE)
+if (!dir.exists(wd)) {
+  dir.create(wd, showWarnings = FALSE, recursive = TRUE)
 }
+
+setwd(wd)
 ```
 
 
@@ -277,18 +280,6 @@ Don't forget to set a seed for our random number generators! This is important f
 ```{r}
 seed <- round(runif(1, 1, 1e6))
 set.seed(seed)
-```
-
-```{r}
-#| echo: false
-#| eval: true
-wd <- file.path(
-  getwd(),
-  "wd",
-  "teaching",
-  "bayesian_intro",
-  "model_of_the_mean"
-)
 ```
 
 ```{r}
