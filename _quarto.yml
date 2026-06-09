@@ -68,5 +68,5 @@ format:
     bibliography: references.bib
 
 execute:
-  freeze: true
+  freeze: auto
 
