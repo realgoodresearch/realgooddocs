@@ -1,5 +1,5 @@
 ---
-title: "Practical Tutorial: A toy MCMC example"
+title: "Practical Tutorial: A Toy MCMC Example"
 subtitle: "Understanding Markov Chain Monte Carlo (MCMC) by calculating it manually for a coin flip process with a potentially unfair coin."
 author: "Michael Chong"
 date: "February 6, 2026"

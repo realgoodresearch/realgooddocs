@@ -49,6 +49,8 @@ website:
           contents:
           - text: "Model of the Mean"
             href: teaching/bayesian_intro/practical-model-of-the-mean.qmd
+          - text: "Exploring Posteriors, Likelihoods, and Priors"
+            href: teaching/bayesian_intro/practical-posteriors-likelihoods-priors.qmd
           - text: "MCMC Toy Example"
             href: teaching/bayesian_intro/practical-mcmc-toy.qmd
           - text: "Synthetic Controls"

@@ -54,7 +54,9 @@ This model of the mean is meant purely as a teaching exercise. This would not be
 
 ## Model Design
 
-Before we get into the code, let's imagine that we are trying to estimate the average temperature from your home town using hourly temperature data (degrees Celcius). 
+Let's imagine that we are trying to estimate the average temperature from your home town using hourly temperature data (degrees Celcius). 
+
+Believe it or not, a simple model of the mean could be designed many different ways depending on the data characteristics and the assumptions that we think are reasonable. So to begin, we will take a moment to go through the model design process: proposing one or more models (i.e. hypotheses about how our system works), assessing their assumptions and suitability for our data, and revising the model as needed before continuing to our analysis where we will confront our model with data. 
 
 ### Proposed model
 
@@ -120,7 +122,7 @@ $$
 
 ### Bayes Theorem
 
-Now that we have a model, let's take a moment to make sure we understand its connection to Bayes Theorem. 
+Now that we have a model, let's take a moment to make sure that we understand its connection to Bayes Theorem. 
 
 <i class="bi bi-exclamation-triangle-fill"></i> **Match the components of our model to the corresponding components of Bayes Theorem below.**  
 
@@ -221,6 +223,32 @@ model {
 ```
 Save this code into a file called `model_of_the_mean.stan` in your R working directory for this exercise.
 
+```{r}
+#| echo: false
+writeLines(
+  c(
+    "data {",
+    "  int<lower=0> n; // sample size",
+    "  vector[n] y; // data",
+    "}",
+    "parameters {",
+    "  real mu; // mean",
+    "  real<lower=0> sigma; // standard deviation",
+    "}",
+    "model {",
+    "  // model of the mean",
+    "  y ~ normal(mu, sigma);",
+    "",
+    "  // priors",
+    "  mu ~ normal(0, 100);",
+    "  sigma ~ uniform(0, 1000);",
+    "}",
+    ""
+  ),
+  file.path(wd, "model_of_the_mean.stan")
+)
+```
+
 <i class="bi bi-question-circle-fill"></i> **Does RStudio identify any syntax errors in our model?** 
 
 ::: {.callout-tip} 
@@ -280,32 +308,6 @@ Don't forget to set a seed for our random number generators! This is important f
 ```{r}
 seed <- round(runif(1, 1, 1e6))
 set.seed(seed)
-```
-
-```{r}
-#| echo: false
-writeLines(
-  c(
-    "data {",
-    "  int<lower=0> n; // sample size",
-    "  vector[n] y; // data",
-    "}",
-    "parameters {",
-    "  real mu; // mean",
-    "  real<lower=0> sigma; // standard deviation",
-    "}",
-    "model {",
-    "  // model of the mean",
-    "  y ~ normal(mu, sigma);",
-    "",
-    "  // priors",
-    "  mu ~ normal(0, 100);",
-    "  sigma ~ uniform(0, 1000);",
-    "}",
-    ""
-  ),
-  file.path(wd, "model_of_the_mean.stan")
-)
 ```
 
 Now we can simulate data for our model. We will start by defining the "true" values for the parameters in our model. These are the values that we will use to generate the data, and they will be unknown to us when we fit the model. 
@@ -640,7 +642,7 @@ md$sigma_true
 We have now completed the most complicated process known to human-kind to estimate the mean of a data set! Yay! The goal was to go through the essentials of a basic Bayesian workflow to familiarise you with the key components. I would certainly not recommend this process for actually estimating a mean, but I hope you gained valuable experience to demystify the process and build confidence to start working on more complex models together in our next sessions. 
 We have included a few additional activities in this document that we would recommend working through in class if there is time remaining or as a self-guided exercise later. 
 
-## Advanced Activites
+# Advanced Activites
 
 ::: {.callout-note}
 # Going Further
@@ -733,7 +735,7 @@ rug(y)
 md <- list(n = n, y = y, mu_true = mu, sigma_true = sigma, seed = seed) # important to set and save seed for reproducibility
 
 # save data to disk
-saveRDS(object = md, file = file.path(outdir, "md.rds"))
+saveRDS(object = md, file = file.path(wd, "md.rds"))
 
 #---- SECTION 2: MCMC for Bayesian model ----#
 
@@ -743,7 +745,7 @@ library(posterior)
 library(bayesplot)
 
 # define location of the stan model file
-model_file <- file.path(basedir, "1_model.stan")
+model_file <- file.path(wd, "model_of_the_mean.stan")
 
 # compile the stan model
 mod <- cmdstan_model(model_file)
@@ -784,13 +786,13 @@ fit <- mod$sample(
 )
 
 # save fitted model to disk
-fit$save_object(file = file.path(outdir, "fit.rds"))
+fit$save_object(file = file.path(wd, "fit.rds"))
 
 #---- SECTION 3: Model diagnostics ----#
 
 # load model and data
-md <- readRDS(file.path(outdir, "md.rds"))
-fit <- readRDS(file.path(outdir, "fit.rds"))
+md <- readRDS(file.path(wd, "md.rds"))
+fit <- readRDS(file.path(wd, "fit.rds"))
 
 ## MCMC diagnostics
 
