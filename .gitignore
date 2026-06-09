@@ -5,6 +5,11 @@
 *_files/
 site_libs/
 
+!_freeze/
+!_freeze/**
+!docs/
+!docs/**
+
 quarto_clean.sh
 
 .Rhistory
