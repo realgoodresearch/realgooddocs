@@ -1,0 +1,22 @@
+Package: realgooddocs
+Title: Real Good Docs
+Version: 0.0.0.9000
+Authors@R: person("Doug Leasure", role = c("aut", "cre"))
+Description: Quarto site metadata and R dependencies for the Real Good Docs documentation site.
+Depends: R (>= 4.2)
+Imports:
+    bayesplot,
+    cmdstanr,
+    dplyr,
+    dagitty,
+    DT,
+    ggdag,
+    ggplot2,
+    posterior,
+    scales,
+    tibble,
+    tidyr,
+    tidybayes,
+    tidysynth
+Encoding: UTF-8
+LazyData: true

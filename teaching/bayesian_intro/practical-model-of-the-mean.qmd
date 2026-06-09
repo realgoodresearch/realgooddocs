@@ -1,0 +1,861 @@
+---
+title: "Practical Tutorial: Model of the Mean"
+subtitle: "Start simple to get the basic building blocks first."
+author: "Doug Leasure"
+date: last-modified
+date-format: "D MMM YYYY, HH:mm:ss"
+image: "resources/practical-model-of-the-mean-hero.webp"
+format:
+  html:
+    embed-resources: true
+    toc: true
+    toc-collapse: 3
+---
+
+![](resources/practical-model-of-the-mean-hero.webp){fig-align="center" width="50%"}
+
+```{r}
+#| echo: false
+suppressPackageStartupMessages({
+  library(ggdag)
+  library(dagitty)
+  library(ggplot2)
+  library(here)
+})
+
+basedir <- here::here()
+
+wd <- file.path(
+  basedir,
+  "wd",
+  "teaching",
+  "bayesian_intro",
+  "model_of_the_mean"
+)
+if (!dir.exists(wd)) {
+  dir.create(wd, showWarnings = FALSE, recursive = TRUE)
+}
+
+setwd(wd)
+```
+
+
+
+
+## Introduction
+
+We will start with simple model so that we can focus on the Bayesian implementation rather than the statistical details. Our goal is to simply estimate the mean of a dataset. We will develop a stochastic simulation to generate the data, write a Stan model that estimates the mean, and use Markov chain Monte Carlo to explore the posterior distribution to fit the model. We will then take a look at some basic model diagnostics to confirm that our results are robust. 
+
+::: {.callout-note}
+This practical is intended to be completed after the lecture [Introduction to Bayesian Inference](lecture-intro-to-bayesian-inference.qmd).
+:::
+
+This model of the mean is meant purely as a teaching exercise. This would not be a practical way to calculate the mean of a dataset in a real analysis, but it is a great way to experience the basics of a Bayesian workflow. 
+
+## Model Design
+
+Let's imagine that we are trying to estimate the average temperature from your home town using hourly temperature data (degrees Celcius). 
+
+Believe it or not, a simple model of the mean could be designed many different ways depending on the data characteristics and the assumptions that we think are reasonable. So to begin, we will take a moment to go through the model design process: proposing one or more models (i.e. hypotheses about how our system works), assessing their assumptions and suitability for our data, and revising the model as needed before continuing to our analysis where we will confront our model with data. 
+
+### Proposed model
+
+Do you have ideas for potential statistical models that would be appropriate for hourly temperature data from your hometown?  
+
+::: {.callout-tip}
+# Hint
+Which probability distributions could accommodate continuous numbers with values that can be positive or negative? 
+:::
+
+<i class="bi bi-exclamation-triangle-fill"></i> **Write down the statistical model that you suggest** before clicking below to see a proposed model that needs your review. Be sure to include the data $y$, the mean $\mu$, the likelihood (i.e. probability distribution), any other parameters needed for your model, and be sure to specify the priors. 
+
+::: {.callout-note collapse="true"}
+# Click to see a *proposed* model that needs your review...
+
+$$
+\begin{aligned}
+y_i &\sim normal(\mu, \sigma) \\
+\\
+\mu &\sim normal(0, 1) \\
+\sigma &\sim uniform(0, 1000)
+\end{aligned}
+$$
+
+We use a normal distribution for the likelihood (i.e. data generating process) because it has an appropriate range of support for temperature data ($-\infty$ to $+\infty$), and it is appropriate for continuous numbers. Notice that we indexed the data $y_i$ because we will have more than one observation of temperature. The normal distribution has two parameters (mean $\mu$ and standard deviation $\sigma$) and we need to include them both. Finally, we specified priors for each parameter. 
+
+<i class="bi bi-question-circle-fill"></i> **Would you suggest any changes to the proposed model?** Keep these in mind as you continue reading...
+:::
+
+### Assumptions 
+
+We make assumptions with every model that we specify. Our choices of probability distributions for the likelihood(s) and prior(s) define assumptions about how likely we are to observe different values for data and parameters. The model structure can also define assumptions about relationships among data and parameters. What are some of the assumptions that we are making with this model? 
+
+<i class="bi bi-exclamation-triangle-fill"></i> **Make your own list of assumptions** that you think are inherent in the proposed model above, and then compare with the list below.
+
+::: {.callout-note collapse="true"}
+# Click here to see a list of assumptions...
+<ul>
+<li>Observations are independent and identically distributed (i.i.d.).</li>
+<li>Hourly temperatures are normally distributed (i.e. continuous with range of support from negative infinity to positive infinity).</li>
+<li>The variance and mean are independent of one another.</li>
+<li>The standard deviation of hourly temperatures is between 0 and 1000 degrees Celcius and all values within that range are equally likely given our prior knowledge before collecting the data (i.e. there is absolutely no chance of a standard deviation of 1001 degrees).</li> 
+<li><strong>There is a 99.7% chance that the mean temperature $\mu$ is between -3 and 3 degrees Celcius given our prior knowledge before collecting the data (i.e. this prior is very informative).</strong></li>
+</ul>
+:::
+
+**Sanity check.** Are these assumptions reasonable or do we want to make changes to our model (i.e. likelihood or priors) before we start coding?
+
+### Suggested model
+
+I would suggest that we change the prior for $\mu$ to be much less informative so that our analysis is driven by our data rather than this strongly informative (and probably wrong) prior. 
+
+For example, we could use a normal prior on the mean $\mu$ centred around zero with a standard deviation of 100. This is uninformative while also defining a very broad but reasonable range of values for the mean temperature based on our prior knowledge of temperatures on Earth. Remember that an uninformative prior should be flat within the range of realistic values for the parameter. 
+
+$$
+\begin{aligned}
+y_i &\sim normal(\mu, \sigma) \\
+\\
+\mu &\sim normal(0, 100) \\
+\sigma &\sim uniform(0, 1000)
+\end{aligned}
+$$
+
+### Bayes Theorem
+
+Now that we have a model, let's take a moment to make sure that we understand its connection to Bayes Theorem. 
+
+<i class="bi bi-exclamation-triangle-fill"></i> **Match the components of our model to the corresponding components of Bayes Theorem below.**  
+
+$$
+P(\mu, \sigma | y) = \frac{P(y | \mu, \sigma) P(\mu) P(\sigma)}{P(y)}
+$$
+
+::: {.callout-tip}
+# Hint 
+Focus on the likelihood and priors from Bayes Theorem. We will estimate the posterior later using MCMC, and the denominator (i.e. marginal likelihood) is just a normalizing constant that ensures the posterior distribution sums to 1.
+:::
+
+### Directed Acyclic Graph (DAG)
+
+We can also represent our model using a DAG. This is a useful way to visualize the structure of the model and the relationships among data and parameters. 
+
+```{r}
+#| echo: false
+model_dag <- dagify(
+  y ~ mu + sigma,
+  labels = c(y = "y", mu = "mu", sigma = "sigma"),
+  coords = list(
+    x = c(y = 0, mu = -0.5, sigma = 0.5),
+    y = c(y = 0.5, mu = -0.5, sigma = -0.5)
+  )
+)
+
+dag_data <- as_tidy_dagitty(model_dag)
+
+x <- ggplot(dag_data$data, aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_dag_edges_link(
+    linewidth = 1,
+    arrow = grid::arrow(length = grid::unit(10, "pt"), type = "closed")
+  ) +
+  geom_dag_node(
+    aes(shape = ifelse(name == "y", 22, 21)),
+    size = 24,
+    colour = "black",
+    fill = "black"
+  ) +
+  geom_dag_text(
+    aes(label = label),
+    parse = TRUE,
+    colour = "white",
+    size = 6.5
+  ) +
+  scale_shape_identity() +
+  coord_equal(
+    xlim = c(-1, 1),
+    ylim = c(-1, 1),
+    expand = FALSE,
+    clip = "off"
+  ) +
+  theme_dag()
+
+x
+```
+
+In the DAG, the squares represent data (i.e. $y$) and the circles represent parameters (i.e. $\mu$ and $\sigma$). The arrows represent the relationships among data and parameters--pointing towards a node that is dependent on another node. In other words, arrows point towards variables that are on the left side of an expression in the model statement. For example, the data $y$ is dependent on both $\mu$ and $\sigma$ because they are parameters of the likelihood (i.e. data generating process). A prior must be specified for every parameter in the DAG that does not have an incoming arrow. We will represent stochastic relationships with solid arrows and deterministic relationships with dashed arrows in later lectures when we have more complex models.
+
+<i class="bi bi-question-circle-fill"></i> **Have we specified priors for all parameters in the DAG that do not have incoming arrows?**
+
+Models cannot contain any node that is indirectly dependent on itself. This would appear as a loop in the DAG (i.e. A -> B -> C -> A). This is why DAGs are referred to as Directed **Acyclic** Graphs--the model cannot contain "cycles". 
+
+<i class="bi bi-question-circle-fill"></i> **Does our model contain any cycles?** 
+
+## Stan Code
+
+Before we get into the model, let's first introduce a few basics of Stan syntax to be aware of:  
+
+-	Stan models saved with the file extension `*.stan` will include helpful markup and syntax checking when opened within RStudio (or Positron with the Stan extension installed).  
+-	A Stan script must be divided into program blocks (e.g. `data{ }`, `parameters{}`, `model{}`). We will dive into these more below.  
+-	Each line of code must end with a semicolon.  
+-	// precedes any comments that you want to be ignored by the Stan interpreter. Do not use # as a comment character because this will return [often cryptic] errors.  
+-	The script must end with a blank line.  
+
+
+Here is our model of the mean written in Stan. 
+
+```stan
+data {
+  int<lower=0> n; // sample size
+  vector[n] y; // data
+}
+parameters {
+  real mu; // mean
+  real<lower=0> sigma; // standard deviation
+}
+model {
+  // model of the mean
+  y ~ normal(mu, sigma);
+  
+  // priors
+  mu ~ normal(0, 100); 
+  sigma ~ uniform(0, 1000);
+}
+
+```
+Save this code into a file called `model_of_the_mean.stan` in your R working directory for this exercise.
+
+```{r}
+#| echo: false
+writeLines(
+  c(
+    "data {",
+    "  int<lower=0> n; // sample size",
+    "  vector[n] y; // data",
+    "}",
+    "parameters {",
+    "  real mu; // mean",
+    "  real<lower=0> sigma; // standard deviation",
+    "}",
+    "model {",
+    "  // model of the mean",
+    "  y ~ normal(mu, sigma);",
+    "",
+    "  // priors",
+    "  mu ~ normal(0, 100);",
+    "  sigma ~ uniform(0, 1000);",
+    "}",
+    ""
+  ),
+  file.path(wd, "model_of_the_mean.stan")
+)
+```
+
+<i class="bi bi-question-circle-fill"></i> **Does RStudio identify any syntax errors in our model?** 
+
+::: {.callout-tip} 
+# Hint
+Click the "Check" button in the top right corner of the RStudio editor pane to check for syntax errors. If there are any errors, they will be highlighted in red and you can hover over the red text to see a description of the error. If there are no syntax errors, you will see a message that says "No syntax errors detected."
+:::
+
+- Try deleting a semicolon and check again. 
+- Try removing the blank line at the end of the script and check again.
+- Try using # instead of // for comments and check again.  
+
+### Program blocks
+
+You will notice that we have three program blocks in our Stan model: `data{}`, `parameters{}`, and `model{}`. 
+
+::: {.callout-note}
+The Stan language has other program blocks that are described in the <a href="https://mc-stan.org/docs/reference-manual/blocks.html" target="_blank">Stan Reference Manual</a>, but we do not need them now.
+:::
+
+The **data** block is where we define each variable that we will provide as observed data. We need to define the data type, dimensions, and range of support (optional) for all data. We provide two variables as data for this model:  the sample size (n) which is a positive integer, and the data (y) which is a vector of length n with values that are continuous numbers with a range of support from negative infinity to infinity.  
+
+::: {.callout-note}
+The <a href="https://mc-stan.org/docs/reference-manual/types.html" target="_blank">Stan Reference Manual</a> describes all data types available. 
+:::
+
+The **parameters** block is where we define each of the parameters that we want to estimate. In our case, this is the mean $\mu$ and the standard deviation $\sigma$. Again, we need to define the data type, dimensions, and range of support (optional) for every parameter. Notice that we defined an appropriate range of support for $\sigma$ because the standard deviation cannot be negative.
+
+The **model** block is where we specify our model and priors. You will notice that the code is very similar to how we wrote our model in the [model design section (above)](#suggested-model). 
+
+## Simulate Data
+
+We would normally use a real dataset for analysis, but we will simulate a dataset for many of our exercises. This will allow you to re-simulate data with different characteristics and to modify your model to explore how things work. 
+
+Before we get into simulating data, let's setup our R environment:
+
+```{r}
+#| eval: false
+# cleanup
+rm(list = ls())
+gc()
+cat("\014")
+try(dev.off(), silent = T)
+
+# check working directory
+getwd()
+
+# [optional] update/fix working directory
+# setwd(file.path('/my/working/directory/model_of_the_mean'))
+
+# directories
+wd <- getwd()
+dir.create(wd, showWarnings = F, recursive = T)
+```
+
+Don't forget to set a seed for our random number generators! This is important for reproducibility. We will save this seed later with our model data so that we can re-simulate the same data in the future if needed.
+
+```{r}
+seed <- round(runif(1, 1, 1e6))
+set.seed(seed)
+```
+
+Now we can simulate data for our model. We will start by defining the "true" values for the parameters in our model. These are the values that we will use to generate the data, and they will be unknown to us when we fit the model. 
+
+```{r}
+# define the sample size
+n <- 1e3
+
+# define the mean value
+mu <- 5
+
+# define the standard deviation
+sigma <- 3
+```
+
+Now we can use these parameter values to simulate data from the likelihood (i.e. data generating process) that we specified in our model. 
+
+```{r}
+# simulate data by drawing random samples from a normal distribution
+y <- rnorm(n = n, mean = mu, sd = sigma)
+```
+
+Let's take a quick look at the data to make sure it looks reasonable. 
+
+```{r}
+# summary statistics of data
+mean(y)
+sd(y)
+summary(y)
+
+# histogram of data
+hist(y)
+
+# density plot of data
+plot(density(y))
+rug(y)
+```
+
+<i class="bi bi-question-circle-fill"></i> **Does the mean and standard deviation match the "true" values that we used to generate the data?** Why might they differ?
+
+### Stan Data Format
+
+Now we need to prepare the data in a list object in R. This format is required by Stan. It allows flexibility for variables to have different dimensions (e.g. vector, matrix, array). All data that have been specified in the Stan model code must be included in this data list. We can also include variables here that are not used by the model, so we will include the true simulated values for each parameter to keep for future reference. 
+
+The data also includes a “seed” which will be used by the random number generator in the MCMC algorithm. It is important to set this seed so that your MCMC simulations are reproducible (i.e. you will get identical results only if you re-run the MCMC using the same seed, model, data, and initial values).
+
+
+```{r}
+# prepare model data in list format for Stan
+md <- list(
+  n = n,
+  y = y,
+  mu_true = mu,
+  sigma_true = sigma,
+  seed = seed
+)
+```
+
+Notice that we included the "true" parameter values and the seed in the data list. These are not required for fitting the model (i.e. they are not in the data block of our model), so Stan will ignore them with a warning. We will use these values to evaluate our model results later on. We should always **save the seed** to ensure that we can reproduce our simulated data and model results in the future.
+
+Now we can save the model data list as an RDS file so that we can load it later when we fit the model. 
+
+```{r}
+saveRDS(object = md, file = file.path(wd, "md.rds"))
+```
+
+# MCMC with Stan
+
+We will use the *cmdstanr* R package to run an MCMC simulation that samples from the posterior distribution $P(\mu, \sigma | y_i)$ for our model. In other words, we'll use Stan to fit the model. 
+
+We need to load a few specialised R libraries this time. 
+
+```{r}
+#| echo: true
+#| message: false
+#| warning: false
+#| results: hide
+# load libraries
+library(cmdstanr)
+library(posterior)
+library(bayesplot)
+```
+
+Note: If you haven't installed these R packages, please go back and look at [Getting Started](getting-started.qmd) for instructions on installing *CmdStan* and *cmdstanr*.
+
+We will load the data that we saved earlier and identify the path to our Stan model file. 
+
+```{r}
+# path to model code
+model_file <- file.path(wd, "model_of_the_mean.stan")
+
+# load model data
+md <- readRDS(file.path(wd, "md.rds"))
+```
+
+## Compile the model 
+
+We begin by compiling our Stan model `model_of_the_mean.stan" into an executable file. This step is one of several features of Stan that helps it run much faster than other MCMC software (e.g. BUGS, JAGS). The model only needs to be compiled once, and then the same executable will be called (in the background) every time you re-run the same model. 
+
+```{r}
+#| results: hide
+# compile the stan model
+mod <- cmdstan_model(model_file)
+
+# check the path of this compiled executable file
+mod$exe_file()
+
+# print the model to the R console
+mod$print()
+```
+
+## MCMC Initials 
+
+We will specify initial values to be used by the MCMC simulation for each parameter in the model. This defines the first value for each parameter in each MCMC chain. It is good practice to create a function to generate random initial values for each parameter so that the initials are different for each chain. We want to generate initials that are over-dispersed compared to the true values of the parameters (i.e. they shouldn’t always be close to the correct answer).
+
+```{r}
+# function to generate initial values for each parameter in the model
+init_generator <- function(md = md, chain_id = 1) {
+  result <- list()
+
+  result[["mu"]] <- runif(1, -100, 100)
+  result[["sigma"]] <- runif(1, 0, 25)
+
+  return(result)
+}
+```
+
+## Run MCMC 
+
+Lastly, we will configure some MCMC settings and then run the MCMC simulation. We will run four MCMC chains with a 1,000 iteration warmup period (a.k.a. burn-in) that will be discarded, plus 2,000 additional iterations that we will keep. This will give us 8,000 samples (4 chains x 2000 iterations) drawn from the posterior distribution of our model. These MCMC draws provide our parameter estimates. These default settings will usually work for simple models, but you may need to increase your warmup period or keep more iterations if you have MCMC convergence problems (we will look at diagnostics next).
+
+```{r}
+# MCMC configuration
+chains <- 4
+warmup <- 1e3
+samples <- 2e3
+inits <- lapply(1:chains, function(id) init_generator(md = md, chain_id = id))
+```
+Notice that we are using our `init_generator()` function from above and applying it to each of our four MCMC chains to generate unique initial values for each chain.
+
+
+Now we can use the `sample()` method of our compiled model object from earlier to run the MCMC simulation. This will take some time to run for more complex models, but this simple model should run very quickly.
+
+```{r}
+#| message: false
+#| results: hide
+# run MCMC to sample from the posterior distribution of our model, given our data
+fit <- mod$sample(
+  data = md,
+  parallel_chains = chains,
+  init = inits,
+  iter_sampling = samples,
+  iter_warmup = warmup,
+  save_warmup = TRUE,
+  seed = md$seed
+)
+```
+One of the advantages of Stan is that it returns informative warning and error messages when the MCMC has completed. These usually come with a hyperlink to a website that explains the message and provides references to high quality troubleshooting guides. 
+
+Finally, we'll save our fitted model to disk. 
+
+```{r}
+# save fitted model to disk
+fit$save_object(file = file.path(wd, "fit.rds"))
+```
+
+<i class="bi bi-question-circle-fill"></i> **Did you have any warning or error messages that resulted from your MCMC run?**
+
+
+# Model Diagnostics
+
+This section will introduce you to initial tools to diagnose MCMC problems and to assess model fit. We will look at these issues in more depth in later sessions (e.g. proper cross validation to assess model fit). Our goals today are to extract the MCMC samples, check for potential problems, retrieve our parameter estimates, and see how they compare to the true parameters that we used to generate the data. 
+
+To begin, we will re-load the model data and the fitted model object from disk. 
+
+```{r}
+# load model and data
+md <- readRDS(file.path(wd, "md.rds"))
+fit <- readRDS(file.path(wd, "fit.rds"))
+```
+
+## MCMC Sampler
+
+### MCMC draws 
+
+We can extract the MCMC samples that were drawn from our model's posterior distribution across all four chains as a `data.frame` or as an `array` object in R. The MCMC draws are the values that were saved for each parameter from each iteration of each MCMC chain. This can be helpful if we want to look at the raw numbers.  
+
+```{r}
+# extract MCMC draws as data frame
+fit$draws(format = "df")
+
+# extract MCMC draws as an array (dimensions = iterations x chains x variables)
+fit$draws()
+```
+
+### Traceplots
+
+It is often good to start with a graphical examination of the "traceplots" which show us the timeseries of MCMC sampler draws for all chains. These provide a quick look at sampler behaviour that can be valuable for diagnosing problems. We want to make sure that all chains converged onto the same parameter space and that they collected enough samples to adequately represent the statistical properties of the posterior distribution. 
+
+```{r}
+# traceplots to visually inspect MCMC chains
+bayesplot::mcmc_trace(fit$draws(), pars = c("mu", "sigma"))
+```
+Here, the x-axes are sampler iterations, while the y-axes are parameter values. For reference, you can look back to the raw data above which are the same as shown in these traceplots.  
+
+We also want to check that our warmup period (a.k.a. burn-in) was long enough. The traceplots above had already discarded the warmup period. Let's plot them again with the warmup period included.
+```{r}
+# check to make sure the warmup period was long enough
+bayesplot::mcmc_trace(
+  fit$draws(inc_warmup = TRUE),
+  pars = c("mu", "sigma"),
+  n_warmup = warmup
+)
+```
+Notice that the samplers explore very unlikely parameter space during the warmup period (i.e. the first 1000 MCMC samples, in this case) before converging onto the most likely parameter space for all parameters. We do not want to keep any samples prior to the chains coming together because this will skew our inferences. 
+
+### Convergence and MCMC Sampler Diagnostics 
+
+After the warm-up period, we need to ensure that all chains "converged". This means that the chains have come together onto the same parameter space (i.e. they independently found the same answer), that they are well mixed, and that they have collected enough samples to reliably represent the statistical properties of the posterior distribution for all parameters. We will take a look at the *rhat statistic* to quantify convergence.
+
+Rhat values of 1 (or very close to 1; e.g. rhat < 1.01) indicate that chains have converged for a parameter estimate. It is possible to get convergence for some parameters but not others, so we will look at rhat for all of them. 
+
+We will also take a look at some basic quantitative measures that can be used to diagnose other MCMC issues, including divergent transitions, exceeding max tree depth, and EBFMI. Stan will return warnings when these types of issues arise along with a link to documentation about potential solutions. We will look at how to extract these metrics manually, but we will not go into detail about them today.
+
+::: {.callout-note}
+Check Stan documentation for more info on diagnostics and warnings: 
+<a href="https://mc-stan.org/misc/warnings.html" target="_blank">https://mc-stan.org/misc/warnings.html</a>.
+:::
+
+Let's take a look at how to retrieve r-hat convergence statistics for one parameter at a time. 
+
+```{r}
+# MCMC convergence diagnostics; rhat=1 means the chains converged
+# (note: stan will return a warning automatically if there are MCMC problems)
+posterior::rhat(fit$draws("mu"))
+posterior::rhat(fit$draws("sigma"))
+```
+
+<i class="bi bi-question-circle-fill"></i> **Do our r-hat values indicate convergence for all parameters?**
+
+We can also retrieve a summary for a range of sampler diagnostics.
+
+```{r}
+# MCMC sampler diagnostics
+# (note: stan will return a warning automatically if there are MCMC problems)
+fit$diagnostic_summary()
+```
+If the diagnostics indicate that our MCMC samples are robust, then we can move on to interpreting our parameter estimates. If not, we need to troubleshoot the sampler and re-run MCMC before interpreting the results. 
+
+## Parameter Estimates
+
+### Parameter Summaries
+
+We can get a quick summary of all parameter estimates from our `fit` object. 
+
+```{r}
+# summary of model results
+fit$summary()
+```
+This provides the point-estimates (i.e. mean or median) for each parameter as well as the credible intervals for the estimates (i.e. quantiles) alongside the r-hat convergence statistic. This is a great initial summary. 
+
+Our `fit` object provides easy access to the vector of MCMC samples drawn for each parameter. 
+
+::: {.callout-tip}
+# Key Point
+The vector of converged MCMC samples for a parameter has enough samples to fully represent the posterior distribution (i.e. the parameter estimate and its uncertainty). This makes it incredibly easy to calculate the statistical properties of the parameter estimate.  
+
+For example, the vector of MCMC samples for our mean $\mu$ look like this: `r paste(paste(head(as.vector(fit$draws("mu")), n=10), collapse=", "), ", ... (n=8,000)")`.
+
+**Point estimates** for the parameter can be calculated as the mean or median of this vector.  
+
+**Credible intervals (a.k.a. confidence intervals)** can be calculated simply with quantiles.
+:::
+
+Let's take a quick look at the posterior distribution for our parameter estimates of the mean $\mu$ and standard deviation $\sigma$.
+```{r}
+# visualise marginal posterior distributions for parameters as density plots
+bayesplot::mcmc_areas(fit$draws("mu"), prob = 0.95)
+bayesplot::mcmc_areas(fit$draws("sigma"), prob = 0.95)
+```
+
+Now let's manually calculate the point estimates for both of our parameter estimates for the mean $\mu$ and standard deviation $\sigma$. 
+
+```{r}
+# manually calculate point estimate (i.e. mean) of parameter estimates from MCMC draws
+mean(fit$draws("mu"))
+mean(fit$draws("sigma"))
+```
+
+And the 95% credible intervals for our parameter estimates... 
+
+```{r}
+# manually calculate 95% credible intervals of parameter estimates from MCMC draws
+quantile(fit$draws("mu"), probs = c(0.025, 0.975))
+quantile(fit$draws("sigma"), probs = c(0.025, 0.975))
+```
+Given the model and our data, we have estimated that there is a 95% probability that the true value of our parameters lie within these credible intervals. 
+
+::: {.callout-warning} 
+# Challenge
+Why are the 95% credible intervals calculated as quantiles 0.025 and 0.975 (i.e. rather than 0.05 and 0.95)? Which quantiles would we use if we wanted 80% credible intervals?
+:::
+
+### Compare with Simulated Truth
+
+The first thing to check: If nothing else, we would hope that the Bayesian model recovered the same sample mean and standard deviation as a simple OLS estimate. Let's check... 
+
+```{r}
+# mu from the sample data (i.e. from simulation)
+mean(md$y)
+
+# sigma from the sample data (i.e. from simulation)
+sd(md$y)
+```
+
+<i class="bi bi-question-circle-fill"></i> **Do the OLS estimates of the sample mean and standard deviation agree with the point estimates that we got from our Bayesian analysis?** Why or why not?
+
+
+Next, there is a 95% probability that the true *population* mean is within the credible intervals that we estimated from our posteriors (i.e. given the model that we specified and the data that we observed). Let's check...
+
+```{r}
+# mu from the true unobserved population (i.e. from simulation)
+md$mu_true
+
+# sigma from the true unobserved population (i.e. from simulation)
+md$sigma_true
+```
+
+<i class="bi bi-question-circle-fill"></i> **Do the true population parameters fall within the credible intervals that we estimated from our Bayesian analysis?** What is the chance that the model is robust and the true population parameters are *outside* our credible intervals?
+
+# Conclusion
+We have now completed the most complicated process known to human-kind to estimate the mean of a data set! Yay! The goal was to go through the essentials of a basic Bayesian workflow to familiarise you with the key components. I would certainly not recommend this process for actually estimating a mean, but I hope you gained valuable experience to demystify the process and build confidence to start working on more complex models together in our next sessions. 
+We have included a few additional activities in this document that we would recommend working through in class if there is time remaining or as a self-guided exercise later. 
+
+# Advanced Activites
+
+::: {.callout-note}
+# Going Further
+
+Once you have completed the this activity with default settings for the simulated data, you can use the workflow to create new simulated data and re-run the analysis. We've incluced the [full analysis scripts](#full-scripts-for-analysis) below for your convenience. Feel free to play around with simulating different data characteristics, model structure, prior specifications, anything! See what breaks and try to understand why. Here are some questions that you may find interesting to explore:
+
+<i class="bi bi-question-circle-fill"></i> What happens to our estimation accuracy for $\mu$ and $\sigma$ if the sample size is very small? Do you think we would under- or over-estimate the standard deviation $\sigma$? Can you test this?
+
+<i class="bi bi-question-circle-fill"></i> How is our posterior parameter estimate affected if the simulated true value of $\sigma$ is very close to (or outside) the bounds of the prior that we specified for this parameter? This will be most obvious if we use a uniform prior.
+
+<i class="bi bi-question-circle-fill"></i> What happens if the distribution used for the data generating process process (i.e. the simulated data, in this case) differs from the likelihood function in our model? For example, what if the data generating was a log-normal distribution: `y <- rlnorm(n=n, meanlog=log(5), sdlog=0.6)`.
+:::
+
+## Full Scripts for Analysis
+
+`model_of_the_mean.stan`
+
+```stan
+data {
+  int<lower=0> n; // sample size
+  vector[n] y; // data
+}
+parameters {
+  real mu; // mean
+  real<lower=0> sigma; // standard deviation
+}
+model {
+  // model of the mean
+  y ~ normal(mu, sigma);
+  
+  // priors
+  mu ~ normal(0, 100); 
+  sigma ~ uniform(0, 1000);
+}
+
+```
+
+`model_of_the_mean.R`
+
+```r
+# cleanup
+rm(list = ls())
+gc()
+cat("\014")
+try(dev.off(), silent = T)
+
+# check working directory
+getwd()
+
+# [optional] update/fix working directory
+# setwd(file.path('/my/working/directory/model_of_the_mean'))
+
+# directories
+wd <- getwd()
+dir.create(wd, showWarnings = F, recursive = T)
+
+# set seed for random number generators (important for reproducibility)
+seed <- round(runif(1, 1, 1e6))
+set.seed(seed)
+
+
+#---- SECTION 1: Simulate data ----#
+
+# define the sample size
+n <- 1e3
+
+# define the mean value
+mu <- 5
+
+# define the standard deviation
+sigma <- 3
+
+# simulate data by drawing random samples from a normal distribution
+# note:  this distribution should be the same as the likelihood that you will use in your model
+y <- rnorm(n = n, mean = mu, sd = sigma)
+
+# summary statistics of data
+mean(y)
+sd(y)
+summary(y)
+
+# histogram of data
+hist(y)
+
+# density plot of data
+plot(density(y))
+rug(y)
+
+# format data as a list (required by stan)
+md <- list(n = n, y = y, mu_true = mu, sigma_true = sigma, seed = seed) # important to set and save seed for reproducibility
+
+# save data to disk
+saveRDS(object = md, file = file.path(wd, "md.rds"))
+
+#---- SECTION 2: MCMC for Bayesian model ----#
+
+# load libraries
+library(cmdstanr)
+library(posterior)
+library(bayesplot)
+
+# define location of the stan model file
+model_file <- file.path(wd, "model_of_the_mean.stan")
+
+# compile the stan model
+mod <- cmdstan_model(model_file)
+
+# check the path of this compiled executable file
+mod$exe_file()
+
+# print the model to the R console
+mod$print()
+
+
+# function to generate initial values for each parameter in the model
+init_generator <- function(md = md, chain_id = 1) {
+  result <- list()
+
+  result[["mu"]] <- runif(1, -1e3, 1e3)
+  result[["sigma"]] <- runif(1, 0, 1e3)
+
+  return(result)
+}
+
+
+# MCMC configuration
+chains <- 4
+warmup <- 1e3
+samples <- 2e3
+inits <- lapply(1:chains, function(id) init_generator(md = md, chain_id = id))
+
+# run MCMC to sample from the posterior distribution of our model, given our data
+fit <- mod$sample(
+  data = md,
+  parallel_chains = chains,
+  init = inits,
+  iter_sampling = samples,
+  iter_warmup = warmup,
+  save_warmup = TRUE,
+  seed = md$seed
+)
+
+# save fitted model to disk
+fit$save_object(file = file.path(wd, "fit.rds"))
+
+#---- SECTION 3: Model diagnostics ----#
+
+# load model and data
+md <- readRDS(file.path(wd, "md.rds"))
+fit <- readRDS(file.path(wd, "fit.rds"))
+
+## MCMC diagnostics
+
+# extract MCMC draws as data frame
+fit$draws(format = "df")
+
+# extract MCMC draws as an array (dimensions = iterations x chains x variables)
+fit$draws()
+
+# traceplots to visually inspect MCMC chains
+bayesplot::mcmc_trace(fit$draws(), pars = c("mu", "sigma"))
+
+# check to make sure the warmup period was long enough
+bayesplot::mcmc_trace(
+  fit$draws(inc_warmup = TRUE),
+  pars = c("mu", "sigma"),
+  n_warmup = warmup
+)
+
+
+# MCMC convergence diagnostics; rhat=1 means the chains converged
+# (note: stan will return a warning automatically if there are MCMC problems)
+posterior::rhat(fit$draws("mu"))
+posterior::rhat(fit$draws("sigma"))
+
+# MCMC sampler diagnostics
+# (note: stan will return a warning automatically if there are MCMC problems)
+fit$diagnostic_summary()
+
+
+## Assess parameter estimates (compare to simulated true parameters)
+
+# mu and sigma from the true unobserved population (i.e. from simulation)
+mu
+sigma
+
+# mu and sigma from the sample data (i.e. from simulation)
+mean(md$y)
+sd(md$y)
+
+
+# summary of model results
+fit$summary()
+
+# manually calculate point estimate (i.e. mean) of parameter estimates from MCMC draws
+mean(fit$draws("mu"))
+mean(fit$draws("sigma"))
+
+# manually calculate 95% credible intervals of parameter estimates from MCMC draws
+quantile(fit$draws("mu"), probs = c(0.025, 0.975))
+quantile(fit$draws("sigma"), probs = c(0.025, 0.975))
+
+
+# visualise marginal posterior distributions for parameters as density plots
+bayesplot::mcmc_areas(fit$draws("mu"), prob = 0.95)
+bayesplot::mcmc_areas(fit$draws("sigma"), prob = 0.95)
+
+bayesplot::mcmc_areas(fit$draws(), pars = c("mu", "sigma"), prob = 0.95)
+
+# ... as histograms
+bayesplot::mcmc_hist(fit$draws("mu"))
+bayesplot::mcmc_hist(fit$draws("sigma"))
+
+bayesplot::mcmc_hist(fit$draws(), pars = c("mu", "sigma"))
+
+```

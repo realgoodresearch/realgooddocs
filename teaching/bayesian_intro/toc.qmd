@@ -2,8 +2,14 @@
 title: "Table of Contents"
 listing: 
     type: grid
+    sort: false
     contents:
         - overview.qmd
-        - getting_started.qmd
-        - synthetic_controls.qmd
+        - getting-started.qmd
+        - lecture-intro-to-bayesian-inference.qmd
+        - practical-model-of-the-mean.qmd
+        - practical-posteriors-likelihoods-priors.qmd
+        - practical-mcmc-toy.qmd
+        - lecture-glm-and-hierarchical-models.qmd
+        - practical-synthetic-controls.qmd
 ---
