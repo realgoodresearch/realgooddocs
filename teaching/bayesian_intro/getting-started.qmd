@@ -7,6 +7,10 @@ image: "resources/getting-started-hero.webp"
 format:
   html:
     embed-resources: true
+resources:
+  - resources/reading/Deterministic-functions-cheat-sheet.pdf
+  - resources/reading/Distribution_cheat_sheet_revised_1_3_15.pdf
+  - resources/reading/Statistical_Distributions_BDA_Appendix_A1.pdf
 ---
 ![](resources/getting-started-hero.webp){fig-align="center" width="50%"}
 
@@ -30,6 +34,12 @@ You will need the following software to be able to run the example code on your 
 
 - <a href="https://github.com/rmcelreath/stat_rethinking_2024" target="_blank">Statistical Rethinking Lectures</a> (and book) by Richard McElreath  
 - <a href="https://www.bayesrulesbook.com/" target="_blank">Bayes Rules!</a> by Johnson, Ott, and Dogucu.  
+
+#### Cheat Sheets
+
+- <a href="resources/reading/Deterministic-functions-cheat-sheet.pdf" target="_blank">Deterministic functions cheat sheet</a>
+- <a href="resources/reading/Distribution_cheat_sheet_revised_1_3_15.pdf" target="_blank">Statistical distribution cheat sheet</a>
+- <a href="resources/reading/Statistical_Distributions_BDA_Appendix_A1.pdf" target="_blank">Statistical distributions cheat sheet</a>
 
 
 ### Stan Software  
