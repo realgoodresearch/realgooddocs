@@ -392,5 +392,12 @@
       "Practical Tutorials",
       "Model of the Mean"
     ]
+  },
+  {
+    "objectID": "teaching/bayesian_intro/practical-gaussian-linear-regression.html",
+    "href": "teaching/bayesian_intro/practical-gaussian-linear-regression.html",
+    "title": "Practical Tutorial: Gaussian Linear Regression",
+    "section": "",
+    "text": "Now that we can design and run a Bayesian model of the mean, let’s add a deterministic linear regression on the mean.\n\n\n\n\n\n\nNote\n\n\n\nThis tutorial assumes that you have already completed the Model of the Mean Practical Tutorial.\n\n\n\nIntroduction\nIn this activity, we will run a Bayesian version of a Gaussian linear regression. We will simulate the data, write the model in Stan, and fit the model using MCMC.\nOur primary aim is to provide a template for linear regression analysis that we can build on for various types of regression analysis. The power of Bayesian inference lies in its ability to handle bespoke model structures (based on data characteristics and our hypotheses about the system we are modelling) that may include non-Gaussian error structures and non-linear deterministic functions. A Gaussian linear regression is the reference point.\n\n\nThe Model\nOur Gaussian linear regression model will take the following form:\n\\[\n\\begin{aligned}\ny_i &\\sim Normal(\\mu_i, \\sigma) \\\\\n\\mu_i &= \\alpha + \\sum_{k=1}^K \\beta_k x_{k,i}\n\\end{aligned}\n\\]\nwith priors, of course:\n\\[\n\\begin{aligned}\n\\alpha &\\sim Normal(0, 10) \\\\\n\\beta_k &\\sim Normal(0, 10) \\\\\n\\sigma &\\sim Uniform(0, 1e4)\n\\end{aligned}\n\\]\n Can you draw a DAG for this model? Once you’ve drawn your DAG, you can compare with the DAG prepared below.\n\n\n\n\n\n\nNoteClick for DAG…\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNotice that this DAG is very similar to the DAG from the model of the mean. Now we have added deterministic (dashed line) predictors of \\(\\mu_i\\). This allows \\(\\mu\\) to vary among our \\(I\\) replicate observations based on the effects \\(\\beta_k\\) of some covariates \\(x_k\\)."
   }
 ]

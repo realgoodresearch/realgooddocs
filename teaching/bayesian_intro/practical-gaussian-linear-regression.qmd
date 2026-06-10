@@ -1,0 +1,146 @@
+---
+title: "Practical Tutorial: Gaussian Linear Regression"
+subtitle: "Adding a deterministic component to our stochastic model of the mean."
+author: "Doug Leasure"
+date: last-modified
+date-format: "D MMM YYYY, HH:mm:ss"
+image: "resources/practical-gaussian-linear-regression-hero.webp"
+format:
+  html:
+    embed-resources: true
+    toc: true
+    toc-collapse: 3
+---
+
+![](resources/practical-gaussian-linear-regression-hero.webp){fig-align="center" width="95%"}
+
+Now that we can design and run a Bayesian model of the mean, let's add a deterministic linear regression on the mean. 
+
+::: {.callout-note}
+This tutorial assumes that you have already completed the [Model of the Mean Practical Tutorial](practical-model-of-the-mean.qmd). 
+:::
+
+# Introduction 
+
+In this activity, we will run a Bayesian version of a Gaussian linear regression. We will simulate the data, write the model in Stan, and fit the model using MCMC. 
+
+Our primary aim is to provide a template for linear regression analysis that we can build on for various types of regression analysis. The power of Bayesian inference lies in its ability to handle bespoke model structures (based on data characteristics and our hypotheses about the system we are modelling) that may include non-Gaussian error structures and non-linear deterministic functions. A Gaussian linear regression is the reference point.
+
+# The Model
+
+Our Gaussian linear regression model will take the following form:
+
+$$
+\begin{aligned}
+y_i &\sim Normal(\mu_i, \sigma) \\
+\mu_i &= \alpha + \sum_{k=1}^K \beta_k x_{k,i}
+\end{aligned}
+$$
+
+with priors, of course:
+
+$$
+\begin{aligned}
+\alpha &\sim Normal(0, 10) \\
+\beta_k &\sim Normal(0, 10) \\
+\sigma &\sim Uniform(0, 1e4)
+\end{aligned}
+$$
+
+<i class="bi bi-question-circle-fill"></i> **Can you draw a DAG for this model?** Once you've drawn your DAG, you can compare with the DAG prepared below.
+
+::: {.callout-note collapse="true"}
+# Click for DAG...
+
+```{r}
+#| echo: false
+suppressPackageStartupMessages({
+  library(ggdag)
+  library(dagitty)
+  library(ggplot2)
+})
+
+model_dag <- dagify(
+  y ~ mu_i + sigma,
+  mu_i ~ alpha + beta_k + x_k,
+  labels = c(
+    y = "y[i]",
+    mu_i = "mu[i]",
+    alpha = "alpha",
+    beta_k = "beta[k]",
+    x_k = "x[k,i]",
+    sigma = "sigma"
+  ),
+  coords = list(
+    x = c(y = 0.2, x_k = -0.2, mu_i = 0, alpha = -0.7, beta_k = 0, sigma = 0.7),
+    y = c(
+      y = 1.0,
+      x_k = 1.0,
+      mu_i = 0.25,
+      alpha = -0.7,
+      beta_k = -0.7,
+      sigma = 0.25
+    )
+  )
+)
+
+dag_data <- as_tidy_dagitty(model_dag)
+
+edge_trim <- function(edge_data, trim = 0.13) {
+  dx <- edge_data$xend - edge_data$x
+  dy <- edge_data$yend - edge_data$y
+  distance <- sqrt(dx^2 + dy^2)
+  scale <- pmax(distance - trim, 0) / distance
+  edge_data$xend <- edge_data$x + dx * scale
+  edge_data$yend <- edge_data$y + dy * scale
+  edge_data
+}
+
+deterministic_edges <- edge_trim(
+  dag_data$data[!is.na(dag_data$data$to) & dag_data$data$to == "mu_i", ]
+)
+stochastic_edges <- edge_trim(
+  dag_data$data[!is.na(dag_data$data$to) & dag_data$data$to == "y", ]
+)
+
+x <- ggplot(dag_data$data, aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_segment(
+    data = deterministic_edges,
+    aes(x = x, y = y, xend = xend, yend = yend),
+    linewidth = 0.9,
+    linetype = "dashed",
+    arrow = grid::arrow(length = grid::unit(7, "pt"), type = "closed")
+  ) +
+  geom_segment(
+    data = stochastic_edges,
+    aes(x = x, y = y, xend = xend, yend = yend),
+    linewidth = 0.9,
+    arrow = grid::arrow(length = grid::unit(7, "pt"), type = "closed")
+  ) +
+  geom_dag_node(
+    aes(shape = ifelse(name %in% c("y", "x_k"), 22, 21)),
+    size = 18,
+    colour = "black",
+    fill = "black"
+  ) +
+  geom_dag_text(
+    aes(label = label),
+    parse = TRUE,
+    colour = "white",
+    size = 6.0
+  ) +
+  scale_shape_identity() +
+  coord_equal(
+    xlim = c(-1.1, 1.1),
+    ylim = c(-0.95, 1.15),
+    expand = FALSE,
+    clip = "off"
+  ) +
+  theme_dag() +
+  labs(title = "Directed Acyclic Graph for our Gaussian Linear Regression")
+
+x
+```
+
+Notice that this DAG is very similar to the DAG from the model of the mean. Now we have added deterministic (dashed line) predictors of $\mu_i$. This allows $\mu$ to vary among our $I$ replicate observations based on the effects $\beta_k$ of some covariates $x_k$. 
+:::

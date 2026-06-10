@@ -1,0 +1,17 @@
+{
+  "hash": "be829d7a12c5f76be639e61a9c68ed20",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Practical Tutorial: Gaussian Linear Regression\"\nsubtitle: \"Adding a deterministic component to our stochastic model of the mean.\"\nauthor: \"Doug Leasure\"\ndate: last-modified\ndate-format: \"D MMM YYYY, HH:mm:ss\"\nimage: \"resources/practical-gaussian-linear-regression-hero.webp\"\nformat:\n  html:\n    embed-resources: true\n    toc: true\n    toc-collapse: 3\n---\n\n![](resources/practical-gaussian-linear-regression-hero.webp){fig-align=\"center\" width=\"95%\"}\n\nNow that we can design and run a Bayesian model of the mean, let's add a deterministic linear regression on the mean. \n\n::: {.callout-note}\nThis tutorial assumes that you have already completed the [Model of the Mean Practical Tutorial](practical-model-of-the-mean.qmd). \n:::\n\n# Introduction \n\nIn this activity, we will run a Bayesian version of a Gaussian linear regression. We will simulate the data, write the model in Stan, and fit the model using MCMC. \n\nOur primary aim is to provide a template for linear regression analysis that we can build on for various types of regression analysis. The power of Bayesian inference lies in its ability to handle bespoke model structures (based on data characteristics and our hypotheses about the system we are modelling) that may include non-Gaussian error structures and non-linear deterministic functions. A Gaussian linear regression is the reference point.\n\n# The Model\n\nOur Gaussian linear regression model will take the following form:\n\n$$\n\\begin{aligned}\ny_i &\\sim Normal(\\mu_i, \\sigma) \\\\\n\\mu_i &= \\alpha + \\sum_{k=1}^K \\beta_k x_{k,i}\n\\end{aligned}\n$$\n\nwith priors, of course:\n\n$$\n\\begin{aligned}\n\\alpha &\\sim Normal(0, 10) \\\\\n\\beta_k &\\sim Normal(0, 10) \\\\\n\\sigma &\\sim Uniform(0, 1e4)\n\\end{aligned}\n$$\n\n<i class=\"bi bi-question-circle-fill\"></i> **Can you draw a DAG for this model?** Once you've drawn your DAG, you can compare with the DAG prepared below.\n\n::: {.callout-note collapse=\"true\"}\n# Click for DAG...\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](practical-gaussian-linear-regression_files/figure-html/unnamed-chunk-1-1.png){width=672}\n:::\n:::\n\n\nNotice that this DAG is very similar to the DAG from the model of the mean. Now we have added deterministic (dashed line) predictors of $\\mu_i$. This allows $\\mu$ to vary among our $I$ replicate observations based on the effects $\\beta_k$ of some covariates $x_k$. \n:::\n",
+    "supporting": [
+      "practical-gaussian-linear-regression_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
