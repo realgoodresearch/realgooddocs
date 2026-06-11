@@ -10,6 +10,7 @@ listing:
         - practical-model-of-the-mean.qmd
         - practical-posteriors-likelihoods-priors.qmd
         - practical-mcmc-toy.qmd
+        - practical-gaussian-linear-regression.qmd
         - lecture-glm-and-hierarchical-models.qmd
         - practical-synthetic-controls.qmd
 ---

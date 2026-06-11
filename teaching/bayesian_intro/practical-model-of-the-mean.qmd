@@ -221,7 +221,10 @@ model {
 }
 
 ```
+
+::: {.callout-important}
 Save this code into a file called `model_of_the_mean.stan` in your R working directory for this exercise.
+:::
 
 ```{r}
 #| echo: false

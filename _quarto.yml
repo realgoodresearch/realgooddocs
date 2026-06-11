@@ -53,6 +53,8 @@ website:
             href: teaching/bayesian_intro/practical-posteriors-likelihoods-priors.qmd
           - text: "MCMC Toy Example"
             href: teaching/bayesian_intro/practical-mcmc-toy.qmd
+          - text: "Gaussian Linear Regression"
+            href: teaching/bayesian_intro/practical-gaussian-linear-regression.qmd
           - text: "Synthetic Controls"
             href: teaching/bayesian_intro/practical-synthetic-controls.qmd
 

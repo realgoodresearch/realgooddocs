@@ -1,0 +1,644 @@
+---
+title: "Practical Tutorial: Gaussian Linear Regression"
+subtitle: "Adding a deterministic component to our stochastic model of the mean."
+author: "Doug Leasure"
+date: last-modified
+date-format: "D MMM YYYY, HH:mm:ss"
+image: "resources/practical-gaussian-linear-regression-hero.webp"
+format:
+  html:
+    embed-resources: true
+    toc: true
+    toc-collapse: 3
+resources:
+  - resources/gaussian_linear_regression.stan
+---
+
+![](resources/practical-gaussian-linear-regression-hero.webp){fig-align="center" width="90%"}
+
+```{r}
+#| echo: false
+suppressPackageStartupMessages({
+  library(ggdag)
+  library(dagitty)
+  library(ggplot2)
+  library(here)
+})
+
+basedir <- here::here()
+
+wd <- file.path(
+  basedir,
+  "wd",
+  "teaching",
+  "bayesian_intro",
+  "gaussian_regression"
+)
+if (!dir.exists(wd)) {
+  dir.create(wd, showWarnings = FALSE, recursive = TRUE)
+}
+```
+
+Now that we can design and run a Bayesian model of the mean, let's add a deterministic linear regression on the mean. 
+
+::: {.callout-note}
+This tutorial assumes that you have already completed the [Model of the Mean Practical Tutorial](practical-model-of-the-mean.qmd). 
+:::
+
+# Introduction 
+
+In this activity, we will run a Bayesian version of a Gaussian linear regression. We will simulate the data, write the model in Stan, and fit the model using MCMC. 
+
+Our primary aim is to provide a template for linear regression analysis that we can build on for various types of regression analysis. The power of Bayesian inference lies in its ability to handle bespoke model structures (based on data characteristics and our hypotheses about the system we are modelling) that may include non-Gaussian error structures and non-linear deterministic functions. A Gaussian linear regression is the reference point.
+
+# The Model
+
+Our Gaussian linear regression model will take the following form:
+
+$$
+\begin{aligned}
+y_i &\sim Normal(\mu_i, \sigma) \\
+\mu_i &= \alpha + \sum_{k=1}^K \beta_k x_{k,i}
+\end{aligned}
+$$
+
+with priors, of course:
+
+$$
+\begin{aligned}
+\alpha &\sim Normal(0, 10) \\
+\beta_k &\sim Normal(0, 10) \\
+\sigma &\sim Uniform(0, 1e4)
+\end{aligned}
+$$
+
+<i class="bi bi-question-circle-fill"></i> **Can you draw a DAG for this model?** Once you've drawn your DAG, you can compare with the DAG prepared below.
+
+::: {.callout-note collapse="true"}
+# Click for DAG...
+
+```{r}
+#| echo: false
+suppressPackageStartupMessages({
+  library(ggdag)
+  library(dagitty)
+  library(ggplot2)
+})
+
+model_dag <- dagify(
+  y ~ mu_i + sigma,
+  mu_i ~ alpha + beta_k + x_k,
+  labels = c(
+    y = "y[i]",
+    mu_i = "mu[i]",
+    alpha = "alpha",
+    beta_k = "beta[k]",
+    x_k = "x[k,i]",
+    sigma = "sigma"
+  ),
+  coords = list(
+    x = c(y = 0.2, x_k = -0.2, mu_i = 0, alpha = -0.7, beta_k = 0, sigma = 0.7),
+    y = c(
+      y = 1.0,
+      x_k = 1.0,
+      mu_i = 0.25,
+      alpha = -0.7,
+      beta_k = -0.7,
+      sigma = 0.25
+    )
+  )
+)
+
+dag_data <- as_tidy_dagitty(model_dag)
+
+edge_trim <- function(edge_data, trim = 0.13) {
+  dx <- edge_data$xend - edge_data$x
+  dy <- edge_data$yend - edge_data$y
+  distance <- sqrt(dx^2 + dy^2)
+  scale <- pmax(distance - trim, 0) / distance
+  edge_data$xend <- edge_data$x + dx * scale
+  edge_data$yend <- edge_data$y + dy * scale
+  edge_data
+}
+
+deterministic_edges <- edge_trim(
+  dag_data$data[!is.na(dag_data$data$to) & dag_data$data$to == "mu_i", ]
+)
+stochastic_edges <- edge_trim(
+  dag_data$data[!is.na(dag_data$data$to) & dag_data$data$to == "y", ]
+)
+
+x <- ggplot(dag_data$data, aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_segment(
+    data = deterministic_edges,
+    aes(x = x, y = y, xend = xend, yend = yend),
+    linewidth = 0.9,
+    linetype = "dashed",
+    arrow = grid::arrow(length = grid::unit(7, "pt"), type = "closed")
+  ) +
+  geom_segment(
+    data = stochastic_edges,
+    aes(x = x, y = y, xend = xend, yend = yend),
+    linewidth = 0.9,
+    arrow = grid::arrow(length = grid::unit(7, "pt"), type = "closed")
+  ) +
+  geom_dag_node(
+    aes(shape = ifelse(name %in% c("y", "x_k"), 22, 21)),
+    size = 18,
+    colour = "black",
+    fill = "black"
+  ) +
+  geom_dag_text(
+    aes(label = label),
+    parse = TRUE,
+    colour = "white",
+    size = 6.0
+  ) +
+  scale_shape_identity() +
+  coord_equal(
+    xlim = c(-1.1, 1.1),
+    ylim = c(-0.95, 1.15),
+    expand = FALSE,
+    clip = "off"
+  ) +
+  theme_dag() +
+  labs(title = "Directed Acyclic Graph for our Gaussian Linear Regression")
+
+x
+```
+
+Notice that this DAG is very similar to the DAG from the model of the mean. Now we have added deterministic (dashed line) predictors of $\mu_i$. This allows $\mu$ to vary among our $I$ replicate observations based on the effects $\beta_k$ of some covariates $x_k$. 
+:::
+
+# Stan Code
+
+Let’s take a look at how to write this model in Stan. This model is setup very similar to our model of the mean from activity 1. 
+
+```{r}
+#| echo: false
+#| results: asis
+stan_code <- readLines("resources/gaussian_linear_regression.stan")
+cat("```stan\n")
+cat(paste(stan_code, collapse = "\n"))
+cat("\n```")
+```
+
+::: {.callout-important}
+Save the Stan code into a file named `gaussian_linear_regression.stan` into your R working directory for this exercise.
+
+<a class="btn btn-primary" href="resources/gaussian_linear_regression.stan" download>Download Stan code</a>
+:::
+
+```{r}
+#| echo: false
+stan_code <- readLines("resources/gaussian_linear_regression.stan")
+writeLines(c(stan_code, ""), file.path(wd, "gaussian_linear_regression.stan"))
+```
+
+Let’s discuss the differences in each model block compared to our previous work, including introducing an important new parameter block in Stan: `transformed parameters {}`. 
+
+## data 
+
+The data model block now includes an integer K that defines the number of predictor variables and a matrix $x_{i,k}$ of values for our predictors. Notice that this matrix has a row for each sample n and a column for each predictor variable $k$. 
+
+## parameters 
+
+The parameters block now includes our regression coefficients: the intercept alpha ($\alpha$) and the effect size beta ($\beta$) of each predictor variable. 
+
+## transformed parameters 
+
+This model block was not included in our model of the mean. This is where we can define parameters that are derived deterministically from other parameters and data in the model. In this case, our linear regression determines the mean $\mu$ of the normal distribution used as our likelihood in the `model{}` block below. 
+
+Note that we are using a matrix multiplication to multiply the matrix $x_{i,k}$ of predictor variables by our vector of regression coefficients $\beta_k$. This notation provides flexibility to include more (or fewer) predictor variables in the model by simply modifying the data and without needing to rewrite the model code.
+
+## model 
+
+This block is very similar to our model of the mean. The difference is only that mu ($\mu$) is now derived in the transformed parameters block rather than having a prior in the model block, and we have added priors for alpha ($\alpha$) and beta ($\beta$).
+
+We have introduced a new distribution as the prior for the standard deviation sigma ($\sigma$) in our likelihood. This is the half-cauchy distribution (“half” because sigma is defined to be greater than 0 in the parameters block). The Cauchy distribution is a t-distribution with one degree of freedom. This is similar to a normal distribution with “fat” tails (i.e. a higher probability of outliers). This is commonly used as the prior for standard deviation parameters, although there are other viable alternatives (e.g. uniform, half-normal).
+
+# Simulate Data
+
+We provided code below to simulate data for our regression analysis. As usual, let's start by setting up our R environment. 
+
+```{r}
+#| eval: false
+# cleanup
+rm(list = ls())
+gc()
+cat("\014")
+try(dev.off(), silent = T)
+
+# check working directory
+getwd()
+
+# [optional] update/fix working directory
+# setwd(file.path('/my/working/directory/model_of_the_mean'))
+
+# directories
+wd <- getwd()
+dir.create(wd, showWarnings = F, recursive = T)
+```
+
+We'll load our required Stan libraries. 
+
+```{r}
+#| echo: true
+#| message: false
+#| warning: false
+#| results: hide
+# load libraries
+library(cmdstanr)
+library(posterior)
+library(bayesplot)
+```
+Don't forget to set a seed for random number generators! 
+```{r}
+# set seed for random number generators (important for reproducibility)
+seed <- round(runif(1, 1, 1e6))
+set.seed(seed)
+```
+
+The way the data are simulated will mirror how the model is written in the stan code. The parameter values are randomly drawn from distributions (analogous to defining the priors), the expected value of the response variable is derived deterministically from the linear regression, there is normally distributed random noise added on. We even used the same matrix multiplication trick (`x * beta`) so that you can convince yourself that this is equivalent to the longer form regression notation (`beta1 * x1 + beta2 * x2`). 
+
+```{r}
+#---- simulate data (Gaussian) ----#
+
+# define the sample size
+n <- 1e3
+
+# number of covariates (use K > 1)
+K <- 2
+if (K < 2) {
+  stop("Please define K as 2 or more.")
+}
+
+# create covariates
+x <- matrix(NA, nrow = n, ncol = K)
+for (k in 1:K) {
+  x[, k] <- rnorm(n, 0, 1)
+}
+
+# define regression parameters (randomly)
+alpha <- rnorm(1, 0, 1)
+beta <- rnorm(K, 0, 3)
+sigma <- runif(1, 0, 2)
+
+# generate response variable
+y <- alpha + as.vector(x %*% beta) + rnorm(n, 0, sigma)
+```
+
+Let's just convince ourselves that the matrix multiplication is doing what is should:
+```{r}
+# note: %*% is a matrix multiplication of a matrix of x values times a vector of beta values
+# convince yourself that (x %*% beta) is equal to (beta1 * x1 + beta2 * x2)
+head(x[, 1:2] %*% beta[1:2])
+head(beta[1] * x[, 1] + beta[2] * x[, 2])
+```
+We can see that we get the exact same results with the matrix multiplication as we do with the element-wise multiplications that are then summed as a second step. 
+
+:::{.callout-note}
+In Stan, the `*` symbol is a matrix multiplication operator for matrix and vector data types. The `.*` operator is an elementwise multiplication for two vectors. 
+:::
+
+Now let's visualise the relationship between our covariates and our outcome:
+```{r}
+# visualise covariate relationships with response variable
+plot(y ~ x[, 1])
+plot(y ~ x[, 2])
+```
+Looks like we've got reasonable linear relationships with plenty of random noise to make the analysis interesting. 
+
+And review a few summary statistics for our response variable: 
+```{r}
+# summary statistics of response variable
+summary(y)
+
+# density plot of response variable
+plot(density(y))
+rug(y)
+```
+Here we can see that we do indeed have a normally-distributed response variable, and we have confirmed it's relationships with our simulated covariates.
+
+### A few notes
+
+Notice that the regression coefficients (alpha and the betas) are simulated randomly so that they change each time you re-simulate the data. This is useful to see how well the model can recover different combinations of these “true” parameter values in its posterior parameter estimates.
+
+Note that we can easily modify our sample size and the number of predictor variables in our data/model by changing the values in the simulation code. This is useful to explore how the model results might change with small sample sizes and different numbers of covariates/predictors. 
+
+# Run MCMC
+
+This section is identical to our previous work with the model of the mean. We're just running MCMC on our model, as usual. 
+
+```{r}
+#---- run Bayesian model (CmdStandR) ----#
+
+# format data as a list (required by stan)
+md <- list(
+  n = n,
+  K = K,
+  y = as.vector(y),
+  x = x,
+  alpha_true = alpha,
+  beta_true = beta,
+  sigma_true = sigma,
+  seed = seed # important to set and save seed for reproducibility
+)
+
+# save data to disk
+saveRDS(
+  object = md,
+  file = file.path(wd, "md.rds")
+)
+
+
+# define location of the stan model file
+model_file <- file.path(wd, "gaussian_linear_regression.stan")
+
+# compile the stan model
+mod <- cmdstan_model(model_file)
+
+
+# function to generate initial values for each parameter in the model
+init_generator <- function(md = md, chain_id = 1) {
+  result <- list()
+
+  result[["alpha"]] <- runif(1, -10, 10)
+  result[["beta"]] <- runif(md$K, -10, 10)
+  result[["sigma"]] <- runif(1, 0, 1e2)
+
+  return(result)
+}
+
+
+# MCMC config
+chains <- 4
+warmup <- 1e3
+samples <- 2e3
+inits <- lapply(1:chains, function(id) init_generator(md = md, chain_id = id))
+```
+Let's just take a quick look at our initials to make sure we understand the values being generated by our `init_generator()` function. Remember, this is provided a starting value for the first MCMC iteration for each parameter, and we need set of indpendent initials for each of our four chains. 
+
+```{r}
+inits
+```
+
+```{r}
+#| message: false
+#| results: hide
+# run MCMC
+fit <- mod$sample(
+  data = md,
+  parallel_chains = chains,
+  init = inits,
+  iter_sampling = samples,
+  iter_warmup = warmup,
+  save_warmup = TRUE,
+  seed = md$seed
+)
+
+# save model to disk
+fit$save_object(file = file.path(wd, "fit.rds"))
+```
+
+Did Stan return any warnings at the end of the model run? If so, follow the links provided by Stan to learn more about the issues.
+
+## Model Diagnostics
+
+Let's start by looking at our traceplots. 
+
+```{r}
+# traceplots to visually inspect MCMC chains
+bayesplot::mcmc_trace(
+  fit$draws(),
+  pars = c(
+    "alpha",
+    paste0("beta[", 1:md$K, "]"),
+    "sigma"
+  )
+)
+```
+<i class="bi bi-question-circle-fill"></i> **What do you think? Do we have convergence?**
+
+If the traceplots visually appear converged and there are no obvious issues, let's formally confirm convergence for each parameter with the r-hat statistics (i.e. we're looking for `r-hat < 1.01` for publication quality convergence or `r-hat < 1.1` for a reliable exploratory model). 
+
+```{r}
+# Check r-hat for convergence
+posterior::rhat(fit$draws("alpha"))
+posterior::rhat(fit$draws("beta[1]"))
+posterior::rhat(fit$draws("beta[2]"))
+posterior::rhat(fit$draws("sigma"))
+```
+
+<i class="bi bi-question-circle-fill"></i> **Are all of our parameters converged?**
+
+# Compare Results to Simulated "Truth"
+
+Let's remind ourselves of the true population-level parameter values that we defined in our simulation.
+```{r}
+# parameters from the true unobserved population (i.e. from simulation)
+alpha
+beta
+sigma
+```
+
+Now, let's compare them to the summary statistics from the posterior distribution for these parameters based on our model and simulated sample data.
+```{r}
+# summary of model results
+pars <- c("alpha", "beta", "sigma")
+fit$summary(variables = pars)
+```
+<i class="bi bi-question-circle-fill"></i> **Do our credible intervals include the true parameter values?** Should the true parameter values always be inside the credible intervals?
+
+<i class="bi bi-question-circle-fill"></i> **Are the credible intervals reflected in columns `q5` and `q95` giving us 95% CI or 90% CI?** 
+
+Now let's just get a nice visual of the marginal posteriors for our parameters using density plots.
+```{r}
+# visualise marginal posterior distributions for parameters as density plots
+pars <- c("alpha", paste0("beta[", 1:md$K, "]"), "sigma")
+bayesplot::mcmc_areas(fit$draws(), pars = pars, prob = 0.95)
+
+# ... as histograms
+bayesplot::mcmc_hist(fit$draws(), pars = pars)
+```
+
+
+# Full Analysis Scripts
+
+## Stan Model
+
+`gaussian_linear_regression.stan`
+
+```{r}
+#| echo: false
+#| results: asis
+stan_code <- readLines("resources/gaussian_linear_regression.stan")
+cat("```stan\n")
+cat(paste(stan_code, collapse = "\n"))
+cat("\n```")
+```
+
+## R Analysis
+
+`gaussian_linear_regression.R`
+
+```{r}
+#| eval: false
+# cleanup
+rm(list = ls())
+gc()
+cat("\014")
+try(dev.off(), silent = T)
+
+# check working directory
+getwd()
+
+# [optional] update/fix working directory
+# setwd(file.path('/my/working/directory/model_of_the_mean'))
+
+# directories
+wd <- getwd()
+dir.create(wd, showWarnings = F, recursive = T)
+
+# load libraries
+library(cmdstanr)
+library(posterior)
+library(bayesplot)
+
+# set seed for random number generators (important for reproducibility)
+seed <- round(runif(1, 1, 1e6))
+set.seed(seed)
+
+#---- simulate data (Gaussian) ----#
+
+# define the sample size
+n <- 1e3
+
+# number of covariates (use K > 1)
+K <- 2
+if (K < 2) {
+  stop("Please define K as 2 or more.")
+}
+
+# create covariates
+x <- matrix(NA, nrow = n, ncol = K)
+for (k in 1:K) {
+  x[, k] <- rnorm(n, 0, 1)
+}
+
+# define regression parameters (randomly)
+alpha <- rnorm(1, 0, 1)
+beta <- rnorm(K, 0, 3)
+sigma <- runif(1, 0, 2)
+
+# generate response variable
+y <- alpha + as.vector(x %*% beta) + rnorm(n, 0, sigma)
+
+# note: %*% is a matrix multiplication of a matrix of x values times a vector of beta values
+# convince yourself that (x %*% beta) is equal to (beta1 * x1 + beta2 * x2)
+head(x[, 1:2] %*% beta[1:2])
+head(beta[1] * x[, 1] + beta[2] * x[, 2])
+
+# visualise covariate relationships with response variable
+plot(y ~ x[, 1])
+plot(y ~ x[, 2])
+
+# summary statistics of response variable
+summary(y)
+
+# density plot of response variable
+plot(density(y))
+rug(y)
+
+#---- run Bayesian model (CmdStandR) ----#
+
+# format data as a list (required by stan)
+md <- list(
+  n = n,
+  K = K,
+  y = as.vector(y),
+  x = x,
+  alpha_true = alpha,
+  beta_true = beta,
+  sigma_true = sigma,
+  seed = seed # important to set and save seed for reproducibility
+)
+
+# save data to disk
+saveRDS(
+  object = md,
+  file = file.path(wd, "md.rds")
+)
+
+
+# define location of the stan model file
+model_file <- file.path(wd, "gaussian_linear_regression.stan")
+
+# compile the stan model
+mod <- cmdstan_model(model_file)
+
+
+# function to generate initial values for each parameter in the model
+init_generator <- function(md = md, chain_id = 1) {
+  result <- list()
+
+  result[["alpha"]] <- runif(1, -10, 10)
+  result[["beta"]] <- runif(md$K, -10, 10)
+  result[["sigma"]] <- runif(1, 0, 1e2)
+
+  return(result)
+}
+
+
+# MCMC config
+chains <- 4
+warmup <- 1e3
+samples <- 2e3
+inits <- lapply(1:chains, function(id) init_generator(md = md, chain_id = id))
+
+# run MCMC
+fit <- mod$sample(
+  data = md,
+  parallel_chains = chains,
+  init = inits,
+  iter_sampling = samples,
+  iter_warmup = warmup,
+  save_warmup = TRUE,
+  seed = md$seed
+)
+
+# save model to disk
+fit$save_object(file = file.path(wd, "fit.rds"))
+
+# traceplots to visually inspect MCMC chains
+bayesplot::mcmc_trace(
+  fit$draws(),
+  pars = c(
+    "alpha",
+    paste0("beta[", 1:md$K, "]"),
+    "sigma"
+  )
+)
+
+# Check r-hat for convergence
+posterior::rhat(fit$draws("alpha"))
+posterior::rhat(fit$draws("beta[1]"))
+posterior::rhat(fit$draws("beta[2]"))
+posterior::rhat(fit$draws("sigma"))
+
+# parameters from the true unobserved population (i.e. from simulation)
+alpha
+beta
+sigma
+
+# summary of model results
+pars <- c("alpha", "beta", "sigma")
+fit$summary(variables = pars)
+
+# visualise marginal posterior distributions for parameters as density plots
+pars <- c("alpha", paste0("beta[", 1:md$K, "]"), "sigma")
+bayesplot::mcmc_areas(fit$draws(), pars = pars, prob = 0.95)
+
+# ... as histograms
+bayesplot::mcmc_hist(fit$draws(), pars = pars)
+```
