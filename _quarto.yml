@@ -59,14 +59,14 @@ website:
             href: teaching/bayesian_intro/practical-synthetic-controls.qmd
     - id: gaza-nowpop-sidebar
       title: "Gaza NowPop"
-      path: research/gaza_nowpop/
+      path: research/nowpop/
       contents: 
         - text: "Introduction"
-          href: research/gaza_nowpop/overview.qmd
+          href: research/nowpop/overview.qmd
         - text: "Table of Contents"
-          href: research/gaza_nowpop/toc.qmd
-        - text: "Telecoms Methods"
-          href: research/gaza_nowpop/gaza-nowpop-telecoms.qmd
+          href: research/nowpop/toc.qmd
+        - text: "Gaza Telecoms"
+          href: research/nowpop/gaza-nowpop-telecoms.qmd
 
 format:
   html:
