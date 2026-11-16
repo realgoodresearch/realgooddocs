@@ -1,15 +1,43 @@
 ---
 title: "Real Good Docs"
-subtitle: "Documenting and teaching the innovations behind Real Good Research."
+subtitle: "Planting good ideas."
 ---
 
-::: {.inset-center}
+![](assets/images/home-hero.webp){fig-align="center" width="50%"}
+
+#### We share our work so that you can figure out how to do it better.
+
+::: {.columns}
+
+::: {.column width="50%"}
+
+## Research
+
+Explore the methods behind our applied research, beginning with population
+nowcasting for humanitarian response in Gaza.
+
+[Explore research →](research/index.qmd)
 
 :::
 
-::: {.callout-warning}
-## Notice
-This site is currently under construction. Some pages and features may be incomplete while we continue building.
+::: {.column width="50%"}
+
+## Teaching
+
+Learn practical statistical methods through accessible lectures, tutorials, and
+worked examples.
+
+[Start learning →](teaching/index.qmd)
+
 :::
 
-![](assets/images/work-in-progress.png)
+:::
+
+## Open by design
+
+Our work is intended to be transparent, reproducible, and adaptable. Alongside
+these guides, you can explore our public data and source code.
+
+- [Browse data →](https://data.realgoodresearch.com)
+- [View our code on GitHub →](https://github.com/realgoodresearch)
+- [Visit Real Good Research →](https://realgoodresearch.com)
