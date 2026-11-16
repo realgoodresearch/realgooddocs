@@ -22,14 +22,14 @@
   {
     "listing": "/research/index.html",
     "items": [
-      "/research/gaza_nowpop/overview.html"
+      "/research/nowpop/overview.html"
     ]
   },
   {
-    "listing": "/research/gaza_nowpop/toc.html",
+    "listing": "/research/nowpop/toc.html",
     "items": [
-      "/research/gaza_nowpop/overview.html",
-      "/research/gaza_nowpop/gaza-nowpop-telecoms.html"
+      "/research/nowpop/overview.html",
+      "/research/nowpop/gaza-nowpop-telecoms.html"
     ]
   }
 ]
