@@ -60,11 +60,25 @@
     ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
+    "objectID": "index.html#research",
+    "href": "index.html#research",
     "title": "Real Good Docs",
-    "section": "",
-    "text": "WarningNotice\n\n\n\nThis site is currently under construction. Some pages and features may be incomplete while we continue building."
+    "section": "Research",
+    "text": "Research\nExplore the methods behind our applied research, beginning with population nowcasting for humanitarian response in Gaza.\nExplore research →"
+  },
+  {
+    "objectID": "index.html#teaching",
+    "href": "index.html#teaching",
+    "title": "Real Good Docs",
+    "section": "Teaching",
+    "text": "Teaching\nLearn practical statistical methods through accessible lectures, tutorials, and worked examples.\nStart learning →"
+  },
+  {
+    "objectID": "index.html#open-by-design",
+    "href": "index.html#open-by-design",
+    "title": "Real Good Docs",
+    "section": "Open by design",
+    "text": "Open by design\nOur work is intended to be transparent, reproducible, and adaptable. Alongside these guides, you can explore our public data and source code.\n\nBrowse data →\nView our code on GitHub →\nVisit Real Good Research →"
   },
   {
     "objectID": "teaching/bayesian_intro/lecture-intro-to-bayesian-inference.html",
