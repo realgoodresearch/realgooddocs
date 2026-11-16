@@ -151,7 +151,7 @@ library(dplyr)
 library(ggplot2)
 ```
 
-If you haven't yet installed *cmdstanr*, please go back to the [Getting Started](./getting_started.qmd) tutorial.
+If you haven't yet installed *cmdstanr*, please go back to the [Getting Started](getting-started.qmd) tutorial.
 
 If you don't have any of the other R packages, you can install them with this code: 
 
