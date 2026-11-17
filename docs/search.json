@@ -4,7 +4,7 @@
     "href": "research/nowpop/overview.html",
     "title": "NowPop",
     "section": "",
-    "text": "The researchers of Real Good Research contribute to international humanitarian response using innovative data sources to produce up-to-date population estimates with frequent updates for the smallest geographic areas possible. We call this humanitarian population nowcasting. Our work in this area began in the immediate aftermath of the large-scale Russian invasion of Ukraine on the 22 February 2022 when we teamed up with the UN International Organization for Migration to repurpose targeted advertising data from social media into a tool for targeted humanitarian aid (Leasure et al. 2023). We later transferred these approaches to Gaza supporting the UN Office for Coordination of Humanitarian Affairs and the Site Management Cluster (Acted and IOM). You can read about some of our early work for Gaza from Darin et al. (2026) that further developed these methods and data to provide a generalised toolbox for digital traces in crisis response.\nSince our initial work with social media targeted advertising data in Ukraine and Gaza, the data landscape has unsurprisingly changed in both of these crises, and we have been continuously working on methods that can help the humanitarian responses adapt to these changes. This has included Bayesian mark-recapture methods to leverage polio vaccination data for estimation of child population sizes and vaccine coverage in Gaza, using Vodafone advertising data to estimate internal (sub-national) population flows in Ukraine, demographic indirect estimation using privacy-preserving telecommunications data for population nowcasting, and machine learning for automated tent mapping from satellite imagery.\nOur aim with this collection of tutorials and documentation is to make these methods more accessible to you. We will walk you through some of the details and provide the source code so that you can reproduce and adapt the methods yourself. This is part of our vision for open-source innovation for humanitarian population nowcasting so that science can be harnessed and adapted more quickly to respond to crisis events. We hope you find these materials useful in your own work and that we can grow the community of researchers working together to improve these approaches.",
+    "text": "The researchers of Real Good Research contribute to international humanitarian response using innovative data sources for population nowcasting. In other words, we produce up-to-date population estimates with frequent updates for the smallest geographic areas possible using digital trace data and satellite remote sensing. Our work in this area began in the immediate aftermath of the large-scale Russian invasion of Ukraine on the 22 February 2022 when we teamed up with the UN International Organization for Migration to repurpose targeted advertising data from social media into a tool for targeted humanitarian aid (Leasure et al. 2023). We later transferred these approaches to Gaza supporting the UN Office for Coordination of Humanitarian Affairs and the Site Management Cluster (Acted and IOM). You can read about some of our early work for Gaza from Darin et al. (2026) that further developed these methods and data to provide a generalised toolbox for digital traces in crisis response.\nSince our initial work with social media targeted advertising data in Ukraine and Gaza, the data landscape has unsurprisingly changed in both of these crises, and we have been continuously working on methods that can help the humanitarian responses adapt to these changes. This has included Bayesian mark-recapture methods to leverage polio vaccination data for estimation of child population sizes and vaccine coverage in Gaza, using Vodafone advertising data to estimate internal (sub-national) population flows in Ukraine, demographic indirect estimation using privacy-preserving telecommunications data for population nowcasting, and machine learning for automated tent mapping from satellite imagery.\nOur aim with this collection of tutorials and documentation is to make these methods more accessible to you. We will walk you through some of the details and provide the source code so that you can reproduce and adapt the methods yourself. This is part of our vision for open-source innovation for humanitarian population nowcasting so that science can be harnessed and adapted more quickly to respond to crisis events. We hope you find these materials useful in your own work and that we can grow the community of researchers working together to improve these approaches.",
     "crumbs": [
       "Introduction"
     ]
@@ -64,7 +64,7 @@
     "href": "index.html",
     "title": "Real Good Docs",
     "section": "",
-    "text": "Dig into the details of methods behind our research innovations in humanitarian population nowcasting and other areas.\nLet’s get nerdy →\n\n\n\n\nLearn practical methods through accessible lectures, tutorials, and worked examples.\nRoll up your sleeves →"
+    "text": "NowPop\n\n\n\n\n\n\n\n\n\nNov 17, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nMapping Tents from Satellite Imagery\n\n\n\n\n\n\nDoug Leasure\n\n\nNov 17, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nBayesian Intro\n\n\n\n\n\n\n\n\n\nMay 21, 2026\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html#research",
@@ -560,7 +560,7 @@
     "href": "research/index.html",
     "title": "Research",
     "section": "",
-    "text": "NowPop\n\n\nPopulation nowcasting to support targeted humanitarian response.\n\n\n\n\n\n\n\n\n\n\nNov 17, 2026\n\n\n\n\n\nNo matching items"
+    "text": "Mapping Tents from Satellite Imagery\n\n\nIntroduction\n\n\n\n\n\n\n\n\n\n\nNov 17, 2026\n\n\nDoug Leasure\n\n\n\n\n\n\n\n\n\n\n\n\nNowPop\n\n\nPopulation nowcasting to support targeted humanitarian response.\n\n\n\n\n\n\n\n\n\n\nNov 17, 2026\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "research/nowpop/toc.html",
@@ -570,6 +570,36 @@
     "text": "NowPop\n\n\n\n\n\n\n\n\n\nNov 17, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nGaza NowPop - Telecoms\n\n\n\n\n\n\nDoug Leasure\n\n\nNov 17, 2026\n\n\n\n\n\n\nNo matching items",
     "crumbs": [
       "Table of Contents"
+    ]
+  },
+  {
+    "objectID": "research/tent-mapping/tentnetfa-overview.html",
+    "href": "research/tent-mapping/tentnetfa-overview.html",
+    "title": "TentNetFA Overview",
+    "section": "",
+    "text": "⛶\n\nMove the slider to compare satellite imagery with TentNetFA detections. Select the fullscreen button to enlarge the comparison.",
+    "crumbs": [
+      "TentNetFA Overview"
+    ]
+  },
+  {
+    "objectID": "research/tent-mapping/toc.html",
+    "href": "research/tent-mapping/toc.html",
+    "title": "Table of Contents",
+    "section": "",
+    "text": "Mapping Tents from Satellite Imagery\n\n\n\n\n\n\nDoug Leasure\n\n\nNov 17, 2026\n\n\n\n\n\n\n\n\n\n\n\nTentNetFA Overview\n\n\n\n\n\n\n\n\n\nNov 17, 2026\n\n\n\n\n\n\nNo matching items",
+    "crumbs": [
+      "Table of Contents"
+    ]
+  },
+  {
+    "objectID": "research/tent-mapping/overview.html",
+    "href": "research/tent-mapping/overview.html",
+    "title": "Mapping Tents from Satellite Imagery",
+    "section": "",
+    "text": "When people are forced from their homes by conflict, violence, or disaster, they often move quickly and settle where they can. This has been witnessed recently at a devastating scale as millions of Gazans have been forced into informal tent settlements as their homes have been systematically destroyed. Theese settlements can appear, expand, move, or disappear faster than conventional population data can be collected and updated. Yet knowing where people are living, and how those locations are changing, is essential for planning humanitarian assistance.\nAutomated tent mapping from satellite imagery gives us a powerful tool for monitoring and quantifying impermanent and mobile tent settlements. By mapping the locations of tents from regularly updated satellite imagery, we can identify areas where displaced communities are likely to be living right now, integrate digital traces as a signal of current occupancy, support the design of more representative surveys, and provide an input to population nowcasting to help guide humanitarian assistance to where it is needed.\nOur partners have been crucial for leading advancements in automated tent mapping from satellite imagery to support our humanitarian population nowcasting initiatives. This includes:\n\nAlgorithmic Governance Foundation\n\nForensic Architecture\n\nInterdisciplinary Institute for Societal Computing\n\nCenter for Advanced Spatial Analysis\nConflict Ecology\nPlanet Labs\n\nIn this book, we introduce our approach to automated tent mapping from satellite imagery. We will walk through the methods, the data they require, and the assumptions that need to be considered when using tent maps for humanitarian decision-making. Our aim is to make the workflow accessible, reproducible, and useful for others working to understand rapidly changing displacement situations.",
+    "crumbs": [
+      "Introduction"
     ]
   }
 ]

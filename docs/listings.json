@@ -22,6 +22,7 @@
   {
     "listing": "/research/index.html",
     "items": [
+      "/research/tent-mapping/overview.html",
       "/research/nowpop/overview.html"
     ]
   },
@@ -30,6 +31,21 @@
     "items": [
       "/research/nowpop/overview.html",
       "/research/nowpop/gaza-nowpop-telecoms.html"
+    ]
+  },
+  {
+    "listing": "/research/tent-mapping/toc.html",
+    "items": [
+      "/research/tent-mapping/overview.html",
+      "/research/tent-mapping/tentnetfa-overview.html"
+    ]
+  },
+  {
+    "listing": "/index.html",
+    "items": [
+      "/research/nowpop/overview.html",
+      "/research/tent-mapping/overview.html",
+      "/teaching/bayesian_intro/overview.html"
     ]
   }
 ]
