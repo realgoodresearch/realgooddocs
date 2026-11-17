@@ -1,6 +1,7 @@
 ---
 title: "Lecture Slides: GLM and Hierarchical Models"
 subtitle: "Building a foundation of flexible modelling frameworks"
+author: "Doug Leasure"
 date: last-modified
 date-format: "D MMM YYYY, HH:mm:ss"
 image: "resources/lecture-glm-and-hierarchical-models-hero.webp"

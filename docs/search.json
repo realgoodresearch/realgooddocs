@@ -114,7 +114,7 @@
     "href": "books/tent-mapping/toc.html",
     "title": "Table of Contents",
     "section": "",
-    "text": "Mapping Tents from Satellite Imagery\n\n\n\n\n\n\nDoug Leasure\n\n\nNov 17, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nTentNetFA: A convolutional neural network\n\n\nTentNetFA maps likely tent locations from high-resolution satellite imagery.\n\n\n\n\n\n\nNov 17, 2026\n\n\n\n\n\n\nNo matching items",
+    "text": "Mapping Tents from Satellite Imagery\n\n\n\n\n\n\n\n\n\nNov 17, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nTentNetFA: A convolutional neural network\n\n\nTentNetFA maps likely tent locations from high-resolution satellite imagery.\n\n\n\n\n\n\nNov 17, 2026\n\n\n\n\n\n\nNo matching items",
     "crumbs": [
       "Table of Contents"
     ]
@@ -340,7 +340,7 @@
     "href": "index.html",
     "title": "Real Good Docs",
     "section": "",
-    "text": "Humanitarian population nowcasting\n\n\n\n\n\n\n\n\n\nNov 17, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nMapping Tents from Satellite Imagery\n\n\n\n\n\n\nDoug Leasure\n\n\nNov 17, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nBayesian Intro\n\n\n\n\n\n\n\n\n\nNov 17, 2026\n\n\n\n\n\n\nNo matching items"
+    "text": "Humanitarian population nowcasting\n\n\n\n\n\n\n\n\n\nNov 17, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nMapping Tents from Satellite Imagery\n\n\n\n\n\n\n\n\n\nNov 17, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nBayesian Intro\n\n\n\n\n\n\n\n\n\nNov 17, 2026\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "books/nowpop/gaza-nowpop-telecoms.html#introduction",
@@ -484,7 +484,7 @@
     "href": "books/bayesian-intro/toc.html",
     "title": "Table of Contents",
     "section": "",
-    "text": "Bayesian Intro\n\n\n\n\n\n\n\n\n\nNov 17, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nGetting Started\n\n\n\n\n\n\n\n\n\nNov 17, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nLecture Slides: Intro to Bayesian Inference\n\n\n\n\n\n\n\n\n\nNov 17, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nPractical Tutorial: Model of the Mean\n\n\n\n\n\n\nDoug Leasure\n\n\nNov 17, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nPractical Tutorial: Posteriors, Likelihoods, and Priors\n\n\n\n\n\n\nDoug Leasure\n\n\nNov 17, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nPractical Tutorial: A Toy MCMC Example\n\n\n\n\n\n\nMichael Chong\n\n\nFeb 6, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nPractical Tutorial: Gaussian Linear Regression\n\n\n\n\n\n\nDoug Leasure\n\n\nNov 17, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nLecture Slides: GLM and Hierarchical Models\n\n\n\n\n\n\n\n\n\nNov 17, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nPractical Tutorial: Synthetic Controls\n\n\n\n\n\n\nDoug Leasure\n\n\nNov 17, 2026\n\n\n\n\n\n\nNo matching items",
+    "text": "Bayesian Intro\n\n\n\n\n\n\n\n\n\nNov 17, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nGetting Started\n\n\n\n\n\n\n\n\n\nNov 17, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nLecture Slides: Intro to Bayesian Inference\n\n\n\n\n\n\nDoug Leasure\n\n\nNov 17, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nPractical Tutorial: Model of the Mean\n\n\n\n\n\n\nDoug Leasure\n\n\nNov 17, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nPractical Tutorial: Posteriors, Likelihoods, and Priors\n\n\n\n\n\n\nDoug Leasure\n\n\nNov 17, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nPractical Tutorial: A Toy MCMC Example\n\n\n\n\n\n\nMichael Chong\n\n\nFeb 6, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nPractical Tutorial: Gaussian Linear Regression\n\n\n\n\n\n\nDoug Leasure\n\n\nNov 17, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nLecture Slides: GLM and Hierarchical Models\n\n\n\n\n\n\nDoug Leasure\n\n\nNov 17, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nPractical Tutorial: Synthetic Controls\n\n\n\n\n\n\nDoug Leasure\n\n\nNov 17, 2026\n\n\n\n\n\n\nNo matching items",
     "crumbs": [
       "Table of Contents"
     ]

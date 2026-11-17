@@ -1,7 +1,6 @@
 ---
 title: "Mapping Tents from Satellite Imagery"
 subtitle: "Introduction"
-author: "Doug Leasure"
 image: "resources/tent-mapping-introduction-hero.png"
 date: last-modified
 date-format: "D MMM YYYY, HH:mm:ss"

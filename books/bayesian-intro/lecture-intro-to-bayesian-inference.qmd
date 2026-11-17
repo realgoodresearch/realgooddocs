@@ -1,6 +1,7 @@
 ---
 title: "Lecture Slides: Intro to Bayesian Inference"
 subtitle: "Introducing the basic concepts for Bayesian inference"
+author: "Doug Leasure"
 date: last-modified
 date-format: "D MMM YYYY, HH:mm:ss"
 image: "resources/lecture-intro-to-bayesian-inference-hero.png"
