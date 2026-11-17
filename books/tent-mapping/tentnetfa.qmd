@@ -166,9 +166,9 @@ TentNetFA maps likely tent locations from high-resolution satellite imagery. It 
 
 The method is not a way to identify people, households, or individual tents with certainty. It is a repeatable process for turning a satellite scene into an estimate of where tents are likely to be concentrated. Those estimates need to be interpreted with the imagery date, local conditions, and independent information in mind.
 
-TentNetFA was developed from a tent-mapping effort with [Forensic Architecture](https://forensic-architecture.org/) using Planet satellite imagery and annotated tent locations. Its outputs support the wider population-nowcasting collaboration with humanitarian partners, including the United Nations, Acted, and IMPACT. The active implementation is maintained in the [TentNetFA source repository](https://github.com/realgoodresearch/TentNetFA).
+TentNetFA was developed from a tent-mapping effort with [Forensic Architecture](https://forensic-architecture.org/) using Planet satellite imagery and annotated tent locations created by a dedicated group of volunteer students at the University of Oxford. Its outputs support our wider population-nowcasting collaboration with humanitarian partners as well as Forensic Architecture's mission to compile evidence for justice and accountability. The active implementation is maintained in our [TentNetFA source repository](https://github.com/realgoodresearch/TentNetFA) which is a fork of the original Algorithmic Governance repository.
 
-![Volunteers manually annotate satellite imagery during the training-data effort.](resources/tentnetfa-volunteer-annotation-session.jpg){#fig-tentnetfa-volunteers fig-align="center" width="85%"}
+![Volunteers manually annotate satellite imagery during the training-data effort run by the Algorithmic Governance Foundation.](resources/tentnetfa-volunteer-annotation-session.jpg){#fig-tentnetfa-volunteers fig-align="center" width="85%"}
 
 *Image credit: [Algorithmic Governance Foundation, “Tracking Conflict Displacement in Gaza with Machine Learning.”](https://algorithmicgovernance.org/f/tracking-conflict-displacement-in-gaza-with-machine-learning)*
 
