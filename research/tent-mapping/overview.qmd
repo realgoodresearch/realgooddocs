@@ -1,6 +1,7 @@
 ---
 title: "Mapping Tents from Satellite Imagery"
 subtitle: "Introduction"
+image: "resources/tent-mapping-introduction-hero.png"
 date: last-modified
 date-format: "D MMM YYYY, HH:mm:ss"
 format:
@@ -8,4 +9,4 @@ format:
     link-external-newwindow: true
 ---
 
-> **In development.** We will draft this introduction after reviewing the project resources.
+<!-- Add introduction content here. -->
