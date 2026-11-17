@@ -1,9 +1,6 @@
 ---
 title: "Real Good Docs"
 subtitle: "We share our tricks so that you can figure out how to do them better."
-aliases:
-  - /research/index.html
-  - /teaching/index.html
 format:
   html:
     css: index.css

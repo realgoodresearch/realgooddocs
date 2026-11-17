@@ -1,7 +1,5 @@
 ---
 title: "Table of Contents"
-aliases:
-  - /teaching/bayesian_intro/toc.html
 listing: 
     type: grid
     sort: false

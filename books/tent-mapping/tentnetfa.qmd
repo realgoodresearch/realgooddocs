@@ -1,7 +1,7 @@
 ---
-title: "TentNetFA Overview"
-aliases:
-  - /research/tent-mapping/tentnetfa-overview.html
+title: "TentNetFA: A convolutional neural network"
+subtitle: "Automated machine learning to extract tent points from satellite imagery."
+image: "resources/tentnetfa-slider-hero.png"
 date: last-modified
 date-format: "D MMM YYYY, HH:mm:ss"
 format:

@@ -1,8 +1,6 @@
 ---
 title: "Mapping Tents from Satellite Imagery"
 subtitle: "Introduction"
-aliases:
-  - /research/tent-mapping/overview.html
 author: "Doug Leasure"
 image: "resources/tent-mapping-introduction-hero.png"
 date: last-modified

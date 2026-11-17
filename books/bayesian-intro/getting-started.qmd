@@ -1,7 +1,5 @@
 ---
 title: "Getting Started"
-aliases:
-  - /teaching/bayesian_intro/getting-started.html
 subtitle: "Software and other preparations"
 date: last-modified
 date-format: "D MMM YYYY, HH:mm:ss"
@@ -60,4 +58,3 @@ You will need the following software to be able to run the example code on your 
 - McElreath R. 2015. Statistical Rethinking: A Bayesian course with examples in R and Stan. Chapman & Hall/CRC Texts in Statistical Science. <a href="https://civil.colorado.edu/~balajir/CVEN6833/bayes-resources/RM-StatRethink-Bayes.pdf" target="_blank">https://civil.colorado.edu/~balajir/CVEN6833/bayes-resources/RM-StatRethink-Bayes.pdf</a>  
 - Lambert B. A student's guide to Bayesian statistics. Sage. <a href="https://study.sagepub.com/lambert" target="_blank">https://study.sagepub.com/lambert</a>.  
 - Hobbs NT, Hooten MB. 2015. Bayesian Models: A statistical primer for ecologists. Princeton University Press. Request full text pdf from authors via ResearchGate: <a href="https://www.researchgate.net/publication/283813602_Bayesian_Models_A_Statistical_Primer_for_Ecologists" target="_blank">https://www.researchgate.net/publication/283813602_Bayesian_Models_A_Statistical_Primer_for_Ecologists</a>.  
-

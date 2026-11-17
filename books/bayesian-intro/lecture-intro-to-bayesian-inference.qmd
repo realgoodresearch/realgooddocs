@@ -1,7 +1,5 @@
 ---
 title: "Lecture Slides: Intro to Bayesian Inference"
-aliases:
-  - /teaching/bayesian_intro/lecture-intro-to-bayesian-inference.html
 subtitle: "Introducing the basic concepts for Bayesian inference"
 date: last-modified
 date-format: "D MMM YYYY, HH:mm:ss"

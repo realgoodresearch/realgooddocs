@@ -1,11 +1,9 @@
 ---
 title: "Table of Contents"
-aliases:
-  - /research/tent-mapping/toc.html
 listing:
   type: grid
   sort: false
   contents:
     - overview.qmd
-    - tentnetfa-overview.qmd
+    - tentnetfa.qmd
 ---

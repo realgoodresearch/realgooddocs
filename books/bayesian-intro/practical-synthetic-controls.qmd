@@ -1,7 +1,5 @@
 ---
 title: "Practical Tutorial: Synthetic Controls"
-aliases:
-  - /teaching/bayesian_intro/practical-synthetic-controls.html
 subtitle: "Assess treatment effects by comparing real history to an alternate reality without the treatment."
 author: "Doug Leasure"
 date: last-modified

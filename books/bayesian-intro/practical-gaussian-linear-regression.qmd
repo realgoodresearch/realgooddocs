@@ -1,7 +1,5 @@
 ---
 title: "Practical Tutorial: Gaussian Linear Regression"
-aliases:
-  - /teaching/bayesian_intro/practical-gaussian-linear-regression.html
 subtitle: "Adding a deterministic component to our stochastic model of the mean."
 author: "Doug Leasure"
 date: last-modified

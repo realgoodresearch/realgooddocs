@@ -1,8 +1,6 @@
 ---
 title: "Humanitarian population nowcasting"
 subtitle: "Rapid-response digital and spatial demography for targeted aid."
-aliases:
-  - /research/nowpop/overview.html
 image: "resources/gaza-nowpop-hero.webp"
 date: last-modified
 date-format: "D MMM YYYY, HH:mm:ss"

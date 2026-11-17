@@ -1,8 +1,6 @@
 ---
 title: "Gaza NowPop - Telecoms"
 subtitle: "Population nowcasting based on privacy-preserving telecommunications data."
-aliases:
-  - /research/nowpop/gaza-nowpop-telecoms.html
 author: "Doug Leasure"
 image: "resources/gaza-nowpop-telecoms/gaza-nowpop-telecoms-hero.webp"
 date: last-modified

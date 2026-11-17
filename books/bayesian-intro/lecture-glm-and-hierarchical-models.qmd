@@ -1,7 +1,5 @@
 ---
 title: "Lecture Slides: GLM and Hierarchical Models"
-aliases:
-  - /teaching/bayesian_intro/lecture-glm-and-hierarchical-models.html
 subtitle: "Building a foundation of flexible modelling frameworks"
 date: last-modified
 date-format: "D MMM YYYY, HH:mm:ss"
