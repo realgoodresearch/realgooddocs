@@ -1,0 +1,32 @@
+.quarto-title-block {
+  position: relative;
+  min-height: 120px;
+}
+
+.quarto-title-block .quarto-title {
+  max-width: calc(100% - 160px);
+}
+
+.quarto-title-block .quarto-title::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 140px;
+  height: 110px;
+  background: url("/assets/images/home-hero.webp") center / contain no-repeat;
+}
+
+@media (max-width: 576px) {
+  .quarto-title-block {
+    min-height: 0;
+  }
+
+  .quarto-title-block .quarto-title {
+    max-width: none;
+  }
+
+  .quarto-title-block .quarto-title::after {
+    display: none;
+  }
+}

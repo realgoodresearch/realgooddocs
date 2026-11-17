@@ -1,15 +1,14 @@
 ---
 title: "Real Good Docs"
-subtitle: "Documenting and teaching the innovations behind Real Good Research."
+subtitle: "We share our tricks so that you can figure out how to do them better."
+format:
+  html:
+    css: index.css
+listing:
+  type: grid
+  sort: false
+  contents:
+    - books/nowpop/overview.qmd
+    - books/tent-mapping/overview.qmd
+    - books/bayesian-intro/overview.qmd
 ---
-
-::: {.inset-center}
-
-:::
-
-::: {.callout-warning}
-## Notice
-This site is currently under construction. Some pages and features may be incomplete while we continue building.
-:::
-
-![](assets/images/work-in-progress.png)

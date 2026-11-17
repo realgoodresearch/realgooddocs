@@ -1,4 +1,0 @@
----
-title: "Research"
-subtitle: "Dig into the nerdy details of our most impactful research."
----
