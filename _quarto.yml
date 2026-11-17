@@ -70,7 +70,7 @@ website:
         - text: "Table of Contents"
           href: books/tent-mapping/toc.qmd
         - text: "TentNetFA Overview"
-          href: books/tent-mapping/tentnetfa-overview.qmd
+          href: books/tent-mapping/tentnetfa.qmd
 
 format:
   html:

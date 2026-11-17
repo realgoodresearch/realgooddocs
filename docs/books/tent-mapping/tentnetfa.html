@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="TentNetFA maps likely tent locations from high-resolution satellite imagery.">
 
 <title>TentNetFA: A convolutional neural network – Real Good Docs</title>
 <style>
@@ -26,7 +27,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -36,6 +56,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
+<link href="../../books/tent-mapping/toc.html" rel="prev">
 <link href="../../assets/images/logo/favicon.ico" rel="icon">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -84,10 +105,39 @@ ul.task-list li input[type="checkbox"] {
 </script>
 <script src="../../assets/pdf-page-viewer.js"></script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+<body class="nav-sidebar floating nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -126,13 +176,66 @@ ul.task-list li input[type="checkbox"] {
             <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../books/tent-mapping/tentnetfa.html">TentNetFA Overview</a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Section">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../books/tent-mapping/overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../books/tent-mapping/toc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Table of Contents</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../books/tent-mapping/tentnetfa.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">TentNetFA Overview</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#what-tentnetfa-does" id="toc-what-tentnetfa-does" class="nav-link active" data-scroll-target="#what-tentnetfa-does">What TentNetFA does</a></li>
+  <li><a href="#the-method-in-one-view" id="toc-the-method-in-one-view" class="nav-link" data-scroll-target="#the-method-in-one-view">The method in one view</a></li>
+  <li><a href="#training-data-imagery-annotations-and-change" id="toc-training-data-imagery-annotations-and-change" class="nav-link" data-scroll-target="#training-data-imagery-annotations-and-change">Training data: imagery, annotations, and change</a>
+  <ul class="collapse">
+  <li><a href="#from-points-to-a-learning-target" id="toc-from-points-to-a-learning-target" class="nav-link" data-scroll-target="#from-points-to-a-learning-target">From points to a learning target</a></li>
+  </ul></li>
+  <li><a href="#the-convolutional-neural-network" id="toc-the-convolutional-neural-network" class="nav-link" data-scroll-target="#the-convolutional-neural-network">The convolutional neural network</a></li>
+  <li><a href="#from-a-density-surface-to-tent-points" id="toc-from-a-density-surface-to-tent-points" class="nav-link" data-scroll-target="#from-a-density-surface-to-tent-points">From a density surface to tent points</a></li>
+  <li><a href="#parameters-that-shape-the-output" id="toc-parameters-that-shape-the-output" class="nav-link" data-scroll-target="#parameters-that-shape-the-output">Parameters that shape the output</a></li>
+  <li><a href="#validation-and-quality-assessment" id="toc-validation-and-quality-assessment" class="nav-link" data-scroll-target="#validation-and-quality-assessment">Validation and quality assessment</a></li>
+  <li><a href="#limitations-and-responsible-use" id="toc-limitations-and-responsible-use" class="nav-link" data-scroll-target="#limitations-and-responsible-use">Limitations and responsible use</a></li>
+  <li><a href="#software-and-data-products" id="toc-software-and-data-products" class="nav-link" data-scroll-target="#software-and-data-products">Software and data products</a></li>
+  <li><a href="#reproducibility-and-adaptation" id="toc-reproducibility-and-adaptation" class="nav-link" data-scroll-target="#reproducibility-and-adaptation">Reproducibility and adaptation</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content" tabindex="-1">
@@ -143,6 +246,11 @@ ul.task-list li input[type="checkbox"] {
 <p class="subtitle lead">Automated machine learning to extract tent points from satellite imagery.</p>
 </div>
 
+<div>
+  <div class="description">
+    TentNetFA maps likely tent locations from high-resolution satellite imagery.
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
@@ -151,7 +259,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">17 Nov 2026, 13:20:28</p>
+      <p class="date">17 Nov 2026, 14:15:36</p>
     </div>
   </div>
   
@@ -174,6 +282,8 @@ ul.task-list li input[type="checkbox"] {
 <p>Move the slider to compare satellite imagery with TentNetFA detections. Select the fullscreen button to enlarge the comparison.</p>
 </div>
 <style>
+#title-block-header .description { display: none; }
+
 .tentnetfa-slider-wrap { max-width: 900px; margin: 1rem auto; }
 
 .tentnetfa-slider {
@@ -305,11 +415,216 @@ ul.task-list li input[type="checkbox"] {
   update(position);
 })();
 </script>
-<!-- Add TentNetFA overview content below this interactive figure. -->
+<section id="what-tentnetfa-does" class="level2">
+<h2 class="anchored" data-anchor-id="what-tentnetfa-does">What TentNetFA does</h2>
+<p>TentNetFA maps likely tent locations from high-resolution satellite imagery. It is designed for a difficult operational problem: settlements can grow, move, and change quickly, while a conventional field count may be unavailable, delayed, or unsafe to conduct. The output is a point map that can be aggregated into grids or administrative areas and used alongside other evidence in population nowcasting.</p>
+<p>The method is not a way to identify people, households, or individual tents with certainty. It is a repeatable process for turning a satellite scene into an estimate of where tents are likely to be concentrated. Those estimates need to be interpreted with the imagery date, local conditions, and independent information in mind.</p>
+<p>TentNetFA was developed from a tent-mapping effort with <a href="https://forensic-architecture.org/">Forensic Architecture</a> using Planet satellite imagery and annotated tent locations. Its outputs support the wider population-nowcasting collaboration with humanitarian partners, including the United Nations, Acted, and IMPACT. The active implementation is maintained in the <a href="https://github.com/realgoodresearch/TentNetFA">TentNetFA source repository</a>.</p>
+<div id="fig-tentnetfa-volunteers" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tentnetfa-volunteers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="resources/tentnetfa-volunteer-annotation-session.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tentnetfa-volunteers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Volunteers manually annotate satellite imagery during the training-data effort.
+</figcaption>
+</figure>
+</div>
+<p><em>Image credit: <a href="https://algorithmicgovernance.org/f/tracking-conflict-displacement-in-gaza-with-machine-learning">Algorithmic Governance Foundation, “Tracking Conflict Displacement in Gaza with Machine Learning.”</a></em></p>
+</section>
+<section id="the-method-in-one-view" class="level2">
+<h2 class="anchored" data-anchor-id="the-method-in-one-view">The method in one view</h2>
+<p>The current workflow has two connected pipelines:</p>
+<ol type="1">
+<li>Build training examples from dated imagery and tent annotations, then fit a convolutional neural network (CNN).</li>
+<li>Apply the fitted model to new imagery, convert its continuous output into points, and merge duplicate detections from overlapping tiles.</li>
+</ol>
+<p>The important idea is that the CNN does not directly answer a yes-or-no question for every pixel. It predicts a smooth <em>tent-density surface</em>. A separate, explicit post-processing step then turns peaks in that surface into tent points. Keeping these steps separate makes it possible to inspect and tune the rules that determine how many points are ultimately reported.</p>
+</section>
+<section id="training-data-imagery-annotations-and-change" class="level2">
+<h2 class="anchored" data-anchor-id="training-data-imagery-annotations-and-change">Training data: imagery, annotations, and change</h2>
+<p>Training begins with Planet GeoTIFF scenes and geographically referenced tent annotations. The annotations were originally produced for the Forensic Architecture mapping effort. For each training scene, TentNetFA selects annotations for the relevant date and rasterises the point locations into the coordinate system of the image.</p>
+<p>Large scenes are divided into small, overlapping tiles. In the current configuration, each tile has a 70-metre core and a 15-metre margin on every side. The margins give the model context around the core and reduce edge artefacts. They also mean that the same ground location can occur in more than one prediction tile; the final merge step is therefore essential.</p>
+<div id="fig-tentnetfa-training-tiles" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tentnetfa-training-tiles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="resources/tentnetfa-training-tiles.webp" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tentnetfa-training-tiles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Examples of annotated image tiles used to construct training data. Magenta marks show tent annotations; red lines show the tile grid.
+</figcaption>
+</figure>
+</div>
+<p>Each tile contains three related RGB images:</p>
+<ul>
+<li>the current satellite image;</li>
+<li>a pre-war reference image covering the same location; and</li>
+<li>the channel-wise difference between the current and reference images.</li>
+</ul>
+<p>Together these form a nine-channel input. The reference and difference layers help the model distinguish features that were already present from changes that may be associated with temporary shelter. They are useful evidence, not a guarantee: damage, rubble, agriculture, shadows, image quality, and other changes can also produce strong differences.</p>
+<p>Before a tile is passed to the model, its image bands are standardised so that one scene’s overall brightness does not dominate another’s. The exact standardisation mode is recorded in the resolved configuration for a run. This does not make images identical, but it gives the model a more stable numerical scale on which to learn.</p>
+<section id="from-points-to-a-learning-target" class="level3">
+<h3 class="anchored" data-anchor-id="from-points-to-a-learning-target">From points to a learning target</h3>
+<p>A tent annotation is a point, but a point is too sparse to be a useful target for a pixel-level model. TentNetFA therefore converts every annotated point into a small Gaussian-shaped bump and adds the bumps together. The result is a density map: locations close to an annotated tent receive high values, and nearby pixels receive lower values that fade with distance. This family of approaches—learning a continuous surface from point annotations—has a long history in object-counting research <span class="citation" data-cites="lempitsky2010learning">(<a href="#ref-lempitsky2010learning" role="doc-biblioref">Lempitsky and Zisserman 2010</a>)</span>.</p>
+<p>This representation gives the CNN a smoother learning problem. Rather than having to reproduce a single exact pixel, it learns to place a peak near each annotated tent. It also preserves a useful interpretation: summing the density surface over an area approximates the number of annotated tents in that area.</p>
+<p>The width of the Gaussian is a modelling decision. A very narrow target approaches a hard point label and becomes sensitive to small alignment errors. A very broad target makes nearby tents harder to separate. TentNetFA records this setting with the training configuration so that the target surface can be reproduced.</p>
+<p>Training data contain many tiles without tents. The pipeline retains only a configured fraction of these empty tiles when it builds the balanced training manifest. This prevents the model from learning the unhelpful rule that every location is empty simply because empty pixels are common.</p>
+</section>
+</section>
+<section id="the-convolutional-neural-network" class="level2">
+<h2 class="anchored" data-anchor-id="the-convolutional-neural-network">The convolutional neural network</h2>
+<p>The model is a compact CNN that accepts the nine-channel tile and returns one channel: a predicted density surface with the same spatial layout as the input. It combines several convolutional layers with batch normalisation and rectified linear activation functions. Dilated and wider convolutional layers give the model a larger local field of view without reducing the output resolution.</p>
+<p>During training, the model compares its predicted density surface with the Gaussian-smoothed annotation surface using pixel-wise mean squared error. The checkpoint with the lowest validation loss is saved for prediction. The implementation uses <a href="https://pytorch.org/">PyTorch</a> for the model, optimisation, and batched data loading <span class="citation" data-cites="paszke2019pytorch">(<a href="#ref-paszke2019pytorch" role="doc-biblioref"><span class="nocase">Paszke et al.</span> 2019</a>)</span>. This evaluation is useful for selecting a model during fitting, but it is not a complete measure of operational accuracy: a low density-map loss does not by itself show that point counts are reliable in every place, settlement type, or date.</p>
+</section>
+<section id="from-a-density-surface-to-tent-points" class="level2">
+<h2 class="anchored" data-anchor-id="from-a-density-surface-to-tent-points">From a density surface to tent points</h2>
+<p>The model’s output is continuous. To produce a point map, TentNetFA applies a transparent sequence of selection rules.</p>
+<p>First, it calculates a local-context score. The raw predicted density is combined with a Gaussian-blurred version of the same surface. The blur rewards a candidate that sits near other predicted tents and reduces the influence of isolated peaks, which are often more likely to be noise or visually similar features. The relative weight of this neighbourhood contribution is a configuration parameter.</p>
+<p>In simplified notation, the selection score at location <span class="math inline">\(x\)</span> is</p>
+<p><span class="math display">\[
+s(x) = p(x) + \alpha\, [G_\sigma * p](x),
+\]</span></p>
+<p>where <span class="math inline">\(p(x)\)</span> is the model’s raw density prediction, <span class="math inline">\(G_\sigma * p\)</span> is its Gaussian-smoothed neighbourhood signal, and <span class="math inline">\(\alpha\)</span> controls how strongly nearby predictions contribute. The score is not a calibrated probability that a tent exists at <span class="math inline">\(x\)</span>; it is a ranking signal used to select candidates.</p>
+<div id="fig-tentnetfa-density-postprocessing" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tentnetfa-density-postprocessing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="resources/tentnetfa-density-postprocessing.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tentnetfa-density-postprocessing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Schematic of point selection distinguishing a cluster of tents from isolated rubble, a potential source of false positives. The upper curve represents local prediction peaks; adding a broad Gaussian neighbourhood signal increases support for clustered peaks while leaving an isolated peak relatively less competitive at a fixed threshold.
+</figcaption>
+</figure>
+</div>
+<p>Next, non-maximum suppression identifies local peaks in that score surface. A candidate must be the largest value within a small neighbourhood and must exceed the configured selection threshold. Tile margins are cropped from the candidate search so that edge predictions are not counted twice.</p>
+<p>Finally, detections from all tiles are merged. Points closer together than the configured minimum distance are deduplicated, and optional inclusion or exclusion zones can be applied. The result is written as a geospatial point layer with the raw peak value and the adjusted, neighbourhood-aware score.</p>
+<p>The merge stage uses a spatial index to find nearby candidates efficiently, then checks their geographic distance before combining them. This matters because prediction tiles overlap by design: without global deduplication, the same visual feature could become two output points.</p>
+<p>Thresholds, neighbourhood weighting, and merge distance are not cosmetic settings. They change the balance between missed tents and spurious detections, and therefore change the resulting counts. They should be selected against independent evidence for the imagery, geography, and operational question at hand—not treated as universal model constants.</p>
+</section>
+<section id="parameters-that-shape-the-output" class="level2">
+<h2 class="anchored" data-anchor-id="parameters-that-shape-the-output">Parameters that shape the output</h2>
+<p>TentNetFA keeps its settings in a resolved configuration file for each run. This is important for reproducibility, but the settings are also methodological choices: they determine what information reaches the model and how a predicted surface becomes a point map. The table below describes the settings that are most important for interpreting or adapting the method. It deliberately describes their role rather than prescribing values.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Parameter group</th>
+<th>What it changes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Tile core and margin (<code>core_metres</code>, <code>margin_metres</code>)</td>
+<td>The area predicted at a time, the amount of contextual imagery around it, and the extent of overlap between neighbouring tiles.</td>
+</tr>
+<tr class="even">
+<td>Valid-data threshold (<code>min_valid_fraction</code>)</td>
+<td>Whether a tile with black, missing, or invalid imagery is retained for training or prediction.</td>
+</tr>
+<tr class="odd">
+<td>Empty-tile retention (<code>null_keep_fraction</code>)</td>
+<td>The balance between tent-free and tent-containing examples during training.</td>
+</tr>
+<tr class="even">
+<td>Standardisation (<code>per_tile_standardisation</code>)</td>
+<td>Whether brightness is normalised separately for each prediction tile or at a wider image scale.</td>
+</tr>
+<tr class="odd">
+<td>Point-selection method (<code>selection.method</code>)</td>
+<td>Whether locations are taken from local score peaks (<code>nms</code>) or the centres of predicted blobs (<code>centroid</code>).</td>
+</tr>
+<tr class="even">
+<td>Selection threshold and neighbourhood factor (<code>selection.threshold</code>, <code>selection.factor</code>)</td>
+<td>How strong a candidate must be, and how much support from nearby predicted signal contributes to its selection score.</td>
+</tr>
+<tr class="odd">
+<td>Peak spacing (<code>nms_kernel_size</code>, <code>selection.min_distance_m</code>)</td>
+<td>How close two selected peaks can be before they are treated as alternatives rather than separate candidates.</td>
+</tr>
+<tr class="even">
+<td>Global merge rules (<code>merge.min_distance_m</code>, <code>merge.agreement</code>, <code>merge.min_adj_peak</code>)</td>
+<td>How predictions from overlapping tiles are combined and filtered into the final point layer.</td>
+</tr>
+<tr class="odd">
+<td>Geographic zones</td>
+<td>Whether points are retained only inside, or removed from, specified geographic areas.</td>
+</tr>
+</tbody>
+</table>
+<p>These settings interact. For example, lowering a selection threshold may recover faint tents but can introduce visually similar false positives; increasing the merge distance can reduce duplicate detections but can also combine nearby real tents. A defensible configuration is therefore one evaluated against relevant independent evidence, not simply the configuration that produces the largest count.</p>
+<p>The <a href="https://github.com/realgoodresearch/TentNetFA">TentNetFA repository</a> records the resolved configuration and runtime behaviour for each run. The settings described here should be reported alongside any published output so that its methodological choices can be inspected and reproduced.</p>
+</section>
+<section id="validation-and-quality-assessment" class="level2">
+<h2 class="anchored" data-anchor-id="validation-and-quality-assessment">Validation and quality assessment</h2>
+<p>Validation has two jobs. The first is to assess the learned density maps during model development. The second is to assess the final point product after all selection and merging rules have been applied. Both matter because point extraction can improve or degrade a useful density prediction.</p>
+<p>Threshold and neighbourhood-weight sensitivity analyses show why a single Strip-wide count is not enough: settings that improve agreement with an independent map in one area can introduce spurious detections in another. This is why point-selection settings need to be assessed at the same spatial scale and in the same kinds of landscapes as the intended use of the results.</p>
+<div id="fig-tentnetfa-threshold-sensitivity" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tentnetfa-threshold-sensitivity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="resources/tentnetfa-threshold-sensitivity.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tentnetfa-threshold-sensitivity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: An example sensitivity analysis for an earlier workflow. Each cell represents a combination of the point-selection cutoff and neighbourhood-weighting factor; the stars identify settings selected under different objectives. These values are historical illustrations, not the active pipeline’s universal parameters.
+</figcaption>
+</figure>
+</div>
+<p>For the active pipeline, validation should use an independent source wherever possible and report results at the spatial scale at which the map will be used. Useful checks include visual review of sampled tiles, comparison of counts in a common grid, error by settlement density or land cover, and comparison across image dates. The repository includes tools for point-level and grid-based comparisons, but their results are specific to the validation data and settings used.</p>
+</section>
+<section id="limitations-and-responsible-use" class="level2">
+<h2 class="anchored" data-anchor-id="limitations-and-responsible-use">Limitations and responsible use</h2>
+<p>TentNetFA is sensitive to the data and assumptions that enter it.</p>
+<ul>
+<li><strong>Annotations are a partial reference, not perfect ground truth.</strong> Missed, inconsistent, or temporally mismatched labels can be learned by the model.</li>
+<li><strong>Satellite scenes vary.</strong> Clouds, haze, shadows, resolution, season, viewing conditions, damage, and image-processing choices can alter what tents look like.</li>
+<li><strong>Change is not uniquely a tent.</strong> The pre-war comparison helps focus attention on new features, but construction, debris, agricultural structures, and other changes can resemble shelter.</li>
+<li><strong>Post-processing encodes decisions.</strong> A threshold or merge distance that is reasonable in a dense camp may not be reasonable in a sparse or damaged area.</li>
+<li><strong>A point count is not a population estimate.</strong> Tent locations must be combined with carefully stated assumptions and other data before they are used to infer the number of people in an area.</li>
+</ul>
+<p>For these reasons, the maps should be used as one input to humanitarian analysis, alongside field knowledge, manual review, and other independent data sources. They are most useful when their uncertainty, date, coverage, and intended aggregation scale travel with the result.</p>
+</section>
+<section id="software-and-data-products" class="level2">
+<h2 class="anchored" data-anchor-id="software-and-data-products">Software and data products</h2>
+<p>TentNetFA is a Python project managed with Poetry. Its main software roles are deliberately separated:</p>
+<ul>
+<li><strong>Raster and coordinate handling:</strong> Rasterio, Fiona, PyProj, GeoPandas, and Shapely read satellite rasters and vector data, transform coordinates, and write spatial outputs.</li>
+<li><strong>Array processing and point selection:</strong> NumPy and SciPy support standardisation, Gaussian filtering, connected components, and spatial search.</li>
+<li><strong>Model fitting and inference:</strong> PyTorch loads tiles in batches, trains the CNN, and evaluates new imagery.</li>
+<li><strong>Run orchestration:</strong> the repository’s pipeline runner resolves the configuration, records logs, and keeps the artifacts from every processing stage together.</li>
+</ul>
+<p>The main intermediates are intentionally inspectable: tile manifests are stored as Parquet tables, per-tile predictions as GeoJSON, and the deduplicated final product as a GeoPackage. A checkpoint alone is therefore not sufficient to reproduce a map. Reproduction also needs the input imagery, reference raster, annotation snapshot where relevant, and the resolved configuration that records tile geometry, standardisation, selection, and merge settings.</p>
+</section>
+<section id="reproducibility-and-adaptation" class="level2">
+<h2 class="anchored" data-anchor-id="reproducibility-and-adaptation">Reproducibility and adaptation</h2>
+<p>The repository separates configuration from code. A run records the resolved configuration, intermediate tile manifests, prediction files, model checkpoint, and final merged output. This makes it possible to reproduce a particular map and to compare alternative configurations without silently changing the processing chain.</p>
+<p>Anyone adapting the method to another setting should treat the model, labels, imagery, reference imagery, and point-selection parameters as a single system. Reusing a checkpoint without local validation is unlikely to be reliable: tent materials, backgrounds, image providers, and the meaning of a temporary structure can all change from one context to another.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Further technical detail
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The current pipeline, configuration reference, and evaluation utilities are available in the <a href="https://github.com/realgoodresearch/TentNetFA">TentNetFA repository</a>. This chapter describes the method and its decisions; it is not a step-by-step deployment guide.</p>
+</div>
+</div>
 
 
 
-</main> <!-- /main -->
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-lempitsky2010learning" class="csl-entry" role="listitem">
+Lempitsky, Victor, and Andrew Zisserman. 2010. <span>“Learning to Count Objects in Images.”</span> <em>Advances in Neural Information Processing Systems</em> 23. <a href="https://proceedings.neurips.cc/paper_files/paper/2010/hash/fe73f687e5bc5280214e0486b273a5f9-Abstract.html">https://proceedings.neurips.cc/paper_files/paper/2010/hash/fe73f687e5bc5280214e0486b273a5f9-Abstract.html</a>.
+</div>
+<div id="ref-paszke2019pytorch" class="csl-entry" role="listitem">
+<span class="nocase">Paszke, Adam, Sam Gross, Francisco Massa, et al.</span> 2019. <span>“PyTorch: An Imperative Style, High-Performance Deep Learning Library.”</span> <em>Advances in Neural Information Processing Systems</em> 32. <a href="https://proceedings.neurips.cc/paper_files/paper/2019/hash/bdbca288fee7f92f2bfa9f7012727740-Abstract.html">https://proceedings.neurips.cc/paper_files/paper/2019/hash/bdbca288fee7f92f2bfa9f7012727740-Abstract.html</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <hr>
 <div style="display: flex; justify-content: space-between; align-items: center; font-family: 'Mulish', sans-serif; font-size: 0.9rem; color: #7f8c8d; padding: 20px 0;">
     <div>
@@ -823,6 +1138,15 @@ ul.task-list li input[type="checkbox"] {
   <script type="application/javascript">
   window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
   </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="../../books/tent-mapping/toc.html" class="pagination-link" aria-label="Table of Contents">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Table of Contents</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
 </div> <!-- /content -->
 
 
