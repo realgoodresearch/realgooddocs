@@ -23,10 +23,10 @@ website:
       - href: https://realgoodresearch.com
         text: Home
     left:
-      - text: "Teaching"
-        href: teaching/index.qmd
       - text: "Research"
         href: research/index.qmd
+      - text: "Teaching"
+        href: teaching/index.qmd
   
   sidebar: 
     - id: bayesian-intro-sidebar

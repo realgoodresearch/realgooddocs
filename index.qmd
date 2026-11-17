@@ -1,11 +1,10 @@
 ---
 title: "Real Good Docs"
-subtitle: "Planting good ideas."
+subtitle: "We share our tricks so that you can figure out how to do them better."
+format:
+  html:
+    css: index.css
 ---
-
-![](assets/images/home-hero.webp){fig-align="center" width="50%"}
-
-#### We share our work so that you can figure out how to do it better.
 
 ::: {.columns}
 
@@ -13,31 +12,20 @@ subtitle: "Planting good ideas."
 
 ## Research
 
-Explore the methods behind our applied research, beginning with population
-nowcasting for humanitarian response in Gaza.
+Dig into the details of methods behind our research innovations in humanitarian population nowcasting and other areas.
 
-[Explore research →](research/index.qmd)
+[Let's get nerdy →](research/index.qmd)
 
 :::
-
 ::: {.column width="50%"}
 
 ## Teaching
 
-Learn practical statistical methods through accessible lectures, tutorials, and
+Learn practical methods through accessible lectures, tutorials, and
 worked examples.
 
-[Start learning →](teaching/index.qmd)
+[Roll up your sleeves →](teaching/index.qmd)
 
 :::
 
 :::
-
-## Open by design
-
-Our work is intended to be transparent, reproducible, and adaptable. Alongside
-these guides, you can explore our public data and source code.
-
-- [Browse data →](https://data.realgoodresearch.com)
-- [View our code on GitHub →](https://github.com/realgoodresearch)
-- [Visit Real Good Research →](https://realgoodresearch.com)

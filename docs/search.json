@@ -60,25 +60,25 @@
     ]
   },
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Real Good Docs",
+    "section": "",
+    "text": "Dig into the details of methods behind our research innovations in humanitarian population nowcasting and other areas.\nLet’s get nerdy →\n\n\n\n\nLearn practical methods through accessible lectures, tutorials, and worked examples.\nRoll up your sleeves →"
+  },
+  {
     "objectID": "index.html#research",
     "href": "index.html#research",
     "title": "Real Good Docs",
-    "section": "Research",
-    "text": "Research\nExplore the methods behind our applied research, beginning with population nowcasting for humanitarian response in Gaza.\nExplore research →"
+    "section": "",
+    "text": "Dig into the details of methods behind our research innovations in humanitarian population nowcasting and other areas.\nLet’s get nerdy →"
   },
   {
     "objectID": "index.html#teaching",
     "href": "index.html#teaching",
     "title": "Real Good Docs",
-    "section": "Teaching",
-    "text": "Teaching\nLearn practical statistical methods through accessible lectures, tutorials, and worked examples.\nStart learning →"
-  },
-  {
-    "objectID": "index.html#open-by-design",
-    "href": "index.html#open-by-design",
-    "title": "Real Good Docs",
-    "section": "Open by design",
-    "text": "Open by design\nOur work is intended to be transparent, reproducible, and adaptable. Alongside these guides, you can explore our public data and source code.\n\nBrowse data →\nView our code on GitHub →\nVisit Real Good Research →"
+    "section": "",
+    "text": "Learn practical methods through accessible lectures, tutorials, and worked examples.\nRoll up your sleeves →"
   },
   {
     "objectID": "teaching/bayesian_intro/lecture-intro-to-bayesian-inference.html",
@@ -560,14 +560,14 @@
     "href": "research/index.html",
     "title": "Research",
     "section": "",
-    "text": "NowPop\n\n\nPopulation nowcasting to support targeted humanitarian response.\n\n\n\n\n\n\n\n\n\n\nNov 16, 2026\n\n\n\n\n\nNo matching items"
+    "text": "NowPop\n\n\nPopulation nowcasting to support targeted humanitarian response.\n\n\n\n\n\n\n\n\n\n\nNov 17, 2026\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "research/nowpop/toc.html",
     "href": "research/nowpop/toc.html",
     "title": "Table of Contents",
     "section": "",
-    "text": "NowPop\n\n\n\n\n\n\n\n\n\nNov 16, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nGaza NowPop - Telecoms\n\n\n\n\n\n\nDoug Leasure\n\n\nNov 16, 2026\n\n\n\n\n\n\nNo matching items",
+    "text": "NowPop\n\n\n\n\n\n\n\n\n\nNov 17, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nGaza NowPop - Telecoms\n\n\n\n\n\n\nDoug Leasure\n\n\nNov 17, 2026\n\n\n\n\n\n\nNo matching items",
     "crumbs": [
       "Table of Contents"
     ]
