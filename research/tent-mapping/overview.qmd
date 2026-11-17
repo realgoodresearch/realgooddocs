@@ -1,0 +1,11 @@
+---
+title: "Mapping Tents from Satellite Imagery"
+subtitle: "Introduction"
+date: last-modified
+date-format: "D MMM YYYY, HH:mm:ss"
+format:
+  html:
+    link-external-newwindow: true
+---
+
+> **In development.** We will draft this introduction after reviewing the project resources.

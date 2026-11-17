@@ -22,12 +22,6 @@ website:
         text: Code
       - href: https://realgoodresearch.com
         text: Home
-    left:
-      - text: "Research"
-        href: research/index.qmd
-      - text: "Teaching"
-        href: teaching/index.qmd
-  
   sidebar: 
     - id: bayesian-intro-sidebar
       title: "Bayesian Intro"
@@ -67,6 +61,16 @@ website:
           href: research/nowpop/toc.qmd
         - text: "Gaza Telecoms"
           href: research/nowpop/gaza-nowpop-telecoms.qmd
+    - id: tent-mapping-sidebar
+      title: "Tent Mapping"
+      path: research/tent-mapping/
+      contents:
+        - text: "Introduction"
+          href: research/tent-mapping/overview.qmd
+        - text: "Table of Contents"
+          href: research/tent-mapping/toc.qmd
+        - text: "TentNetFA Overview"
+          href: research/tent-mapping/tentnetfa-overview.qmd
 
 format:
   html:
@@ -81,4 +85,3 @@ format:
 
 execute:
   freeze: auto
-

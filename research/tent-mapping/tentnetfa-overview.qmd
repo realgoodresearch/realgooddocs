@@ -1,0 +1,10 @@
+---
+title: "TentNetFA Overview"
+date: last-modified
+date-format: "D MMM YYYY, HH:mm:ss"
+format:
+  html:
+    link-external-newwindow: true
+---
+
+> **In development.** We will draft this algorithm overview after reviewing the project resources.

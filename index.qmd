@@ -4,28 +4,11 @@ subtitle: "We share our tricks so that you can figure out how to do them better.
 format:
   html:
     css: index.css
+listing:
+  type: grid
+  sort: false
+  contents:
+    - research/nowpop/overview.qmd
+    - research/tent-mapping/overview.qmd
+    - teaching/bayesian_intro/overview.qmd
 ---
-
-::: {.columns}
-
-::: {.column width="50%"}
-
-## Research
-
-Dig into the details of methods behind our research innovations in humanitarian population nowcasting and other areas.
-
-[Let's get nerdy →](research/index.qmd)
-
-:::
-::: {.column width="50%"}
-
-## Teaching
-
-Learn practical methods through accessible lectures, tutorials, and
-worked examples.
-
-[Roll up your sleeves →](teaching/index.qmd)
-
-:::
-
-:::
