@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="TentNetFA maps likely tent locations from high-resolution satellite imagery.">
+
+<title>TentNetFA: A convolutional neural network – Real Good Docs</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../books/tent-mapping/toc.html" rel="prev">
+<link href="../../assets/images/logo/favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-0d6b17e1774deaac102b13973fef85f6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link rel="stylesheet" href="../../assets/pdf-page-viewer.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+  if (typeof pdfjsLib !== 'undefined') {
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  }
+</script>
+<script src="../../assets/pdf-page-viewer.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Real Good Docs</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://data.realgoodresearch.com"> 
+<span class="menu-text">Data</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://docs.realgoodresearch.com"> 
+<span class="menu-text">Docs</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/realgoodresearch" target="_blank"> 
+<span class="menu-text">Code</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://realgoodresearch.com"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+            <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../books/tent-mapping/tentnetfa.html">TentNetFA Overview</a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Section">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../books/tent-mapping/overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../books/tent-mapping/toc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Table of Contents</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../books/tent-mapping/tentnetfa.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">TentNetFA Overview</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#what-tentnetfa-does" id="toc-what-tentnetfa-does" class="nav-link active" data-scroll-target="#what-tentnetfa-does">What TentNetFA does</a></li>
+  <li><a href="#the-method-in-one-view" id="toc-the-method-in-one-view" class="nav-link" data-scroll-target="#the-method-in-one-view">The method in one view</a></li>
+  <li><a href="#training-data-imagery-annotations-and-change" id="toc-training-data-imagery-annotations-and-change" class="nav-link" data-scroll-target="#training-data-imagery-annotations-and-change">Training data: imagery, annotations, and change</a>
+  <ul class="collapse">
+  <li><a href="#from-points-to-a-learning-target" id="toc-from-points-to-a-learning-target" class="nav-link" data-scroll-target="#from-points-to-a-learning-target">From points to a learning target</a></li>
+  </ul></li>
+  <li><a href="#the-convolutional-neural-network" id="toc-the-convolutional-neural-network" class="nav-link" data-scroll-target="#the-convolutional-neural-network">The convolutional neural network</a></li>
+  <li><a href="#from-a-density-surface-to-tent-points" id="toc-from-a-density-surface-to-tent-points" class="nav-link" data-scroll-target="#from-a-density-surface-to-tent-points">From a density surface to tent points</a></li>
+  <li><a href="#parameters-that-shape-the-output" id="toc-parameters-that-shape-the-output" class="nav-link" data-scroll-target="#parameters-that-shape-the-output">Parameters that shape the output</a></li>
+  <li><a href="#validation-and-quality-assessment" id="toc-validation-and-quality-assessment" class="nav-link" data-scroll-target="#validation-and-quality-assessment">Validation and quality assessment</a></li>
+  <li><a href="#limitations-and-responsible-use" id="toc-limitations-and-responsible-use" class="nav-link" data-scroll-target="#limitations-and-responsible-use">Limitations and responsible use</a></li>
+  <li><a href="#software-and-data-products" id="toc-software-and-data-products" class="nav-link" data-scroll-target="#software-and-data-products">Software and data products</a></li>
+  <li><a href="#reproducibility-and-adaptation" id="toc-reproducibility-and-adaptation" class="nav-link" data-scroll-target="#reproducibility-and-adaptation">Reproducibility and adaptation</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">TentNetFA: A convolutional neural network</h1>
+<p class="subtitle lead">Automated machine learning to extract tent points from satellite imagery.</p>
+</div>
+
+<div>
+  <div class="description">
+    TentNetFA maps likely tent locations from high-resolution satellite imagery.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">17 Nov 2026, 14:22:39</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="tentnetfa-slider-wrap">
+<div class="tentnetfa-slider" aria-label="Interactive comparison of satellite imagery and TentNetFA tent detections">
+<img src="resources/tent-mapping-imagery.jpg" alt="Satellite imagery of a densely built area"> <img class="tentnetfa-slider-overlay" src="resources/tent-mapping-detections.jpg" alt="Satellite imagery with red TentNetFA tent detections">
+<div class="tentnetfa-slider-handle" aria-hidden="true">
+
+</div>
+<p><button class="tentnetfa-slider-fullscreen" type="button" title="Enter fullscreen" aria-label="Enter fullscreen">⛶</button></p>
+</div>
+<p>Move the slider to compare satellite imagery with TentNetFA detections. Select the fullscreen button to enlarge the comparison.</p>
+</div>
+<style>
+#title-block-header .description { display: none; }
+
+.tentnetfa-slider-wrap { max-width: 900px; margin: 1rem auto; }
+
+.tentnetfa-slider {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 8px;
+  cursor: ew-resize;
+  touch-action: none;
+  user-select: none;
+}
+
+.tentnetfa-slider img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+.tentnetfa-slider-overlay { clip-path: inset(0 50% 0 0); }
+
+.tentnetfa-slider-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+
+.tentnetfa-slider-handle::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35);
+}
+
+.tentnetfa-slider-fullscreen {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 10;
+  padding: 6px 12px;
+  background: rgba(0, 0, 0, 0.65);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.tentnetfa-slider:fullscreen {
+  width: 100vw;
+  height: 100vh;
+  aspect-ratio: auto;
+  border-radius: 0;
+  background: #111;
+}
+
+.tentnetfa-slider:fullscreen img { object-fit: contain; }
+</style>
+
+<script>
+(() => {
+  const slider = document.querySelector('.tentnetfa-slider');
+  if (!slider) return;
+
+  const overlay = slider.querySelector('.tentnetfa-slider-overlay');
+  const handle = slider.querySelector('.tentnetfa-slider-handle');
+  const fullscreenButton = slider.querySelector('.tentnetfa-slider-fullscreen');
+  let dragging = false;
+  let position = 50;
+
+  const update = (percentage) => {
+    position = Math.min(Math.max(percentage, 0), 100);
+    overlay.style.clipPath = `inset(0 ${100 - position}% 0 0)`;
+    handle.style.left = `${position}%`;
+  };
+
+  const setPosition = (clientX) => {
+    const rectangle = slider.getBoundingClientRect();
+    const x = Math.min(Math.max(clientX - rectangle.left, 0), rectangle.width);
+    update(rectangle.width === 0 ? 50 : (x / rectangle.width) * 100);
+  };
+
+  slider.addEventListener('pointerdown', (event) => {
+    if (event.target === fullscreenButton) return;
+    dragging = true;
+    slider.setPointerCapture(event.pointerId);
+    setPosition(event.clientX);
+  });
+  slider.addEventListener('pointermove', (event) => { if (dragging) setPosition(event.clientX); });
+
+  const stopDragging = (event) => {
+    dragging = false;
+    if (slider.hasPointerCapture(event.pointerId)) slider.releasePointerCapture(event.pointerId);
+  };
+  slider.addEventListener('pointerup', stopDragging);
+  slider.addEventListener('pointercancel', stopDragging);
+  slider.addEventListener('pointerleave', () => { dragging = false; });
+
+  fullscreenButton.addEventListener('click', (event) => {
+    event.stopPropagation();
+    if (document.fullscreenElement === slider) document.exitFullscreen();
+    else slider.requestFullscreen();
+  });
+
+  document.addEventListener('fullscreenchange', () => {
+    update(position);
+    const label = document.fullscreenElement === slider ? 'Exit fullscreen' : 'Enter fullscreen';
+    fullscreenButton.title = label;
+    fullscreenButton.setAttribute('aria-label', label);
+  });
+
+  window.addEventListener('resize', () => update(position));
+  update(position);
+})();
+</script>
+<section id="what-tentnetfa-does" class="level2">
+<h2 class="anchored" data-anchor-id="what-tentnetfa-does">What TentNetFA does</h2>
+<p>TentNetFA maps likely tent locations from high-resolution satellite imagery. It is designed for a difficult operational problem: settlements can grow, move, and change quickly, while a conventional field count may be unavailable, delayed, or unsafe to conduct. The output is a point map that can be aggregated into grids or administrative areas and used alongside other evidence in population nowcasting.</p>
+<p>The method is not a way to identify people, households, or individual tents with certainty. It is a repeatable process for turning a satellite scene into an estimate of where tents are likely to be concentrated. Those estimates need to be interpreted with the imagery date, local conditions, and independent information in mind.</p>
+<p>TentNetFA was developed from a tent-mapping effort with <a href="https://forensic-architecture.org/">Forensic Architecture</a> using Planet satellite imagery and annotated tent locations created by a dedicated group of volunteer students at the University of Oxford. Its outputs support our wider population-nowcasting collaboration with humanitarian partners as well as Forensic Architecture’s mission to compile evidence for justice and accountability. The active implementation is maintained in our <a href="https://github.com/realgoodresearch/TentNetFA">TentNetFA source repository</a> which is a fork of the original Algorithmic Governance repository.</p>
+<div id="fig-tentnetfa-volunteers" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tentnetfa-volunteers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="resources/tentnetfa-volunteer-annotation-session.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tentnetfa-volunteers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Volunteers manually annotate satellite imagery during the training-data effort run by the Algorithmic Governance Foundation.
+</figcaption>
+</figure>
+</div>
+<p><em>Image credit: <a href="https://algorithmicgovernance.org/f/tracking-conflict-displacement-in-gaza-with-machine-learning">Algorithmic Governance Foundation, “Tracking Conflict Displacement in Gaza with Machine Learning.”</a></em></p>
+</section>
+<section id="the-method-in-one-view" class="level2">
+<h2 class="anchored" data-anchor-id="the-method-in-one-view">The method in one view</h2>
+<p>The current workflow has two connected pipelines:</p>
+<ol type="1">
+<li>Build training examples from dated imagery and tent annotations, then fit a convolutional neural network (CNN).</li>
+<li>Apply the fitted model to new imagery, convert its continuous output into points, and merge duplicate detections from overlapping tiles.</li>
+</ol>
+<p>The important idea is that the CNN does not directly answer a yes-or-no question for every pixel. It predicts a smooth <em>tent-density surface</em>. A separate, explicit post-processing step then turns peaks in that surface into tent points. Keeping these steps separate makes it possible to inspect and tune the rules that determine how many points are ultimately reported.</p>
+</section>
+<section id="training-data-imagery-annotations-and-change" class="level2">
+<h2 class="anchored" data-anchor-id="training-data-imagery-annotations-and-change">Training data: imagery, annotations, and change</h2>
+<p>Training begins with Planet GeoTIFF scenes and geographically referenced tent annotations. The annotations were originally produced for the Forensic Architecture mapping effort. For each training scene, TentNetFA selects annotations for the relevant date and rasterises the point locations into the coordinate system of the image.</p>
+<p>Large scenes are divided into small, overlapping tiles. In the current configuration, each tile has a 70-metre core and a 15-metre margin on every side. The margins give the model context around the core and reduce edge artefacts. They also mean that the same ground location can occur in more than one prediction tile; the final merge step is therefore essential.</p>
+<div id="fig-tentnetfa-training-tiles" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tentnetfa-training-tiles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="resources/tentnetfa-training-tiles.webp" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tentnetfa-training-tiles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Examples of annotated image tiles used to construct training data. Magenta marks show tent annotations; red lines show the tile grid.
+</figcaption>
+</figure>
+</div>
+<p>Each tile contains three related RGB images:</p>
+<ul>
+<li>the current satellite image;</li>
+<li>a pre-war reference image covering the same location; and</li>
+<li>the channel-wise difference between the current and reference images.</li>
+</ul>
+<p>Together these form a nine-channel input. The reference and difference layers help the model distinguish features that were already present from changes that may be associated with temporary shelter. They are useful evidence, not a guarantee: damage, rubble, agriculture, shadows, image quality, and other changes can also produce strong differences.</p>
+<p>Before a tile is passed to the model, its image bands are standardised so that one scene’s overall brightness does not dominate another’s. The exact standardisation mode is recorded in the resolved configuration for a run. This does not make images identical, but it gives the model a more stable numerical scale on which to learn.</p>
+<section id="from-points-to-a-learning-target" class="level3">
+<h3 class="anchored" data-anchor-id="from-points-to-a-learning-target">From points to a learning target</h3>
+<p>A tent annotation is a point, but a point is too sparse to be a useful target for a pixel-level model. TentNetFA therefore converts every annotated point into a small Gaussian-shaped bump and adds the bumps together. The result is a density map: locations close to an annotated tent receive high values, and nearby pixels receive lower values that fade with distance. This family of approaches—learning a continuous surface from point annotations—has a long history in object-counting research <span class="citation" data-cites="lempitsky2010learning">(<a href="#ref-lempitsky2010learning" role="doc-biblioref">Lempitsky and Zisserman 2010</a>)</span>.</p>
+<p>This representation gives the CNN a smoother learning problem. Rather than having to reproduce a single exact pixel, it learns to place a peak near each annotated tent. It also preserves a useful interpretation: summing the density surface over an area approximates the number of annotated tents in that area.</p>
+<p>The width of the Gaussian is a modelling decision. A very narrow target approaches a hard point label and becomes sensitive to small alignment errors. A very broad target makes nearby tents harder to separate. TentNetFA records this setting with the training configuration so that the target surface can be reproduced.</p>
+<p>Training data contain many tiles without tents. The pipeline retains only a configured fraction of these empty tiles when it builds the balanced training manifest. This prevents the model from learning the unhelpful rule that every location is empty simply because empty pixels are common.</p>
+</section>
+</section>
+<section id="the-convolutional-neural-network" class="level2">
+<h2 class="anchored" data-anchor-id="the-convolutional-neural-network">The convolutional neural network</h2>
+<p>The model is a compact CNN that accepts the nine-channel tile and returns one channel: a predicted density surface with the same spatial layout as the input. It combines several convolutional layers with batch normalisation and rectified linear activation functions. Dilated and wider convolutional layers give the model a larger local field of view without reducing the output resolution.</p>
+<p>During training, the model compares its predicted density surface with the Gaussian-smoothed annotation surface using pixel-wise mean squared error. The checkpoint with the lowest validation loss is saved for prediction. The implementation uses <a href="https://pytorch.org/">PyTorch</a> for the model, optimisation, and batched data loading <span class="citation" data-cites="paszke2019pytorch">(<a href="#ref-paszke2019pytorch" role="doc-biblioref"><span class="nocase">Paszke et al.</span> 2019</a>)</span>. This evaluation is useful for selecting a model during fitting, but it is not a complete measure of operational accuracy: a low density-map loss does not by itself show that point counts are reliable in every place, settlement type, or date.</p>
+</section>
+<section id="from-a-density-surface-to-tent-points" class="level2">
+<h2 class="anchored" data-anchor-id="from-a-density-surface-to-tent-points">From a density surface to tent points</h2>
+<p>The model’s output is continuous. To produce a point map, TentNetFA applies a transparent sequence of selection rules.</p>
+<p>First, it calculates a local-context score. The raw predicted density is combined with a Gaussian-blurred version of the same surface. The blur rewards a candidate that sits near other predicted tents and reduces the influence of isolated peaks, which are often more likely to be noise or visually similar features. The relative weight of this neighbourhood contribution is a configuration parameter.</p>
+<p>In simplified notation, the selection score at location <span class="math inline">\(x\)</span> is</p>
+<p><span class="math display">\[
+s(x) = p(x) + \alpha\, [G_\sigma * p](x),
+\]</span></p>
+<p>where <span class="math inline">\(p(x)\)</span> is the model’s raw density prediction, <span class="math inline">\(G_\sigma * p\)</span> is its Gaussian-smoothed neighbourhood signal, and <span class="math inline">\(\alpha\)</span> controls how strongly nearby predictions contribute. The score is not a calibrated probability that a tent exists at <span class="math inline">\(x\)</span>; it is a ranking signal used to select candidates.</p>
+<div id="fig-tentnetfa-density-postprocessing" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tentnetfa-density-postprocessing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="resources/tentnetfa-density-postprocessing.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tentnetfa-density-postprocessing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Schematic of point selection distinguishing a cluster of tents from isolated rubble, a potential source of false positives. The upper curve represents local prediction peaks; adding a broad Gaussian neighbourhood signal increases support for clustered peaks while leaving an isolated peak relatively less competitive at a fixed threshold.
+</figcaption>
+</figure>
+</div>
+<p>Next, non-maximum suppression identifies local peaks in that score surface. A candidate must be the largest value within a small neighbourhood and must exceed the configured selection threshold. Tile margins are cropped from the candidate search so that edge predictions are not counted twice.</p>
+<p>Finally, detections from all tiles are merged. Points closer together than the configured minimum distance are deduplicated, and optional inclusion or exclusion zones can be applied. The result is written as a geospatial point layer with the raw peak value and the adjusted, neighbourhood-aware score.</p>
+<p>The merge stage uses a spatial index to find nearby candidates efficiently, then checks their geographic distance before combining them. This matters because prediction tiles overlap by design: without global deduplication, the same visual feature could become two output points.</p>
+<p>Thresholds, neighbourhood weighting, and merge distance are not cosmetic settings. They change the balance between missed tents and spurious detections, and therefore change the resulting counts. They should be selected against independent evidence for the imagery, geography, and operational question at hand—not treated as universal model constants.</p>
+</section>
+<section id="parameters-that-shape-the-output" class="level2">
+<h2 class="anchored" data-anchor-id="parameters-that-shape-the-output">Parameters that shape the output</h2>
+<p>TentNetFA keeps its settings in a resolved configuration file for each run. This is important for reproducibility, but the settings are also methodological choices: they determine what information reaches the model and how a predicted surface becomes a point map. The table below describes the settings that are most important for interpreting or adapting the method. It deliberately describes their role rather than prescribing values.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Parameter group</th>
+<th>What it changes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Tile core and margin (<code>core_metres</code>, <code>margin_metres</code>)</td>
+<td>The area predicted at a time, the amount of contextual imagery around it, and the extent of overlap between neighbouring tiles.</td>
+</tr>
+<tr class="even">
+<td>Valid-data threshold (<code>min_valid_fraction</code>)</td>
+<td>Whether a tile with black, missing, or invalid imagery is retained for training or prediction.</td>
+</tr>
+<tr class="odd">
+<td>Empty-tile retention (<code>null_keep_fraction</code>)</td>
+<td>The balance between tent-free and tent-containing examples during training.</td>
+</tr>
+<tr class="even">
+<td>Standardisation (<code>per_tile_standardisation</code>)</td>
+<td>Whether brightness is normalised separately for each prediction tile or at a wider image scale.</td>
+</tr>
+<tr class="odd">
+<td>Point-selection method (<code>selection.method</code>)</td>
+<td>Whether locations are taken from local score peaks (<code>nms</code>) or the centres of predicted blobs (<code>centroid</code>).</td>
+</tr>
+<tr class="even">
+<td>Selection threshold and neighbourhood factor (<code>selection.threshold</code>, <code>selection.factor</code>)</td>
+<td>How strong a candidate must be, and how much support from nearby predicted signal contributes to its selection score.</td>
+</tr>
+<tr class="odd">
+<td>Peak spacing (<code>nms_kernel_size</code>, <code>selection.min_distance_m</code>)</td>
+<td>How close two selected peaks can be before they are treated as alternatives rather than separate candidates.</td>
+</tr>
+<tr class="even">
+<td>Global merge rules (<code>merge.min_distance_m</code>, <code>merge.agreement</code>, <code>merge.min_adj_peak</code>)</td>
+<td>How predictions from overlapping tiles are combined and filtered into the final point layer.</td>
+</tr>
+<tr class="odd">
+<td>Geographic zones</td>
+<td>Whether points are retained only inside, or removed from, specified geographic areas.</td>
+</tr>
+</tbody>
+</table>
+<p>These settings interact. For example, lowering a selection threshold may recover faint tents but can introduce visually similar false positives; increasing the merge distance can reduce duplicate detections but can also combine nearby real tents. A defensible configuration is therefore one evaluated against relevant independent evidence, not simply the configuration that produces the largest count.</p>
+<p>The <a href="https://github.com/realgoodresearch/TentNetFA">TentNetFA repository</a> records the resolved configuration and runtime behaviour for each run. The settings described here should be reported alongside any published output so that its methodological choices can be inspected and reproduced.</p>
+</section>
+<section id="validation-and-quality-assessment" class="level2">
+<h2 class="anchored" data-anchor-id="validation-and-quality-assessment">Validation and quality assessment</h2>
+<p>Validation has two jobs. The first is to assess the learned density maps during model development. The second is to assess the final point product after all selection and merging rules have been applied. Both matter because point extraction can improve or degrade a useful density prediction.</p>
+<p>Threshold and neighbourhood-weight sensitivity analyses show why a single Strip-wide count is not enough: settings that improve agreement with an independent map in one area can introduce spurious detections in another. This is why point-selection settings need to be assessed at the same spatial scale and in the same kinds of landscapes as the intended use of the results.</p>
+<div id="fig-tentnetfa-threshold-sensitivity" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tentnetfa-threshold-sensitivity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="resources/tentnetfa-threshold-sensitivity.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tentnetfa-threshold-sensitivity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: An example sensitivity analysis for an earlier workflow. Each cell represents a combination of the point-selection cutoff and neighbourhood-weighting factor; the stars identify settings selected under different objectives. These values are historical illustrations, not the active pipeline’s universal parameters.
+</figcaption>
+</figure>
+</div>
+<p>For the active pipeline, validation should use an independent source wherever possible and report results at the spatial scale at which the map will be used. Useful checks include visual review of sampled tiles, comparison of counts in a common grid, error by settlement density or land cover, and comparison across image dates. The repository includes tools for point-level and grid-based comparisons, but their results are specific to the validation data and settings used.</p>
+</section>
+<section id="limitations-and-responsible-use" class="level2">
+<h2 class="anchored" data-anchor-id="limitations-and-responsible-use">Limitations and responsible use</h2>
+<p>TentNetFA is sensitive to the data and assumptions that enter it.</p>
+<ul>
+<li><strong>Annotations are a partial reference, not perfect ground truth.</strong> Missed, inconsistent, or temporally mismatched labels can be learned by the model.</li>
+<li><strong>Satellite scenes vary.</strong> Clouds, haze, shadows, resolution, season, viewing conditions, damage, and image-processing choices can alter what tents look like.</li>
+<li><strong>Change is not uniquely a tent.</strong> The pre-war comparison helps focus attention on new features, but construction, debris, agricultural structures, and other changes can resemble shelter.</li>
+<li><strong>Post-processing encodes decisions.</strong> A threshold or merge distance that is reasonable in a dense camp may not be reasonable in a sparse or damaged area.</li>
+<li><strong>A point count is not a population estimate.</strong> Tent locations must be combined with carefully stated assumptions and other data before they are used to infer the number of people in an area.</li>
+</ul>
+<p>For these reasons, the maps should be used as one input to humanitarian analysis, alongside field knowledge, manual review, and other independent data sources. They are most useful when their uncertainty, date, coverage, and intended aggregation scale travel with the result.</p>
+</section>
+<section id="software-and-data-products" class="level2">
+<h2 class="anchored" data-anchor-id="software-and-data-products">Software and data products</h2>
+<p>TentNetFA is a Python project managed with Poetry. Its main software roles are deliberately separated:</p>
+<ul>
+<li><strong>Raster and coordinate handling:</strong> Rasterio, Fiona, PyProj, GeoPandas, and Shapely read satellite rasters and vector data, transform coordinates, and write spatial outputs.</li>
+<li><strong>Array processing and point selection:</strong> NumPy and SciPy support standardisation, Gaussian filtering, connected components, and spatial search.</li>
+<li><strong>Model fitting and inference:</strong> PyTorch loads tiles in batches, trains the CNN, and evaluates new imagery.</li>
+<li><strong>Run orchestration:</strong> the repository’s pipeline runner resolves the configuration, records logs, and keeps the artifacts from every processing stage together.</li>
+</ul>
+<p>The main intermediates are intentionally inspectable: tile manifests are stored as Parquet tables, per-tile predictions as GeoJSON, and the deduplicated final product as a GeoPackage. A checkpoint alone is therefore not sufficient to reproduce a map. Reproduction also needs the input imagery, reference raster, annotation snapshot where relevant, and the resolved configuration that records tile geometry, standardisation, selection, and merge settings.</p>
+</section>
+<section id="reproducibility-and-adaptation" class="level2">
+<h2 class="anchored" data-anchor-id="reproducibility-and-adaptation">Reproducibility and adaptation</h2>
+<p>The repository separates configuration from code. A run records the resolved configuration, intermediate tile manifests, prediction files, model checkpoint, and final merged output. This makes it possible to reproduce a particular map and to compare alternative configurations without silently changing the processing chain.</p>
+<p>Anyone adapting the method to another setting should treat the model, labels, imagery, reference imagery, and point-selection parameters as a single system. Reusing a checkpoint without local validation is unlikely to be reliable: tent materials, backgrounds, image providers, and the meaning of a temporary structure can all change from one context to another.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Further technical detail
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The current pipeline, configuration reference, and evaluation utilities are available in the <a href="https://github.com/realgoodresearch/TentNetFA">TentNetFA repository</a>. This chapter describes the method and its decisions; it is not a step-by-step deployment guide.</p>
+</div>
+</div>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-lempitsky2010learning" class="csl-entry" role="listitem">
+Lempitsky, Victor, and Andrew Zisserman. 2010. <span>“Learning to Count Objects in Images.”</span> <em>Advances in Neural Information Processing Systems</em> 23. <a href="https://proceedings.neurips.cc/paper_files/paper/2010/hash/fe73f687e5bc5280214e0486b273a5f9-Abstract.html">https://proceedings.neurips.cc/paper_files/paper/2010/hash/fe73f687e5bc5280214e0486b273a5f9-Abstract.html</a>.
+</div>
+<div id="ref-paszke2019pytorch" class="csl-entry" role="listitem">
+<span class="nocase">Paszke, Adam, Sam Gross, Francisco Massa, et al.</span> 2019. <span>“PyTorch: An Imperative Style, High-Performance Deep Learning Library.”</span> <em>Advances in Neural Information Processing Systems</em> 32. <a href="https://proceedings.neurips.cc/paper_files/paper/2019/hash/bdbca288fee7f92f2bfa9f7012727740-Abstract.html">https://proceedings.neurips.cc/paper_files/paper/2019/hash/bdbca288fee7f92f2bfa9f7012727740-Abstract.html</a>.
+</div>
+</div></section></div></main> <!-- /main -->
+<hr>
+<div style="display: flex; justify-content: space-between; align-items: center; font-family: 'Mulish', sans-serif; font-size: 0.9rem; color: #7f8c8d; padding: 20px 0;">
+    <div>
+        © 2026 Real Good Research.<br>All rights reserved.
+    </div>
+    <div>
+        Source code for this website<br>is available on <a href="https://github.com/realgoodresearch/realgooddocs" target="_blank">GitHub</a>.
+    </div>
+    <div>
+        Open Source Content: <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC-BY 4.0</a><br>
+        Open Source Code: <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a>
+    </div>
+</div>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      const newWindowLabel = "(opens in a new tab)";
+      const newWindowNoteId = "quarto-ext-newwindow-label";
+      // Links reference one hidden label through aria-describedby, so the
+      // announcement never changes their accessible name.
+      var describeNewWindow = (link) => {
+        if (!window.document.getElementById(newWindowNoteId)) {
+          var newWindowNote = window.document.createElement("span");
+          newWindowNote.id = newWindowNoteId;
+          newWindowNote.hidden = true;
+          newWindowNote.textContent = newWindowLabel;
+          window.document.body.appendChild(newWindowNote);
+        }
+        var describedBy = (link.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
+        if (!describedBy.includes(newWindowNoteId)) {
+          describedBy.push(newWindowNoteId);
+          link.setAttribute("aria-describedby", describedBy.join(" "));
+        }
+      }
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            describeNewWindow(link);
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="../../books/tent-mapping/toc.html" class="pagination-link" aria-label="Table of Contents">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Table of Contents</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Table of Contents – Real Good Docs</title>
+<title>Bayesian Intro – Real Good Docs</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -36,11 +36,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../teaching/bayesian_intro/getting-started.html" rel="next">
-<link href="../../teaching/bayesian_intro/overview.html" rel="prev">
+<link href="../../books/bayesian-intro/toc.html" rel="next">
 <link href="../../assets/images/logo/favicon.ico" rel="icon">
-<script src="../../site_libs/quarto-listing/list.min.js"></script>
-<script src="../../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
@@ -79,29 +76,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-title','listing-author','listing-date','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-  </script>
 <link rel="stylesheet" href="../../assets/pdf-page-viewer.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script>
@@ -111,35 +85,6 @@ ul.task-list li input[type="checkbox"] {
 </script>
 <script src="../../assets/pdf-page-viewer.js"></script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -158,16 +103,6 @@ window.Quarto = {
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="../../research/index.html"> 
-<span class="menu-text">Research</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../teaching/index.html"> 
-<span class="menu-text">Teaching</span></a>
-  </li>  
-</ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
     <a class="nav-link" href="https://data.realgoodresearch.com"> 
@@ -197,7 +132,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../teaching/bayesian_intro/toc.html">Table of Contents</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../books/bayesian-intro/overview.html">Welcome</a></li></ol></nav>
         <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -211,19 +146,19 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../teaching/bayesian_intro/overview.html" class="sidebar-item-text sidebar-link">
+  <a href="../../books/bayesian-intro/overview.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Welcome</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../teaching/bayesian_intro/toc.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../books/bayesian-intro/toc.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Table of Contents</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../teaching/bayesian_intro/getting-started.html" class="sidebar-item-text sidebar-link">
+  <a href="../../books/bayesian-intro/getting-started.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Getting Started</span></a>
   </div>
 </li>
@@ -235,13 +170,13 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../teaching/bayesian_intro/lecture-intro-to-bayesian-inference.html" class="sidebar-item-text sidebar-link">
+  <a href="../../books/bayesian-intro/lecture-intro-to-bayesian-inference.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Intro to Bayesian Inference</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../teaching/bayesian_intro/lecture-glm-and-hierarchical-models.html" class="sidebar-item-text sidebar-link">
+  <a href="../../books/bayesian-intro/lecture-glm-and-hierarchical-models.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">GLMs and Hierarchical Models</span></a>
   </div>
 </li>
@@ -255,31 +190,31 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../teaching/bayesian_intro/practical-model-of-the-mean.html" class="sidebar-item-text sidebar-link">
+  <a href="../../books/bayesian-intro/practical-model-of-the-mean.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Model of the Mean</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../teaching/bayesian_intro/practical-posteriors-likelihoods-priors.html" class="sidebar-item-text sidebar-link">
+  <a href="../../books/bayesian-intro/practical-posteriors-likelihoods-priors.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exploring Posteriors, Likelihoods, and Priors</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../teaching/bayesian_intro/practical-mcmc-toy.html" class="sidebar-item-text sidebar-link">
+  <a href="../../books/bayesian-intro/practical-mcmc-toy.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">MCMC Toy Example</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../teaching/bayesian_intro/practical-gaussian-linear-regression.html" class="sidebar-item-text sidebar-link">
+  <a href="../../books/bayesian-intro/practical-gaussian-linear-regression.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Gaussian Linear Regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../teaching/bayesian_intro/practical-synthetic-controls.html" class="sidebar-item-text sidebar-link">
+  <a href="../../books/bayesian-intro/practical-synthetic-controls.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Synthetic Controls</span></a>
   </div>
 </li>
@@ -298,7 +233,8 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Table of Contents</h1>
+<h1 class="title">Bayesian Intro</h1>
+<p class="subtitle lead">An introduction to Bayesian statistics for applied research.</p>
 </div>
 
 
@@ -306,6 +242,12 @@ window.Quarto = {
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">17 Nov 2026, 13:16:11</p>
+    </div>
+  </div>
   
     
   </div>
@@ -315,231 +257,22 @@ window.Quarto = {
 </header>
 
 
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="resources/bayesian-intro-hero.webp" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+<p>Welcome to the world of Bayesian statistics!</p>
+<p>This collection of tutorials was developed for workshops on Bayesian statistics at the Max Planck Institute for Demographic Research and the British Grand Union Doctoral Training Partnership with courses delivered at the London School of Economics and the University of Oxford. We decided to put the material online for everyone to access and to continue developing new material as we think of interesting topics to explore with students.</p>
+<p>This is our original course advert:</p>
+<div class="shaded-box">
+<p>This two-day course provides a practical and accessible introduction to Bayesian statistics for applied research in any field. Students will benefit from a combination of lectures and discussion to explore fundamental concepts unlocking the potential to design bespoke statistical analyses based on your data and hypotheses as well as practical exercises to gain hands-on experience implementing Bayesian models using free and open-source software. The course is designed as a springboard to overcome the steepest part of the Bayesian learning curve with an immersive two-day deep-dive.</p>
+<p>Students can expect to gain a working understanding of Bayes theorem (i.e.&nbsp;likelihoods, priors, and posterior probability distributions) and implementation of Markov Chain Monte Carlo for Bayesian model fitting. The course will cover common probability distributions and the know-how to choose between them when designing bespoke models as well as a solid foundation in model validation techniques for high quality research. These concepts will be reinforced through practical lab exercises to gain experience implementing Bayesian models using R and Stan software. Students will be challenged through interactive group discussions to formalise their own mental models (i.e.&nbsp;hypotheses) into bespoke statistical models that can be used to confront these models with data.</p>
+</div>
 
 
 
-
-<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
-<div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-listing-date-sort="1779377872000" data-listing-file-modified-sort="1779377872398" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="277">
-<a href="../../teaching/bayesian_intro/overview.html" class="quarto-grid-link no-external-icon">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="../../teaching/bayesian_intro/resources/bayesian-intro-hero.webp" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Bayesian Intro
-</h5>
-<div class="card-text listing-description">
-Welcome to the world of Bayesian statistics!
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-
-</div>
-<div class="listing-date">
-May 21, 2026
-</div>
-</div>
-</div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="1" data-listing-date-sort="1781162117000" data-listing-file-modified-sort="1781162117254" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="409">
-<a href="../../teaching/bayesian_intro/getting-started.html" class="quarto-grid-link no-external-icon">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="../../teaching/bayesian_intro/resources/getting-started-hero.webp" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Getting Started
-</h5>
-<div class="card-text listing-description">
-Let’s make sure you have everything you need to get off to a good start!
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-
-</div>
-<div class="listing-date">
-Jun 11, 2026
-</div>
-</div>
-</div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="2" data-listing-date-sort="1781018481000" data-listing-file-modified-sort="1781018481374" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="252">
-<a href="../../teaching/bayesian_intro/lecture-intro-to-bayesian-inference.html" class="quarto-grid-link no-external-icon">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="../../teaching/bayesian_intro/resources/lecture-intro-to-bayesian-inference-hero.png" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Lecture Slides: Intro to Bayesian Inference
-</h5>
-<div class="card-text listing-description">
-These lecture slides introduce the basic concepts for Bayesian inference: Probability distributions, likelihoods, priors, posteriors, Markov chain Monte Carlo simulation…
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-
-</div>
-<div class="listing-date">
-Jun 9, 2026
-</div>
-</div>
-</div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="3" data-listing-date-sort="1794867930000" data-listing-file-modified-sort="1794867930524" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="27" data-listing-word-count-sort="5217">
-<a href="../../teaching/bayesian_intro/practical-model-of-the-mean.html" class="quarto-grid-link no-external-icon">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="../../teaching/bayesian_intro/resources/practical-model-of-the-mean-hero.webp" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Practical Tutorial: Model of the Mean
-</h5>
-<div class="card-text listing-description">
-We will start with simple model so that we can focus on the Bayesian implementation rather than the statistical details. Our goal is to simply estimate the mean of a…
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Doug Leasure
-</div>
-<div class="listing-date">
-Nov 16, 2026
-</div>
-</div>
-</div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="4" data-listing-date-sort="1781018481000" data-listing-file-modified-sort="1781018481375" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="17" data-listing-word-count-sort="3335">
-<a href="../../teaching/bayesian_intro/practical-posteriors-likelihoods-priors.html" class="quarto-grid-link no-external-icon">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="../../teaching/bayesian_intro/resources/practical-posteriors-likelihoods-priors-hero.webp" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Practical Tutorial: Posteriors, Likelihoods, and Priors
-</h5>
-<div class="card-text listing-description">
-To get experience designing priors, we will explore how informative priors interact with the likelihood to influence the posterior.
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Doug Leasure
-</div>
-<div class="listing-date">
-Jun 9, 2026
-</div>
-</div>
-</div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="5" data-listing-date-sort="1770336000000" data-listing-file-modified-sort="1781018481375" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="796">
-<a href="../../teaching/bayesian_intro/practical-mcmc-toy.html" class="quarto-grid-link no-external-icon">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="../../teaching/bayesian_intro/resources/practical-mcmc-toy-hero.webp" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Practical Tutorial: A Toy MCMC Example
-</h5>
-<div class="card-text listing-description">
-In this toy example, we manually calculate a Markov Chain Monte Carlo (MCMC) simulation for a coin flip process with a potentially unfair coin to demystify how MCMC works.
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Michael Chong
-</div>
-<div class="listing-date">
-Feb 6, 2026
-</div>
-</div>
-</div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="6" data-listing-date-sort="1794867930000" data-listing-file-modified-sort="1794867930524" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-word-count-sort="2663">
-<a href="../../teaching/bayesian_intro/practical-gaussian-linear-regression.html" class="quarto-grid-link no-external-icon">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="../../teaching/bayesian_intro/resources/practical-gaussian-linear-regression-hero.webp" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Practical Tutorial: Gaussian Linear Regression
-</h5>
-<div class="card-text listing-description">
-Now that we can design and run a Bayesian model of the mean, let’s add a deterministic linear regression on the mean.
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Doug Leasure
-</div>
-<div class="listing-date">
-Nov 16, 2026
-</div>
-</div>
-</div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="7" data-listing-date-sort="1781018481000" data-listing-file-modified-sort="1781018481374" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="244">
-<a href="../../teaching/bayesian_intro/lecture-glm-and-hierarchical-models.html" class="quarto-grid-link no-external-icon">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="../../teaching/bayesian_intro/resources/lecture-glm-and-hierarchical-models-hero.webp" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Lecture Slides: GLM and Hierarchical Models
-</h5>
-<div class="card-text listing-description">
-These lecture slides extend on the fundamentals to include flexible modelling frameworks of generalised linear models and hierarchical models.
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-
-</div>
-<div class="listing-date">
-Jun 9, 2026
-</div>
-</div>
-</div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="8" data-listing-date-sort="1794867930000" data-listing-file-modified-sort="1794867930525" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="45" data-listing-word-count-sort="8919">
-<a href="../../teaching/bayesian_intro/practical-synthetic-controls.html" class="quarto-grid-link no-external-icon">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="../../teaching/bayesian_intro/resources/practical-synthetic-controls-hero.webp" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Practical Tutorial: Synthetic Controls
-</h5>
-<div class="card-text listing-description">
-Imagine an alternate reality in which Russia’s large scale invasion of Ukraine never happened. Or where the British referendum vote had rejected Brexit. Would global…
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Doug Leasure
-</div>
-<div class="listing-date">
-Nov 16, 2026
-</div>
-</div>
-</div>
-</div></a>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <hr>
 <div style="display: flex; justify-content: space-between; align-items: center; font-family: 'Mulish', sans-serif; font-size: 0.9rem; color: #7f8c8d; padding: 20px 0;">
     <div>
@@ -1031,13 +764,10 @@ Nov 16, 2026
   </script>
 <nav class="page-navigation" aria-label="Page">
   <div class="nav-page nav-page-previous">
-      <a href="../../teaching/bayesian_intro/overview.html" class="pagination-link" aria-label="Welcome">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Welcome</span>
-      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../teaching/bayesian_intro/getting-started.html" class="pagination-link" aria-label="Getting Started">
-        <span class="nav-page-text">Getting Started</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../books/bayesian-intro/toc.html" class="pagination-link" aria-label="Table of Contents">
+        <span class="nav-page-text">Table of Contents</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

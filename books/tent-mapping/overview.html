@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Doug Leasure">
 
-<title>Bayesian Intro – Real Good Docs</title>
+<title>Mapping Tents from Satellite Imagery – Real Good Docs</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -36,7 +37,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../teaching/bayesian_intro/toc.html" rel="next">
+<link href="../../books/tent-mapping/toc.html" rel="next">
 <link href="../../assets/images/logo/favicon.ico" rel="icon">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -49,6 +50,9 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap-0d6b17e1774deaac102b13973fef85f6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -103,16 +107,6 @@ ul.task-list li input[type="checkbox"] {
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="../../research/index.html"> 
-<span class="menu-text">Research</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../teaching/index.html"> 
-<span class="menu-text">Teaching</span></a>
-  </li>  
-</ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
     <a class="nav-link" href="https://data.realgoodresearch.com"> 
@@ -142,7 +136,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../teaching/bayesian_intro/overview.html">Welcome</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../books/tent-mapping/overview.html">Introduction</a></li></ol></nav>
         <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -156,80 +150,22 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../teaching/bayesian_intro/overview.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Welcome</span></a>
+  <a href="../../books/tent-mapping/overview.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Introduction</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../teaching/bayesian_intro/toc.html" class="sidebar-item-text sidebar-link">
+  <a href="../../books/tent-mapping/toc.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Table of Contents</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../teaching/bayesian_intro/getting-started.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Getting Started</span></a>
+  <a href="../../books/tent-mapping/tentnetfa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TentNetFA Overview</span></a>
   </div>
 </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text" id="quarto-sidebar-section-1-label">Lecture Slides</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
-      </div>
-      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../teaching/bayesian_intro/lecture-intro-to-bayesian-inference.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Intro to Bayesian Inference</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../teaching/bayesian_intro/lecture-glm-and-hierarchical-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">GLMs and Hierarchical Models</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="true">
- <span class="menu-text" id="quarto-sidebar-section-2-label">Practical Tutorials</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
-      </div>
-      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../teaching/bayesian_intro/practical-model-of-the-mean.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Model of the Mean</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../teaching/bayesian_intro/practical-posteriors-likelihoods-priors.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Exploring Posteriors, Likelihoods, and Priors</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../teaching/bayesian_intro/practical-mcmc-toy.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">MCMC Toy Example</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../teaching/bayesian_intro/practical-gaussian-linear-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Gaussian Linear Regression</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../teaching/bayesian_intro/practical-synthetic-controls.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Synthetic Controls</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
     </ul>
     </div>
 </nav>
@@ -243,19 +179,25 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Bayesian Intro</h1>
-<p class="subtitle lead">An introduction to Bayesian statistics for applied research.</p>
+<h1 class="title">Mapping Tents from Satellite Imagery</h1>
+<p class="subtitle lead">Introduction</p>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Doug Leasure </p>
+          </div>
+  </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">21 May 2026, 16:37:52</p>
+      <p class="date">17 Nov 2026, 13:16:11</p>
     </div>
   </div>
   
@@ -269,16 +211,25 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="resources/bayesian-intro-hero.webp" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
+<p><a href="resources/tent-mapping-introduction-hero.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="resources/tent-mapping-introduction-hero.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></a></p>
 </figure>
 </div>
-<p>Welcome to the world of Bayesian statistics!</p>
-<p>This collection of tutorials was developed for workshops on Bayesian statistics at the Max Planck Institute for Demographic Research and the British Grand Union Doctoral Training Partnership with courses delivered at the London School of Economics and the University of Oxford. We decided to put the material online for everyone to access and to continue developing new material as we think of interesting topics to explore with students.</p>
-<p>This is our original course advert:</p>
-<div class="shaded-box">
-<p>This two-day course provides a practical and accessible introduction to Bayesian statistics for applied research in any field. Students will benefit from a combination of lectures and discussion to explore fundamental concepts unlocking the potential to design bespoke statistical analyses based on your data and hypotheses as well as practical exercises to gain hands-on experience implementing Bayesian models using free and open-source software. The course is designed as a springboard to overcome the steepest part of the Bayesian learning curve with an immersive two-day deep-dive.</p>
-<p>Students can expect to gain a working understanding of Bayes theorem (i.e.&nbsp;likelihoods, priors, and posterior probability distributions) and implementation of Markov Chain Monte Carlo for Bayesian model fitting. The course will cover common probability distributions and the know-how to choose between them when designing bespoke models as well as a solid foundation in model validation techniques for high quality research. These concepts will be reinforced through practical lab exercises to gain experience implementing Bayesian models using R and Stan software. Students will be challenged through interactive group discussions to formalise their own mental models (i.e.&nbsp;hypotheses) into bespoke statistical models that can be used to confront these models with data.</p>
-</div>
+<p>Automated tent mapping from satellite imagery allows us to quantify temporary dwellings to provide a current footprint of forcibly displaced populations as they move.</p>
+<p>When people are forced from their homes by conflict, violence, or disaster, they often move quickly and settle where they can. This has been witnessed recently at a devastating scale as millions of Gazans have been forced into informal tent settlements as their homes have been systematically destroyed. Theese settlements can appear, expand, move, or disappear faster than conventional population data can be collected and updated. Yet knowing where people are living, and how those locations are changing, is essential for planning humanitarian assistance.</p>
+<p>Automated tent mapping from satellite imagery gives us a powerful tool for monitoring and quantifying impermanent and mobile tent settlements. By mapping the locations of tents from regularly updated satellite imagery, we can identify areas where displaced communities are likely to be living right now, integrate digital traces as a signal of current occupancy, support the design of more representative surveys, and provide an input to population nowcasting to help guide humanitarian assistance to where it is needed.</p>
+<p>Our partners have been crucial for leading advancements in automated tent mapping from satellite imagery to support our humanitarian population nowcasting initiatives. This includes:</p>
+<ul>
+<li><a href="https://algorithmicgovernance.org">Algorithmic Governance Foundation</a><br>
+</li>
+<li><a href="https://forensic-architecture.org/">Forensic Architecture</a><br>
+</li>
+<li><a href="https://www.i2sc.net/">Interdisciplinary Institute for Societal Computing</a><br>
+</li>
+<li><a href="https://www.ucl.ac.uk/bartlett/casa">Center for Advanced Spatial Analysis</a></li>
+<li><a href="https://www.conflict-ecology.org">Conflict Ecology</a></li>
+<li><a href="https://www.planet.com/">Planet Labs</a></li>
+</ul>
+<p>In this book, we introduce our approach to automated tent mapping from satellite imagery. We will walk through the methods, the data they require, and the assumptions that need to be considered when using tent maps for humanitarian decision-making. Our aim is to make the workflow accessible, reproducible, and useful for others working to understand rapidly changing displacement situations.</p>
 
 
 
@@ -370,6 +321,24 @@ ul.task-list li input[type="checkbox"] {
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
         var filterRegex = new RegExp('/' + window.location.host + '/');
+      const newWindowLabel = "(opens in a new tab)";
+      const newWindowNoteId = "quarto-ext-newwindow-label";
+      // Links reference one hidden label through aria-describedby, so the
+      // announcement never changes their accessible name.
+      var describeNewWindow = (link) => {
+        if (!window.document.getElementById(newWindowNoteId)) {
+          var newWindowNote = window.document.createElement("span");
+          newWindowNote.id = newWindowNoteId;
+          newWindowNote.hidden = true;
+          newWindowNote.textContent = newWindowLabel;
+          window.document.body.appendChild(newWindowNote);
+        }
+        var describedBy = (link.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
+        if (!describedBy.includes(newWindowNoteId)) {
+          describedBy.push(newWindowNoteId);
+          link.setAttribute("aria-describedby", describedBy.join(" "));
+        }
+      }
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -384,6 +353,12 @@ ul.task-list li input[type="checkbox"] {
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            describeNewWindow(link);
           if (!link.classList.contains('no-external-icon')) {
           }
         }
@@ -776,12 +751,44 @@ ul.task-list li input[type="checkbox"] {
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../teaching/bayesian_intro/toc.html" class="pagination-link" aria-label="Table of Contents">
+      <a href="../../books/tent-mapping/toc.html" class="pagination-link" aria-label="Table of Contents">
         <span class="nav-page-text">Table of Contents</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
