@@ -1,8 +1,0 @@
----
-title: "Research"
-subtitle: "Dig into the nerdy details of our most impactful research."
-listing: 
-    contents:
-        - nowpop/overview.qmd
-        - tent-mapping/overview.qmd
----

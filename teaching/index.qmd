@@ -1,7 +1,0 @@
----
-title: "Teaching"
-subtitle: "Learn our tricks so you can apply them to solve issues that you are passionate about."
-listing: 
-    contents:
-        - bayesian_intro/overview.qmd
----

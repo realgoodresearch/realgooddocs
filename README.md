@@ -5,8 +5,7 @@ Source for the Real Good Research documentation site, built with [Quarto](https:
 ## Repo layout
 
 - `index.qmd` — site home page
-- `teaching/` — teaching material, including the Bayesian intro chapter set
-- `research/` — research notes and project pages
+- `books/` — book-length research methods, tutorials, and project documentation
 - `assets/` — shared images and site assets
 - `_quarto.yml` — global site configuration
 - `requirements.R` — R package dependencies used by the site

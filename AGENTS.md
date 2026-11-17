@@ -26,15 +26,14 @@ Write issues, comments, commits, and pull requests in clear, concise language. S
 ## Repository structure
 
 - `index.qmd`: site landing page
-- `research/`: research books and project pages
-- `teaching/`: teaching materials
+- `books/`: all book-length research methods, tutorials, and project documentation
 - `assets/`: shared images and browser assets
 - `_quarto.yml`: global navigation, sidebars, formatting, and execution settings
 - `references.bib`: shared bibliography
 - `docs/`: rendered site published by GitHub Pages
 - `.github/workflows/publish.yml`: publishes the committed `docs/` directory from `main`
 
-A book-like collection normally has its own directory under `research/` or `teaching/`, an introductory `overview.qmd`, a `toc.qmd`, and one file per chapter. Add its overview to the relevant listing and add a path-scoped sidebar to `_quarto.yml`.
+A book-like collection has its own directory under `books/`, an introductory `overview.qmd`, a `toc.qmd`, and one file per chapter. Add its overview to the landing-page listing and add a path-scoped sidebar to `_quarto.yml`.
 
 ## Writing and sources
 

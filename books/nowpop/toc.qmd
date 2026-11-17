@@ -1,0 +1,11 @@
+---
+title: "Table of Contents"
+aliases:
+  - /research/nowpop/toc.html
+listing: 
+    type: grid
+    sort: false
+    contents:
+        - overview.qmd
+        - gaza-nowpop-telecoms.qmd
+---

@@ -25,52 +25,52 @@ website:
   sidebar: 
     - id: bayesian-intro-sidebar
       title: "Bayesian Intro"
-      path: teaching/bayesian_intro/
+      path: books/bayesian-intro/
       contents: 
         - text: "Welcome"
-          href: teaching/bayesian_intro/overview.qmd
+          href: books/bayesian-intro/overview.qmd
         - text: "Table of Contents"
-          href: teaching/bayesian_intro/toc.qmd
+          href: books/bayesian-intro/toc.qmd
         - text: "Getting Started" 
-          href: teaching/bayesian_intro/getting-started.qmd
+          href: books/bayesian-intro/getting-started.qmd
         - section: "Lecture Slides"
           contents: 
           - text: "Intro to Bayesian Inference"
-            href: teaching/bayesian_intro/lecture-intro-to-bayesian-inference.qmd
+            href: books/bayesian-intro/lecture-intro-to-bayesian-inference.qmd
           - text: "GLMs and Hierarchical Models"
-            href: teaching/bayesian_intro/lecture-glm-and-hierarchical-models.qmd
+            href: books/bayesian-intro/lecture-glm-and-hierarchical-models.qmd
         - section: "Practical Tutorials"
           contents:
           - text: "Model of the Mean"
-            href: teaching/bayesian_intro/practical-model-of-the-mean.qmd
+            href: books/bayesian-intro/practical-model-of-the-mean.qmd
           - text: "Exploring Posteriors, Likelihoods, and Priors"
-            href: teaching/bayesian_intro/practical-posteriors-likelihoods-priors.qmd
+            href: books/bayesian-intro/practical-posteriors-likelihoods-priors.qmd
           - text: "MCMC Toy Example"
-            href: teaching/bayesian_intro/practical-mcmc-toy.qmd
+            href: books/bayesian-intro/practical-mcmc-toy.qmd
           - text: "Gaussian Linear Regression"
-            href: teaching/bayesian_intro/practical-gaussian-linear-regression.qmd
+            href: books/bayesian-intro/practical-gaussian-linear-regression.qmd
           - text: "Synthetic Controls"
-            href: teaching/bayesian_intro/practical-synthetic-controls.qmd
+            href: books/bayesian-intro/practical-synthetic-controls.qmd
     - id: gaza-nowpop-sidebar
       title: "Gaza NowPop"
-      path: research/nowpop/
+      path: books/nowpop/
       contents: 
         - text: "Introduction"
-          href: research/nowpop/overview.qmd
+          href: books/nowpop/overview.qmd
         - text: "Table of Contents"
-          href: research/nowpop/toc.qmd
+          href: books/nowpop/toc.qmd
         - text: "Gaza Telecoms"
-          href: research/nowpop/gaza-nowpop-telecoms.qmd
+          href: books/nowpop/gaza-nowpop-telecoms.qmd
     - id: tent-mapping-sidebar
       title: "Tent Mapping"
-      path: research/tent-mapping/
+      path: books/tent-mapping/
       contents:
         - text: "Introduction"
-          href: research/tent-mapping/overview.qmd
+          href: books/tent-mapping/overview.qmd
         - text: "Table of Contents"
-          href: research/tent-mapping/toc.qmd
+          href: books/tent-mapping/toc.qmd
         - text: "TentNetFA Overview"
-          href: research/tent-mapping/tentnetfa-overview.qmd
+          href: books/tent-mapping/tentnetfa-overview.qmd
 
 format:
   html:
