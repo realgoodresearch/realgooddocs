@@ -43,14 +43,20 @@ A book-like collection has its own directory under `books/`, an introductory `ov
 - Prefer short sections, descriptive headings, and meaningful link text.
 - Do not invent facts, citations, performance claims, implementation details, or data provenance. Mark unresolved content with an explicit `TODO` and state what evidence is needed.
 - Cite primary sources where possible. Add reusable references to `references.bib`; use direct links sparingly for project pages or resources that do not belong in the bibliography.
+- When documenting software, treat the active implementation and its resolved configuration as authoritative. Use historical reports for context or explanatory figures, but do not present their settings as the current method.
+- Do not refer readers to internal reports or unpublished working plans. Public chapters must stand alone: explain the necessary context, evidence, and caveats in the chapter itself.
+- Credit externally sourced images visibly, with the creator or organisation and a source link where available. Project-owned figures and repository material do not need external-style attribution unless the user asks for it.
 - Put book-specific images and downloads in that book's `resources/` directory. Use `assets/` only for resources shared across the site.
 - Include alt text or an informative caption for meaningful images.
+- Do not add source imagery, annotations, derived data, or model artefacts to the repository unless their redistribution status and any relevant sensitivity constraints are clear.
 
 ## Quarto conventions
 
 - Use `.qmd` for authored pages and valid YAML front matter.
+- Use `$...$` for inline LaTeX and `$$...$$` for displayed equations.
 - Use root-relative source paths in `_quarto.yml`, following the existing navigation style.
 - Keep global defaults in `_quarto.yml`; add page-level options only when a page genuinely differs.
+- For a listing preview, use a page's YAML `description`. If it should not appear in the rendered title block, hide only that page's title-block description with scoped CSS; retain the metadata for listings and search.
 - Keep computational output reproducible. When code changes, render locally so Quarto's freeze data and generated output stay in sync.
 - Do not hand-edit generated files in `docs/`, `_site/`, or `.quarto/`. Generate them with Quarto.
 
@@ -64,6 +70,8 @@ git status --short
 ```
 
 Review warnings, changed files, navigation, internal links, citations, and representative pages in the rendered site. If Quarto or another required dependency is unavailable, report that clearly; do not claim the render passed.
+
+If the user already has a Quarto preview running, do not start a competing render. Let that preview regenerate the affected files, inspect its output, and report that validation route instead.
 
 Because deployment publishes the committed `docs/` directory, include appropriate rendered `docs/` changes when a source-page change is ready for review. Do not commit transient `_site/` or `.quarto/` files.
 
