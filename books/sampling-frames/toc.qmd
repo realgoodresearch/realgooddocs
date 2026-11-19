@@ -1,9 +1,12 @@
 ---
 title: "Table of Contents"
 listing: 
-    type: grid
+    type: default
+    fields: [title, description, image]
     sort: false
     contents:
         - overview.qmd
-        - clusterComposer_gaza_tutorial.qmd
+        - cluster_composer.qmd
+        - data_processing_general.qmd
+        - data_processing_gaza.qmd
 ---

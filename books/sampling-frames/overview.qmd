@@ -1,6 +1,7 @@
 ---
 title: "Automated Survey Sampling Frames"
 subtitle: "Survey sample frames from building footprints"
+description: "A short description for the table of contents."
 image: "resources/sampling-frames-hero-placeholder.svg"
 date: last-modified
 date-format: "D MMM YYYY, HH:mm:ss"
@@ -9,6 +10,12 @@ format:
     link-external-newwindow: true
 ---
 
+<style>
+#title-block-header .description {
+  display: none;
+}
+</style>
+
 ![](resources/sampling-frames-hero-placeholder.svg){fig-align="center" width="90%"}
 
-Placeholder text.
+Introduce automated sampling frames and explain why they are important.

@@ -10,7 +10,9 @@
     "listing": "/books/sampling-frames/toc.html",
     "items": [
       "/books/sampling-frames/overview.html",
-      "/books/sampling-frames/clusterComposer_gaza_tutorial.html"
+      "/books/sampling-frames/cluster_composer.html",
+      "/books/sampling-frames/data_processing_general.html",
+      "/books/sampling-frames/data_processing_gaza.html"
     ]
   },
   {

@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Claire Dooley">
+<meta name="description" content="A short description for the table of contents.">
 
-<title>Creating a Spatial Sampling Frame for Deir al Balah – Real Good Docs</title>
+<title>Input Data for Gaza – Real Good Docs</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -72,7 +73,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../books/sampling-frames/toc.html" rel="prev">
+<link href="../../books/sampling-frames/data_processing_general.html" rel="prev">
 <link href="../../assets/images/logo/favicon.ico" rel="icon">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -168,7 +169,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../books/sampling-frames/clusterComposer_gaza_tutorial.html">Gaza Sampling Frame Tutorial</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../books/sampling-frames/data_processing_gaza.html">Input Data for Gaza</a></li></ol></nav>
         <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -194,8 +195,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../books/sampling-frames/clusterComposer_gaza_tutorial.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Gaza Sampling Frame Tutorial</span></a>
+  <a href="../../books/sampling-frames/cluster_composer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">clusterComposer</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../books/sampling-frames/data_processing_general.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Input Data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../books/sampling-frames/data_processing_gaza.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Input Data for Gaza</span></a>
   </div>
 </li>
     </ul>
@@ -233,9 +246,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Creating a Spatial Sampling Frame for Deir al Balah</h1>
+<h1 class="title">Input Data for Gaza</h1>
+<p class="subtitle lead">Subtitle</p>
 </div>
 
+<div>
+  <div class="description">
+    A short description for the table of contents.
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
@@ -250,7 +269,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">19 Nov 2026, 16:23:48</p>
+      <p class="date">19 Nov 2026, 18:20:55</p>
     </div>
   </div>
   
@@ -262,6 +281,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<style>
+#title-block-header .description {
+  display: none;
+}
+</style>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="resources/sampling-frames-hero-placeholder.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></p>
+</figure>
+</div>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>This tutorial demonstrates how to generate a spatial sampling frame from building and tent locations data using the <code>clusterComposer</code> R package.</p>
@@ -272,14 +301,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="define-file-paths">1. Define file paths</h2>
 <p>Define the root data directory and the relative paths to the building, tent, administrative boundary, road, input, and output data.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data_dir <span class="ot">&lt;-</span><span class="st">""</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data_dir <span class="ot">&lt;-</span> <span class="st">""</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>blds_filepath <span class="ot">&lt;-</span> <span class="st">"raw/"</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>tents_filepath <span class="ot">&lt;-</span> <span class="st">"raw/"</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>admin_filepath <span class="ot">&lt;-</span> <span class="st">"raw/"</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>roads_path <span class="ot">&lt;-</span> <span class="st">"raw/"</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>cc_input_path <span class="ot">&lt;-</span> <span class="st">"in/"</span> <span class="co"># create before saving first input file below</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>cc_output_path <span class="ot">&lt;-</span> <span class="st">"out/"</span> <span class="co"># </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>cc_output_path <span class="ot">&lt;-</span> <span class="st">"out/"</span> <span class="co">#</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="install-and-load-the-required-packages" class="level2">
@@ -306,11 +335,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Read the building locations (UNOSAT, 2025), tent locations (), administrative boundaries (), and road network (PA MOP, JRJ &amp; OCHA, 2021). The road dataset is then restricted to roads within the Gaza Strip.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read in data</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>bld_points <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="fu">paste0</span>(data_dir,blds_filepath,<span class="st">"UNOSAT_GazaStrip_CDA_11October2025_HU.gdb"</span>))</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>tent_points <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="fu">paste0</span>(data_dir,tents_filepath,<span class="st">"gaza_tent_points_20260805.gpkg"</span>))</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>admin <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="fu">paste0</span>(data_dir,admin_filepath,<span class="st">"gaza_neighbourhood_boundaries.gpkg"</span>))</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>roads <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="fu">paste0</span>(data_dir,roads_path,<span class="st">"Road_network_oPt.shp"</span>))</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>roads <span class="ot">&lt;-</span> roads[roads<span class="sc">$</span>Region<span class="sc">==</span><span class="st">"Gaza Strip"</span>,]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>bld_points <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="fu">paste0</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  data_dir,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  blds_filepath,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"UNOSAT_GazaStrip_CDA_11October2025_HU.gdb"</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>tent_points <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="fu">paste0</span>(</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  data_dir,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  tents_filepath,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"gaza_tent_points_20260805.gpkg"</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>admin <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="fu">paste0</span>(</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  data_dir,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  admin_filepath,</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">"gaza_neighbourhood_boundaries.gpkg"</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>roads <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="fu">paste0</span>(data_dir, roads_path, <span class="st">"Road_network_oPt.shp"</span>))</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>roads <span class="ot">&lt;-</span> roads[roads<span class="sc">$</span>Region <span class="sc">==</span> <span class="st">"Gaza Strip"</span>, ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="transform-the-spatial-datasets" class="level2">
@@ -318,10 +359,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Transform all spatial datasets to EPSG:32636 so that spatial operations and distance-based calculations are performed in a projected coordinate reference system with metre-based units.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># espg 32636</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>bld_points <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(bld_points,<span class="dv">32636</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>tent_points <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(tent_points,<span class="dv">32636</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>admin <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(admin,<span class="dv">32636</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>roads <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(roads,<span class="dv">32636</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>bld_points <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(bld_points, <span class="dv">32636</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>tent_points <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(tent_points, <span class="dv">32636</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>admin <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(admin, <span class="dv">32636</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>roads <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(roads, <span class="dv">32636</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="remove-buildings-identified-as-having-no-housing-units-due-to-destructiondamage" class="level2">
@@ -330,7 +371,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># omit blds with no housing units</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>bld_points<span class="sc">$</span>HU_update <span class="ot">&lt;-</span> bld_points<span class="sc">$</span>HU_tot <span class="sc">-</span> bld_points<span class="sc">$</span>HU_damaged_14</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>bld_points <span class="ot">&lt;-</span> bld_points[bld_points<span class="sc">$</span>HU_update <span class="sc">&gt;</span> <span class="dv">0</span>,]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>bld_points <span class="ot">&lt;-</span> bld_points[bld_points<span class="sc">$</span>HU_update <span class="sc">&gt;</span> <span class="dv">0</span>, ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="prepare-the-building-and-tent-input" class="level2">
@@ -338,8 +379,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Combine the building and tent locations into a single spatial object. Each point is buffered by two metres to create the polygon geometries required by <code>clusterComposer</code>. It may be useful to have different buffers for buildings and tents in which case <code>st_zm()</code> and <code>st_buffer()</code> can be applied separately to the buildings and tents, followed by the step to bring them into the same object.</p>
 <p>For this example, every building or tent is assigned a population of five. This could be replaced with an appropriate population estimate before producing a final sampling frame.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># save all points into one gpgk </span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>bf <span class="ot">&lt;-</span> <span class="fu">st_sf</span>(<span class="at">geometry =</span> <span class="fu">c</span>(<span class="fu">st_geometry</span>(bld_points),<span class="fu">st_geometry</span>(tent_points)))</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># save all points into one gpgk</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>bf <span class="ot">&lt;-</span> <span class="fu">st_sf</span>(<span class="at">geometry =</span> <span class="fu">c</span>(<span class="fu">st_geometry</span>(bld_points), <span class="fu">st_geometry</span>(tent_points)))</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>bf <span class="ot">&lt;-</span> <span class="fu">st_zm</span>(bf, <span class="at">drop =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>bf <span class="ot">&lt;-</span> <span class="fu">st_buffer</span>(bf, <span class="dv">2</span>)</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>bf<span class="sc">$</span>pop_building <span class="ot">&lt;-</span> <span class="dv">5</span></span>
@@ -353,8 +394,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Note that while <code>clusterComposer</code> is still under development, we recommend generating sampling frames for specific areas rather than whole regions.</p>
 <p>Select the Deir al Balah area at administrative unit level 3 (ADM3). Columns are also created to store the number of buildings and tents in each section.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># test for Deir al Balah </span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>aoi <span class="ot">&lt;-</span> admin[admin<span class="sc">$</span>ADM3_EN<span class="sc">==</span><span class="st">"Deir al Balah"</span>,]</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># test for Deir al Balah</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>aoi <span class="ot">&lt;-</span> admin[admin<span class="sc">$</span>ADM3_EN <span class="sc">==</span> <span class="st">"Deir al Balah"</span>, ]</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>aoi<span class="sc">$</span>section_id <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(aoi)</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>aoi<span class="sc">$</span>bf_count <span class="ot">&lt;-</span> <span class="dv">0</span>L</span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>aoi<span class="sc">$</span>tent_count <span class="ot">&lt;-</span> <span class="dv">0</span>L</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -365,14 +406,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Count the buildings and tents locations intersecting each area-of-interest section. The total number of points and an indicative population are then calculated.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># number of buildings and tents per section</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(section <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(aoi)){</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  aoi<span class="sc">$</span>bf_count[section] <span class="ot">&lt;-</span> <span class="fu">lengths</span>(<span class="fu">st_intersects</span>(aoi[section,],bld_points))</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  aoi<span class="sc">$</span>tent_count[section] <span class="ot">&lt;-</span> <span class="fu">lengths</span>(<span class="fu">st_intersects</span>(aoi[section,],tent_points))</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (section <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(aoi)) {</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  aoi<span class="sc">$</span>bf_count[section] <span class="ot">&lt;-</span> <span class="fu">lengths</span>(<span class="fu">st_intersects</span>(aoi[section, ], bld_points))</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  aoi<span class="sc">$</span>tent_count[section] <span class="ot">&lt;-</span> <span class="fu">lengths</span>(<span class="fu">st_intersects</span>(aoi[section, ], tent_points))</span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># clusterComposer runs best on less than 1000 buildings</span></span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>aoi<span class="sc">$</span>tot_points <span class="ot">&lt;-</span> (aoi<span class="sc">$</span>bf_count <span class="sc">+</span> aoi<span class="sc">$</span>tent_count)</span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># assuming 5 people per point just for testing purposes</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>aoi<span class="sc">$</span>tot_pop <span class="ot">&lt;-</span> aoi<span class="sc">$</span>tot_points<span class="sc">*</span><span class="dv">5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>aoi<span class="sc">$</span>tot_pop <span class="ot">&lt;-</span> aoi<span class="sc">$</span>tot_points <span class="sc">*</span> <span class="dv">5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="identify-and-divide-large-sections" class="level2">
@@ -381,10 +422,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The road geometries and area boundaries are combined, noded, and polygonised to create smaller subsections.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># split areas with more than 800 buildings/tents using roads, prior to running cluster composer</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>aoi_big <span class="ot">&lt;-</span> aoi[aoi<span class="sc">$</span>tot_points<span class="sc">&gt;</span><span class="dv">800</span>,]</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>roads_aoi <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(roads, <span class="fu">st_buffer</span>(aoi_big,<span class="dv">50</span>))</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>sub_sections <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">st_geometry</span>(roads_aoi),<span class="fu">st_geometry</span>(<span class="fu">st_boundary</span>(aoi_big)))</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>lines <span class="ot">&lt;-</span> <span class="fu">st_union</span>(sub_sections) </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>aoi_big <span class="ot">&lt;-</span> aoi[aoi<span class="sc">$</span>tot_points <span class="sc">&gt;</span> <span class="dv">800</span>, ]</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>roads_aoi <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(roads, <span class="fu">st_buffer</span>(aoi_big, <span class="dv">50</span>))</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>sub_sections <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">st_geometry</span>(roads_aoi), <span class="fu">st_geometry</span>(<span class="fu">st_boundary</span>(aoi_big)))</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>lines <span class="ot">&lt;-</span> <span class="fu">st_union</span>(sub_sections)</span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>lines <span class="ot">&lt;-</span> <span class="fu">st_node</span>(lines)</span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>poly_strata <span class="ot">&lt;-</span> <span class="fu">st_polygonize</span>(lines)</span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>polygons <span class="ot">&lt;-</span> <span class="fu">st_collection_extract</span>(poly_strata, <span class="st">"POLYGON"</span>)</span>
@@ -398,46 +439,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The procedure is repeated until no polygons below the threshold remain or no further suitable merge can be made.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># merge small polys into neighbours</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>thresh <span class="ot">&lt;-</span><span class="dv">50000</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>thresh <span class="ot">&lt;-</span> <span class="dv">50000</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="cf">repeat</span> {</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  small_idx <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">as.numeric</span>(polygons_sf<span class="sc">$</span>area) <span class="sc">&lt;</span> thresh)</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(small_idx) <span class="sc">==</span> <span class="dv">0</span>) <span class="cf">break</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  merged_any <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> small_idx) {</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  small_idx <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">as.numeric</span>(polygons_sf<span class="sc">$</span>area) <span class="sc">&lt;</span> thresh)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(small_idx) <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">break</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  merged_any <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> small_idx) {</span>
 <span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    nbr_idx <span class="ot">&lt;-</span> <span class="fu">st_intersects</span>(polygons_sf[i, ], polygons_sf)[[<span class="dv">1</span>]]</span>
 <span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    nbr_idx <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(nbr_idx, i)</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">length</span>(nbr_idx) <span class="sc">==</span> <span class="dv">0</span>) <span class="cf">next</span></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    shared_len <span class="ot">&lt;-</span> <span class="fu">sapply</span>(nbr_idx, <span class="cf">function</span>(j) {</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>      shared <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>        <span class="fu">st_boundary</span>(<span class="fu">st_make_valid</span>(<span class="fu">st_geometry</span>(polygons_sf[i, ]))),</span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>        <span class="fu">st_boundary</span>(<span class="fu">st_make_valid</span>(<span class="fu">st_geometry</span>(polygons_sf[j, ])))</span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sum</span>(<span class="fu">as.numeric</span>(<span class="fu">st_length</span>(shared)))</span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">max</span>(shared_len) <span class="sc">==</span> <span class="dv">0</span>) <span class="cf">next</span></span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>    target <span class="ot">&lt;-</span> nbr_idx[<span class="fu">which.max</span>(shared_len)]</span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_geometry</span>(polygons_sf[target, ]) <span class="ot">&lt;-</span> <span class="fu">st_union</span>(</span>
-<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>      <span class="fu">st_make_valid</span>(<span class="fu">st_geometry</span>(polygons_sf[target, ])),</span>
-<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>      <span class="fu">st_make_valid</span>(<span class="fu">st_geometry</span>(polygons_sf[i, ]))</span>
-<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>    polygons_sf <span class="ot">&lt;-</span> polygons_sf[<span class="sc">-</span>i, ]</span>
-<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>    merged_any <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
-<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">break</span></span>
-<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span>merged_any) <span class="cf">break</span></span>
-<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>polygons_sf <span class="ot">&lt;-</span> polygons_sf[<span class="sc">!</span><span class="fu">st_is_empty</span>(polygons_sf), ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">length</span>(nbr_idx) <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>      <span class="cf">next</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    shared_len <span class="ot">&lt;-</span> <span class="fu">sapply</span>(nbr_idx, <span class="cf">function</span>(j) {</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>      shared <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>        <span class="fu">st_boundary</span>(<span class="fu">st_make_valid</span>(<span class="fu">st_geometry</span>(polygons_sf[i, ]))),</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>        <span class="fu">st_boundary</span>(<span class="fu">st_make_valid</span>(<span class="fu">st_geometry</span>(polygons_sf[j, ])))</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sum</span>(<span class="fu">as.numeric</span>(<span class="fu">st_length</span>(shared)))</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">max</span>(shared_len) <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>      <span class="cf">next</span></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>    target <span class="ot">&lt;-</span> nbr_idx[<span class="fu">which.max</span>(shared_len)]</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_geometry</span>(polygons_sf[target, ]) <span class="ot">&lt;-</span> <span class="fu">st_union</span>(</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>      <span class="fu">st_make_valid</span>(<span class="fu">st_geometry</span>(polygons_sf[target, ])),</span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>      <span class="fu">st_make_valid</span>(<span class="fu">st_geometry</span>(polygons_sf[i, ]))</span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>    polygons_sf <span class="ot">&lt;-</span> polygons_sf[<span class="sc">-</span>i, ]</span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>    merged_any <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">break</span></span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span>merged_any) <span class="cf">break</span></span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>polygons_sf <span class="ot">&lt;-</span> polygons_sf[<span class="sc">!</span><span class="fu">st_is_empty</span>(polygons_sf), ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The above code merges based on polygon area but this could be adapted to explicitly merge based on estimated population sizes of polygons.</p>
 </section>
@@ -450,17 +495,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>polygons_sf<span class="sc">$</span>section_id <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(polygons_sf)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>polygons_sf<span class="sc">$</span>bf_count <span class="ot">&lt;-</span> <span class="dv">0</span>L</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>polygons_sf<span class="sc">$</span>tent_count <span class="ot">&lt;-</span> <span class="dv">0</span>L</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(section <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(polygons_sf)){</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  polygons_sf<span class="sc">$</span>bf_count[section] <span class="ot">&lt;-</span> <span class="fu">lengths</span>(<span class="fu">st_intersects</span>(polygons_sf[section,],bld_points))</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  polygons_sf<span class="sc">$</span>tent_count[section] <span class="ot">&lt;-</span> <span class="fu">lengths</span>(<span class="fu">st_intersects</span>(polygons_sf[section,],tent_points))</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># clusterComposer runs best on less than 1000 buildings</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>polygons_sf<span class="sc">$</span>tot_points <span class="ot">&lt;-</span> (polygons_sf<span class="sc">$</span>bf_count <span class="sc">+</span> polygons_sf<span class="sc">$</span>tent_count)</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co"># assuming 5 people per point just for testing purposes</span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>polygons_sf<span class="sc">$</span>tot_pop <span class="ot">&lt;-</span> polygons_sf<span class="sc">$</span>tot_points<span class="sc">*</span><span class="dv">5</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co"># rename geometry col</span></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(polygons_sf)[<span class="fu">names</span>(polygons_sf) <span class="sc">==</span> <span class="fu">attr</span>(polygons_sf, <span class="st">"sf_column"</span>)] <span class="ot">&lt;-</span> <span class="st">"geom"</span></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(polygons_sf, <span class="st">"sf_column"</span>) <span class="ot">&lt;-</span> <span class="st">"geom"</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (section <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(polygons_sf)) {</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  polygons_sf<span class="sc">$</span>bf_count[section] <span class="ot">&lt;-</span> <span class="fu">lengths</span>(<span class="fu">st_intersects</span>(</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    polygons_sf[section, ],</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    bld_points</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  polygons_sf<span class="sc">$</span>tent_count[section] <span class="ot">&lt;-</span> <span class="fu">lengths</span>(<span class="fu">st_intersects</span>(</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    polygons_sf[section, ],</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    tent_points</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co"># clusterComposer runs best on less than 1000 buildings</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>polygons_sf<span class="sc">$</span>tot_points <span class="ot">&lt;-</span> (polygons_sf<span class="sc">$</span>bf_count <span class="sc">+</span> polygons_sf<span class="sc">$</span>tent_count)</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="co"># assuming 5 people per point just for testing purposes</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>polygons_sf<span class="sc">$</span>tot_pop <span class="ot">&lt;-</span> polygons_sf<span class="sc">$</span>tot_points <span class="sc">*</span> <span class="dv">5</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="co"># rename geometry col</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(polygons_sf)[</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(polygons_sf) <span class="sc">==</span> <span class="fu">attr</span>(polygons_sf, <span class="st">"sf_column"</span>)</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>] <span class="ot">&lt;-</span> <span class="st">"geom"</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(polygons_sf, <span class="st">"sf_column"</span>) <span class="ot">&lt;-</span> <span class="st">"geom"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="reassemble-the-area-of-interest" class="level2">
@@ -469,10 +522,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The section areas and identifiers are then recalculated.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add to previous sections</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>aoi <span class="ot">&lt;-</span> <span class="fu">rbind</span>(aoi[aoi<span class="sc">$</span>tot_points<span class="sc">&lt;=</span><span class="dv">800</span>,<span class="fu">c</span>(<span class="st">"bf_count"</span>,<span class="st">"tent_count"</span>,<span class="st">"tot_points"</span>,<span class="st">"tot_pop"</span>)],</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>         polygons_sf[,<span class="fu">c</span>(<span class="st">"bf_count"</span>,<span class="st">"tent_count"</span>,<span class="st">"tot_points"</span>,<span class="st">"tot_pop"</span>)])</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>aoi<span class="sc">$</span>area <span class="ot">&lt;-</span> <span class="fu">st_area</span>(aoi)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>aoi<span class="sc">$</span>section_id <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(aoi)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>aoi <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  aoi[</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    aoi<span class="sc">$</span>tot_points <span class="sc">&lt;=</span> <span class="dv">800</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">"bf_count"</span>, <span class="st">"tent_count"</span>, <span class="st">"tot_points"</span>, <span class="st">"tot_pop"</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  ],</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  polygons_sf[, <span class="fu">c</span>(<span class="st">"bf_count"</span>, <span class="st">"tent_count"</span>, <span class="st">"tot_points"</span>, <span class="st">"tot_pop"</span>)]</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>aoi<span class="sc">$</span>area <span class="ot">&lt;-</span> <span class="fu">st_area</span>(aoi)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>aoi<span class="sc">$</span>section_id <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(aoi)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="check-sections-with-low-populations" class="level2">
@@ -481,7 +539,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># note that several of these sections are below the minimum population per EZ of 150</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the code above to split up areas could be based on population counts rather than size</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(aoi[aoi<span class="sc">$</span>tot_pop<span class="sc">&lt;</span><span class="dv">150</span>,]) <span class="co"># 19</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(aoi[aoi<span class="sc">$</span>tot_pop <span class="sc">&lt;</span> <span class="dv">150</span>, ]) <span class="co"># 19</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="save-the-area-of-interest-sections" class="level2">
@@ -499,16 +557,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>ncores <span class="ot">&lt;-</span> parallel<span class="sc">::</span><span class="fu">detectCores</span>() <span class="sc">-</span> <span class="dv">1</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># run clusterComposer function</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">clusterComposer</span>(<span class="at">aoi=</span>aoi,</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">bf_file_path =</span> <span class="fu">paste0</span>(data_dir,cc_input_path,<span class="st">"bld_tent_points.gpkg"</span>),</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">run_id =</span> <span class="st">"gaza_test_dab_20261119"</span>,</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">output_file_path =</span> <span class="fu">paste0</span>(data_dir,cc_output_path),</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">pop_per_EZ=</span><span class="dv">250</span>,</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">max_pop_per_EZ=</span><span class="dv">350</span>,</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>                <span class="at">min_pop_per_EZ=</span><span class="dv">150</span>,</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>                <span class="at">n_cores =</span> ncores,</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>                <span class="at">delete_temp_files =</span> <span class="cn">FALSE</span></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">clusterComposer</span>(</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">aoi =</span> aoi,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">bf_file_path =</span> <span class="fu">paste0</span>(data_dir, cc_input_path, <span class="st">"bld_tent_points.gpkg"</span>),</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">run_id =</span> <span class="st">"gaza_test_dab_20261119"</span>,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">output_file_path =</span> <span class="fu">paste0</span>(data_dir, cc_output_path),</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">pop_per_EZ =</span> <span class="dv">250</span>,</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_pop_per_EZ =</span> <span class="dv">350</span>,</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">min_pop_per_EZ =</span> <span class="dv">150</span>,</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_cores =</span> ncores,</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">delete_temp_files =</span> <span class="cn">FALSE</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="evaluating-results" class="level2">
@@ -1037,8 +1096,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation" aria-label="Page">
   <div class="nav-page nav-page-previous">
-      <a href="../../books/sampling-frames/toc.html" class="pagination-link" aria-label="Table of Contents">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Table of Contents</span>
+      <a href="../../books/sampling-frames/data_processing_general.html" class="pagination-link" aria-label="Input Data">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Input Data</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

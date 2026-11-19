@@ -1,5 +1,8 @@
 ---
-title: "Creating a Spatial Sampling Frame for Deir al Balah"
+title: "Input Data for Gaza"
+subtitle: "Subtitle"
+description: "A short description for the table of contents."
+image: "resources/sampling-frames-hero-placeholder.svg"
 author: "Claire Dooley"
 date: last-modified
 date-format: "D MMM YYYY, HH:mm:ss"
@@ -9,6 +12,14 @@ format:
 execute:
   eval: false
 ---
+
+<style>
+#title-block-header .description {
+  display: none;
+}
+</style>
+
+![](resources/sampling-frames-hero-placeholder.svg){fig-align="center" width="90%"}
 
 ## Introduction
 
@@ -24,14 +35,14 @@ The example covered in this tutorial creates a spatial sampling frame for Deir a
 Define the root data directory and the relative paths to the building, tent, administrative boundary, road, input, and output data.
 
 ```{r define-file-paths}
-data_dir <-""
+data_dir <- ""
 
 blds_filepath <- "raw/"
 tents_filepath <- "raw/"
 admin_filepath <- "raw/"
 roads_path <- "raw/"
 cc_input_path <- "in/" # create before saving first input file below
-cc_output_path <- "out/" # 
+cc_output_path <- "out/" #
 ```
 
 ## 2. Install and load the required packages
@@ -40,7 +51,6 @@ The dependencies used internally by `clusterComposer` are installed
 automatically when the package is installed. The installation line only needs to be run when installing or updating `clusterComposer`. It does not need to be run every time the analysis is started.
 
 ```{r install}
-
 # install "pak" if not installed
 #install.packages("pak")
 # use pak to install clusterComposer
@@ -51,7 +61,6 @@ The remaining packages are used for data preparation, running
 `clusterComposer`, and exploring the results.
 
 ```{r load-packages}
-
 # libraries for data prep, generating sampling frame & exploration of results
 library(sf)
 library(terra)
@@ -67,11 +76,23 @@ Read the building locations (UNOSAT, 2025), tent locations (), administrative bo
 
 ```{r read-input-data}
 # read in data
-bld_points <- st_read(paste0(data_dir,blds_filepath,"UNOSAT_GazaStrip_CDA_11October2025_HU.gdb"))
-tent_points <- st_read(paste0(data_dir,tents_filepath,"gaza_tent_points_20260805.gpkg"))
-admin <- st_read(paste0(data_dir,admin_filepath,"gaza_neighbourhood_boundaries.gpkg"))
-roads <- st_read(paste0(data_dir,roads_path,"Road_network_oPt.shp"))
-roads <- roads[roads$Region=="Gaza Strip",]
+bld_points <- st_read(paste0(
+  data_dir,
+  blds_filepath,
+  "UNOSAT_GazaStrip_CDA_11October2025_HU.gdb"
+))
+tent_points <- st_read(paste0(
+  data_dir,
+  tents_filepath,
+  "gaza_tent_points_20260805.gpkg"
+))
+admin <- st_read(paste0(
+  data_dir,
+  admin_filepath,
+  "gaza_neighbourhood_boundaries.gpkg"
+))
+roads <- st_read(paste0(data_dir, roads_path, "Road_network_oPt.shp"))
+roads <- roads[roads$Region == "Gaza Strip", ]
 ```
 
 ## 4. Transform the spatial datasets
@@ -82,10 +103,10 @@ system with metre-based units.
 
 ```{r transform-spatial-data}
 # espg 32636
-bld_points <- st_transform(bld_points,32636)
-tent_points <- st_transform(tent_points,32636)
-admin <- st_transform(admin,32636)
-roads <- st_transform(roads,32636)
+bld_points <- st_transform(bld_points, 32636)
+tent_points <- st_transform(tent_points, 32636)
+admin <- st_transform(admin, 32636)
+roads <- st_transform(roads, 32636)
 ```
 
 ## 5. Remove buildings identified as having no housing units due to destruction/damage
@@ -96,7 +117,7 @@ no remaining housing units.
 ```{r remove-buildings-without-housing-units}
 # omit blds with no housing units
 bld_points$HU_update <- bld_points$HU_tot - bld_points$HU_damaged_14
-bld_points <- bld_points[bld_points$HU_update > 0,]
+bld_points <- bld_points[bld_points$HU_update > 0, ]
 ```
 
 ## 6. Prepare the building and tent input
@@ -106,8 +127,8 @@ Combine the building and tent locations into a single spatial object. Each point
 For this example, every building or tent is assigned a population of five. This could be replaced with an appropriate population estimate before producing a final sampling frame.
 
 ```{r prepare-building-and-tent-input}
-# save all points into one gpgk 
-bf <- st_sf(geometry = c(st_geometry(bld_points),st_geometry(tent_points)))
+# save all points into one gpgk
+bf <- st_sf(geometry = c(st_geometry(bld_points), st_geometry(tent_points)))
 bf <- st_zm(bf, drop = TRUE)
 bf <- st_buffer(bf, 2)
 bf$pop_building <- 5
@@ -126,8 +147,8 @@ Select the Deir al Balah area at administrative unit level 3 (ADM3). Columns are
 buildings and tents in each section.
 
 ```{r select-area-of-interest}
-# test for Deir al Balah 
-aoi <- admin[admin$ADM3_EN=="Deir al Balah",]
+# test for Deir al Balah
+aoi <- admin[admin$ADM3_EN == "Deir al Balah", ]
 aoi$section_id <- 1:nrow(aoi)
 aoi$bf_count <- 0L
 aoi$tent_count <- 0L
@@ -141,14 +162,14 @@ calculated.
 
 ```{r count-points-by-section}
 # number of buildings and tents per section
-for(section in 1:nrow(aoi)){
-  aoi$bf_count[section] <- lengths(st_intersects(aoi[section,],bld_points))
-  aoi$tent_count[section] <- lengths(st_intersects(aoi[section,],tent_points))
+for (section in 1:nrow(aoi)) {
+  aoi$bf_count[section] <- lengths(st_intersects(aoi[section, ], bld_points))
+  aoi$tent_count[section] <- lengths(st_intersects(aoi[section, ], tent_points))
 }
 # clusterComposer runs best on less than 1000 buildings
 aoi$tot_points <- (aoi$bf_count + aoi$tent_count)
 # assuming 5 people per point just for testing purposes
-aoi$tot_pop <- aoi$tot_points*5
+aoi$tot_pop <- aoi$tot_points * 5
 ```
 
 ## 9. Identify and divide large sections
@@ -161,10 +182,10 @@ create smaller subsections.
 
 ```{r divide-large-sections}
 # split areas with more than 800 buildings/tents using roads, prior to running cluster composer
-aoi_big <- aoi[aoi$tot_points>800,]
-roads_aoi <- st_intersection(roads, st_buffer(aoi_big,50))
-sub_sections <- c(st_geometry(roads_aoi),st_geometry(st_boundary(aoi_big)))
-lines <- st_union(sub_sections) 
+aoi_big <- aoi[aoi$tot_points > 800, ]
+roads_aoi <- st_intersection(roads, st_buffer(aoi_big, 50))
+sub_sections <- c(st_geometry(roads_aoi), st_geometry(st_boundary(aoi_big)))
+lines <- st_union(sub_sections)
 lines <- st_node(lines)
 poly_strata <- st_polygonize(lines)
 polygons <- st_collection_extract(poly_strata, "POLYGON")
@@ -173,7 +194,6 @@ polygons_sf <- st_as_sf(polygons)
 polygons_sf <- polygons_sf[!st_is_empty(polygons_sf), ]
 polygons_sf <- st_make_valid(polygons_sf)
 polygons_sf$area <- st_area(polygons_sf)
-
 ```
 The above code creates lots of smaller polygons from the large sections. As the road network was used to split these areas, we now have some undesirable polygons, e.g. thin strips of land between a road edge and the neighbourhod boundary. So, next, we merge these merged into
 neighbouring polygons that share the longest boundary.
@@ -183,19 +203,21 @@ further suitable merge can be made.
 
 ```{r merge-small-polygons}
 # merge small polys into neighbours
-thresh <-50000
+thresh <- 50000
 repeat {
-  
   small_idx <- which(as.numeric(polygons_sf$area) < thresh)
-  if (length(small_idx) == 0) break
+  if (length(small_idx) == 0) {
+    break
+  }
   merged_any <- FALSE
   for (i in small_idx) {
-    
     nbr_idx <- st_intersects(polygons_sf[i, ], polygons_sf)[[1]]
     nbr_idx <- setdiff(nbr_idx, i)
-    
-    if (length(nbr_idx) == 0) next
-    
+
+    if (length(nbr_idx) == 0) {
+      next
+    }
+
     shared_len <- sapply(nbr_idx, function(j) {
       shared <- st_intersection(
         st_boundary(st_make_valid(st_geometry(polygons_sf[i, ]))),
@@ -203,22 +225,24 @@ repeat {
       )
       sum(as.numeric(st_length(shared)))
     })
-    
-    if (max(shared_len) == 0) next
-    
+
+    if (max(shared_len) == 0) {
+      next
+    }
+
     target <- nbr_idx[which.max(shared_len)]
-    
+
     st_geometry(polygons_sf[target, ]) <- st_union(
       st_make_valid(st_geometry(polygons_sf[target, ])),
       st_make_valid(st_geometry(polygons_sf[i, ]))
     )
-    
+
     polygons_sf <- polygons_sf[-i, ]
-    
+
     merged_any <- TRUE
     break
   }
-  
+
   if (!merged_any) break
 }
 
@@ -240,17 +264,25 @@ the new sections.
 polygons_sf$section_id <- 1:nrow(polygons_sf)
 polygons_sf$bf_count <- 0L
 polygons_sf$tent_count <- 0L
-for(section in 1:nrow(polygons_sf)){
-  polygons_sf$bf_count[section] <- lengths(st_intersects(polygons_sf[section,],bld_points))
-  polygons_sf$tent_count[section] <- lengths(st_intersects(polygons_sf[section,],tent_points))
+for (section in 1:nrow(polygons_sf)) {
+  polygons_sf$bf_count[section] <- lengths(st_intersects(
+    polygons_sf[section, ],
+    bld_points
+  ))
+  polygons_sf$tent_count[section] <- lengths(st_intersects(
+    polygons_sf[section, ],
+    tent_points
+  ))
 }
 # clusterComposer runs best on less than 1000 buildings
 polygons_sf$tot_points <- (polygons_sf$bf_count + polygons_sf$tent_count)
 # assuming 5 people per point just for testing purposes
-polygons_sf$tot_pop <- polygons_sf$tot_points*5
+polygons_sf$tot_pop <- polygons_sf$tot_points * 5
 # rename geometry col
-names(polygons_sf)[names(polygons_sf) == attr(polygons_sf, "sf_column")] <- "geom"
-attr(polygons_sf, "sf_column") <- "geom" 
+names(polygons_sf)[
+  names(polygons_sf) == attr(polygons_sf, "sf_column")
+] <- "geom"
+attr(polygons_sf, "sf_column") <- "geom"
 ```
 
 ## 11. Reassemble the area of interest
@@ -262,8 +294,13 @@ The section areas and identifiers are then recalculated.
 
 ```{r reassemble-area-of-interest}
 # add to previous sections
-aoi <- rbind(aoi[aoi$tot_points<=800,c("bf_count","tent_count","tot_points","tot_pop")],
-         polygons_sf[,c("bf_count","tent_count","tot_points","tot_pop")])
+aoi <- rbind(
+  aoi[
+    aoi$tot_points <= 800,
+    c("bf_count", "tent_count", "tot_points", "tot_pop")
+  ],
+  polygons_sf[, c("bf_count", "tent_count", "tot_points", "tot_pop")]
+)
 aoi$area <- st_area(aoi)
 aoi$section_id <- 1:nrow(aoi)
 ```
@@ -275,7 +312,7 @@ Identify sections whose indicative population is below the minimum cluster popul
 ```{r check-low-population-sections}
 # note that several of these sections are below the minimum population per EZ of 150
 # the code above to split up areas could be based on population counts rather than size
-nrow(aoi[aoi$tot_pop<150,]) # 19
+nrow(aoi[aoi$tot_pop < 150, ]) # 19
 ```
 
 ## 13. Save the area-of-interest sections
@@ -297,15 +334,16 @@ ready to write the file.
 ncores <- parallel::detectCores() - 1
 
 # run clusterComposer function
-clusterComposer(aoi=aoi,
-                bf_file_path = paste0(data_dir,cc_input_path,"bld_tent_points.gpkg"),
-                run_id = "gaza_test_dab_20261119",
-                output_file_path = paste0(data_dir,cc_output_path),
-                pop_per_EZ=250,
-                max_pop_per_EZ=350,
-                min_pop_per_EZ=150,
-                n_cores = ncores,
-                delete_temp_files = FALSE
+clusterComposer(
+  aoi = aoi,
+  bf_file_path = paste0(data_dir, cc_input_path, "bld_tent_points.gpkg"),
+  run_id = "gaza_test_dab_20261119",
+  output_file_path = paste0(data_dir, cc_output_path),
+  pop_per_EZ = 250,
+  max_pop_per_EZ = 350,
+  min_pop_per_EZ = 150,
+  n_cores = ncores,
+  delete_temp_files = FALSE
 )
 ```
 

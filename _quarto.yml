@@ -69,8 +69,12 @@ website:
           href: books/sampling-frames/overview.qmd
         - text: "Table of Contents"
           href: books/sampling-frames/toc.qmd
-        - text: "Gaza Sampling Frame Tutorial"
-          href: books/sampling-frames/clusterComposer_gaza_tutorial.qmd
+        - text: "clusterComposer"
+          href: books/sampling-frames/cluster_composer.qmd
+        - text: "Input Data"
+          href: books/sampling-frames/data_processing_general.qmd
+        - text: "Input Data for Gaza"
+          href: books/sampling-frames/data_processing_gaza.qmd
     - id: tent-mapping-sidebar
       title: "Tent Mapping"
       path: books/tent-mapping/
