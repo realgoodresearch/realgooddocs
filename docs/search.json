@@ -326,13 +326,23 @@
     ]
   },
   {
-    "objectID": "books/sampling-frames/toc.html",
-    "href": "books/sampling-frames/toc.html",
-    "title": "Table of Contents",
+    "objectID": "books/sampling-frames/data_processing_general.html",
+    "href": "books/sampling-frames/data_processing_general.html",
+    "title": "Input Data",
     "section": "",
-    "text": "Automated Survey Sampling Frames\n\n\n\nA short description for the table of contents.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nclusterComposer\n\n\n\nA short description for the table of contents.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInput Data\n\n\n\nA short description for the table of contents.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInput Data for Gaza\n\n\n\nA short description for the table of contents.\n\n\n\n\n\n\n\n\nNo matching items",
+    "text": "Something similar to clusterComposer vignette.",
     "crumbs": [
-      "Table of Contents"
+      "Input Data"
+    ]
+  },
+  {
+    "objectID": "books/sampling-frames/overview.html",
+    "href": "books/sampling-frames/overview.html",
+    "title": "Automated Survey Sampling Frames",
+    "section": "",
+    "text": "Introduce automated sampling frames and explain why they are important.",
+    "crumbs": [
+      "Introduction"
     ]
   },
   {
@@ -413,193 +423,193 @@
     ]
   },
   {
-    "objectID": "books/sampling-frames/clusterComposer_gaza_tutorial.html",
-    "href": "books/sampling-frames/clusterComposer_gaza_tutorial.html",
-    "title": "Creating a Spatial Sampling Frame for Deir al Balah",
+    "objectID": "books/sampling-frames/toc.html",
+    "href": "books/sampling-frames/toc.html",
+    "title": "Table of Contents",
     "section": "",
-    "text": "This tutorial demonstrates how to generate a spatial sampling frame from building and tent locations data using the clusterComposer R package.\nclusterComposer has been designed to derive sampling frames from building footprints. Each unit is created to meet a target population while having clear boundaries that identify the buildings included and are reasonably navigable by field teams. Since ****, in Gaza, building footprints alone are not very helpful for understanding the distribution of population across space. Instead we can use buffered building and tent point location to create a pseudo building footprints dataset from which clusterComposer can generate a spatial sampling frame.\nThe example covered in this tutorial creates a spatial sampling frame for Deir al Balah using building locations, tent locations, neighbourhood boundaries, and a road network. The neighbourhood boundaries and roads data are used to create sections. The building and tent points data are converted into dwelling polygons and each assigned a population count. The clusterComposer function is applied to build clusters of dwellings within each section that meet a target population sise of 250 people. At the end of the tutorial, the results are evaluated.",
+    "text": "Automated Survey Sampling Frames\n\n\n\nA short description for the table of contents.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nclusterComposer\n\n\n\nA short description for the table of contents.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInput Data\n\n\n\nA short description for the table of contents.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInput Data for Gaza\n\n\n\nA short description for the table of contents.\n\n\n\n\n\n\n\n\nNo matching items",
     "crumbs": [
-      "Gaza Sampling Frame Tutorial"
+      "Table of Contents"
     ]
   },
   {
-    "objectID": "books/sampling-frames/clusterComposer_gaza_tutorial.html#introduction",
-    "href": "books/sampling-frames/clusterComposer_gaza_tutorial.html#introduction",
-    "title": "Creating a Spatial Sampling Frame for Deir al Balah",
-    "section": "",
-    "text": "This tutorial demonstrates how to generate a spatial sampling frame from building and tent locations data using the clusterComposer R package.\nclusterComposer has been designed to derive sampling frames from building footprints. Each unit is created to meet a target population while having clear boundaries that identify the buildings included and are reasonably navigable by field teams. Since ****, in Gaza, building footprints alone are not very helpful for understanding the distribution of population across space. Instead we can use buffered building and tent point location to create a pseudo building footprints dataset from which clusterComposer can generate a spatial sampling frame.\nThe example covered in this tutorial creates a spatial sampling frame for Deir al Balah using building locations, tent locations, neighbourhood boundaries, and a road network. The neighbourhood boundaries and roads data are used to create sections. The building and tent points data are converted into dwelling polygons and each assigned a population count. The clusterComposer function is applied to build clusters of dwellings within each section that meet a target population sise of 250 people. At the end of the tutorial, the results are evaluated.",
+    "objectID": "books/sampling-frames/data_processing_gaza.html#introduction",
+    "href": "books/sampling-frames/data_processing_gaza.html#introduction",
+    "title": "Input Data for Gaza",
+    "section": "Introduction",
+    "text": "Introduction\nThis tutorial demonstrates how to generate a spatial sampling frame from building and tent locations data using the clusterComposer R package.\nclusterComposer has been designed to derive sampling frames from building footprints. Each unit is created to meet a target population while having clear boundaries that identify the buildings included and are reasonably navigable by field teams. Since ****, in Gaza, building footprints alone are not very helpful for understanding the distribution of population across space. Instead we can use buffered building and tent point location to create a pseudo building footprints dataset from which clusterComposer can generate a spatial sampling frame.\nThe example covered in this tutorial creates a spatial sampling frame for Deir al Balah using building locations, tent locations, neighbourhood boundaries, and a road network. The neighbourhood boundaries and roads data are used to create sections. The building and tent points data are converted into dwelling polygons and each assigned a population count. The clusterComposer function is applied to build clusters of dwellings within each section that meet a target population sise of 250 people. At the end of the tutorial, the results are evaluated.",
     "crumbs": [
-      "Gaza Sampling Frame Tutorial"
+      "Input Data for Gaza"
     ]
   },
   {
-    "objectID": "books/sampling-frames/clusterComposer_gaza_tutorial.html#define-file-paths",
-    "href": "books/sampling-frames/clusterComposer_gaza_tutorial.html#define-file-paths",
-    "title": "Creating a Spatial Sampling Frame for Deir al Balah",
+    "objectID": "books/sampling-frames/data_processing_gaza.html#define-file-paths",
+    "href": "books/sampling-frames/data_processing_gaza.html#define-file-paths",
+    "title": "Input Data for Gaza",
     "section": "1. Define file paths",
-    "text": "1. Define file paths\nDefine the root data directory and the relative paths to the building, tent, administrative boundary, road, input, and output data.\n\ndata_dir &lt;-\"\"\n\nblds_filepath &lt;- \"raw/\"\ntents_filepath &lt;- \"raw/\"\nadmin_filepath &lt;- \"raw/\"\nroads_path &lt;- \"raw/\"\ncc_input_path &lt;- \"in/\" # create before saving first input file below\ncc_output_path &lt;- \"out/\" #",
+    "text": "1. Define file paths\nDefine the root data directory and the relative paths to the building, tent, administrative boundary, road, input, and output data.\n\ndata_dir &lt;- \"\"\n\nblds_filepath &lt;- \"raw/\"\ntents_filepath &lt;- \"raw/\"\nadmin_filepath &lt;- \"raw/\"\nroads_path &lt;- \"raw/\"\ncc_input_path &lt;- \"in/\" # create before saving first input file below\ncc_output_path &lt;- \"out/\" #",
     "crumbs": [
-      "Gaza Sampling Frame Tutorial"
+      "Input Data for Gaza"
     ]
   },
   {
-    "objectID": "books/sampling-frames/clusterComposer_gaza_tutorial.html#install-and-load-the-required-packages",
-    "href": "books/sampling-frames/clusterComposer_gaza_tutorial.html#install-and-load-the-required-packages",
-    "title": "Creating a Spatial Sampling Frame for Deir al Balah",
+    "objectID": "books/sampling-frames/data_processing_gaza.html#install-and-load-the-required-packages",
+    "href": "books/sampling-frames/data_processing_gaza.html#install-and-load-the-required-packages",
+    "title": "Input Data for Gaza",
     "section": "2. Install and load the required packages",
     "text": "2. Install and load the required packages\nThe dependencies used internally by clusterComposer are installed automatically when the package is installed. The installation line only needs to be run when installing or updating clusterComposer. It does not need to be run every time the analysis is started.\n\n# install \"pak\" if not installed\n#install.packages(\"pak\")\n# use pak to install clusterComposer\npak::pak(\"cadooley/clusterComposer\")\n\nThe remaining packages are used for data preparation, running clusterComposer, and exploring the results.\n\n# libraries for data prep, generating sampling frame & exploration of results\nlibrary(sf)\nlibrary(terra)\nlibrary(data.table)\nlibrary(clusterComposer)\nlibrary(ggplot2)",
     "crumbs": [
-      "Gaza Sampling Frame Tutorial"
+      "Input Data for Gaza"
     ]
   },
   {
-    "objectID": "books/sampling-frames/clusterComposer_gaza_tutorial.html#read-the-input-datasets",
-    "href": "books/sampling-frames/clusterComposer_gaza_tutorial.html#read-the-input-datasets",
-    "title": "Creating a Spatial Sampling Frame for Deir al Balah",
+    "objectID": "books/sampling-frames/data_processing_gaza.html#read-the-input-datasets",
+    "href": "books/sampling-frames/data_processing_gaza.html#read-the-input-datasets",
+    "title": "Input Data for Gaza",
     "section": "3. Read the input datasets",
-    "text": "3. Read the input datasets\nRead the building locations (UNOSAT, 2025), tent locations (), administrative boundaries (), and road network (PA MOP, JRJ & OCHA, 2021). The road dataset is then restricted to roads within the Gaza Strip.\n\n# read in data\nbld_points &lt;- st_read(paste0(data_dir,blds_filepath,\"UNOSAT_GazaStrip_CDA_11October2025_HU.gdb\"))\ntent_points &lt;- st_read(paste0(data_dir,tents_filepath,\"gaza_tent_points_20260805.gpkg\"))\nadmin &lt;- st_read(paste0(data_dir,admin_filepath,\"gaza_neighbourhood_boundaries.gpkg\"))\nroads &lt;- st_read(paste0(data_dir,roads_path,\"Road_network_oPt.shp\"))\nroads &lt;- roads[roads$Region==\"Gaza Strip\",]",
+    "text": "3. Read the input datasets\nRead the building locations (UNOSAT, 2025), tent locations (), administrative boundaries (), and road network (PA MOP, JRJ & OCHA, 2021). The road dataset is then restricted to roads within the Gaza Strip.\n\n# read in data\nbld_points &lt;- st_read(paste0(\n  data_dir,\n  blds_filepath,\n  \"UNOSAT_GazaStrip_CDA_11October2025_HU.gdb\"\n))\ntent_points &lt;- st_read(paste0(\n  data_dir,\n  tents_filepath,\n  \"gaza_tent_points_20260805.gpkg\"\n))\nadmin &lt;- st_read(paste0(\n  data_dir,\n  admin_filepath,\n  \"gaza_neighbourhood_boundaries.gpkg\"\n))\nroads &lt;- st_read(paste0(data_dir, roads_path, \"Road_network_oPt.shp\"))\nroads &lt;- roads[roads$Region == \"Gaza Strip\", ]",
     "crumbs": [
-      "Gaza Sampling Frame Tutorial"
+      "Input Data for Gaza"
     ]
   },
   {
-    "objectID": "books/sampling-frames/clusterComposer_gaza_tutorial.html#transform-the-spatial-datasets",
-    "href": "books/sampling-frames/clusterComposer_gaza_tutorial.html#transform-the-spatial-datasets",
-    "title": "Creating a Spatial Sampling Frame for Deir al Balah",
+    "objectID": "books/sampling-frames/data_processing_gaza.html#transform-the-spatial-datasets",
+    "href": "books/sampling-frames/data_processing_gaza.html#transform-the-spatial-datasets",
+    "title": "Input Data for Gaza",
     "section": "4. Transform the spatial datasets",
-    "text": "4. Transform the spatial datasets\nTransform all spatial datasets to EPSG:32636 so that spatial operations and distance-based calculations are performed in a projected coordinate reference system with metre-based units.\n\n# espg 32636\nbld_points &lt;- st_transform(bld_points,32636)\ntent_points &lt;- st_transform(tent_points,32636)\nadmin &lt;- st_transform(admin,32636)\nroads &lt;- st_transform(roads,32636)",
+    "text": "4. Transform the spatial datasets\nTransform all spatial datasets to EPSG:32636 so that spatial operations and distance-based calculations are performed in a projected coordinate reference system with metre-based units.\n\n# espg 32636\nbld_points &lt;- st_transform(bld_points, 32636)\ntent_points &lt;- st_transform(tent_points, 32636)\nadmin &lt;- st_transform(admin, 32636)\nroads &lt;- st_transform(roads, 32636)",
     "crumbs": [
-      "Gaza Sampling Frame Tutorial"
+      "Input Data for Gaza"
     ]
   },
   {
-    "objectID": "books/sampling-frames/clusterComposer_gaza_tutorial.html#remove-buildings-identified-as-having-no-housing-units-due-to-destructiondamage",
-    "href": "books/sampling-frames/clusterComposer_gaza_tutorial.html#remove-buildings-identified-as-having-no-housing-units-due-to-destructiondamage",
-    "title": "Creating a Spatial Sampling Frame for Deir al Balah",
+    "objectID": "books/sampling-frames/data_processing_gaza.html#remove-buildings-identified-as-having-no-housing-units-due-to-destructiondamage",
+    "href": "books/sampling-frames/data_processing_gaza.html#remove-buildings-identified-as-having-no-housing-units-due-to-destructiondamage",
+    "title": "Input Data for Gaza",
     "section": "5. Remove buildings identified as having no housing units due to destruction/damage",
-    "text": "5. Remove buildings identified as having no housing units due to destruction/damage\nCalculate the updated number of housing units and remove buildings with no remaining housing units.\n\n# omit blds with no housing units\nbld_points$HU_update &lt;- bld_points$HU_tot - bld_points$HU_damaged_14\nbld_points &lt;- bld_points[bld_points$HU_update &gt; 0,]",
+    "text": "5. Remove buildings identified as having no housing units due to destruction/damage\nCalculate the updated number of housing units and remove buildings with no remaining housing units.\n\n# omit blds with no housing units\nbld_points$HU_update &lt;- bld_points$HU_tot - bld_points$HU_damaged_14\nbld_points &lt;- bld_points[bld_points$HU_update &gt; 0, ]",
     "crumbs": [
-      "Gaza Sampling Frame Tutorial"
+      "Input Data for Gaza"
     ]
   },
   {
-    "objectID": "books/sampling-frames/clusterComposer_gaza_tutorial.html#prepare-the-building-and-tent-input",
-    "href": "books/sampling-frames/clusterComposer_gaza_tutorial.html#prepare-the-building-and-tent-input",
-    "title": "Creating a Spatial Sampling Frame for Deir al Balah",
+    "objectID": "books/sampling-frames/data_processing_gaza.html#prepare-the-building-and-tent-input",
+    "href": "books/sampling-frames/data_processing_gaza.html#prepare-the-building-and-tent-input",
+    "title": "Input Data for Gaza",
     "section": "6. Prepare the building and tent input",
-    "text": "6. Prepare the building and tent input\nCombine the building and tent locations into a single spatial object. Each point is buffered by two metres to create the polygon geometries required by clusterComposer. It may be useful to have different buffers for buildings and tents in which case st_zm() and st_buffer() can be applied separately to the buildings and tents, followed by the step to bring them into the same object.\nFor this example, every building or tent is assigned a population of five. This could be replaced with an appropriate population estimate before producing a final sampling frame.\n\n# save all points into one gpgk \nbf &lt;- st_sf(geometry = c(st_geometry(bld_points),st_geometry(tent_points)))\nbf &lt;- st_zm(bf, drop = TRUE)\nbf &lt;- st_buffer(bf, 2)\nbf$pop_building &lt;- 5\n# save as gpkg\n#st_write(bf,paste0(data_dir,cc_input_path,\"bld_tent_points.gpkg\"),delete_dsn=TRUE)\n\nThe final st_write() line is commented out. Remove the initial # when ready to save the prepared input as a GeoPackage.",
+    "text": "6. Prepare the building and tent input\nCombine the building and tent locations into a single spatial object. Each point is buffered by two metres to create the polygon geometries required by clusterComposer. It may be useful to have different buffers for buildings and tents in which case st_zm() and st_buffer() can be applied separately to the buildings and tents, followed by the step to bring them into the same object.\nFor this example, every building or tent is assigned a population of five. This could be replaced with an appropriate population estimate before producing a final sampling frame.\n\n# save all points into one gpgk\nbf &lt;- st_sf(geometry = c(st_geometry(bld_points), st_geometry(tent_points)))\nbf &lt;- st_zm(bf, drop = TRUE)\nbf &lt;- st_buffer(bf, 2)\nbf$pop_building &lt;- 5\n# save as gpkg\n#st_write(bf,paste0(data_dir,cc_input_path,\"bld_tent_points.gpkg\"),delete_dsn=TRUE)\n\nThe final st_write() line is commented out. Remove the initial # when ready to save the prepared input as a GeoPackage.",
     "crumbs": [
-      "Gaza Sampling Frame Tutorial"
+      "Input Data for Gaza"
     ]
   },
   {
-    "objectID": "books/sampling-frames/clusterComposer_gaza_tutorial.html#select-area-for-sampling-frame",
-    "href": "books/sampling-frames/clusterComposer_gaza_tutorial.html#select-area-for-sampling-frame",
-    "title": "Creating a Spatial Sampling Frame for Deir al Balah",
+    "objectID": "books/sampling-frames/data_processing_gaza.html#select-area-for-sampling-frame",
+    "href": "books/sampling-frames/data_processing_gaza.html#select-area-for-sampling-frame",
+    "title": "Input Data for Gaza",
     "section": "7. Select area for sampling frame",
-    "text": "7. Select area for sampling frame\nNote that while clusterComposer is still under development, we recommend generating sampling frames for specific areas rather than whole regions.\nSelect the Deir al Balah area at administrative unit level 3 (ADM3). Columns are also created to store the number of buildings and tents in each section.\n\n# test for Deir al Balah \naoi &lt;- admin[admin$ADM3_EN==\"Deir al Balah\",]\naoi$section_id &lt;- 1:nrow(aoi)\naoi$bf_count &lt;- 0L\naoi$tent_count &lt;- 0L",
+    "text": "7. Select area for sampling frame\nNote that while clusterComposer is still under development, we recommend generating sampling frames for specific areas rather than whole regions.\nSelect the Deir al Balah area at administrative unit level 3 (ADM3). Columns are also created to store the number of buildings and tents in each section.\n\n# test for Deir al Balah\naoi &lt;- admin[admin$ADM3_EN == \"Deir al Balah\", ]\naoi$section_id &lt;- 1:nrow(aoi)\naoi$bf_count &lt;- 0L\naoi$tent_count &lt;- 0L",
     "crumbs": [
-      "Gaza Sampling Frame Tutorial"
+      "Input Data for Gaza"
     ]
   },
   {
-    "objectID": "books/sampling-frames/clusterComposer_gaza_tutorial.html#count-buildings-and-tents-within-each-section",
-    "href": "books/sampling-frames/clusterComposer_gaza_tutorial.html#count-buildings-and-tents-within-each-section",
-    "title": "Creating a Spatial Sampling Frame for Deir al Balah",
+    "objectID": "books/sampling-frames/data_processing_gaza.html#count-buildings-and-tents-within-each-section",
+    "href": "books/sampling-frames/data_processing_gaza.html#count-buildings-and-tents-within-each-section",
+    "title": "Input Data for Gaza",
     "section": "8. Count buildings and tents within each section",
-    "text": "8. Count buildings and tents within each section\nCount the buildings and tents locations intersecting each area-of-interest section. The total number of points and an indicative population are then calculated.\n\n# number of buildings and tents per section\nfor(section in 1:nrow(aoi)){\n  aoi$bf_count[section] &lt;- lengths(st_intersects(aoi[section,],bld_points))\n  aoi$tent_count[section] &lt;- lengths(st_intersects(aoi[section,],tent_points))\n}\n# clusterComposer runs best on less than 1000 buildings\naoi$tot_points &lt;- (aoi$bf_count + aoi$tent_count)\n# assuming 5 people per point just for testing purposes\naoi$tot_pop &lt;- aoi$tot_points*5",
+    "text": "8. Count buildings and tents within each section\nCount the buildings and tents locations intersecting each area-of-interest section. The total number of points and an indicative population are then calculated.\n\n# number of buildings and tents per section\nfor (section in 1:nrow(aoi)) {\n  aoi$bf_count[section] &lt;- lengths(st_intersects(aoi[section, ], bld_points))\n  aoi$tent_count[section] &lt;- lengths(st_intersects(aoi[section, ], tent_points))\n}\n# clusterComposer runs best on less than 1000 buildings\naoi$tot_points &lt;- (aoi$bf_count + aoi$tent_count)\n# assuming 5 people per point just for testing purposes\naoi$tot_pop &lt;- aoi$tot_points * 5",
     "crumbs": [
-      "Gaza Sampling Frame Tutorial"
+      "Input Data for Gaza"
     ]
   },
   {
-    "objectID": "books/sampling-frames/clusterComposer_gaza_tutorial.html#identify-and-divide-large-sections",
-    "href": "books/sampling-frames/clusterComposer_gaza_tutorial.html#identify-and-divide-large-sections",
-    "title": "Creating a Spatial Sampling Frame for Deir al Balah",
+    "objectID": "books/sampling-frames/data_processing_gaza.html#identify-and-divide-large-sections",
+    "href": "books/sampling-frames/data_processing_gaza.html#identify-and-divide-large-sections",
+    "title": "Input Data for Gaza",
     "section": "9. Identify and divide large sections",
-    "text": "9. Identify and divide large sections\nSelect sections containing more than 800 building or tent locations. Roads within and immediately around these sections are used as dividing lines.\nThe road geometries and area boundaries are combined, noded, and polygonised to create smaller subsections.\n\n# split areas with more than 800 buildings/tents using roads, prior to running cluster composer\naoi_big &lt;- aoi[aoi$tot_points&gt;800,]\nroads_aoi &lt;- st_intersection(roads, st_buffer(aoi_big,50))\nsub_sections &lt;- c(st_geometry(roads_aoi),st_geometry(st_boundary(aoi_big)))\nlines &lt;- st_union(sub_sections) \nlines &lt;- st_node(lines)\npoly_strata &lt;- st_polygonize(lines)\npolygons &lt;- st_collection_extract(poly_strata, \"POLYGON\")\npolygons &lt;- st_cast(polygons, \"POLYGON\")\npolygons_sf &lt;- st_as_sf(polygons)\npolygons_sf &lt;- polygons_sf[!st_is_empty(polygons_sf), ]\npolygons_sf &lt;- st_make_valid(polygons_sf)\npolygons_sf$area &lt;- st_area(polygons_sf)\n\nThe above code creates lots of smaller polygons from the large sections. As the road network was used to split these areas, we now have some undesirable polygons, e.g. thin strips of land between a road edge and the neighbourhod boundary. So, next, we merge these merged into neighbouring polygons that share the longest boundary.\nThe procedure is repeated until no polygons below the threshold remain or no further suitable merge can be made.\n\n# merge small polys into neighbours\nthresh &lt;-50000\nrepeat {\n  \n  small_idx &lt;- which(as.numeric(polygons_sf$area) &lt; thresh)\n  if (length(small_idx) == 0) break\n  merged_any &lt;- FALSE\n  for (i in small_idx) {\n    \n    nbr_idx &lt;- st_intersects(polygons_sf[i, ], polygons_sf)[[1]]\n    nbr_idx &lt;- setdiff(nbr_idx, i)\n    \n    if (length(nbr_idx) == 0) next\n    \n    shared_len &lt;- sapply(nbr_idx, function(j) {\n      shared &lt;- st_intersection(\n        st_boundary(st_make_valid(st_geometry(polygons_sf[i, ]))),\n        st_boundary(st_make_valid(st_geometry(polygons_sf[j, ])))\n      )\n      sum(as.numeric(st_length(shared)))\n    })\n    \n    if (max(shared_len) == 0) next\n    \n    target &lt;- nbr_idx[which.max(shared_len)]\n    \n    st_geometry(polygons_sf[target, ]) &lt;- st_union(\n      st_make_valid(st_geometry(polygons_sf[target, ])),\n      st_make_valid(st_geometry(polygons_sf[i, ]))\n    )\n    \n    polygons_sf &lt;- polygons_sf[-i, ]\n    \n    merged_any &lt;- TRUE\n    break\n  }\n  \n  if (!merged_any) break\n}\n\npolygons_sf &lt;- polygons_sf[!st_is_empty(polygons_sf), ]\n\nThe above code merges based on polygon area but this could be adapted to explicitly merge based on estimated population sizes of polygons.",
+    "text": "9. Identify and divide large sections\nSelect sections containing more than 800 building or tent locations. Roads within and immediately around these sections are used as dividing lines.\nThe road geometries and area boundaries are combined, noded, and polygonised to create smaller subsections.\n\n# split areas with more than 800 buildings/tents using roads, prior to running cluster composer\naoi_big &lt;- aoi[aoi$tot_points &gt; 800, ]\nroads_aoi &lt;- st_intersection(roads, st_buffer(aoi_big, 50))\nsub_sections &lt;- c(st_geometry(roads_aoi), st_geometry(st_boundary(aoi_big)))\nlines &lt;- st_union(sub_sections)\nlines &lt;- st_node(lines)\npoly_strata &lt;- st_polygonize(lines)\npolygons &lt;- st_collection_extract(poly_strata, \"POLYGON\")\npolygons &lt;- st_cast(polygons, \"POLYGON\")\npolygons_sf &lt;- st_as_sf(polygons)\npolygons_sf &lt;- polygons_sf[!st_is_empty(polygons_sf), ]\npolygons_sf &lt;- st_make_valid(polygons_sf)\npolygons_sf$area &lt;- st_area(polygons_sf)\n\nThe above code creates lots of smaller polygons from the large sections. As the road network was used to split these areas, we now have some undesirable polygons, e.g. thin strips of land between a road edge and the neighbourhod boundary. So, next, we merge these merged into neighbouring polygons that share the longest boundary.\nThe procedure is repeated until no polygons below the threshold remain or no further suitable merge can be made.\n\n# merge small polys into neighbours\nthresh &lt;- 50000\nrepeat {\n  small_idx &lt;- which(as.numeric(polygons_sf$area) &lt; thresh)\n  if (length(small_idx) == 0) {\n    break\n  }\n  merged_any &lt;- FALSE\n  for (i in small_idx) {\n    nbr_idx &lt;- st_intersects(polygons_sf[i, ], polygons_sf)[[1]]\n    nbr_idx &lt;- setdiff(nbr_idx, i)\n\n    if (length(nbr_idx) == 0) {\n      next\n    }\n\n    shared_len &lt;- sapply(nbr_idx, function(j) {\n      shared &lt;- st_intersection(\n        st_boundary(st_make_valid(st_geometry(polygons_sf[i, ]))),\n        st_boundary(st_make_valid(st_geometry(polygons_sf[j, ])))\n      )\n      sum(as.numeric(st_length(shared)))\n    })\n\n    if (max(shared_len) == 0) {\n      next\n    }\n\n    target &lt;- nbr_idx[which.max(shared_len)]\n\n    st_geometry(polygons_sf[target, ]) &lt;- st_union(\n      st_make_valid(st_geometry(polygons_sf[target, ])),\n      st_make_valid(st_geometry(polygons_sf[i, ]))\n    )\n\n    polygons_sf &lt;- polygons_sf[-i, ]\n\n    merged_any &lt;- TRUE\n    break\n  }\n\n  if (!merged_any) break\n}\n\npolygons_sf &lt;- polygons_sf[!st_is_empty(polygons_sf), ]\n\nThe above code merges based on polygon area but this could be adapted to explicitly merge based on estimated population sizes of polygons.",
     "crumbs": [
-      "Gaza Sampling Frame Tutorial"
+      "Input Data for Gaza"
     ]
   },
   {
-    "objectID": "books/sampling-frames/clusterComposer_gaza_tutorial.html#recalculate-section-counts",
-    "href": "books/sampling-frames/clusterComposer_gaza_tutorial.html#recalculate-section-counts",
-    "title": "Creating a Spatial Sampling Frame for Deir al Balah",
+    "objectID": "books/sampling-frames/data_processing_gaza.html#recalculate-section-counts",
+    "href": "books/sampling-frames/data_processing_gaza.html#recalculate-section-counts",
+    "title": "Input Data for Gaza",
     "section": "10. Recalculate section counts",
-    "text": "10. Recalculate section counts\nCount the building and tent locations contained in each polygon.\nThe total number of points and the indicative population are recalculated for the new sections.\n\n# count blds & tents for new polygons\npolygons_sf$section_id &lt;- 1:nrow(polygons_sf)\npolygons_sf$bf_count &lt;- 0L\npolygons_sf$tent_count &lt;- 0L\nfor(section in 1:nrow(polygons_sf)){\n  polygons_sf$bf_count[section] &lt;- lengths(st_intersects(polygons_sf[section,],bld_points))\n  polygons_sf$tent_count[section] &lt;- lengths(st_intersects(polygons_sf[section,],tent_points))\n}\n# clusterComposer runs best on less than 1000 buildings\npolygons_sf$tot_points &lt;- (polygons_sf$bf_count + polygons_sf$tent_count)\n# assuming 5 people per point just for testing purposes\npolygons_sf$tot_pop &lt;- polygons_sf$tot_points*5\n# rename geometry col\nnames(polygons_sf)[names(polygons_sf) == attr(polygons_sf, \"sf_column\")] &lt;- \"geom\"\nattr(polygons_sf, \"sf_column\") &lt;- \"geom\"",
+    "text": "10. Recalculate section counts\nCount the building and tent locations contained in each polygon.\nThe total number of points and the indicative population are recalculated for the new sections.\n\n# count blds & tents for new polygons\npolygons_sf$section_id &lt;- 1:nrow(polygons_sf)\npolygons_sf$bf_count &lt;- 0L\npolygons_sf$tent_count &lt;- 0L\nfor (section in 1:nrow(polygons_sf)) {\n  polygons_sf$bf_count[section] &lt;- lengths(st_intersects(\n    polygons_sf[section, ],\n    bld_points\n  ))\n  polygons_sf$tent_count[section] &lt;- lengths(st_intersects(\n    polygons_sf[section, ],\n    tent_points\n  ))\n}\n# clusterComposer runs best on less than 1000 buildings\npolygons_sf$tot_points &lt;- (polygons_sf$bf_count + polygons_sf$tent_count)\n# assuming 5 people per point just for testing purposes\npolygons_sf$tot_pop &lt;- polygons_sf$tot_points * 5\n# rename geometry col\nnames(polygons_sf)[\n  names(polygons_sf) == attr(polygons_sf, \"sf_column\")\n] &lt;- \"geom\"\nattr(polygons_sf, \"sf_column\") &lt;- \"geom\"",
     "crumbs": [
-      "Gaza Sampling Frame Tutorial"
+      "Input Data for Gaza"
     ]
   },
   {
-    "objectID": "books/sampling-frames/clusterComposer_gaza_tutorial.html#reassemble-the-area-of-interest",
-    "href": "books/sampling-frames/clusterComposer_gaza_tutorial.html#reassemble-the-area-of-interest",
-    "title": "Creating a Spatial Sampling Frame for Deir al Balah",
+    "objectID": "books/sampling-frames/data_processing_gaza.html#reassemble-the-area-of-interest",
+    "href": "books/sampling-frames/data_processing_gaza.html#reassemble-the-area-of-interest",
+    "title": "Input Data for Gaza",
     "section": "11. Reassemble the area of interest",
-    "text": "11. Reassemble the area of interest\nRetain the original sections containing no more than 800 points and combine them with the new subsections created from the larger areas.\nThe section areas and identifiers are then recalculated.\n\n# add to previous sections\naoi &lt;- rbind(aoi[aoi$tot_points&lt;=800,c(\"bf_count\",\"tent_count\",\"tot_points\",\"tot_pop\")],\n         polygons_sf[,c(\"bf_count\",\"tent_count\",\"tot_points\",\"tot_pop\")])\naoi$area &lt;- st_area(aoi)\naoi$section_id &lt;- 1:nrow(aoi)",
+    "text": "11. Reassemble the area of interest\nRetain the original sections containing no more than 800 points and combine them with the new subsections created from the larger areas.\nThe section areas and identifiers are then recalculated.\n\n# add to previous sections\naoi &lt;- rbind(\n  aoi[\n    aoi$tot_points &lt;= 800,\n    c(\"bf_count\", \"tent_count\", \"tot_points\", \"tot_pop\")\n  ],\n  polygons_sf[, c(\"bf_count\", \"tent_count\", \"tot_points\", \"tot_pop\")]\n)\naoi$area &lt;- st_area(aoi)\naoi$section_id &lt;- 1:nrow(aoi)",
     "crumbs": [
-      "Gaza Sampling Frame Tutorial"
+      "Input Data for Gaza"
     ]
   },
   {
-    "objectID": "books/sampling-frames/clusterComposer_gaza_tutorial.html#check-sections-with-low-populations",
-    "href": "books/sampling-frames/clusterComposer_gaza_tutorial.html#check-sections-with-low-populations",
-    "title": "Creating a Spatial Sampling Frame for Deir al Balah",
+    "objectID": "books/sampling-frames/data_processing_gaza.html#check-sections-with-low-populations",
+    "href": "books/sampling-frames/data_processing_gaza.html#check-sections-with-low-populations",
+    "title": "Input Data for Gaza",
     "section": "12. Check sections with low populations",
-    "text": "12. Check sections with low populations\nIdentify sections whose indicative population is below the minimum cluster population of 150. clusterComposer will simply save these as individual\n\n# note that several of these sections are below the minimum population per EZ of 150\n# the code above to split up areas could be based on population counts rather than size\nnrow(aoi[aoi$tot_pop&lt;150,]) # 19",
+    "text": "12. Check sections with low populations\nIdentify sections whose indicative population is below the minimum cluster population of 150. clusterComposer will simply save these as individual\n\n# note that several of these sections are below the minimum population per EZ of 150\n# the code above to split up areas could be based on population counts rather than size\nnrow(aoi[aoi$tot_pop &lt; 150, ]) # 19",
     "crumbs": [
-      "Gaza Sampling Frame Tutorial"
+      "Input Data for Gaza"
     ]
   },
   {
-    "objectID": "books/sampling-frames/clusterComposer_gaza_tutorial.html#save-the-area-of-interest-sections",
-    "href": "books/sampling-frames/clusterComposer_gaza_tutorial.html#save-the-area-of-interest-sections",
-    "title": "Creating a Spatial Sampling Frame for Deir al Balah",
+    "objectID": "books/sampling-frames/data_processing_gaza.html#save-the-area-of-interest-sections",
+    "href": "books/sampling-frames/data_processing_gaza.html#save-the-area-of-interest-sections",
+    "title": "Input Data for Gaza",
     "section": "13. Save the area-of-interest sections",
     "text": "13. Save the area-of-interest sections\nSave the completed Deir al Balah area-of-interest sections as a GeoPackage for use with clusterComposer.\nThe st_write() call is currently commented out. Remove the initial # when ready to write the file.\n\n# save the Areas of Interest\n#st_write(aoi,paste0(data_dir,cc_input_path,\"aoi_DeiralBalah.gpkg\"),delete_dsn=TRUE)",
     "crumbs": [
-      "Gaza Sampling Frame Tutorial"
+      "Input Data for Gaza"
     ]
   },
   {
-    "objectID": "books/sampling-frames/clusterComposer_gaza_tutorial.html#create-sampling-frame-from-clustercomposer",
-    "href": "books/sampling-frames/clusterComposer_gaza_tutorial.html#create-sampling-frame-from-clustercomposer",
-    "title": "Creating a Spatial Sampling Frame for Deir al Balah",
+    "objectID": "books/sampling-frames/data_processing_gaza.html#create-sampling-frame-from-clustercomposer",
+    "href": "books/sampling-frames/data_processing_gaza.html#create-sampling-frame-from-clustercomposer",
+    "title": "Input Data for Gaza",
     "section": "14. Create sampling frame from clusterComposer",
-    "text": "14. Create sampling frame from clusterComposer\n\nncores &lt;- parallel::detectCores() - 1\n\n# run clusterComposer function\nclusterComposer(aoi=aoi,\n                bf_file_path = paste0(data_dir,cc_input_path,\"bld_tent_points.gpkg\"),\n                run_id = \"gaza_test_dab_20261119\",\n                output_file_path = paste0(data_dir,cc_output_path),\n                pop_per_EZ=250,\n                max_pop_per_EZ=350,\n                min_pop_per_EZ=150,\n                n_cores = ncores,\n                delete_temp_files = FALSE\n)",
+    "text": "14. Create sampling frame from clusterComposer\n\nncores &lt;- parallel::detectCores() - 1\n\n# run clusterComposer function\nclusterComposer(\n  aoi = aoi,\n  bf_file_path = paste0(data_dir, cc_input_path, \"bld_tent_points.gpkg\"),\n  run_id = \"gaza_test_dab_20261119\",\n  output_file_path = paste0(data_dir, cc_output_path),\n  pop_per_EZ = 250,\n  max_pop_per_EZ = 350,\n  min_pop_per_EZ = 150,\n  n_cores = ncores,\n  delete_temp_files = FALSE\n)",
     "crumbs": [
-      "Gaza Sampling Frame Tutorial"
+      "Input Data for Gaza"
     ]
   },
   {
-    "objectID": "books/sampling-frames/clusterComposer_gaza_tutorial.html#evaluating-results",
-    "href": "books/sampling-frames/clusterComposer_gaza_tutorial.html#evaluating-results",
-    "title": "Creating a Spatial Sampling Frame for Deir al Balah",
+    "objectID": "books/sampling-frames/data_processing_gaza.html#evaluating-results",
+    "href": "books/sampling-frames/data_processing_gaza.html#evaluating-results",
+    "title": "Input Data for Gaza",
     "section": "15. Evaluating results",
     "text": "15. Evaluating results",
     "crumbs": [
-      "Gaza Sampling Frame Tutorial"
+      "Input Data for Gaza"
     ]
   },
   {
-    "objectID": "books/sampling-frames/clusterComposer_gaza_tutorial.html#references",
-    "href": "books/sampling-frames/clusterComposer_gaza_tutorial.html#references",
-    "title": "Creating a Spatial Sampling Frame for Deir al Balah",
+    "objectID": "books/sampling-frames/data_processing_gaza.html#references",
+    "href": "books/sampling-frames/data_processing_gaza.html#references",
+    "title": "Input Data for Gaza",
     "section": "References",
     "text": "References\nState of Palestine Ministry of Planning and Administrative Development (PA MOP), Joint Research Centre (JRC), and United Nations Office for the Coordination of Humanitarian Affairs (OCHA). 2021. State of Palestine – Roads. Humanitarian Data Exchange. Updated 18 November 2021. Accessed November 2026. Dataset.",
     "crumbs": [
-      "Gaza Sampling Frame Tutorial"
+      "Input Data for Gaza"
     ]
   },
   {
-    "objectID": "books/sampling-frames/overview.html",
-    "href": "books/sampling-frames/overview.html",
-    "title": "Automated Survey Sampling Frames",
+    "objectID": "books/sampling-frames/cluster_composer.html",
+    "href": "books/sampling-frames/cluster_composer.html",
+    "title": "clusterComposer",
     "section": "",
-    "text": "Introduce automated sampling frames and explain why they are important.",
+    "text": "Add something similar to README.md.",
     "crumbs": [
-      "Introduction"
+      "clusterComposer"
     ]
   },
   {
@@ -872,206 +882,6 @@
     "text": "Automated tent mapping from satellite imagery allows us to quantify temporary dwellings to provide a current footprint of forcibly displaced populations as they move.\nWhen people are forced from their homes by conflict, violence, or disaster, they often move quickly and settle where they can. This has been witnessed recently at a devastating scale as millions of Gazans have been forced into informal tent settlements as their homes have been systematically destroyed. Theese settlements can appear, expand, move, or disappear faster than conventional population data can be collected and updated. Yet knowing where people are living, and how those locations are changing, is essential for planning humanitarian assistance.\nAutomated tent mapping from satellite imagery gives us a powerful tool for monitoring and quantifying impermanent and mobile tent settlements. By mapping the locations of tents from regularly updated satellite imagery, we can identify areas where displaced communities are likely to be living right now, integrate digital traces as a signal of current occupancy, support the design of more representative surveys, and provide an input to population nowcasting to help guide humanitarian assistance to where it is needed.\nOur partners have been crucial for leading advancements in automated tent mapping from satellite imagery to support our humanitarian population nowcasting initiatives. This includes:\n\nAlgorithmic Governance Foundation\n\nForensic Architecture\n\nInterdisciplinary Institute for Societal Computing\n\nCenter for Advanced Spatial Analysis\nConflict Ecology\nPlanet Labs\n\nIn this book, we introduce our approach to automated tent mapping from satellite imagery. We will walk through the methods, the data they require, and the assumptions that need to be considered when using tent maps for humanitarian decision-making. Our aim is to make the workflow accessible, reproducible, and useful for others working to understand rapidly changing displacement situations.",
     "crumbs": [
       "Introduction"
-    ]
-  },
-  {
-    "objectID": "books/sampling-frames/data_processing_general.html",
-    "href": "books/sampling-frames/data_processing_general.html",
-    "title": "Input Data",
-    "section": "",
-    "text": "Something similar to clusterComposer vignette.",
-    "crumbs": [
-      "Input Data"
-    ]
-  },
-  {
-    "objectID": "books/sampling-frames/data_processing_gaza.html",
-    "href": "books/sampling-frames/data_processing_gaza.html",
-    "title": "Input Data for Gaza",
-    "section": "",
-    "text": "This tutorial demonstrates how to generate a spatial sampling frame from building and tent locations data using the clusterComposer R package.\nclusterComposer has been designed to derive sampling frames from building footprints. Each unit is created to meet a target population while having clear boundaries that identify the buildings included and are reasonably navigable by field teams. Since ****, in Gaza, building footprints alone are not very helpful for understanding the distribution of population across space. Instead we can use buffered building and tent point location to create a pseudo building footprints dataset from which clusterComposer can generate a spatial sampling frame.\nThe example covered in this tutorial creates a spatial sampling frame for Deir al Balah using building locations, tent locations, neighbourhood boundaries, and a road network. The neighbourhood boundaries and roads data are used to create sections. The building and tent points data are converted into dwelling polygons and each assigned a population count. The clusterComposer function is applied to build clusters of dwellings within each section that meet a target population sise of 250 people. At the end of the tutorial, the results are evaluated.",
-    "crumbs": [
-      "Processing Input Data for Gaza"
-    ]
-  },
-  {
-    "objectID": "books/sampling-frames/data_processing_gaza.html#introduction",
-    "href": "books/sampling-frames/data_processing_gaza.html#introduction",
-    "title": "Input Data for Gaza",
-    "section": "Introduction",
-    "text": "Introduction\nThis tutorial demonstrates how to generate a spatial sampling frame from building and tent locations data using the clusterComposer R package.\nclusterComposer has been designed to derive sampling frames from building footprints. Each unit is created to meet a target population while having clear boundaries that identify the buildings included and are reasonably navigable by field teams. Since ****, in Gaza, building footprints alone are not very helpful for understanding the distribution of population across space. Instead we can use buffered building and tent point location to create a pseudo building footprints dataset from which clusterComposer can generate a spatial sampling frame.\nThe example covered in this tutorial creates a spatial sampling frame for Deir al Balah using building locations, tent locations, neighbourhood boundaries, and a road network. The neighbourhood boundaries and roads data are used to create sections. The building and tent points data are converted into dwelling polygons and each assigned a population count. The clusterComposer function is applied to build clusters of dwellings within each section that meet a target population sise of 250 people. At the end of the tutorial, the results are evaluated.",
-    "crumbs": [
-      "Input Data for Gaza"
-    ]
-  },
-  {
-    "objectID": "books/sampling-frames/data_processing_gaza.html#define-file-paths",
-    "href": "books/sampling-frames/data_processing_gaza.html#define-file-paths",
-    "title": "Input Data for Gaza",
-    "section": "1. Define file paths",
-    "text": "1. Define file paths\nDefine the root data directory and the relative paths to the building, tent, administrative boundary, road, input, and output data.\n\ndata_dir &lt;- \"\"\n\nblds_filepath &lt;- \"raw/\"\ntents_filepath &lt;- \"raw/\"\nadmin_filepath &lt;- \"raw/\"\nroads_path &lt;- \"raw/\"\ncc_input_path &lt;- \"in/\" # create before saving first input file below\ncc_output_path &lt;- \"out/\" #",
-    "crumbs": [
-      "Input Data for Gaza"
-    ]
-  },
-  {
-    "objectID": "books/sampling-frames/data_processing_gaza.html#install-and-load-the-required-packages",
-    "href": "books/sampling-frames/data_processing_gaza.html#install-and-load-the-required-packages",
-    "title": "Input Data for Gaza",
-    "section": "2. Install and load the required packages",
-    "text": "2. Install and load the required packages\nThe dependencies used internally by clusterComposer are installed automatically when the package is installed. The installation line only needs to be run when installing or updating clusterComposer. It does not need to be run every time the analysis is started.\n\n# install \"pak\" if not installed\n#install.packages(\"pak\")\n# use pak to install clusterComposer\npak::pak(\"cadooley/clusterComposer\")\n\nThe remaining packages are used for data preparation, running clusterComposer, and exploring the results.\n\n# libraries for data prep, generating sampling frame & exploration of results\nlibrary(sf)\nlibrary(terra)\nlibrary(data.table)\nlibrary(clusterComposer)\nlibrary(ggplot2)",
-    "crumbs": [
-      "Input Data for Gaza"
-    ]
-  },
-  {
-    "objectID": "books/sampling-frames/data_processing_gaza.html#read-the-input-datasets",
-    "href": "books/sampling-frames/data_processing_gaza.html#read-the-input-datasets",
-    "title": "Input Data for Gaza",
-    "section": "3. Read the input datasets",
-    "text": "3. Read the input datasets\nRead the building locations (UNOSAT, 2025), tent locations (), administrative boundaries (), and road network (PA MOP, JRJ & OCHA, 2021). The road dataset is then restricted to roads within the Gaza Strip.\n\n# read in data\nbld_points &lt;- st_read(paste0(\n  data_dir,\n  blds_filepath,\n  \"UNOSAT_GazaStrip_CDA_11October2025_HU.gdb\"\n))\ntent_points &lt;- st_read(paste0(\n  data_dir,\n  tents_filepath,\n  \"gaza_tent_points_20260805.gpkg\"\n))\nadmin &lt;- st_read(paste0(\n  data_dir,\n  admin_filepath,\n  \"gaza_neighbourhood_boundaries.gpkg\"\n))\nroads &lt;- st_read(paste0(data_dir, roads_path, \"Road_network_oPt.shp\"))\nroads &lt;- roads[roads$Region == \"Gaza Strip\", ]",
-    "crumbs": [
-      "Input Data for Gaza"
-    ]
-  },
-  {
-    "objectID": "books/sampling-frames/data_processing_gaza.html#transform-the-spatial-datasets",
-    "href": "books/sampling-frames/data_processing_gaza.html#transform-the-spatial-datasets",
-    "title": "Input Data for Gaza",
-    "section": "4. Transform the spatial datasets",
-    "text": "4. Transform the spatial datasets\nTransform all spatial datasets to EPSG:32636 so that spatial operations and distance-based calculations are performed in a projected coordinate reference system with metre-based units.\n\n# espg 32636\nbld_points &lt;- st_transform(bld_points, 32636)\ntent_points &lt;- st_transform(tent_points, 32636)\nadmin &lt;- st_transform(admin, 32636)\nroads &lt;- st_transform(roads, 32636)",
-    "crumbs": [
-      "Input Data for Gaza"
-    ]
-  },
-  {
-    "objectID": "books/sampling-frames/data_processing_gaza.html#remove-buildings-identified-as-having-no-housing-units-due-to-destructiondamage",
-    "href": "books/sampling-frames/data_processing_gaza.html#remove-buildings-identified-as-having-no-housing-units-due-to-destructiondamage",
-    "title": "Input Data for Gaza",
-    "section": "5. Remove buildings identified as having no housing units due to destruction/damage",
-    "text": "5. Remove buildings identified as having no housing units due to destruction/damage\nCalculate the updated number of housing units and remove buildings with no remaining housing units.\n\n# omit blds with no housing units\nbld_points$HU_update &lt;- bld_points$HU_tot - bld_points$HU_damaged_14\nbld_points &lt;- bld_points[bld_points$HU_update &gt; 0, ]",
-    "crumbs": [
-      "Input Data for Gaza"
-    ]
-  },
-  {
-    "objectID": "books/sampling-frames/data_processing_gaza.html#prepare-the-building-and-tent-input",
-    "href": "books/sampling-frames/data_processing_gaza.html#prepare-the-building-and-tent-input",
-    "title": "Input Data for Gaza",
-    "section": "6. Prepare the building and tent input",
-    "text": "6. Prepare the building and tent input\nCombine the building and tent locations into a single spatial object. Each point is buffered by two metres to create the polygon geometries required by clusterComposer. It may be useful to have different buffers for buildings and tents in which case st_zm() and st_buffer() can be applied separately to the buildings and tents, followed by the step to bring them into the same object.\nFor this example, every building or tent is assigned a population of five. This could be replaced with an appropriate population estimate before producing a final sampling frame.\n\n# save all points into one gpgk\nbf &lt;- st_sf(geometry = c(st_geometry(bld_points), st_geometry(tent_points)))\nbf &lt;- st_zm(bf, drop = TRUE)\nbf &lt;- st_buffer(bf, 2)\nbf$pop_building &lt;- 5\n# save as gpkg\n#st_write(bf,paste0(data_dir,cc_input_path,\"bld_tent_points.gpkg\"),delete_dsn=TRUE)\n\nThe final st_write() line is commented out. Remove the initial # when ready to save the prepared input as a GeoPackage.",
-    "crumbs": [
-      "Input Data for Gaza"
-    ]
-  },
-  {
-    "objectID": "books/sampling-frames/data_processing_gaza.html#select-area-for-sampling-frame",
-    "href": "books/sampling-frames/data_processing_gaza.html#select-area-for-sampling-frame",
-    "title": "Input Data for Gaza",
-    "section": "7. Select area for sampling frame",
-    "text": "7. Select area for sampling frame\nNote that while clusterComposer is still under development, we recommend generating sampling frames for specific areas rather than whole regions.\nSelect the Deir al Balah area at administrative unit level 3 (ADM3). Columns are also created to store the number of buildings and tents in each section.\n\n# test for Deir al Balah\naoi &lt;- admin[admin$ADM3_EN == \"Deir al Balah\", ]\naoi$section_id &lt;- 1:nrow(aoi)\naoi$bf_count &lt;- 0L\naoi$tent_count &lt;- 0L",
-    "crumbs": [
-      "Input Data for Gaza"
-    ]
-  },
-  {
-    "objectID": "books/sampling-frames/data_processing_gaza.html#count-buildings-and-tents-within-each-section",
-    "href": "books/sampling-frames/data_processing_gaza.html#count-buildings-and-tents-within-each-section",
-    "title": "Input Data for Gaza",
-    "section": "8. Count buildings and tents within each section",
-    "text": "8. Count buildings and tents within each section\nCount the buildings and tents locations intersecting each area-of-interest section. The total number of points and an indicative population are then calculated.\n\n# number of buildings and tents per section\nfor (section in 1:nrow(aoi)) {\n  aoi$bf_count[section] &lt;- lengths(st_intersects(aoi[section, ], bld_points))\n  aoi$tent_count[section] &lt;- lengths(st_intersects(aoi[section, ], tent_points))\n}\n# clusterComposer runs best on less than 1000 buildings\naoi$tot_points &lt;- (aoi$bf_count + aoi$tent_count)\n# assuming 5 people per point just for testing purposes\naoi$tot_pop &lt;- aoi$tot_points * 5",
-    "crumbs": [
-      "Input Data for Gaza"
-    ]
-  },
-  {
-    "objectID": "books/sampling-frames/data_processing_gaza.html#identify-and-divide-large-sections",
-    "href": "books/sampling-frames/data_processing_gaza.html#identify-and-divide-large-sections",
-    "title": "Input Data for Gaza",
-    "section": "9. Identify and divide large sections",
-    "text": "9. Identify and divide large sections\nSelect sections containing more than 800 building or tent locations. Roads within and immediately around these sections are used as dividing lines.\nThe road geometries and area boundaries are combined, noded, and polygonised to create smaller subsections.\n\n# split areas with more than 800 buildings/tents using roads, prior to running cluster composer\naoi_big &lt;- aoi[aoi$tot_points &gt; 800, ]\nroads_aoi &lt;- st_intersection(roads, st_buffer(aoi_big, 50))\nsub_sections &lt;- c(st_geometry(roads_aoi), st_geometry(st_boundary(aoi_big)))\nlines &lt;- st_union(sub_sections)\nlines &lt;- st_node(lines)\npoly_strata &lt;- st_polygonize(lines)\npolygons &lt;- st_collection_extract(poly_strata, \"POLYGON\")\npolygons &lt;- st_cast(polygons, \"POLYGON\")\npolygons_sf &lt;- st_as_sf(polygons)\npolygons_sf &lt;- polygons_sf[!st_is_empty(polygons_sf), ]\npolygons_sf &lt;- st_make_valid(polygons_sf)\npolygons_sf$area &lt;- st_area(polygons_sf)\n\nThe above code creates lots of smaller polygons from the large sections. As the road network was used to split these areas, we now have some undesirable polygons, e.g. thin strips of land between a road edge and the neighbourhod boundary. So, next, we merge these merged into neighbouring polygons that share the longest boundary.\nThe procedure is repeated until no polygons below the threshold remain or no further suitable merge can be made.\n\n# merge small polys into neighbours\nthresh &lt;- 50000\nrepeat {\n  small_idx &lt;- which(as.numeric(polygons_sf$area) &lt; thresh)\n  if (length(small_idx) == 0) {\n    break\n  }\n  merged_any &lt;- FALSE\n  for (i in small_idx) {\n    nbr_idx &lt;- st_intersects(polygons_sf[i, ], polygons_sf)[[1]]\n    nbr_idx &lt;- setdiff(nbr_idx, i)\n\n    if (length(nbr_idx) == 0) {\n      next\n    }\n\n    shared_len &lt;- sapply(nbr_idx, function(j) {\n      shared &lt;- st_intersection(\n        st_boundary(st_make_valid(st_geometry(polygons_sf[i, ]))),\n        st_boundary(st_make_valid(st_geometry(polygons_sf[j, ])))\n      )\n      sum(as.numeric(st_length(shared)))\n    })\n\n    if (max(shared_len) == 0) {\n      next\n    }\n\n    target &lt;- nbr_idx[which.max(shared_len)]\n\n    st_geometry(polygons_sf[target, ]) &lt;- st_union(\n      st_make_valid(st_geometry(polygons_sf[target, ])),\n      st_make_valid(st_geometry(polygons_sf[i, ]))\n    )\n\n    polygons_sf &lt;- polygons_sf[-i, ]\n\n    merged_any &lt;- TRUE\n    break\n  }\n\n  if (!merged_any) break\n}\n\npolygons_sf &lt;- polygons_sf[!st_is_empty(polygons_sf), ]\n\nThe above code merges based on polygon area but this could be adapted to explicitly merge based on estimated population sizes of polygons.",
-    "crumbs": [
-      "Input Data for Gaza"
-    ]
-  },
-  {
-    "objectID": "books/sampling-frames/data_processing_gaza.html#recalculate-section-counts",
-    "href": "books/sampling-frames/data_processing_gaza.html#recalculate-section-counts",
-    "title": "Input Data for Gaza",
-    "section": "10. Recalculate section counts",
-    "text": "10. Recalculate section counts\nCount the building and tent locations contained in each polygon.\nThe total number of points and the indicative population are recalculated for the new sections.\n\n# count blds & tents for new polygons\npolygons_sf$section_id &lt;- 1:nrow(polygons_sf)\npolygons_sf$bf_count &lt;- 0L\npolygons_sf$tent_count &lt;- 0L\nfor (section in 1:nrow(polygons_sf)) {\n  polygons_sf$bf_count[section] &lt;- lengths(st_intersects(\n    polygons_sf[section, ],\n    bld_points\n  ))\n  polygons_sf$tent_count[section] &lt;- lengths(st_intersects(\n    polygons_sf[section, ],\n    tent_points\n  ))\n}\n# clusterComposer runs best on less than 1000 buildings\npolygons_sf$tot_points &lt;- (polygons_sf$bf_count + polygons_sf$tent_count)\n# assuming 5 people per point just for testing purposes\npolygons_sf$tot_pop &lt;- polygons_sf$tot_points * 5\n# rename geometry col\nnames(polygons_sf)[\n  names(polygons_sf) == attr(polygons_sf, \"sf_column\")\n] &lt;- \"geom\"\nattr(polygons_sf, \"sf_column\") &lt;- \"geom\"",
-    "crumbs": [
-      "Input Data for Gaza"
-    ]
-  },
-  {
-    "objectID": "books/sampling-frames/data_processing_gaza.html#reassemble-the-area-of-interest",
-    "href": "books/sampling-frames/data_processing_gaza.html#reassemble-the-area-of-interest",
-    "title": "Input Data for Gaza",
-    "section": "11. Reassemble the area of interest",
-    "text": "11. Reassemble the area of interest\nRetain the original sections containing no more than 800 points and combine them with the new subsections created from the larger areas.\nThe section areas and identifiers are then recalculated.\n\n# add to previous sections\naoi &lt;- rbind(\n  aoi[\n    aoi$tot_points &lt;= 800,\n    c(\"bf_count\", \"tent_count\", \"tot_points\", \"tot_pop\")\n  ],\n  polygons_sf[, c(\"bf_count\", \"tent_count\", \"tot_points\", \"tot_pop\")]\n)\naoi$area &lt;- st_area(aoi)\naoi$section_id &lt;- 1:nrow(aoi)",
-    "crumbs": [
-      "Input Data for Gaza"
-    ]
-  },
-  {
-    "objectID": "books/sampling-frames/data_processing_gaza.html#check-sections-with-low-populations",
-    "href": "books/sampling-frames/data_processing_gaza.html#check-sections-with-low-populations",
-    "title": "Input Data for Gaza",
-    "section": "12. Check sections with low populations",
-    "text": "12. Check sections with low populations\nIdentify sections whose indicative population is below the minimum cluster population of 150. clusterComposer will simply save these as individual\n\n# note that several of these sections are below the minimum population per EZ of 150\n# the code above to split up areas could be based on population counts rather than size\nnrow(aoi[aoi$tot_pop &lt; 150, ]) # 19",
-    "crumbs": [
-      "Input Data for Gaza"
-    ]
-  },
-  {
-    "objectID": "books/sampling-frames/data_processing_gaza.html#save-the-area-of-interest-sections",
-    "href": "books/sampling-frames/data_processing_gaza.html#save-the-area-of-interest-sections",
-    "title": "Input Data for Gaza",
-    "section": "13. Save the area-of-interest sections",
-    "text": "13. Save the area-of-interest sections\nSave the completed Deir al Balah area-of-interest sections as a GeoPackage for use with clusterComposer.\nThe st_write() call is currently commented out. Remove the initial # when ready to write the file.\n\n# save the Areas of Interest\n#st_write(aoi,paste0(data_dir,cc_input_path,\"aoi_DeiralBalah.gpkg\"),delete_dsn=TRUE)",
-    "crumbs": [
-      "Input Data for Gaza"
-    ]
-  },
-  {
-    "objectID": "books/sampling-frames/data_processing_gaza.html#create-sampling-frame-from-clustercomposer",
-    "href": "books/sampling-frames/data_processing_gaza.html#create-sampling-frame-from-clustercomposer",
-    "title": "Input Data for Gaza",
-    "section": "14. Create sampling frame from clusterComposer",
-    "text": "14. Create sampling frame from clusterComposer\n\nncores &lt;- parallel::detectCores() - 1\n\n# run clusterComposer function\nclusterComposer(\n  aoi = aoi,\n  bf_file_path = paste0(data_dir, cc_input_path, \"bld_tent_points.gpkg\"),\n  run_id = \"gaza_test_dab_20261119\",\n  output_file_path = paste0(data_dir, cc_output_path),\n  pop_per_EZ = 250,\n  max_pop_per_EZ = 350,\n  min_pop_per_EZ = 150,\n  n_cores = ncores,\n  delete_temp_files = FALSE\n)",
-    "crumbs": [
-      "Input Data for Gaza"
-    ]
-  },
-  {
-    "objectID": "books/sampling-frames/data_processing_gaza.html#evaluating-results",
-    "href": "books/sampling-frames/data_processing_gaza.html#evaluating-results",
-    "title": "Input Data for Gaza",
-    "section": "15. Evaluating results",
-    "text": "15. Evaluating results",
-    "crumbs": [
-      "Input Data for Gaza"
-    ]
-  },
-  {
-    "objectID": "books/sampling-frames/data_processing_gaza.html#references",
-    "href": "books/sampling-frames/data_processing_gaza.html#references",
-    "title": "Input Data for Gaza",
-    "section": "References",
-    "text": "References\nState of Palestine Ministry of Planning and Administrative Development (PA MOP), Joint Research Centre (JRC), and United Nations Office for the Coordination of Humanitarian Affairs (OCHA). 2021. State of Palestine – Roads. Humanitarian Data Exchange. Updated 18 November 2021. Accessed November 2026. Dataset.",
-    "crumbs": [
-      "Input Data for Gaza"
-    ]
-  },
-  {
-    "objectID": "books/sampling-frames/cluster_composer.html",
-    "href": "books/sampling-frames/cluster_composer.html",
-    "title": "clusterComposer",
-    "section": "",
-    "text": "Add something similar to README.md.",
-    "crumbs": [
-      "clusterComposer"
     ]
   }
 ]

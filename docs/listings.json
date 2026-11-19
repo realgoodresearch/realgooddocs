@@ -7,15 +7,6 @@
     ]
   },
   {
-    "listing": "/books/sampling-frames/toc.html",
-    "items": [
-      "/books/sampling-frames/overview.html",
-      "/books/sampling-frames/cluster_composer.html",
-      "/books/sampling-frames/data_processing_general.html",
-      "/books/sampling-frames/data_processing_gaza.html"
-    ]
-  },
-  {
     "listing": "/index.html",
     "items": [
       "/books/sampling-frames/overview.html",
@@ -29,6 +20,15 @@
     "items": [
       "/books/nowpop/overview.html",
       "/books/nowpop/gaza-nowpop-telecoms.html"
+    ]
+  },
+  {
+    "listing": "/books/sampling-frames/toc.html",
+    "items": [
+      "/books/sampling-frames/overview.html",
+      "/books/sampling-frames/cluster_composer.html",
+      "/books/sampling-frames/data_processing_general.html",
+      "/books/sampling-frames/data_processing_gaza.html"
     ]
   },
   {
