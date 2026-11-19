@@ -1,17 +1,14 @@
 ---
-title: "clusterComposer_gaza_tutorial"
+title: "Creating a Spatial Sampling Frame for Deir al Balah"
 author: "Claire Dooley"
-date: "2026-11-18"
-output: html_document
+date: last-modified
+date-format: "D MMM YYYY, HH:mm:ss"
+format:
+  html:
+    link-external-newwindow: true
 execute:
   eval: false
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-eval = FALSE
-```
-
 
 ## Introduction
 
@@ -25,17 +22,6 @@ The example covered in this tutorial creates a spatial sampling frame for Deir a
 ## 1. Define file paths
 
 Define the root data directory and the relative paths to the building, tent, administrative boundary, road, input, and output data.
-
-```{r define-shared-drive-file-paths, include=FALSE}
-data_dir <-"/Volumes/realgoodsamba/"
-
-blds_filepath <- "common/unosat/Gaza_building_damage/OCHA-CBPF-OPT-031_UNOSAT_Gaza_Strip_CDA_11October2025_GDB_HU/"
-tents_filepath <- "projects/gazatents/publications/2026-08-05/supplementary_data/"
-admin_filepath <- "projects/gridez/data/ocha/admin_boundaries/"
-roads_path <- "projects/gridez/data/roads_oPt/"
-cc_input_path <- "projects/gridez/data/clusterComposer_in/"
-cc_output_path <- "projects/gridez/"
-```
 
 ```{r define-file-paths}
 data_dir <-""

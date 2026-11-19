@@ -70,7 +70,7 @@ website:
         - text: "Table of Contents"
           href: books/sampling-frames/toc.qmd
         - text: "Gaza Sampling Frame Tutorial"
-          href: books/sampling-frames/clusterComposer_gaza_tutorial.Rmd
+          href: books/sampling-frames/clusterComposer_gaza_tutorial.qmd
     - id: tent-mapping-sidebar
       title: "Tent Mapping"
       path: books/tent-mapping/
