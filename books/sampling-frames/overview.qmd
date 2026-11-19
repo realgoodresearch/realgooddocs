@@ -1,0 +1,14 @@
+---
+title: "Automated Survey Sampling Frames"
+subtitle: "Survey sample frames from building footprints"
+image: "resources/sampling-frames-hero-placeholder.svg"
+date: last-modified
+date-format: "D MMM YYYY, HH:mm:ss"
+format:
+  html:
+    link-external-newwindow: true
+---
+
+![](resources/sampling-frames-hero-placeholder.svg){fig-align="center" width="90%"}
+
+Placeholder text.

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="700" viewBox="0 0 1600 700" role="img" aria-labelledby="title desc">
+  <title id="title">Placeholder for spatial sampling frames hero image</title>
+  <desc id="desc">A neutral placeholder to be replaced with the book's hero image.</desc>
+  <rect width="1600" height="700" fill="#e9ecef"/>
+  <rect x="80" y="80" width="1440" height="540" rx="12" fill="#f8f9fa" stroke="#adb5bd" stroke-width="4" stroke-dasharray="14 12"/>
+  <text x="800" y="330" fill="#495057" font-family="system-ui, sans-serif" font-size="42" text-anchor="middle">Hero image placeholder</text>
+  <text x="800" y="390" fill="#6c757d" font-family="system-ui, sans-serif" font-size="27" text-anchor="middle">Spatial Sampling Frames</text>
+</svg>

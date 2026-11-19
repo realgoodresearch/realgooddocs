@@ -7,18 +7,25 @@
     ]
   },
   {
-    "listing": "/books/nowpop/toc.html",
+    "listing": "/books/sampling-frames/toc.html",
     "items": [
-      "/books/nowpop/overview.html",
-      "/books/nowpop/gaza-nowpop-telecoms.html"
+      "/books/sampling-frames/overview.html"
     ]
   },
   {
     "listing": "/index.html",
     "items": [
+      "/books/sampling-frames/overview.html",
       "/books/nowpop/overview.html",
       "/books/tent-mapping/overview.html",
       "/books/bayesian-intro/overview.html"
+    ]
+  },
+  {
+    "listing": "/books/nowpop/toc.html",
+    "items": [
+      "/books/nowpop/overview.html",
+      "/books/nowpop/gaza-nowpop-telecoms.html"
     ]
   },
   {

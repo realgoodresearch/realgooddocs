@@ -3,6 +3,8 @@ title: "clusterComposer_gaza_tutorial"
 author: "Claire Dooley"
 date: "2026-11-18"
 output: html_document
+execute:
+  eval: false
 ---
 
 ```{r setup, include=FALSE}
@@ -24,7 +26,7 @@ The example covered in this tutorial creates a spatial sampling frame for Deir a
 
 Define the root data directory and the relative paths to the building, tent, administrative boundary, road, input, and output data.
 
-```{r define-file-paths, include=FALSE}
+```{r define-shared-drive-file-paths, include=FALSE}
 data_dir <-"/Volumes/realgoodsamba/"
 
 blds_filepath <- "common/unosat/Gaza_building_damage/OCHA-CBPF-OPT-031_UNOSAT_Gaza_Strip_CDA_11October2025_GDB_HU/"

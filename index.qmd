@@ -8,6 +8,7 @@ listing:
   type: grid
   sort: false
   contents:
+    - books/sampling-frames/overview.qmd
     - books/nowpop/overview.qmd
     - books/tent-mapping/overview.qmd
     - books/bayesian-intro/overview.qmd

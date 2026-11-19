@@ -61,6 +61,16 @@ website:
           href: books/nowpop/toc.qmd
         - text: "Gaza Telecoms"
           href: books/nowpop/gaza-nowpop-telecoms.qmd
+    - id: sampling-frames-sidebar
+      title: "Spatial Sampling Frames"
+      path: books/sampling-frames/
+      contents:
+        - text: "Introduction"
+          href: books/sampling-frames/overview.qmd
+        - text: "Table of Contents"
+          href: books/sampling-frames/toc.qmd
+        - text: "Gaza Sampling Frame Tutorial"
+          href: books/sampling-frames/clusterComposer_gaza_tutorial.Rmd
     - id: tent-mapping-sidebar
       title: "Tent Mapping"
       path: books/tent-mapping/
