@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Edith Darin">
+
+<title>Ukraine NowPop - Telecoms advertising data – Real Good Docs</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../books/nowpop/gaza-nowpop-telecoms.html" rel="prev">
+<link href="../../assets/images/logo/favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-be1990241c5249fdc3b2c4d9b6aba20c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link rel="stylesheet" href="../../assets/pdf-page-viewer.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+<script>
+
+  if (typeof pdfjsLib !== 'undefined') {
+
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+  }
+
+</script>
+
+<script src="../../assets/pdf-page-viewer.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Real Good Docs</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://data.realgoodresearch.com"> 
+<span class="menu-text">Data</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://docs.realgoodresearch.com"> 
+<span class="menu-text">Docs</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/realgoodresearch" target="_blank"> 
+<span class="menu-text">Code</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://realgoodresearch.com"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../books/nowpop/ukraine-nowpop-telecoms.html">Ukraine Telecoms</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../books/nowpop/overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../books/nowpop/toc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Table of Contents</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../books/nowpop/gaza-nowpop-telecoms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Gaza Telecoms</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../books/nowpop/ukraine-nowpop-telecoms.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Ukraine Telecoms</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#analysis" id="toc-analysis" class="nav-link" data-scroll-target="#analysis">Analysis</a>
+  <ul class="collapse">
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation">Data preparation</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#notation" id="toc-notation" class="nav-link" data-scroll-target="#notation">Notation</a></li>
+  <li><a href="#step-1-population-flows" id="toc-step-1-population-flows" class="nav-link" data-scroll-target="#step-1-population-flows">Step 1: Population flows</a></li>
+  <li><a href="#step-2-age-and-sex" id="toc-step-2-age-and-sex" class="nav-link" data-scroll-target="#step-2-age-and-sex">Step 2: Age and sex</a></li>
+  <li><a href="#step-3-rescaling-to-national-totals" id="toc-step-3-rescaling-to-national-totals" class="nav-link" data-scroll-target="#step-3-rescaling-to-national-totals">Step 3: Rescaling to national totals</a></li>
+  <li><a href="#outputs" id="toc-outputs" class="nav-link" data-scroll-target="#outputs">Outputs</a></li>
+  </ul></li>
+  <li><a href="#triangulation" id="toc-triangulation" class="nav-link" data-scroll-target="#triangulation">Triangulation</a></li>
+  <li><a href="#assumptions-and-limitations" id="toc-assumptions-and-limitations" class="nav-link" data-scroll-target="#assumptions-and-limitations">Assumptions and limitations</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Ukraine NowPop - Telecoms advertising data</h1>
+<p class="subtitle lead">Monthly population stocks and flow estimates from telecom advertising data.</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Edith Darin </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">20 Nov 2026, 18:50:51</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="resources/ukraine-nowpop-telecoms/ukraine-nowpop-telecoms-hero.webp" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Since the full-scale Russian invasion of Ukraine in February 2022, millions of people have left the country, moved within it, and, increasingly, returned. Humanitarian planning needs up-to-date answers to three questions: how many people live in each community now, who they are by age and sex, and where they have come from. Ukraine has had no census since 2001, and conventional population estimates cannot keep pace with displacement on this scale.</p>
+<p>Mobile networks observe these movements continuously. Unlike our <a href="../../books/nowpop/gaza-nowpop-telecoms.html">Gaza NowPop</a> work, which uses counts of users connected to individual cell towers, here we use a commercial data product: aggregated statistics that a mobile network operator in Ukraine produces for targeted marketing purposes and makes available for purchase. Using an off-the-shelf data product has practical advantages: it can be bought through a standard commercial process, it arrives already aggregated at administrative level, and it comes in a regular format with age and sex. The trade-off is that we cannot control how the aggregates are produced, and that keeping estimates up to date means continuing to buy data updates.</p>
+<p>Telecom advertising data were not our first exercise. Our earlier nowcasts for Ukraine used social media advertising audience counts from Meta (<a href="https://doi.org/10.1111/padr.12558">Leasure et al.&nbsp;2023</a>), but a change to Meta’s Marketing API in May 2024 made those data unsuitable on their own for real-time nowcasting. We therefore moved to telecom advertising data, which offered something new: as well as counting subscribers in each place, they record, for each pair of locations, how many subscribers moved between locations. These monthly flows let us better track how the share of residents on the network, the <em>penetration rate</em>, changes over time and space as people move.</p>
+<p><strong>Our modelling goal</strong> is to convert monthly subscriber flows into monthly population estimates and population flows for each hromada (Ukraine’s basic municipal unit), by age group and sex, consistent with the national population after accounting for people who have crossed the border.</p>
+<p>This work was undertaken at the Demographic Science Unit, University of Oxford, in partnership with the World Health Organization (WHO) Ukraine.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Open-source
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The source code for this analysis pipeline is publicly available from GitHub with an open-source license (GPL-3.0): <a href="https://github.com/OxfordDemSci/UkraineNowPop" class="uri">https://github.com/OxfordDemSci/UkraineNowPop</a>.</p>
+<p>The method described here is in the <code>./src/analysis/</code> folder, and the data preparation in <code>./src/data_prep/</code>.</p>
+</div>
+</div>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<p>The primary data used in this pipeline are:</p>
+<ul>
+<li><p><strong>Telecom subscribers flows</strong> - A commercial data product from a mobile phone company in Ukraine, designed for advertising, giving aggregated monthly counts of subscribers by age group and sex. A subscriber’s <em>home</em> hromada is their most common night-time location over the previous three months. We use three of the product’s tables:</p>
+<ul>
+<li><em>Monthly flows</em>: subscribers whose home hromada last month was <span class="math inline">\(i\)</span> and whose current home hromada is <span class="math inline">\(j\)</span>. Besides hromadas, origins can be <em>Abroad</em> (subscribers returning from outside Ukraine) or <em>Unknown</em> (subscribers whose previous location is not known, such as new subscribers), and destinations can be <em>Abroad</em>. Monthly flows are only available for government-controlled territory (GCT).</li>
+<li><em>Baseline flows</em>: subscribers whose home hromada in January 2022 was <span class="math inline">\(i\)</span> and whose current home hromada is <span class="math inline">\(j\)</span>. We use them to account for non-government-controlled territory (NGCT) (see Step 3).</li>
+<li><em>Stocks</em>: subscribers whose home is in each hromada.</li>
+</ul>
+<p>Our estimates cover February 2022 to November 2025 for the 18 to 64 years old.</p></li>
+<li><p><strong>Baseline population</strong> - Total population of each hromada in 2022 from the State Statistics Service of Ukraine (<a href="https://www.ukrstat.gov.ua">SSSU</a>).</p></li>
+<li><p><strong>Baseline age-sex structure</strong> - Population by age and sex for each oblast (region) on 1 January 2022, from the Common Operational Dataset on Population Statistics (COD-PS) for Ukraine (<a href="https://data.humdata.org/dataset/cod-ps-ukr">UNFPA, HDX</a>).</p></li>
+<li><p><strong>Border crossings</strong> - Counts of people leaving and entering Ukraine, recorded by the border authorities and published by UNHCR: daily until December 2024, then monthly (<a href="https://data.unhcr.org/en/situations/ukraine">UNHCR Operational Data Portal</a>).</p></li>
+<li><p><strong>Age-sex profile of people leaving</strong> - Ukrainians with temporary protection status in neighbouring countries (Hungary, Moldova, Poland, Romania, and Slovakia), by age and sex (<a href="https://ec.europa.eu/eurostat/cache/metadata/en/migr_asytp_esms.htm">Eurostat</a>).</p></li>
+<li><p><strong>Age-sex profile of people returning</strong> - Profiles of returnees from the International Organization for Migration (IOM) Displacement Tracking Matrix (DTM) <em>Crossing back</em> surveys (<a href="https://dtm.iom.int/online-interactive-resources/ukraine-regional-response-dashboard/index.html?category=Demographic%20Profile&amp;survey=crossings">IOM DTM</a>). These surveys stopped in December 2024.</p></li>
+</ul>
+<p>Additional data that are used include:</p>
+<ul>
+<li><strong>Administrative boundaries</strong> - Oblasts, raions (districts), and hromadas with their P-codes from the Common Operational Dataset on Administrative Boundaries (COD-AB) (<a href="https://data.humdata.org/dataset/cod-ab-ukr">OCHA, HDX</a>). We also group oblasts into macroregions.</li>
+<li><strong>Areas outside government control</strong> - We follow the telecom operator’s own classification which is fixed over time.</li>
+</ul>
+</section>
+<section id="analysis" class="level2">
+<h2 class="anchored" data-anchor-id="analysis">Analysis</h2>
+<section id="data-preparation" class="level3">
+<h3 class="anchored" data-anchor-id="data-preparation">Data preparation</h3>
+<p>Some hromadas are missing from the monthly flows for some months. If a hromada is missing for three or fewer consecutive months, we fill the gap by repeating the flows into it from the last month observed before the gap. Hromadas missing for more than three consecutive months are excluded, both as origins and as destinations. 3 hromadas were imputed in this way, and 1,138 hromadas were included in the estimates.</p>
+</section>
+<section id="overview" class="level3">
+<h3 class="anchored" data-anchor-id="overview">Overview</h3>
+<p>The pipeline runs month by month. In outline (<a href="#fig-model-schema" class="quarto-xref">Figure&nbsp;1</a>):</p>
+<ol type="1">
+<li><strong>Population totals.</strong> For each hromada, we measure the <em>penetration rate</em>: the number of the operator’s subscribers per resident. We estimate it at the start of the series, before the full-scale invasion, using the 2022 baseline population. We use it to turn each month’s subscriber flows into population flows, and then update it from the newly estimated population.</li>
+<li><strong>Age and sex.</strong> We repeat the same logic separately for each age-sex group, at the coarser level of macroregions, where data are more complete. We use the result to split each hromada flow by age and sex.</li>
+<li><strong>National consistency.</strong> We rescale the estimates so that, for each age-sex group, they match the national population after accounting for cumulative border crossings and the population in non-government-controlled territory (NGCT). This also allows to take into accout change in penetration rate that are affecting uniformly the country.</li>
+</ol>
+<p>Summing the estimated flows by destination gives the population of each hromada at each month.</p>
+<div id="fig-model-schema" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-model-schema-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<svg viewbox="0 0 900 420" role="img" aria-label="Model schema. Columns: abroad, government-controlled territory with telecom monthly flows between hromadas, and non-government-controlled territory. Rows under each column list the telecom data, other data, and estimated quantities. Below, the national total receives border crossings and the NGCT population and rescales the government-controlled estimates." style="width:100%; max-width:900px; height:auto; display:block; margin:1rem auto; font-family:inherit; font-size:13px;">
+  <defs>
+    <marker id="ua-t" viewbox="0 0 10 10" refx="9" refy="5" markerwidth="7" markerheight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0072B2"></path></marker>
+    <marker id="ua-o" viewbox="0 0 10 10" refx="9" refy="5" markerwidth="7" markerheight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#00795A"></path></marker>
+    <marker id="ua-e" viewbox="0 0 10 10" refx="9" refy="5" markerwidth="7" markerheight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#B84F00"></path></marker>
+    <marker id="ua-g" viewbox="0 0 10 10" refx="9" refy="5" markerwidth="6" markerheight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5b6675"></path></marker>
+    <marker id="ua-e2" viewbox="0 0 10 10" refx="9" refy="5" markerwidth="3.5" markerheight="3.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#B84F00"></path></marker>
+  </defs>
+
+  <!-- Areas -->
+  <rect x="110" y="45" width="130" height="235" rx="10" fill="#f5f6f8" stroke="#9aa5b4"></rect>
+  <rect x="290" y="10" width="370" height="270" rx="10" fill="#f5f6f8" stroke="#9aa5b4"></rect>
+  <rect x="710" y="45" width="180" height="235" rx="10" fill="#f5f6f8" stroke="#9aa5b4"></rect>
+  <text x="175" y="70" text-anchor="middle" font-weight="bold" font-size="14" fill="#1f2933">Abroad</text>
+  <text x="475" y="36" text-anchor="middle" font-weight="bold" font-size="14" fill="#1f2933">Government-controlled</text>
+  <text x="800" y="66" text-anchor="middle" font-weight="bold" font-size="14" fill="#1f2933">Non-government-</text>
+  <text x="800" y="83" text-anchor="middle" font-weight="bold" font-size="14" fill="#1f2933">controlled</text>
+
+  <!-- GCT: hromadas with monthly flows -->
+  <circle cx="375" cy="95" r="20" fill="#fff" stroke="#9aa5b4" stroke-width="1.5"></circle>
+  <circle cx="575" cy="80" r="20" fill="#fff" stroke="#9aa5b4" stroke-width="1.5"></circle>
+  <circle cx="475" cy="150" r="20" fill="#fff" stroke="#9aa5b4" stroke-width="1.5"></circle>
+  <line x1="400" y1="93" x2="548" y2="82" stroke="#0072B2" stroke-width="1" marker-end="url(#ua-t)"></line>
+  <line x1="555" y1="94" x2="497" y2="135" stroke="#0072B2" stroke-width="1" marker-end="url(#ua-t)"></line>
+  <line x1="453" y1="138" x2="399" y2="108" stroke="#0072B2" stroke-width="1" marker-end="url(#ua-t)"></line>
+  <text x="575" y="118" text-anchor="middle" font-size="12" font-style="italic" fill="#5b6675">hromadas</text>
+  <path d="M465,172 C452,202 498,202 485,173" fill="none" stroke="#0072B2" stroke-width="1" marker-end="url(#ua-t)"></path>
+
+  <!-- NGCT: one area -->
+  <circle cx="800" cy="135" r="30" fill="#fff" stroke="#9aa5b4" stroke-width="1.5"></circle>
+
+  <!-- Abroad: one area, flows to and from hromadas -->
+  <circle cx="175" cy="135" r="30" fill="#fff" stroke="#9aa5b4" stroke-width="1.5"></circle>
+  <line x1="209" y1="128" x2="349" y2="100" stroke="#0072B2" stroke-width="1" marker-end="url(#ua-t)"></line>
+  <line x1="450" y1="149" x2="212" y2="137" stroke="#0072B2" stroke-width="1" marker-end="url(#ua-t)"></line>
+
+  <!-- NGCT -> GCT: leavers join government-controlled territory, destination hromada unknown -->
+  <line x1="764" y1="135" x2="666" y2="135" stroke="#0072B2" stroke-width="1" marker-end="url(#ua-t)"></line>
+
+  <!-- Separators between diagram and rows -->
+  <line x1="120" y1="205" x2="230" y2="205" stroke="#9aa5b4" stroke-dasharray="3 3"></line>
+  <line x1="300" y1="205" x2="650" y2="205" stroke="#9aa5b4" stroke-dasharray="3 3"></line>
+  <line x1="720" y1="205" x2="880" y2="205" stroke="#9aa5b4" stroke-dasharray="3 3"></line>
+
+  <!-- Rows: telecom data, other data, estimated -->
+  <text x="12" y="222" font-weight="bold" font-size="12" fill="#0072B2">Telecom data</text>
+  <text x="175" y="222" text-anchor="middle" fill="#0072B2">monthly flows</text>
+  <text x="475" y="222" text-anchor="middle" fill="#0072B2">monthly flows</text>
+  <text x="800" y="222" text-anchor="middle" fill="#0072B2">stock, baseline flows</text>
+  <text x="12" y="244" font-weight="bold" font-size="12" fill="#00795A">Other data</text>
+  <text x="175" y="244" text-anchor="middle" fill="#00795A">crossings</text>
+  <text x="475" y="244" text-anchor="middle" fill="#00795A">2022 baseline</text>
+  <text x="800" y="244" text-anchor="middle" fill="#00795A">2022 baseline</text>
+  <text x="12" y="266" font-weight="bold" font-size="12" fill="#B84F00">Penetration rate</text>
+  <text x="175" y="266" text-anchor="middle" fill="#B84F00">reset monthly</text>
+  <text x="475" y="266" text-anchor="middle" fill="#B84F00">updated monthly</text>
+  <text x="800" y="266" text-anchor="middle" fill="#B84F00">fixed (pre-invasion)</text>
+
+  <!-- Role of the national total -->
+  <line x1="800" y1="286" x2="800" y2="324" stroke="#B84F00" stroke-width="1" marker-end="url(#ua-e)"></line>
+  <text x="808" y="309" font-size="12" fill="#B84F00">− NGCT</text>
+  <line x1="475" y1="325" x2="475" y2="288" stroke="#B84F00" stroke-width="3" marker-end="url(#ua-e2)"></line>
+  <text x="487" y="309" font-size="12" font-weight="bold" fill="#B84F00">calibrates population</text>
+
+  <rect x="110" y="330" width="780" height="56" rx="10" fill="#f5f6f8" stroke="#9aa5b4"></rect>
+  <text x="500" y="363" text-anchor="middle" font-weight="bold" font-size="14"><tspan fill="#B84F00">National total</tspan><tspan fill="#1f2933"> = </tspan><tspan fill="#00795A">2022 baseline ± border crossings</tspan><tspan fill="#1f2933"> − </tspan><tspan fill="#B84F00">NGCT population</tspan></text>
+
+  <text x="500" y="410" text-anchor="middle" font-size="12"><tspan fill="#00795A">Other data: SSSU, COD-PS, UNHCR, Eurostat, IOM</tspan><tspan fill="#5b6675">   ·   </tspan><tspan fill="#B84F00">Orange: estimated by the model</tspan></text>
+</svg>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-model-schema-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Overview of the model.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="notation" class="level3">
+<h3 class="anchored" data-anchor-id="notation">Notation</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Indices</th>
+<th>Data</th>
+<th>Parameters</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(i\)</span>, <span class="math inline">\(j\)</span>: origin and destination hromada (or <em>Abroad</em>, <em>Unknown</em>)</td>
+<td><span class="math inline">\(S\)</span>: subscriber monthly flows</td>
+<td><span class="math inline">\(p\)</span>: penetration rate</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(m\)</span>: macroregion (<span class="math inline">\(m_i\)</span>: of hromada <span class="math inline">\(i\)</span>)</td>
+<td><span class="math inline">\(S^{BF}\)</span>, <span class="math inline">\(S^{\text{stock}}\)</span>: subscriber baseline flows and stocks</td>
+<td><span class="math inline">\(\pi\)</span>: age-sex proportion of flows</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(o_i\)</span>: oblast of hromada <span class="math inline">\(i\)</span></td>
+<td><span class="math inline">\(T^C\)</span>: baseline (2022) population</td>
+<td><span class="math inline">\(\dot N\)</span>: intermediate population estimate</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(a\)</span>, <span class="math inline">\(s\)</span>: age group and sex</td>
+<td><span class="math inline">\(\pi^O\)</span>: baseline age-sex proportion (COD-PS)</td>
+<td><span class="math inline">\(\theta\)</span>: national scaling factor</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(t\)</span>: month; <span class="math inline">\(t_0\)</span>: first month</td>
+<td><span class="math inline">\(BC\)</span>: border crossings (UNHCR)</td>
+<td><span class="math inline">\(T^{GCT}\)</span>: national population in government-controlled territory</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(in\)</span>, <span class="math inline">\(out\)</span>: inflows and outflows</td>
+<td><span class="math inline">\(\pi^E\)</span>, <span class="math inline">\(\pi^{DTM}\)</span>: age-sex profiles of leavers (Eurostat) and returnees (IOM DTM)</td>
+<td><span class="math inline">\(N\)</span>: final population estimate</td>
+</tr>
+</tbody>
+</table>
+<p>The first month, <span class="math inline">\(t_0\)</span>, is February 2022, which reflects home locations before the full-scale invasion. The baseline population by age and sex, <span class="math inline">\(T^C_{t_0,i,a,s}\)</span>, is the 2022 total population of hromada <span class="math inline">\(i\)</span> multiplied by the age-sex proportion <span class="math inline">\(\pi^O_{t_0,o_i,a,s}\)</span> of its oblast; <span class="math inline">\(T^C_{t_0,i} = \sum_{a,s} T^C_{t_0,i,a,s}\)</span> is its sum over the age-sex groups covered by the model (18 to 64).</p>
+</section>
+<section id="step-1-population-flows" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-population-flows">Step 1: Population flows</h3>
+<section id="initial-penetration-rate" class="level4">
+<h4 class="anchored" data-anchor-id="initial-penetration-rate">Initial penetration rate</h4>
+<p>At <span class="math inline">\(t_0\)</span>, the penetration rate of hromada <span class="math inline">\(i\)</span> is the number of subscribers whose flows start there, divided by its baseline population:</p>
+<p><span class="math display">\[
+p_{t_0,i} = \frac{\sum_j S_{t_0,i,j}}{T^C_{t_0,i}}.
+\]</span></p>
+<p>The penetration rate captures the operator’s local market share and any differences between subscribers and residents, such as people with more than one SIM card or no phone. Rates are not capped, so a hromada can have more subscribers than residents.</p>
+</section>
+<section id="from-subscriber-flows-to-population-flows" class="level4">
+<h4 class="anchored" data-anchor-id="from-subscriber-flows-to-population-flows">From subscriber flows to population flows</h4>
+<p>Each month, we divide subscriber flows by the penetration rate of the place they came from, using the rate estimated for the previous month:</p>
+<p><span class="math display">\[
+\dot N_{t,i,j} =
+\begin{cases}
+\dfrac{S_{t,i,j}}{p_{t-1,i}}, &amp; \text{origin } i \text{ is a hromada}, \\[2ex]
+\dfrac{S_{t,\text{unknown},j}}{p_{t-1,j}}, &amp; \text{origin } i \text{ is Unknown}, \\[2ex]
+S_{t,\text{abroad},j}\,\dfrac{BC^{in}_t}{\sum_{j} S_{t,\text{abroad},j}}, &amp; \text{origin }i \text{ is Abroad}.
+\end{cases}
+\]</span></p>
+<p>Subscribers from an unknown origin take the penetration rate of their destination; if they are going abroad, they take the mean penetration rate. Subscribers arriving from abroad are calibrated directly to the border crossing data: their total equals the number of people recorded entering Ukraine that month, distributed across destinations in proportion to the operator’s returning subscribers. Unlike hromada penetration rates, which are updated from the previous month’s estimates, the rate for arrivals from abroad is reset each month from that month’s border entries.</p>
+</section>
+<section id="updating-the-penetration-rate" class="level4">
+<h4 class="anchored" data-anchor-id="updating-the-penetration-rate">Updating the penetration rate</h4>
+<p>Penetration rates change over time because people move, and because the operator’s market share among people who moved can differ from that of people who stayed. After rescaling (Step 3), we update each hromada’s penetration rate as the ratio between the subscribers who were in it and the estimated population there:</p>
+<p><span class="math display">\[
+p_{t,j} = \frac{\sum_i S_{t,i,j}}{\sum_i N_{t,i,j}}.
+\]</span></p>
+<p>This rate is used as the origin penetration rate for flows leaving hromada <span class="math inline">\(j\)</span> in the following month.</p>
+</section>
+</section>
+<section id="step-2-age-and-sex" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-age-and-sex">Step 2: Age and sex</h3>
+<p>Subscriber counts by age and sex are sparse at the hromada level: many age-sex groups have no recorded flows between particular hromadas. We therefore estimate age-sex penetration rates for macroregions:</p>
+<p><span class="math display">\[
+p_{t_0,m,a,s} = \frac{\sum_{i \in m} \sum_j S_{t_0,i,j,a,s}}{\sum_{i \in m} T^C_{t_0,i,a,s}},
+\]</span></p>
+<p>For each month, we compute age-sex specific intermediate flows <span class="math inline">\(S_{t,i,j,a,s} / p_{t-1,m_i,a,s}\)</span>, and from these the age-sex composition <span class="math inline">\(\pi_{t,a,s}\)</span> of the flows between each pair of origin and destination macroregions. We then split each hromada-level flow from Step 1 according to that composition:</p>
+<p><span class="math display">\[
+\dot N_{t,i,j,a,s} = \pi_{t,a,s, m_i, m_j}\; \dot N_{t,i,j}.
+\]</span></p>
+<p>The total size of each flow therefore comes from the hromada-level penetration rates, while its age-sex composition comes from the macroregion-level rates. For flows from abroad, the age-sex rates are calibrated to border crossings by age and sex (see below). After rescaling, the macroregion age-sex penetration rates are updated in the same way as in Step 1:</p>
+<p><span class="math display">\[
+p_{t,m,a,s} = \frac{\sum_{j \in m} \sum_i S_{t,i,j,a,s}}{\sum_{j \in m} \sum_i N_{t,i,j,a,s}}.
+\]</span></p>
+</section>
+<section id="step-3-rescaling-to-national-totals" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-rescaling-to-national-totals">Step 3: Rescaling to national totals</h3>
+<p>Step 3 anchor the estimates to an independent national total, built from the baseline population and border crossings, and use the subscriber data ultimately to distribute it across hromadas.</p>
+<section id="border-crossings-by-age-and-sex" class="level4">
+<h4 class="anchored" data-anchor-id="border-crossings-by-age-and-sex">Border crossings by age and sex</h4>
+<p>Border crossing counts are not broken down by age or sex. We apply the age-sex profile of people under temporary protection in the European Union to departures, and the IOM DTM returnee profile to arrivals:</p>
+<p><span class="math display">\[
+BC^{out}_{t,a,s} = BC^{out}_t\, \pi^E_{t,a,s},
+\qquad
+BC^{in}_{t,a,s} = BC^{in}_t\, \pi^{DTM}_{t,a,s}.
+\]</span></p>
+<p>The DTM profile uses a broad adult age band; we split it into the model’s age groups using the Eurostat age distribution. When the latest month of border crossing or Eurostat data is not yet available, we carry the most recent values forward.</p>
+</section>
+<section id="population-in-non-government-controlled-territory" class="level4">
+<h4 class="anchored" data-anchor-id="population-in-non-government-controlled-territory">Population in non-government-controlled territory</h4>
+<p>The telecom data have limited coverage in non-government-controlled territory: we have only monthly baseline flows which is the number of people that used to be in the NGCT, that are now in the GCT. We estimate the number of subscribers who remain in NGCT as the NGCT subscriber stock minus the baseline flows of subscribers who have left NGCT since before the full-scale invasion:</p>
+<p><span class="math display">\[
+S_{t,\text{NGCT},\text{NGCT},a,s} = S^{\text{stock}}_{t_0,\text{NGCT},a,s} - S^{BF}_{t,\text{NGCT}, \text{GCT},a,s}.
+\]</span></p>
+<p>We convert this to population using the penetration rate at <span class="math inline">\(t_0\)</span>, which we hold constant:</p>
+<p><span class="math display">\[
+p_{t_0,\text{NGCT},a,s} = \frac{S^{\text{stock}}_{t_0,\text{NGCT},a,s}}{\sum_{i \in \text{NGCT}} T^C_{t_0,i,a,s}},
+\qquad
+N_{t,\text{NGCT},a,s} = \frac{S_{t,\text{NGCT},\text{NGCT},a,s}}{p_{t_0,\text{NGCT},a,s}}.
+\]</span></p>
+<p>These estimates are important to correct the national total used to calibrate the population estimates in the government controlled territory.</p>
+</section>
+<section id="national-totals-and-scaling-factor" class="level4">
+<h4 class="anchored" data-anchor-id="national-totals-and-scaling-factor">National totals and scaling factor</h4>
+<p>For each age-sex group, the national total in government-controlled territory is the baseline population, minus everyone who has left Ukraine since <span class="math inline">\(t_0\)</span>, plus everyone who has returned, minus the population in non-government-controlled territory:</p>
+<p><span class="math display">\[
+T^{\text{GCT}}_{t,a,s} = \sum_i T^C_{t_0,i,a,s} \;-\; \sum_{\tau \le t} BC^{out}_{\tau,a,s} \;+\; \sum_{\tau \le t} BC^{in}_{\tau,a,s} \;-\; N_{t,\text{NGCT},\text{NGCT},a,s},
+\]</span></p>
+<p>where the baseline sum covers the hromadas in the telecom data and in non-government-controlled territory.</p>
+<p>The domestic flows (from one hromada to another) should add up to this total, except for this month’s border crossings, which are represented separately by the flows to and from <em>Abroad</em>. The scaling factor is therefore:</p>
+<p><span class="math display">\[
+\theta^{-1}_{t,a,s} = \frac{\sum_{i \ne \text{abroad}} \sum_{j \ne \text{abroad}} \dot N_{t,i,j,a,s}}{T^{\text{GCT}}_{t,a,s}}.
+\]</span></p>
+<p>The final flows are:</p>
+<p><span class="math display">\[
+N_{t,i,j,a,s} =
+\begin{cases}
+\dot N_{t,i,j,a,s}\; \theta_{t,a,s}, &amp; i, j \ne \text{abroad}, \\[1ex]
+\dot N_{t,i,\text{abroad},a,s}\; \dfrac{BC^{out}_{t,a,s}}{\sum_{i} \dot N_{t,i,\text{abroad},a,s}}, &amp; j = \text{abroad}, \\[2ex]
+\dot N_{t,\text{abroad},j,a,s}, &amp; i = \text{abroad}.
+\end{cases}
+\]</span></p>
+<p>Flows to <em>Abroad</em> are rescaled so that they sum to the number of people recorded leaving Ukraine that month. Flows from <em>Abroad</em> are already calibrated to arrivals and are not rescaled. Subscribers recorded as moving from abroad to abroad are dropped, because they cannot be calibrated.</p>
+<p>Putting the three steps together, each domestic estimate is a subscriber count multiplied by an inverse penetration rate, an age-sex proportion, and a national scaling factor:</p>
+<p><span class="math display">\[
+N_{t,i,j,a,s} = S_{t,i,j}\; p^{-1}_{t-1,i}\; \pi_{t,a,s, m_i,m_j}\; \theta_{t,a,s}.
+\]</span></p>
+</section>
+</section>
+<section id="outputs" class="level3">
+<h3 class="anchored" data-anchor-id="outputs">Outputs</h3>
+<section id="population-count-at-hromada-level" class="level4">
+<h4 class="anchored" data-anchor-id="population-count-at-hromada-level">Population count at hromada level</h4>
+<p>The population of hromada <span class="math inline">\(j\)</span> in month <span class="math inline">\(t\)</span> is the sum of all flows arriving there:</p>
+<p><span class="math display">\[
+N_{t,j,a,s} = \sum_i N_{t,i,j,a,s}.
+\]</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="resources/ukraine-nowpop-telecoms/map_population.png" class="img-fluid figure-img"></p>
+<figcaption>Population estimates at the hromada-level for November 2025 showing the hromadas for which telecom data were available to support up-to-date population estimation.</figcaption>
+</figure>
+</div>
+</section>
+<section id="population-monthly-timeserie-from-february-2022-to-november-2025" class="level4">
+<h4 class="anchored" data-anchor-id="population-monthly-timeserie-from-february-2022-to-november-2025">Population monthly timeserie from February 2022 to November 2025</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="resources/ukraine-nowpop-telecoms/timeserie_population.png" class="img-fluid figure-img"></p>
+<figcaption>Monthly population trends through time for all hromadas included in the telecom analysis for each oblast. Note that the count of hromadas included for each oblast is listed under the oblast name at the top of each panel.</figcaption>
+</figure>
+</div>
+</section>
+<section id="population-from-and-to-abroad" class="level4">
+<h4 class="anchored" data-anchor-id="population-from-and-to-abroad">Population from and to abroad</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="resources/ukraine-nowpop-telecoms/map_abroad.png" class="img-fluid figure-img"></p>
+<figcaption>Number of people estimated to be moving to Ukraine from abroad (left) or moving abroad from Ukraine (right) for each hromada in November 2025.</figcaption>
+</figure>
+</div>
+</section>
+<section id="age-and-sex-compositional-shift" class="level4">
+<h4 class="anchored" data-anchor-id="age-and-sex-compositional-shift">Age and sex compositional shift</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="resources/ukraine-nowpop-telecoms/pyramid.png" class="img-fluid figure-img"></p>
+<figcaption>Change in the age-sex composition of populations in the hromadas that experience the largest change between October and November 2025.</figcaption>
+</figure>
+</div>
+<p>We release one pair of CSV files per month:</p>
+<ul>
+<li><strong>Population stocks</strong> - estimated population in each hromada.</li>
+<li><strong>Population flows</strong> - estimated number of people whose home was in one hromada last month and in another (or the same) hromada this month, including flows to and from <em>Abroad</em> and from <em>Unknown</em> origins.</li>
+</ul>
+<p>Each row identifies the hromada, raion, and oblast by COD P-code, with names in English and Ukrainian. Columns give estimates for each sex (<code>F</code>, <code>M</code>, or total <code>T</code>) and age group (<code>18_24</code>, <code>25_34</code>, <code>35_44</code>, <code>45_54</code>, <code>55_64</code>, or all adults <code>18_64</code>); for example, <code>F_18_24</code> holds women aged 18 to 24.</p>
+<p>As with any small-area estimate, individual hromada figures are less reliable than aggregates. We recommend aggregating to raions or oblasts where possible.</p>
+<p>The estimates are classified as restricted with moderate sensitivity, following the OCHA Information Sharing Protocol for Ukraine. They can be explored in the <a href="https://ukraine.nowpop.org">Ukraine NowPop dashboard</a>, which shows population estimates for a chosen month, age-sex group, and geographic level, as well as flows between areas. Oblast-level results are public; raion- and hromada-level results require user authentication.</p>
+</section>
+</section>
+</section>
+<section id="triangulation" class="level2">
+<h2 class="anchored" data-anchor-id="triangulation">Triangulation</h2>
+<p>There is no complete, independent count of Ukraine’s population after February 2022 against which to validate these estimates. We compare them with other sources:</p>
+<ul>
+<li><strong>Official population estimates</strong> - We compare our estimates with the 2023, 2024, and 2025 COD-PS updates produced by the United Nations Population Fund (UNFPA), by age and sex, at national and oblast level, and map the differences. To make the comparison fair, we restrict it to raions in which every hromada is covered by the telecom data.</li>
+<li><strong>Displacement surveys</strong> - We compare estimated internal movements with the numbers of internally displaced people (IDPs) reported by the IOM DTM, for each oblast and month.</li>
+</ul>
+<p>The relative age structure of our estimates aligns closely with COD-PS in every year, particularly in the middle working-age groups. However, our estimates suggest fewer women than COD-PS in most age groups. This may be because our method accounts for flows to and from abroad by age and sex, using the border crossing data.</p>
+<p><img src="resources/ukraine-nowpop-telecoms/comp_codps_2023.png" class="img-fluid"></p>
+<p>Our estimates of internal movement follow the same trends as the IDP numbers reported by IOM, but are about 15 times larger. This is expected because the two measure different things: IOM counts internally displaced people, whereas we count every change of home hromada. The discrepancy was much larger during the first few months after the full-scale invasion, which may reflect both this difference in definitions and reporting errors during that chaotic period.</p>
+<p>Because the telecom data are updated monthly, the estimates can complement the annual COD-PS updates between releases.</p>
+<p>The method described here is a rapid-response approach designed to deliver operational estimates quickly from a single data source. In parallel, we are developing a Bayesian statistical framework that integrates several data sources, so that estimates remain stable when any one source changes or is lost.</p>
+</section>
+<section id="assumptions-and-limitations" class="level2">
+<h2 class="anchored" data-anchor-id="assumptions-and-limitations">Assumptions and limitations</h2>
+<ul>
+<li><strong>Coverage.</strong> Estimates are only produced for hromadas with consistent telecom data through time. Crimea, Sevastopol, and Donetska and Luhanska oblasts are not covered, nor are a further 103 hromadas.</li>
+<li><strong>Age.</strong> Subscriber data are sparse for people under 18 and over 64, so the estimates cover only adults aged 18 to 64.</li>
+<li><strong>Home location.</strong> A subscriber’s home is their most common night-time location over the previous three months, so the estimates do not capture sudden, short-term moves.</li>
+<li><strong>Penetration rates.</strong> The initial penetration rate depends on the accuracy of the 2022 baseline population. Updated rates assume that the subscribers in a hromada are representative of its estimated population.</li>
+<li><strong>Age and sex.</strong> Age-sex penetration rates are assumed to be the same for all hromadas in a macroregion, and the baseline age-sex structure of each oblast is assumed to apply to all its hromadas.</li>
+<li><strong>Unknown origins and abroad.</strong> Subscribers with an unknown origin are assumed to resemble residents of their destination. Flows to and from abroad rely on border crossing totals and on age-sex profiles from other sources, which may not represent everyone crossing the border: temporary protection beneficiaries in neighbouring countries for departures, and IOM returnee surveys for arrivals. Because those surveys stopped in December 2024, we assume the returnee profile has not changed since.</li>
+<li><strong>Non-government-controlled territory.</strong> The population there is estimated from very limited data, using a penetration rate held constant since <span class="math inline">\(t_0\)</span>. The baseline flows show people moving from non-government-controlled into government-controlled territory, but we must assume that nobody moves the other way.</li>
+<li><strong>Border crossings.</strong> Without more detailed information, we assume that every border crossing involves one of the hromadas in the government-controlled territory. We therefore assume no border-crossing from non-government-controlled territory are recorded.</li>
+<li><strong>Natural change.</strong> The national total is updated only for border crossings. Births, deaths, and ageing since 2022 are not accounted for.</li>
+<li><strong>Commercial aggregates.</strong> The data are a marketing product, so we do not control or fully observe how subscribers are assigned to hromadas, age groups, and sex. Changes in how the operator produces the product can appear as artificial population changes.</li>
+<li><strong>Data continuity.</strong> Estimates go out of date unless new data are purchased, and they depend on a single data source.</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<hr>
+
+<div style="display: flex; justify-content: space-between; align-items: center; font-family: 'Mulish', sans-serif; font-size: 0.9rem; color: #7f8c8d; padding: 20px 0;">
+
+    <div>
+
+        © 2026 Real Good Research.<br>All rights reserved.
+
+    </div>
+
+    <div>
+
+        Source code for this website<br>is available on <a href="https://github.com/realgoodresearch/realgooddocs" target="_blank">GitHub</a>.
+
+    </div>
+
+    <div>
+
+        Open Source Content: <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC-BY 4.0</a><br>
+
+        Open Source Code: <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a>
+
+    </div>
+
+</div>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../books/nowpop/gaza-nowpop-telecoms.html" class="pagination-link" aria-label="Gaza Telecoms">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Gaza Telecoms</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

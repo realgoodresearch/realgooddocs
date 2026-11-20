@@ -6,4 +6,5 @@ listing:
     contents:
         - overview.qmd
         - gaza-nowpop-telecoms.qmd
+        - ukraine-nowpop-telecoms.qmd
 ---
