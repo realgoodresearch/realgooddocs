@@ -1,9 +1,11 @@
 ---
 title: "Table of Contents"
 listing: 
-    type: grid
+    type: default
+    fields: [title, description, image]
     sort: false
     contents:
         - overview.qmd
         - gaza-nowpop-telecoms.qmd
+        - ukraine-nowpop-telecoms.qmd
 ---

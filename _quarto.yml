@@ -61,6 +61,8 @@ website:
           href: books/nowpop/toc.qmd
         - text: "Gaza Telecoms"
           href: books/nowpop/gaza-nowpop-telecoms.qmd
+        - text: "Ukraine Telecoms"
+          href: books/nowpop/ukraine-nowpop-telecoms.qmd
     - id: tent-mapping-sidebar
       title: "Tent Mapping"
       path: books/tent-mapping/
