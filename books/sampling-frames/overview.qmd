@@ -16,7 +16,7 @@ format:
 }
 </style>
 
-![](resources/sampling-frames-hero-placeholder.svg){fig-align="center" width="90%"}
+![](resources/sampling-frames-introduction-hero.png){fig-align="center" width="90%"}
 
 Sampling frames form the geographical and statistical foundation of censuses and household surveys. They provide the structure for comprehensive census enumeration and the basis for selecting primary sampling units and, subsequently, households or individuals for surveys. Their quality directly affects the representativeness of survey samples and the reliability of estimates of population characteristics, such as health, economic circumstances and public perceptions. Maintaining reliable frames is nevertheless challenging. Rapid population growth, urban expansion and forced displacement can make existing frames obsolete, while political sensitivities may restrict access to official census materials. Frames may also be geographically incomplete where armed conflict, insecurity or limited resources prevent enumeration in parts of a country.
 
