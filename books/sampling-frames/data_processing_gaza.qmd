@@ -1,7 +1,7 @@
 ---
-title: "Input Data for Gaza"
-subtitle: "Subtitle"
-description: "A short description for the table of contents."
+title: "Preparing data for generating spatial frames in Gaza"
+subtitle: "Creating building footprint-like data from information on damaged buildings and tented accommodation"
+description: "Where conventional building footprints do not adequately represent inhabited locations, additional data are needed to create accurate spatial sampling frames. This tutorial prepares an input dataset that reflects the current distribution of Gaza’s population, including people living in tents and areas affected by building damage or destruction. The resulting dataset is used with clusterComposer to generate a spatial sampling frame."
 image: "resources/sampling-frames-hero-placeholder.svg"
 author: "Claire Dooley"
 date: last-modified
