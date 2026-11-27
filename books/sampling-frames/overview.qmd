@@ -1,7 +1,7 @@
 ---
 title: "Automated Spatial Sampling Frames"
 subtitle: "Progress in approaches to generate reliable spatial frames for household surveys and census enumeration."
-description: "A short description for the table of contents."
+description: "An overview of approaches being developed by researchers at RGR to fill data gaps in survey sampling frames and census frames."
 image: "resources/sampling-frames-hero-placeholder.svg"
 date: last-modified
 date-format: "D MMM YYYY, HH:mm:ss"

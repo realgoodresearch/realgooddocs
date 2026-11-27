@@ -26,8 +26,8 @@
     "listing": "/books/sampling-frames/toc.html",
     "items": [
       "/books/sampling-frames/overview.html",
-      "/books/sampling-frames/cluster_composer.html",
-      "/books/sampling-frames/data_processing_general.html",
+      "/books/sampling-frames/cluster_composer_introduction.html",
+      "/books/sampling-frames/cluster_composer_tutorial_getting_started.html",
       "/books/sampling-frames/data_processing_gaza.html"
     ]
   },

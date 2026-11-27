@@ -1,7 +1,7 @@
 ---
 title: "Creating Sampling Frames using clusterComposer"
 subtitle: "Examples for Three Neighbourhoods in Guatemala City"
-description: "A short description for the table of contents."
+description: "Explore how clusterComposer performs at creating sampling frames for different urban layouts and for different target clusters sizes. This chapter is in the style of a tutorial aimed at getting users started with creating frames."
 image: "resources/sampling-frames-hero-placeholder.svg"
 date: last-modified
 date-format: "D MMM YYYY, HH:mm:ss"

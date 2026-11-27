@@ -427,7 +427,7 @@
     "href": "books/sampling-frames/toc.html",
     "title": "Table of Contents",
     "section": "",
-    "text": "Automated Survey Sampling Frames\n\n\n\nA short description for the table of contents.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nclusterComposer\n\n\n\nA short description for the table of contents.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInput Data\n\n\n\nA short description for the table of contents.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInput Data for Gaza\n\n\n\nA short description for the table of contents.\n\n\n\n\n\n\n\n\nNo matching items",
+    "text": "Automated Spatial Sampling Frames\n\n\nAn overview of approaches being developed by researchers at RGR to fill data gaps in survey sampling frames and census frames.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe clusterComposer approach for generating automated spatial sampling frames\n\n\nA look at the inner workings of clusterComposer through a step-by-step guide.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCreating Sampling Frames using clusterComposer\n\n\nExplore how clusterComposer performs at creating sampling frames for different urban layouts and for different target clusters sizes. This chapter is in the style of a tutorial aimed at getting users started with creating frames.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInput Data for Gaza\n\n\nA short description for the table of contents.\n\n\n\n\n\n\n\n\nNo matching items",
     "crumbs": [
       "Table of Contents"
     ]
@@ -981,5 +981,103 @@
     "title": "Repository workflow",
     "section": "",
     "text": "Use imperative, specific commit subjects.\nReference the issue in the pull request description and explain the user-visible result.\nIn the pull request, list the validation performed and any remaining TODOs or source gaps.\nDo not push, merge, rewrite history, or close issues unless the user explicitly asks.\nBefore handoff, summarize changed source files, validation results, and anything the next contributor must supply."
+  },
+  {
+    "objectID": "books/sampling-frames/cluster_composer_tutorial_getting_started.html#load-packages",
+    "href": "books/sampling-frames/cluster_composer_tutorial_getting_started.html#load-packages",
+    "title": "Creating Sampling Frames using clusterComposer",
+    "section": "Load packages",
+    "text": "Load packages\nHere we load clusterCompser as well as the sf package for reading and plotting spatial data\n\nlibrary(clusterComposer)\nlibrary(sf)"
+  },
+  {
+    "objectID": "books/sampling-frames/cluster_composer_tutorial_getting_started.html#locate-the-example-data-files",
+    "href": "books/sampling-frames/cluster_composer_tutorial_getting_started.html#locate-the-example-data-files",
+    "title": "Creating Sampling Frames using clusterComposer",
+    "section": "Locate the example data files",
+    "text": "Locate the example data files\nThe code below stores the file path to the existing data saved in the clusterComposer R package folders.\n\nextdata_path &lt;- system.file(\"extdata\", package = \"clusterComposer\")"
+  },
+  {
+    "objectID": "books/sampling-frames/cluster_composer_tutorial_getting_started.html#locate-the-directory-for-output-files",
+    "href": "books/sampling-frames/cluster_composer_tutorial_getting_started.html#locate-the-directory-for-output-files",
+    "title": "Creating Sampling Frames using clusterComposer",
+    "section": "Locate the directory for output files",
+    "text": "Locate the directory for output files\nEdit the below code so that the object output_dir contains the desired folder you would like your sampling frame output files to be saved. The second chunk of code creates a folder called “output”, in your chosen location, if it doesn’t already exist.\n\n# Set the directory in which you would like output files to be saved.\noutput_dir &lt;- \"\"\n\n\n# Create the output folder within this directory if it does not already exist.\noutput_path &lt;- file.path(output_dir, \"output\")\ndir.create(output_path, recursive = TRUE, showWarnings = FALSE)"
+  },
+  {
+    "objectID": "books/sampling-frames/cluster_composer_tutorial_getting_started.html#section-a-regular-road-network-layout-with-buildings-arranged-in-clearly-defined-blocks",
+    "href": "books/sampling-frames/cluster_composer_tutorial_getting_started.html#section-a-regular-road-network-layout-with-buildings-arranged-in-clearly-defined-blocks",
+    "title": "Creating Sampling Frames using clusterComposer",
+    "section": "Section A: regular road network layout with buildings arranged in clearly defined blocks",
+    "text": "Section A: regular road network layout with buildings arranged in clearly defined blocks\nRead in the section boundary and buildings data, then plot them.\n\nAOI_A &lt;- st_read(file.path(extdata_path, \"sectionA.gpkg\"))\nbf_A &lt;- st_read(file.path(extdata_path, \"bfsA.gpkg\"))\n\nplot(st_geometry(AOI_A), border = \"red\", lwd = 2)\nplot(st_geometry(bf_A), add = TRUE, col = \"grey70\", border = \"grey40\")\n\n\n\n\n\n\n\n\n\n\nSection A has a regular grid-like arrangement of blocks of buildings.\nNext, run clusterComposer for Section A.\n\nclusterComposer(\n  aoi = AOI_A,\n  bf_file_path = file.path(extdata_path, \"bfsA.gpkg\"),\n  run_id = \"guatemala_sectionA\",\n  output_file_path = output_path,\n  n_cores = 1\n)\n\nIn these examples, we run clusterComposer separately on each section (spatial area) and examine the results. When multiple sections are processed in a single run, clusterComposer can use parallel processing, with different sections processed simultaneously by different computing cores. Therefore, we generally recommend using the total number of available cores minus one, although fewer cores can be used. Here, only one section is processed at a time, so we use one core (n_cores = 1).\nNow we can read in and plot the sampling frame boundaries produced for Section A. Note that clusterComposer saves files using the run_id followed by _clusters.gpkg. In this example, the file saved is guatemala_sectionA_clusters.gpkg.\n\n# Plot the building footprints.\nplot(\n  st_geometry(bf_A),\n  col = \"grey70\",\n  border = \"grey40\",\n  main = \"Section A sampling frame boundaries\"\n)\n\n# Read in the sampling frame units and add them to the plot.\nsectionA_boundaries &lt;- st_read(\n  file.path(output_path, \"guatemala_sectionA_clusters.gpkg\")\n)\nplot(\n  st_geometry(sectionA_boundaries),\n  add = TRUE,\n  col = NA,\n  border = \"blue\",\n  lwd = 2\n)\n\n\n\n\n\n\n\n\n\n\nNow, plot the population sizes of the clusters.\n\n# clusterComposer calculates the population size for the final cluster\n# boundaries and saves these values in a column called \"pop\".\nplot(\n  sectionA_boundaries[, \"pop\"],\n  main = \"Section A population size per cluster\"\n)\n\n\n\n\n\n\n\n\n\n\nFor comparisons across output sampling frames, it is easier to use standardised population bands and colour coding. Let’s re-plot the population per cluster for Section A.\n\nsectionA_boundaries$pop_band &lt;- cut(\n  sectionA_boundaries[[\"pop\"]],\n  breaks = c(-Inf, 50, 100, 150, 200, 250, 300, 350, Inf),\n  labels = c(\n    \"≤50\", \"51–100\", \"101–150\", \"151–200\",\n    \"201–250\", \"251–300\", \"301–350\", \"&gt;350\"\n  ),\n  include.lowest = TRUE\n)\n\nplot(\n  sectionA_boundaries[\"pop_band\"],\n  pal = c(\n    \"#ffffcc\", \"#d9f0a3\", \"#addd8e\", \"#78c679\",\n    \"#41ab5d\", \"#238443\", \"#006837\", \"#004529\"\n  ),\n  main = \"Section A population size per cluster\"\n)\n\n\n\n\n\n\n\n\n\n\nclusterComposer has a default target population per cluster of 250 people. In our Section A example, clusterComposer has successfully generated clusters with populations that are mostly close to this target. clusterComposer also has default settings for the maximum and minimum population size per cluster, which govern the range in population sizes across clusters. We will show some results for different population parameters later. First, let’s look at two other example urban layouts."
+  },
+  {
+    "objectID": "books/sampling-frames/cluster_composer_tutorial_getting_started.html#section-b-buildings-arranged-in-a-regular-pattern-within-a-more-irregular-road-network",
+    "href": "books/sampling-frames/cluster_composer_tutorial_getting_started.html#section-b-buildings-arranged-in-a-regular-pattern-within-a-more-irregular-road-network",
+    "title": "Creating Sampling Frames using clusterComposer",
+    "section": "Section B: buildings arranged in a regular pattern within a more irregular road network",
+    "text": "Section B: buildings arranged in a regular pattern within a more irregular road network\nRead in the data, plot the section, then run clusterComposer for Section B using the default population settings (target = 250 people; max = 350 people; min 150 people).\n\n# Read in the data.\nAOI_B &lt;- st_read(file.path(extdata_path, \"sectionB.gpkg\"))\nbf_B &lt;- st_read(file.path(extdata_path, \"bfsB.gpkg\"))\n\n# Plot the inputs.\nplot(st_geometry(AOI_B), border = \"red\", lwd = 2)\nplot(st_geometry(bf_B), add = TRUE, col = \"grey70\", border = \"grey40\")\n\nclusterComposer(\n  aoi = AOI_B,\n  bf_file_path = file.path(extdata_path, \"bfsB.gpkg\"),\n  run_id = \"guatemala_sectionB\",\n  output_file_path = output_path,\n  n_cores = 1\n)\n\n\n\n\n\n\n\n\n\n\nPlot the results.\n\n# Plot the building footprints.\nplot(\n  st_geometry(bf_B),\n  col = \"grey70\",\n  border = \"grey40\",\n  main = \"Section B sampling frame boundaries\"\n)\n\n# Read in the sampling frame units and add them to the plot.\nsectionB_boundaries &lt;- st_read(\n  file.path(output_path, \"guatemala_sectionB_clusters.gpkg\")\n)\nplot(\n  st_geometry(sectionB_boundaries),\n  add = TRUE,\n  col = NA,\n  border = \"blue\",\n  lwd = 2\n)\n\n\n\n\n\n\n\n\n\n\n\n# Plot population per cluster.\nsectionB_boundaries$pop_band &lt;- cut(\n  sectionB_boundaries[[\"pop\"]],\n  breaks = c(-Inf, 50, 100, 150, 200, 250, 300, 350, Inf),\n  labels = c(\n    \"≤50\", \"51–100\", \"101–150\", \"151–200\",\n    \"201–250\", \"251–300\", \"301–350\", \"&gt;350\"\n  ),\n  include.lowest = TRUE\n)\n\nplot(\n  sectionB_boundaries[\"pop_band\"],\n  pal = c(\n    \"#ffffcc\", \"#d9f0a3\", \"#addd8e\", \"#78c679\",\n    \"#41ab5d\", \"#238443\", \"#006837\", \"#004529\"\n  ),\n  main = \"Section B population size per cluster\"\n)\n\n\n\n\n\n\n\n\n\n\nWe see that eight of the nine clusters meet the desired population range of 150-350 people. One cluster has a population size slightly below the 150 minimum."
+  },
+  {
+    "objectID": "books/sampling-frames/cluster_composer_tutorial_getting_started.html#section-c-an-irregular-layout-with-variation-in-building-size-and-arrangement",
+    "href": "books/sampling-frames/cluster_composer_tutorial_getting_started.html#section-c-an-irregular-layout-with-variation-in-building-size-and-arrangement",
+    "title": "Creating Sampling Frames using clusterComposer",
+    "section": "Section C: an irregular layout with variation in building size and arrangement",
+    "text": "Section C: an irregular layout with variation in building size and arrangement\nRead in the data, plot the section, then run clusterComposer for Section C using the default population settings (target = 250 people; max = 350 people; min 150 people).\n\n# Read in the data.\nAOI_C &lt;- st_read(file.path(extdata_path, \"sectionC.gpkg\"))\nbf_C &lt;- st_read(file.path(extdata_path, \"bfsC.gpkg\"))\n\n# Plot the inputs.\nplot(st_geometry(AOI_C), border = \"red\", lwd = 2)\nplot(st_geometry(bf_C), add = TRUE, col = \"grey70\", border = \"grey40\")\n\nclusterComposer(\n  aoi = AOI_C,\n  bf_file_path = file.path(extdata_path, \"bfsC.gpkg\"),\n  run_id = \"guatemala_sectionC\",\n  output_file_path = output_path,\n  n_cores = 1\n)\n\n\n\n\n\n\n\n\n\n\nPlot the results.\n\n# Plot the building footprints.\nplot(\n  st_geometry(bf_C),\n  col = \"grey70\",\n  border = \"grey40\",\n  main = \"Section C sampling frame boundaries\"\n)\n\n# Read in the sampling frame units and add them to the plot.\nsectionC_boundaries &lt;- st_read(\n  file.path(output_path, \"guatemala_sectionC_clusters.gpkg\")\n)\nplot(\n  st_geometry(sectionC_boundaries),\n  add = TRUE,\n  col = NA,\n  border = \"blue\",\n  lwd = 2\n)\n\n\n\n\n\n\n\n\n\n\n\n# Plot population per cluster.\nsectionC_boundaries$pop_band &lt;- cut(\n  sectionC_boundaries[[\"pop\"]],\n  breaks = c(-Inf, 50, 100, 150, 200, 250, 300, 350, Inf),\n  labels = c(\n    \"≤50\", \"51–100\", \"101–150\", \"151–200\",\n    \"201–250\", \"251–300\", \"301–350\", \"&gt;350\"\n  ),\n  include.lowest = TRUE\n)\n\nplot(\n  sectionC_boundaries[\"pop_band\"],\n  pal = c(\n    \"#ffffcc\", \"#d9f0a3\", \"#addd8e\", \"#78c679\",\n    \"#41ab5d\", \"#238443\", \"#006837\", \"#004529\"\n  ),\n  main = \"Section C population size per cluster\"\n)\n\n\n\n\n\n\n\n\n\n\nIn this example, eight clusters were generated and all have population within the desired range of 150-350 people."
+  },
+  {
+    "objectID": "books/sampling-frames/cluster_composer_introduction.html",
+    "href": "books/sampling-frames/cluster_composer_introduction.html",
+    "title": "The clusterComposer approach for generating automated spatial sampling frames",
+    "section": "",
+    "text": "The clusterComposer tool (Dooley et al. 2026) creates spatial clusters from building footprints and estimated population counts per building. It is designed to produce clusters that meet specified population thresholds while remaining spatially coherent and practical for field enumeration.\nThe process is summarised below using an example set of building footprints obtained from the Overture Maps Foundation buildings dataset (Overture Maps Foundation, accessed November 2026).\nFigure 1: Example building footprints used as input to the cluster construction process. Data attribution: Overture Maps Foundation, overturemaps.org. © OpenStreetMap contributors."
+  },
+  {
+    "objectID": "books/sampling-frames/cluster_composer_introduction.html#step-1-group-nearby-buildings",
+    "href": "books/sampling-frames/cluster_composer_introduction.html#step-1-group-nearby-buildings",
+    "title": "The clusterComposer approach for generating automated spatial sampling frames",
+    "section": "Step 1: Group nearby buildings",
+    "text": "Step 1: Group nearby buildings\nBuilding footprints are buffered a small amount, and overlapping buffers are merged to create collections of buildings that are in close proximity.\nThe buffer distance is selected adaptively. It is set so that the estimated population of a building collection does not exceed the specified maximum population per cluster, or enumeration zone. Consequently, different building collections may be created using different buffer distances, depending on the local density and distribution of buildings and population.\nThe goal of this first step is to group together buildings in very close proximity without exceeding the set cluster population threshold.\n\n\n\n\n\n\n\n\nFigure 2: Step 1: Buildings are grouped into collections based on proximity and population constraints."
+  },
+  {
+    "objectID": "books/sampling-frames/cluster_composer_introduction.html#step-2-define-coherent-cluster-areas",
+    "href": "books/sampling-frames/cluster_composer_introduction.html#step-2-define-coherent-cluster-areas",
+    "title": "The clusterComposer approach for generating automated spatial sampling frames",
+    "section": "Step 2: Define coherent cluster areas",
+    "text": "Step 2: Define coherent cluster areas\nMinimum-area rectangles are created around the building collections. Rectangles with substantial overlap are then merged.\nThis step helps to define sensible cluster areas and reduces the likelihood that separate building collections become spatially intertwined. The resulting areas provide a clearer spatial structure for the subsequent clustering process.\n\n\n\n\n\n\n\n\nFigure 3: Step 2: Minimum-area rectangles are created around building collections and merged where they overlap substantially."
+  },
+  {
+    "objectID": "books/sampling-frames/cluster_composer_introduction.html#step-3-combine-building-collections-into-clusters",
+    "href": "books/sampling-frames/cluster_composer_introduction.html#step-3-combine-building-collections-into-clusters",
+    "title": "The clusterComposer approach for generating automated spatial sampling frames",
+    "section": "Step 3: Combine building collections into clusters",
+    "text": "Step 3: Combine building collections into clusters\nHierarchical clustering is applied to spatially combine blocks of building collections. This step produces a hierarchical tree of potential clustering options. The tree is examined and the combinations of building collections that meet the desired population range are selected as clusters.\n\n\n\n\n\n\n\n\nFigure 4: Step 3: Hierarchical clustering combines building collections to achieve the target population per cluster."
+  },
+  {
+    "objectID": "books/sampling-frames/cluster_composer_introduction.html#step-4-allocate-gaps-between-clusters",
+    "href": "books/sampling-frames/cluster_composer_introduction.html#step-4-allocate-gaps-between-clusters",
+    "title": "The clusterComposer approach for generating automated spatial sampling frames",
+    "section": "Step 4: Allocate gaps between clusters",
+    "text": "Step 4: Allocate gaps between clusters\nAny small unallocated spaces between clusters are assigned to a neighbouring cluster. Each space is allocated to the neighbouring cluster with which it shares the longest boundary.\nThis produces a complete set of adjoining cluster polygons without small gaps between them.\n\n\n\n\n\n\n\n\nFigure 5: Step 4: Small spaces between clusters are assigned according to the longest shared boundary.\n\n\n\n\n\nThe next step considers the population sizes of clusters, so let’s see what these look like at this stage of the process.\n\n\n\n\n\n\n\n\nFigure 6: Post Step 4 population per cluster."
+  },
+  {
+    "objectID": "books/sampling-frames/cluster_composer_introduction.html#step-5-merge-clusters-below-the-minimum-population-threshold",
+    "href": "books/sampling-frames/cluster_composer_introduction.html#step-5-merge-clusters-below-the-minimum-population-threshold",
+    "title": "The clusterComposer approach for generating automated spatial sampling frames",
+    "section": "Step 5: Merge clusters below the minimum population threshold",
+    "text": "Step 5: Merge clusters below the minimum population threshold\nClusters whose estimated populations fall below the specified minimum are combined with suitable neighbouring clusters. A merge is permitted only when the population of the resulting cluster does not exceed the maximum population threshold.\nWhere several valid neighbouring clusters are available, the function selects the combination that produces the most spatially compact result. This balances the population requirements with the need to create practical cluster shapes.\n\n\n\n\n\n\n\n\nFigure 7: Step 5: Clusters below the minimum population are merged with suitable neighbours."
+  },
+  {
+    "objectID": "books/sampling-frames/cluster_composer_introduction.html#step-6-refine-cluster-boundaries",
+    "href": "books/sampling-frames/cluster_composer_introduction.html#step-6-refine-cluster-boundaries",
+    "title": "The clusterComposer approach for generating automated spatial sampling frames",
+    "section": "Step 6: Refine cluster boundaries",
+    "text": "Step 6: Refine cluster boundaries\nFinally, cluster boundaries are cleaned and refined. The boundaries are adjusted so that they pass around buildings rather than through them, and unnecessary irregularities are removed.\nThis step produces boundaries that are smoother, more interpretable and more suitable for use in mapping and field enumeration.\n\n\n\n\n\n\n\n\nFigure 8: Step 6: Cluster boundaries are refined to follow sensible routes around buildings. Data attribution: Overture Maps Foundation, overturemaps.org. © OpenStreetMap contributors."
+  },
+  {
+    "objectID": "books/sampling-frames/cluster_composer_introduction.html#references",
+    "href": "books/sampling-frames/cluster_composer_introduction.html#references",
+    "title": "The clusterComposer approach for generating automated spatial sampling frames",
+    "section": "References",
+    "text": "References\nDooley, C. A., Clary, C. B., Rhoda, D. A., & Thomson, D. R. (2026). clusterComposer: Generate Bespoke Spatial Sampling Frames from Buildings. R package version 0.1.1. DOI: https://doi.org/10.5281/zenodo.24353237. Repository: https://github.com/cadooley/clusterComposer.\nOverture Maps Foundation. Overture Maps data. https://overturemaps.org/. Accessed November 2026."
   }
 ]
