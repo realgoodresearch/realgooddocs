@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.11.9">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,16 +11,10 @@
 
 <title>Input Data for Gaza – Real Good Docs</title>
 <style>
-/* Default styles provided by pandoc.
-** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
-*/
+code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: 1.5em;}
-div.column{flex: auto;}
-@media screen {
-div.columns{gap: min(4vw, 1.5em);}
-div.column{overflow-x: auto;}
-}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -73,19 +67,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../books/sampling-frames/data_processing_general.html" rel="prev">
+<link href="../../books/sampling-frames/data_processing_general.qmd" rel="prev">
 <link href="../../assets/images/logo/favicon.ico" rel="icon">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-0d6b17e1774deaac102b13973fef85f6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-354872f81673af113701ade52bd741b3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -125,18 +118,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar floating nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+<body class="nav-sidebar floating nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Real Good Docs</span>
     </a>
   </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -161,16 +155,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
-            <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+  <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../books/sampling-frames/data_processing_gaza.html">Input Data for Gaza</a></li></ol></nav>
-        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../books/sampling-frames/data_processing_gaza.html">Input Data for Gaza</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
   </nav>
@@ -178,7 +171,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Section">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
@@ -201,7 +194,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../books/sampling-frames/data_processing_general.html" class="sidebar-item-text sidebar-link">
+  <a href="../../books/sampling-frames/data_processing_general.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Input Data</span></a>
   </div>
 </li>
@@ -217,7 +210,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+        <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
@@ -242,7 +235,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content" tabindex="-1">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -269,7 +262,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">19 Nov 2026, 18:20:55</p>
+      <p class="date">25 Nov 2026, 15:03:14</p>
     </div>
   </div>
   
@@ -301,40 +294,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="define-file-paths">1. Define file paths</h2>
 <p>Define the root data directory and the relative paths to the building, tent, administrative boundary, road, input, and output data.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data_dir <span class="ot">&lt;-</span> <span class="st">""</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data_dir <span class="ot">&lt;-</span> <span class="st">""</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>blds_filepath <span class="ot">&lt;-</span> <span class="st">"raw/"</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>tents_filepath <span class="ot">&lt;-</span> <span class="st">"raw/"</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>admin_filepath <span class="ot">&lt;-</span> <span class="st">"raw/"</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>roads_path <span class="ot">&lt;-</span> <span class="st">"raw/"</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>cc_input_path <span class="ot">&lt;-</span> <span class="st">"in/"</span> <span class="co"># create before saving first input file below</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>cc_output_path <span class="ot">&lt;-</span> <span class="st">"out/"</span> <span class="co">#</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>cc_output_path <span class="ot">&lt;-</span> <span class="st">"out/"</span> <span class="co">#</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="install-and-load-the-required-packages" class="level2">
 <h2 class="anchored" data-anchor-id="install-and-load-the-required-packages">2. Install and load the required packages</h2>
 <p>The dependencies used internally by <code>clusterComposer</code> are installed automatically when the package is installed. The installation line only needs to be run when installing or updating <code>clusterComposer</code>. It does not need to be run every time the analysis is started.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install "pak" if not installed</span></span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install "pak" if not installed</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("pak")</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># use pak to install clusterComposer</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">pak</span>(<span class="st">"cadooley/clusterComposer"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">pak</span>(<span class="st">"cadooley/clusterComposer"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The remaining packages are used for data preparation, running <code>clusterComposer</code>, and exploring the results.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># libraries for data prep, generating sampling frame &amp; exploration of results</span></span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># libraries for data prep, generating sampling frame &amp; exploration of results</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(clusterComposer)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="read-the-input-datasets" class="level2">
 <h2 class="anchored" data-anchor-id="read-the-input-datasets">3. Read the input datasets</h2>
 <p>Read the building locations (UNOSAT, 2025), tent locations (), administrative boundaries (), and road network (PA MOP, JRJ &amp; OCHA, 2021). The road dataset is then restricted to roads within the Gaza Strip.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read in data</span></span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read in data</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>bld_points <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="fu">paste0</span>(</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  data_dir,</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  blds_filepath,</span>
@@ -351,27 +344,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">"gaza_neighbourhood_boundaries.gpkg"</span></span>
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>))</span>
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>roads <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="fu">paste0</span>(data_dir, roads_path, <span class="st">"Road_network_oPt.shp"</span>))</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>roads <span class="ot">&lt;-</span> roads[roads<span class="sc">$</span>Region <span class="sc">==</span> <span class="st">"Gaza Strip"</span>, ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>roads <span class="ot">&lt;-</span> roads[roads<span class="sc">$</span>Region <span class="sc">==</span> <span class="st">"Gaza Strip"</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="transform-the-spatial-datasets" class="level2">
 <h2 class="anchored" data-anchor-id="transform-the-spatial-datasets">4. Transform the spatial datasets</h2>
 <p>Transform all spatial datasets to EPSG:32636 so that spatial operations and distance-based calculations are performed in a projected coordinate reference system with metre-based units.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># espg 32636</span></span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># espg 32636</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>bld_points <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(bld_points, <span class="dv">32636</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>tent_points <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(tent_points, <span class="dv">32636</span>)</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>admin <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(admin, <span class="dv">32636</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>roads <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(roads, <span class="dv">32636</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>roads <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(roads, <span class="dv">32636</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="remove-buildings-identified-as-having-no-housing-units-due-to-destructiondamage" class="level2">
 <h2 class="anchored" data-anchor-id="remove-buildings-identified-as-having-no-housing-units-due-to-destructiondamage">5. Remove buildings identified as having no housing units due to destruction/damage</h2>
 <p>Calculate the updated number of housing units and remove buildings with no remaining housing units.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># omit blds with no housing units</span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># omit blds with no housing units</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>bld_points<span class="sc">$</span>HU_update <span class="ot">&lt;-</span> bld_points<span class="sc">$</span>HU_tot <span class="sc">-</span> bld_points<span class="sc">$</span>HU_damaged_14</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>bld_points <span class="ot">&lt;-</span> bld_points[bld_points<span class="sc">$</span>HU_update <span class="sc">&gt;</span> <span class="dv">0</span>, ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>bld_points <span class="ot">&lt;-</span> bld_points[bld_points<span class="sc">$</span>HU_update <span class="sc">&gt;</span> <span class="dv">0</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="prepare-the-building-and-tent-input" class="level2">
@@ -379,13 +372,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Combine the building and tent locations into a single spatial object. Each point is buffered by two metres to create the polygon geometries required by <code>clusterComposer</code>. It may be useful to have different buffers for buildings and tents in which case <code>st_zm()</code> and <code>st_buffer()</code> can be applied separately to the buildings and tents, followed by the step to bring them into the same object.</p>
 <p>For this example, every building or tent is assigned a population of five. This could be replaced with an appropriate population estimate before producing a final sampling frame.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># save all points into one gpgk</span></span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># save all points into one gpgk</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>bf <span class="ot">&lt;-</span> <span class="fu">st_sf</span>(<span class="at">geometry =</span> <span class="fu">c</span>(<span class="fu">st_geometry</span>(bld_points), <span class="fu">st_geometry</span>(tent_points)))</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>bf <span class="ot">&lt;-</span> <span class="fu">st_zm</span>(bf, <span class="at">drop =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>bf <span class="ot">&lt;-</span> <span class="fu">st_buffer</span>(bf, <span class="dv">2</span>)</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>bf<span class="sc">$</span>pop_building <span class="ot">&lt;-</span> <span class="dv">5</span></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># save as gpkg</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#st_write(bf,paste0(data_dir,cc_input_path,"bld_tent_points.gpkg"),delete_dsn=TRUE)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#st_write(bf,paste0(data_dir,cc_input_path,"bld_tent_points.gpkg"),delete_dsn=TRUE)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The final <code>st_write()</code> line is commented out. Remove the initial <code>#</code> when ready to save the prepared input as a GeoPackage.</p>
 </section>
@@ -394,18 +387,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Note that while <code>clusterComposer</code> is still under development, we recommend generating sampling frames for specific areas rather than whole regions.</p>
 <p>Select the Deir al Balah area at administrative unit level 3 (ADM3). Columns are also created to store the number of buildings and tents in each section.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># test for Deir al Balah</span></span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># test for Deir al Balah</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>aoi <span class="ot">&lt;-</span> admin[admin<span class="sc">$</span>ADM3_EN <span class="sc">==</span> <span class="st">"Deir al Balah"</span>, ]</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>aoi<span class="sc">$</span>section_id <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(aoi)</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>aoi<span class="sc">$</span>bf_count <span class="ot">&lt;-</span> <span class="dv">0</span>L</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>aoi<span class="sc">$</span>tent_count <span class="ot">&lt;-</span> <span class="dv">0</span>L</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>aoi<span class="sc">$</span>tent_count <span class="ot">&lt;-</span> <span class="dv">0</span>L</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="count-buildings-and-tents-within-each-section" class="level2">
 <h2 class="anchored" data-anchor-id="count-buildings-and-tents-within-each-section">8. Count buildings and tents within each section</h2>
 <p>Count the buildings and tents locations intersecting each area-of-interest section. The total number of points and an indicative population are then calculated.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># number of buildings and tents per section</span></span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># number of buildings and tents per section</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (section <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(aoi)) {</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  aoi<span class="sc">$</span>bf_count[section] <span class="ot">&lt;-</span> <span class="fu">lengths</span>(<span class="fu">st_intersects</span>(aoi[section, ], bld_points))</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  aoi<span class="sc">$</span>tent_count[section] <span class="ot">&lt;-</span> <span class="fu">lengths</span>(<span class="fu">st_intersects</span>(aoi[section, ], tent_points))</span>
@@ -413,7 +406,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># clusterComposer runs best on less than 1000 buildings</span></span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>aoi<span class="sc">$</span>tot_points <span class="ot">&lt;-</span> (aoi<span class="sc">$</span>bf_count <span class="sc">+</span> aoi<span class="sc">$</span>tent_count)</span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># assuming 5 people per point just for testing purposes</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>aoi<span class="sc">$</span>tot_pop <span class="ot">&lt;-</span> aoi<span class="sc">$</span>tot_points <span class="sc">*</span> <span class="dv">5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>aoi<span class="sc">$</span>tot_pop <span class="ot">&lt;-</span> aoi<span class="sc">$</span>tot_points <span class="sc">*</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="identify-and-divide-large-sections" class="level2">
@@ -421,7 +414,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Select sections containing more than 800 building or tent locations. Roads within and immediately around these sections are used as dividing lines.</p>
 <p>The road geometries and area boundaries are combined, noded, and polygonised to create smaller subsections.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># split areas with more than 800 buildings/tents using roads, prior to running cluster composer</span></span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># split areas with more than 800 buildings/tents using roads, prior to running cluster composer</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>aoi_big <span class="ot">&lt;-</span> aoi[aoi<span class="sc">$</span>tot_points <span class="sc">&gt;</span> <span class="dv">800</span>, ]</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>roads_aoi <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(roads, <span class="fu">st_buffer</span>(aoi_big, <span class="dv">50</span>))</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>sub_sections <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">st_geometry</span>(roads_aoi), <span class="fu">st_geometry</span>(<span class="fu">st_boundary</span>(aoi_big)))</span>
@@ -433,12 +426,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>polygons_sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(polygons)</span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>polygons_sf <span class="ot">&lt;-</span> polygons_sf[<span class="sc">!</span><span class="fu">st_is_empty</span>(polygons_sf), ]</span>
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>polygons_sf <span class="ot">&lt;-</span> <span class="fu">st_make_valid</span>(polygons_sf)</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>polygons_sf<span class="sc">$</span>area <span class="ot">&lt;-</span> <span class="fu">st_area</span>(polygons_sf)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>polygons_sf<span class="sc">$</span>area <span class="ot">&lt;-</span> <span class="fu">st_area</span>(polygons_sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The above code creates lots of smaller polygons from the large sections. As the road network was used to split these areas, we now have some undesirable polygons, e.g.&nbsp;thin strips of land between a road edge and the neighbourhod boundary. So, next, we merge these merged into neighbouring polygons that share the longest boundary.</p>
 <p>The procedure is repeated until no polygons below the threshold remain or no further suitable merge can be made.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># merge small polys into neighbours</span></span>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># merge small polys into neighbours</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>thresh <span class="ot">&lt;-</span> <span class="dv">50000</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="cf">repeat</span> {</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  small_idx <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">as.numeric</span>(polygons_sf<span class="sc">$</span>area) <span class="sc">&lt;</span> thresh)</span>
@@ -482,7 +475,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span>merged_any) <span class="cf">break</span></span>
 <span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>polygons_sf <span class="ot">&lt;-</span> polygons_sf[<span class="sc">!</span><span class="fu">st_is_empty</span>(polygons_sf), ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>polygons_sf <span class="ot">&lt;-</span> polygons_sf[<span class="sc">!</span><span class="fu">st_is_empty</span>(polygons_sf), ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The above code merges based on polygon area but this could be adapted to explicitly merge based on estimated population sizes of polygons.</p>
 </section>
@@ -491,7 +484,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Count the building and tent locations contained in each polygon.</p>
 <p>The total number of points and the indicative population are recalculated for the new sections.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># count blds &amp; tents for new polygons</span></span>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># count blds &amp; tents for new polygons</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>polygons_sf<span class="sc">$</span>section_id <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(polygons_sf)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>polygons_sf<span class="sc">$</span>bf_count <span class="ot">&lt;-</span> <span class="dv">0</span>L</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>polygons_sf<span class="sc">$</span>tent_count <span class="ot">&lt;-</span> <span class="dv">0</span>L</span>
@@ -513,7 +506,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(polygons_sf)[</span>
 <span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(polygons_sf) <span class="sc">==</span> <span class="fu">attr</span>(polygons_sf, <span class="st">"sf_column"</span>)</span>
 <span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>] <span class="ot">&lt;-</span> <span class="st">"geom"</span></span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(polygons_sf, <span class="st">"sf_column"</span>) <span class="ot">&lt;-</span> <span class="st">"geom"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(polygons_sf, <span class="st">"sf_column"</span>) <span class="ot">&lt;-</span> <span class="st">"geom"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="reassemble-the-area-of-interest" class="level2">
@@ -521,7 +514,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Retain the original sections containing no more than 800 points and combine them with the new subsections created from the larger areas.</p>
 <p>The section areas and identifiers are then recalculated.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add to previous sections</span></span>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add to previous sections</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>aoi <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  aoi[</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    aoi<span class="sc">$</span>tot_points <span class="sc">&lt;=</span> <span class="dv">800</span>,</span>
@@ -530,16 +523,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  polygons_sf[, <span class="fu">c</span>(<span class="st">"bf_count"</span>, <span class="st">"tent_count"</span>, <span class="st">"tot_points"</span>, <span class="st">"tot_pop"</span>)]</span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>aoi<span class="sc">$</span>area <span class="ot">&lt;-</span> <span class="fu">st_area</span>(aoi)</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>aoi<span class="sc">$</span>section_id <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(aoi)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>aoi<span class="sc">$</span>section_id <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(aoi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="check-sections-with-low-populations" class="level2">
 <h2 class="anchored" data-anchor-id="check-sections-with-low-populations">12. Check sections with low populations</h2>
 <p>Identify sections whose indicative population is below the minimum cluster population of 150. <code>clusterComposer</code> will simply save these as individual</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># note that several of these sections are below the minimum population per EZ of 150</span></span>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># note that several of these sections are below the minimum population per EZ of 150</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the code above to split up areas could be based on population counts rather than size</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(aoi[aoi<span class="sc">$</span>tot_pop <span class="sc">&lt;</span> <span class="dv">150</span>, ]) <span class="co"># 19</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(aoi[aoi<span class="sc">$</span>tot_pop <span class="sc">&lt;</span> <span class="dv">150</span>, ]) <span class="co"># 19</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="save-the-area-of-interest-sections" class="level2">
@@ -547,14 +540,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Save the completed Deir al Balah area-of-interest sections as a GeoPackage for use with <code>clusterComposer</code>.</p>
 <p>The <code>st_write()</code> call is currently commented out. Remove the initial <code>#</code> when ready to write the file.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># save the Areas of Interest</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#st_write(aoi,paste0(data_dir,cc_input_path,"aoi_DeiralBalah.gpkg"),delete_dsn=TRUE)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># save the Areas of Interest</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#st_write(aoi,paste0(data_dir,cc_input_path,"aoi_DeiralBalah.gpkg"),delete_dsn=TRUE)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="create-sampling-frame-from-clustercomposer" class="level2">
 <h2 class="anchored" data-anchor-id="create-sampling-frame-from-clustercomposer">14. Create sampling frame from <code>clusterComposer</code></h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>ncores <span class="ot">&lt;-</span> parallel<span class="sc">::</span><span class="fu">detectCores</span>() <span class="sc">-</span> <span class="dv">1</span></span>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>ncores <span class="ot">&lt;-</span> parallel<span class="sc">::</span><span class="fu">detectCores</span>() <span class="sc">-</span> <span class="dv">1</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># run clusterComposer function</span></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">clusterComposer</span>(</span>
@@ -567,7 +560,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">min_pop_per_EZ =</span> <span class="dv">150</span>,</span>
 <span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_cores =</span> ncores,</span>
 <span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">delete_temp_files =</span> <span class="cn">FALSE</span></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="evaluating-results" class="level2">
@@ -645,14 +638,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-      const outerScaffold = trigger.parentElement.cloneNode(true);
-      const codeEl = outerScaffold.querySelector('code');
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
         }
-      }
-      return codeEl.innerText;
+        return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -668,30 +660,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
         var filterRegex = new RegExp('/' + window.location.host + '/');
-      const newWindowLabel = "(opens in a new tab)";
-      const newWindowNoteId = "quarto-ext-newwindow-label";
-      // Links reference one hidden label through aria-describedby, so the
-      // announcement never changes their accessible name.
-      var describeNewWindow = (link) => {
-        if (!window.document.getElementById(newWindowNoteId)) {
-          var newWindowNote = window.document.createElement("span");
-          newWindowNote.id = newWindowNoteId;
-          newWindowNote.hidden = true;
-          newWindowNote.textContent = newWindowLabel;
-          window.document.body.appendChild(newWindowNote);
-        }
-        var describedBy = (link.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
-        if (!describedBy.includes(newWindowNoteId)) {
-          describedBy.push(newWindowNoteId);
-          link.setAttribute("aria-describedby", describedBy.join(" "));
-        }
-      }
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-      window.quartoDecorateExternalLinks = function (root) {
-     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -705,70 +678,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             if (link.getAttribute("rel") === null) {
               link.setAttribute("rel", "noopener");
             }
-            describeNewWindow(link);
-          if (!link.classList.contains('no-external-icon')) {
-          }
         }
       }
-      };
-      window.quartoDecorateExternalLinks(window.document);
-    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
-    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
-    const hideOnEscAndFocusOut = {
-      name: 'hideOnEscAndFocusOut',
-      defaultValue: true,
-      fn(instance) {
-        const dismiss = () => {
-          // A show scheduled by the trigger delay would otherwise reopen it
-          instance.clearDelayTimeouts();
-          instance.hide();
-        };
-        const onKeyDown = (event) => {
-          if (event.key !== 'Escape') {
-            return;
-          }
-          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
-          // except an open reveal.js slide menu, which Esc should close too.
-          // The menu handles keys only when its keyboard option is on.
-          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
-            window.Reveal.getConfig().menu?.keyboard !== false;
-          if (!menuHandlesEsc) {
-            event.stopPropagation();
-          }
-          if (instance.popper.contains(window.document.activeElement)) {
-            // Disabled while refocusing so the focus trigger does not reopen it
-            instance.disable();
-            instance.reference.focus();
-            instance.enable();
-          }
-          dismiss();
-        };
-        const onFocusOut = (event) => {
-          const target = event.relatedTarget;
-          if (target && !instance.reference.contains(target) &&
-              !instance.popper.contains(target)) {
-            dismiss();
-          }
-        };
-        // On the trigger too: a click trigger (code-annotations: select) has no
-        // blur handling. Attached for the instance's lifetime so leaving the
-        // trigger also cancels a show still pending on the trigger delay.
-        instance.reference.addEventListener('focusout', onFocusOut);
-        return {
-          onShow() {
-            window.document.addEventListener('keydown', onKeyDown, true);
-            instance.popper.addEventListener('focusout', onFocusOut);
-          },
-          onHide() {
-            window.document.removeEventListener('keydown', onKeyDown, true);
-            instance.popper.removeEventListener('focusout', onFocusOut);
-          },
-          onDestroy() {
-            instance.reference.removeEventListener('focusout', onFocusOut);
-          },
-        };
-      },
-    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -782,7 +693,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
-        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -945,54 +855,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          // Each band is positioned against its own containing block, which is
-          // not the offsetParent of the lines, so place it from client rects.
-          const placeBand = (band, firstEl, lastEl, codeBlock) => {
-            const container = band.offsetParent;
-            if (container === null) {
-              return;
-            }
-            const containerRect = container.getBoundingClientRect();
-            // Reveal.js scales slides with a transform, so convert client
-            // pixels back to the CSS pixels of the container.
-            const scale = containerRect.height / container.offsetHeight || 1;
-            const firstRect = firstEl.getBoundingClientRect();
-            const lastRect = lastEl.getBoundingClientRect();
-            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
-            const height = (lastRect.bottom - firstRect.top) / scale;
-            band.style.top = top - 2 + "px";
-            band.style.height = height + 4 + "px";
-            if (codeBlock) {
-              // Without the copy button wrapper, the containing block is wider
-              // than the code block, so span the code block explicitly.
-              const blockRect = codeBlock.getBoundingClientRect();
-              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
-              band.style.width = blockRect.width / scale + "px";
-            }
-          };
+          let top = null;
+          let height = null;
+          let parent = null;
           if (lineIds.length > 0) {
-            const el = window.document.getElementById(lineIds[0]);
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const parent = el.parentElement.parentElement;
-            // cook up a div (if necessary) and position it
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
             }
-            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
             }
-            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1091,12 +991,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
   });
   </script>
-  <script type="application/javascript">
-  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
-  </script>
-<nav class="page-navigation" aria-label="Page">
+<nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../books/sampling-frames/data_processing_general.html" class="pagination-link" aria-label="Input Data">
+      <a href="../../books/sampling-frames/data_processing_general.qmd" class="pagination-link" aria-label="Input Data">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Input Data</span>
       </a>          
   </div>
