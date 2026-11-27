@@ -1,5 +1,5 @@
 ---
-title: "clusterComposer"
+title: "The clusterComposer approach for generating automated sampling frames using "
 subtitle: "Subtitle"
 description: "A short description for the table of contents."
 image: "resources/sampling-frames-hero-placeholder.svg"

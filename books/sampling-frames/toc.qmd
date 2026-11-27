@@ -6,7 +6,7 @@ listing:
     sort: false
     contents:
         - overview.qmd
-        - cluster_composer.qmd
-        - data_processing_general.qmd
+        - cluster_composer_introduction.qmd
+        - cluster_composer_tutorial_getting_started.qmd
         - data_processing_gaza.qmd
 ---
