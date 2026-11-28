@@ -15,7 +15,7 @@ format:
 }
 </style>
 
-![](resources/sampling-frames-hero-placeholder.svg){fig-align="center" width="90%"}
+![](resources/cluster-composer-introduction-hero.png){fig-align="center" width="90%"}
 
 The clusterComposer tool ([Dooley et al. 2026](https://github.com/cadooley/clusterComposer)) creates spatial clusters from building footprints and estimated population counts per building. It is designed to produce clusters that meet specified population thresholds while remaining spatially coherent and practical for field enumeration.
 

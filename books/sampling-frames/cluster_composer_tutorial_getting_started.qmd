@@ -21,7 +21,7 @@ execute:
 }
 </style>
 
-![](resources/sampling-frames-hero-placeholder.svg){fig-align="center" width="90%"}
+![](resources/cluster_composer_tutorial_getting_started_hero.png){fig-align="center" width="90%"}
 
 ```{r}
 #| label: setup-options

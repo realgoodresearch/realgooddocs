@@ -19,20 +19,19 @@ execute:
 }
 </style>
 
-![](resources/sampling-frames-hero-placeholder.svg){fig-align="center" width="90%"}
+![](resources/data_processing_gaza_hero.png){fig-align="center" width="90%"}
 
 ## Introduction
 
-This tutorial demonstrates how to generate a spatial sampling frame from building and tent locations data using the `clusterComposer` R package.
+This tutorial demonstrates how to generate a spatial sampling frame from building and tent location data using the `clusterComposer` R package. 
 
-`clusterComposer` has been designed to derive sampling frames from building footprints. Each unit is created to meet a target population while having clear boundaries that identify the buildings included and are reasonably navigable by field teams. Since ****, in Gaza, building footprints alone are not very helpful for understanding the distribution of population across space. Instead we can use buffered building and tent point location to create a pseudo building footprints dataset from which `clusterComposer` can generate a spatial sampling frame. 
+While `clusterComposer` was originally designed to derive sampling frames from building footprints, available footprint datasets do not adequately represent the current distribution of inhabited dwellings in Gaza. This tutorial therefore demonstrates an alternative workflow that uses locations of tent and buildings that are known to contain housing units as a substitute for building footprints. We then show how to use this alternative dataset to create a sampling frame.
 
-The example covered in this tutorial creates a spatial sampling frame for Deir al Balah using building locations, tent locations, neighbourhood boundaries, and a road network. The neighbourhood boundaries and roads data are used to create sections. The building and tent points data are converted into dwelling polygons and each assigned a population count. The `clusterComposer` function is applied to build clusters of dwellings within each section that meet a target population sise of 250 people. At the end of the tutorial, the results are evaluated.
-
+The example covered in this tutorial creates a spatial sampling frame for Deir al Balah using building locations, tent locations, neighbourhood boundaries, and a road network. The neighbourhood boundaries and roads data are used to create sections. The building and tent points data are converted into dwelling polygons and each polygon has an associated number of housing units based on building damage data. The `clusterComposer` function is applied to build clusters of dwellings within each section that meet a target size of 150 housing units. At the end of the tutorial, the results are evaluated.
 
 ## 1. Define file paths
 
-Define the root data directory and the relative paths to the building, tent, administrative boundary, road, input, and output data.
+Define the root data directory and the relative paths to the building, tent, administrative boundary and road datasets, together with the paths where intermediate data and final outputs will be saved.
 
 ```{r define-file-paths}
 data_dir <- ""
@@ -41,23 +40,22 @@ blds_filepath <- "raw/"
 tents_filepath <- "raw/"
 admin_filepath <- "raw/"
 roads_path <- "raw/"
-cc_input_path <- "in/" # create before saving first input file below
-cc_output_path <- "out/" #
+cc_input_path <- "in/" 
+cc_output_path <- "out/" 
 ```
 
 ## 2. Install and load the required packages
 
-The dependencies used internally by `clusterComposer` are installed
-automatically when the package is installed. The installation line only needs to be run when installing or updating `clusterComposer`. It does not need to be run every time the analysis is started.
+The code below install the `pak` R package. The `pak` function is then used to install `clusterComposer`. You only ever need to run code to install packages the first time you are using them or to update them so you do not need to run this code every time a new analysis or new session of R is started.
 
 ```{r install}
 # install "pak" if not installed
-#install.packages("pak")
+install.packages("pak")
 # use pak to install clusterComposer
 pak::pak("cadooley/clusterComposer")
 ```
 
-The remaining packages are used for data preparation, running
+Load packages needed for data preparation, running
 `clusterComposer`, and exploring the results.
 
 ```{r load-packages}
@@ -72,7 +70,7 @@ library(ggplot2)
 
 ## 3. Read the input datasets
 
-Read the building locations (UNOSAT, 2025), tent locations (), administrative boundaries (), and road network (PA MOP, JRJ & OCHA, 2021). The road dataset is then restricted to roads within the Gaza Strip. 
+Read the building locations (UNOSAT, 2025), tent locations (Zhang et al. 2026), administrative boundaries (UNOCHA 2025), and road network (HOTOSM 2025). The road dataset is then restricted to roads within the Gaza Strip. 
 
 ```{r read-input-data}
 # read in data
@@ -84,15 +82,32 @@ bld_points <- st_read(paste0(
 tent_points <- st_read(paste0(
   data_dir,
   tents_filepath,
-  "gaza_tent_points_20260805.gpkg"
+  "gaza_tent_points_20261016.gpkg"
 ))
 admin <- st_read(paste0(
   data_dir,
   admin_filepath,
   "gaza_neighbourhood_boundaries.gpkg"
 ))
-roads <- st_read(paste0(data_dir, roads_path, "Road_network_oPt.shp"))
-roads <- roads[roads$Region == "Gaza Strip", ]
+roads <- st_read(paste0(data_dir, roads_path,"roads.gpkg"))
+roads <- roads[roads$adm1_name == "Gaza Strip", ]
+```
+Plot your administrative units to look at their size and layout. The image below is based on the boundaries used in this tutorial - your plot will differ when using another boundary dataset.
+
+``` {r plot-admin}
+# look at column names
+names(admin)
+# plot using an appropriate column name
+plot(admin[,"ADM3_EN"])
+```
+```{r}
+#| label: gaza-admin-boundaries-figure
+#| eval: true
+#| echo: false
+#| out-width: 80%
+#| fig-align: center
+
+knitr::include_graphics("resources/gaza_adminBoundaries.png")
 ```
 
 ## 4. Transform the spatial datasets
@@ -102,6 +117,9 @@ distance-based calculations are performed in a projected coordinate reference
 system with metre-based units.
 
 ```{r transform-spatial-data}
+# buildings data includes a thirs coordinate for each point which gives height/elevation information
+# this is simply 0 for most points, so let's remove it as it is not relevant to our analysis
+bld_points <- st_zm(bld_points, drop = TRUE)
 # espg 32636
 bld_points <- st_transform(bld_points, 32636)
 tent_points <- st_transform(tent_points, 32636)
@@ -109,81 +127,110 @@ admin <- st_transform(admin, 32636)
 roads <- st_transform(roads, 32636)
 ```
 
-## 5. Remove buildings identified as having no housing units due to destruction/damage
+## 5. Calculate housing units per building
 
-Calculate the updated number of housing units and remove buildings with
-no remaining housing units.
+The buildings data here contains a column `HU_tot` which gives the original number of housing units in a building. The dataset also contain an estimate of the number of housing units per building that are damaged in `HU_damaged_14`. Calculate the original number minus those damaged to obtain an estimate of remaining housing units per building.
 
-```{r remove-buildings-without-housing-units}
-# omit blds with no housing units
-bld_points$HU_update <- bld_points$HU_tot - bld_points$HU_damaged_14
-bld_points <- bld_points[bld_points$HU_update > 0, ]
+``` {r}
+# if original number of housing units is NA, assume this means 0
+bld_points$HU_tot[is.na(bld_points$HU_tot)] <- 0
+# if number of housing units damaged is NA, assume this means 0 units have been damaged
+bld_points$HU_damaged_14[is.na(bld_points$HU_damaged_14)] <- 0
+# calculate to remaining housing units associated with each building point
+bld_points$hu_update <- bld_points$HU_tot - bld_points$HU_damaged_14
 ```
 
-## 6. Prepare the building and tent input
+## 6. Convert building and tent point locations into spatial polygons
 
-Combine the building and tent locations into a single spatial object. Each point is buffered by two metres to create the polygon geometries required by `clusterComposer`. It may be useful to have different buffers for buildings and tents in which case `st_zm()` and `st_buffer()` can be applied separately to the buildings and tents, followed by the step to bring them into the same object.
-
-For this example, every building or tent is assigned a population of five. This could be replaced with an appropriate population estimate before producing a final sampling frame.
+Buffer building points by 5 metres and tent points by 2 metres to create the polygon geometries required by `clusterComposer`. Combine these into a single spatial object.
 
 ```{r prepare-building-and-tent-input}
-# save all points into one gpgk
-bf <- st_sf(geometry = c(st_geometry(bld_points), st_geometry(tent_points)))
-bf <- st_zm(bf, drop = TRUE)
-bf <- st_buffer(bf, 2)
-bf$pop_building <- 5
+# buffer building points
+bld_polys <- st_buffer(bld_points, 5)
+# buffer tent points
+tent_polys <- st_buffer(tent_points, 2)
+
+# bring building and tent polygons into one object
+
+# note we use the column name "pop_building" because this is what the clusterComposer function expects, but we'll put count of dwellings per building here
+# specify one housing unit per tent
+tent_polys$pop_building <- 1 
+# rename the column in the building points 
+names(bld_polys)[names(bld_polys)=="hu_update"] <- "pop_building"
+# rename the buildings geometry column to match that for the tents object
+names(bld_polys)[names(bld_polys) == attr(bld_polys, "sf_column")] <- "geom"
+attr(bld_polys, "sf_column") <- "geom"
+
+# put buildings and tents in the same object, include number of housing units
+dwellings <- rbind(bld_polys[,"pop_building"],tent_polys[,"pop_building"])
+
+```
+Next, we save the complete dwellings object, covering the full area for which building and tent locations are available. As this object may contain a large number of points, the resulting file can be substantial and may take time to save. Consider subsetting the data to the required area before saving.
+
+``` {r save-dwellings}
 # save as gpkg
-#st_write(bf,paste0(data_dir,cc_input_path,"bld_tent_points.gpkg"),delete_dsn=TRUE)
+st_write(dwellings,paste0(data_dir,cc_input_path,"dwelling_buffered_points.gpkg"),delete_dsn=TRUE)
 ```
 
-The final `st_write()` line is commented out. Remove the initial `#` when ready
-to save the prepared input as a GeoPackage.
+## 7. Select area for the sampling frame 
 
-## 7. Select area for sampling frame 
+While `clusterComposer` is still under development, we recommend generating sampling frames for specific areas and examine outputs before creating frames for large regions. 
 
-Note that while `clusterComposer` is still under development, we recommend generating sampling frames for specific areas rather than whole regions. 
-
-Select the Deir al Balah area at administrative unit level 3 (ADM3). Columns are also created to store the number of
-buildings and tents in each section.
+Select the Deir al Balah area at administrative unit level 3 (ADM3).
 
 ```{r select-area-of-interest}
 # test for Deir al Balah
-aoi <- admin[admin$ADM3_EN == "Deir al Balah", ]
-aoi$section_id <- 1:nrow(aoi)
-aoi$bf_count <- 0L
-aoi$tent_count <- 0L
+aoi_initial <- admin[admin$ADM3_EN == "Deir al Balah", ]
+aoi_initial$section_id <- 1:nrow(aoi_initial)
 ```
 
-## 8. Count buildings and tents within each section
+## 8. Create suitable sections within the area of interest
 
-Count the buildings and tents locations intersecting each area-of-interest
-section. The total number of points and an indicative population are then
-calculated.
+We now want to focus on creating reasonable areal units that `clusterComposer` can efficiently process. 
+
+First, we count the dwelling locations intersecting each section within the area of interest. Note, this is just counting the number of dwelling locations not the number of housing units as we are more interested in the amount of polygons inside our large units, rather than population as it is the spatial processing that is computationally intensive. 
 
 ```{r count-points-by-section}
+# omit dwellings with zero housing units
+dwellings <- dwellings[!dwellings$pop_building==0,]
 # number of buildings and tents per section
-for (section in 1:nrow(aoi)) {
-  aoi$bf_count[section] <- lengths(st_intersects(aoi[section, ], bld_points))
-  aoi$tent_count[section] <- lengths(st_intersects(aoi[section, ], tent_points))
-}
-# clusterComposer runs best on less than 1000 buildings
-aoi$tot_points <- (aoi$bf_count + aoi$tent_count)
-# assuming 5 people per point just for testing purposes
-aoi$tot_pop <- aoi$tot_points * 5
+aoi_initial$dwelling_count <- lengths(sf::st_intersects(aoi_initial, dwellings))
 ```
 
-## 9. Identify and divide large sections
+Plot the counts of dwellings across the units within the area of interest. 
 
-Select sections containing more than 800 building or tent locations. Roads
-within and immediately around these sections are used as dividing lines.
+``` {r plot-admin-dwellings}
+# look at column names
+names(aoi_initial)
+# plot using an appropriate column name
+plot(aoi_initial[,"dwelling_count"],
+     pal = function(n) hcl.colors(n, palette="Terrain",rev="TRUE"),
+     main="Counts of occupied dwellings per admin unit")
+# we can look at the full list the counts of dwellings per section 
+sort(aoi_initial$dwelling_count)
+```
+```{r}
+#| label: gaza-dwellings-per-admin-figure
+#| eval: true
+#| echo: false
+#| out-width: 80%
+#| fig-align: center
 
-The road geometries and area boundaries are combined, noded, and polygonised to
-create smaller subsections.
+knitr::include_graphics("resources/gaza_dwellings_per_adminUnit.png")
+```
+
+In this example, the range in counts of dwellings per section is 462 to 11,453.
+
+Next, we want to identify and divide large sections. Start by selecting sections containing more than 2000 dwelling locations and cut these up into smaller sections using roads data.
+
+To achieve this, the road geometries and area boundaries are combined, noded, and polygonised to create smaller subsections.
 
 ```{r divide-large-sections}
+# we don't want to use all the roads for this step as this would create many very small sections so subset to major roads
+roads_major <- roads[roads$highway %in% c("trunk_link","trunk","tertiary_link","tertiary","secondary_link","secondary","primary_link","primary","motorway_link","motorway"),] 
 # split areas with more than 800 buildings/tents using roads, prior to running cluster composer
-aoi_big <- aoi[aoi$tot_points > 800, ]
-roads_aoi <- st_intersection(roads, st_buffer(aoi_big, 50))
+aoi_big <- aoi_initial[aoi_initial$dwelling_count > 2000, ]
+roads_aoi <- st_intersection(roads_major, st_buffer(aoi_big, 50))
 sub_sections <- c(st_geometry(roads_aoi), st_geometry(st_boundary(aoi_big)))
 lines <- st_union(sub_sections)
 lines <- st_node(lines)
@@ -195,15 +242,15 @@ polygons_sf <- polygons_sf[!st_is_empty(polygons_sf), ]
 polygons_sf <- st_make_valid(polygons_sf)
 polygons_sf$area <- st_area(polygons_sf)
 ```
-The above code creates lots of smaller polygons from the large sections. As the road network was used to split these areas, we now have some undesirable polygons, e.g. thin strips of land between a road edge and the neighbourhod boundary. So, next, we merge these merged into
-neighbouring polygons that share the longest boundary.
+The above code creates lots of smaller polygons from the large sections. As the road network was used to split these areas, we now have some undesirable polygons, e.g. thin strips of land between a road edge and the neighbourhod boundary. So, next, we merge these into neighbouring polygons that share the longest boundary.
 
-The procedure is repeated until no polygons below the threshold remain or no
-further suitable merge can be made.
+The procedure is repeated until no polygons below a set threshold remain or no further suitable merge can be made. In this example, we set the threshold to be 50,000 m^2^. 
 
 ```{r merge-small-polygons}
-# merge small polys into neighbours
+# set area threshold
 thresh <- 50000
+
+# merge small polys into neighbours
 repeat {
   small_idx <- which(as.numeric(polygons_sf$area) < thresh)
   if (length(small_idx) == 0) {
@@ -249,86 +296,63 @@ repeat {
 polygons_sf <- polygons_sf[!st_is_empty(polygons_sf), ]
 ```
 
-The above code merges based on polygon area but this could be adapted to explicitly merge based on estimated population sizes of polygons.
+The aim of this step is to reduce the number of annoying small polygons that are likely to contain very low populations by merging them with neighbouring units. For simplicity, polygons are selected for merging based on an area threshold. 
 
-## 10. Recalculate section counts
+This step could be developed to play a more significant role in preparing the data whereby the above code could be adapted to allow merges based on dwelling (or population) counts. This could be an important addition if there are many sections with a low population because the sections we are preparing will be passed to clusterComposer for division into clusters/enumeration zones, and sections that are already small will remain unchanged. Merging them at this stage can therefore help avoid retaining unnecessarily small, low-population units in the final sampling frame.
 
-Count the building and
-tent locations contained in each polygon.
-
-The total number of points and the indicative population are recalculated for
-the new sections.
+To complete the preparation of suitable sections within our area of interest, recalculate dwelling counts for newly formed sections and add these to the object containing the sections we did not split up.
 
 ```{r recount-points-in-new-sections}
-# count blds & tents for new polygons
-polygons_sf$section_id <- 1:nrow(polygons_sf)
-polygons_sf$bf_count <- 0L
-polygons_sf$tent_count <- 0L
-for (section in 1:nrow(polygons_sf)) {
-  polygons_sf$bf_count[section] <- lengths(st_intersects(
-    polygons_sf[section, ],
-    bld_points
-  ))
-  polygons_sf$tent_count[section] <- lengths(st_intersects(
-    polygons_sf[section, ],
-    tent_points
-  ))
-}
-# clusterComposer runs best on less than 1000 buildings
-polygons_sf$tot_points <- (polygons_sf$bf_count + polygons_sf$tent_count)
-# assuming 5 people per point just for testing purposes
-polygons_sf$tot_pop <- polygons_sf$tot_points * 5
-# rename geometry col
+# count dwelling locations for new polygons
+polygons_sf$dwelling_count <- lengths(sf::st_intersects(polygons_sf, dwellings))
+
+# rename geometry col to match that of aoi
 names(polygons_sf)[
   names(polygons_sf) == attr(polygons_sf, "sf_column")
 ] <- "geom"
 attr(polygons_sf, "sf_column") <- "geom"
-```
 
-## 11. Reassemble the area of interest
-
-Retain the original sections containing no more than 800 points and combine
-them with the new subsections created from the larger areas.
-
-The section areas and identifiers are then recalculated.
-
-```{r reassemble-area-of-interest}
 # add to previous sections
 aoi <- rbind(
-  aoi[
-    aoi$tot_points <= 800,
-    c("bf_count", "tent_count", "tot_points", "tot_pop")
-  ],
-  polygons_sf[, c("bf_count", "tent_count", "tot_points", "tot_pop")]
+  aoi_initial[aoi_initial$dwelling_count <= 2000,"dwelling_count"],
+  polygons_sf[, "dwelling_count"]
 )
 aoi$area <- st_area(aoi)
 aoi$section_id <- 1:nrow(aoi)
 ```
 
-## 12. Check sections with low populations
+Plot the updated sections and their count of dwellings to compare with our plot above (noting the different colour scales).
 
-Identify sections whose indicative population is below the minimum cluster population of 150. `clusterComposer` will simply save these as individual 
+``` {r plot-section-dwellings}
+# plot using an appropriate column name
+plot(aoi[,"dwelling_count"],
+     pal = function(n) hcl.colors(n, palette="Terrain",rev="TRUE"),
+     main="Counts of occupied dwellings per section")
+# we can look at the full list the counts of dwellings per section 
+sort(aoi$dwelling_count)
+```
+```{r}
+#| label: gaza-dwellings-per-section-figure
+#| eval: true
+#| echo: false
+#| out-width: 80%
+#| fig-align: center
 
-```{r check-low-population-sections}
-# note that several of these sections are below the minimum population per EZ of 150
-# the code above to split up areas could be based on population counts rather than size
-nrow(aoi[aoi$tot_pop < 150, ]) # 19
+knitr::include_graphics("resources/gaza_dwellings_per_section.png")
 ```
 
-## 13. Save the area-of-interest sections
+## 9. Save the area of interest sections (optional)
 
-Save the completed Deir al Balah area-of-interest sections as a GeoPackage for
-use with `clusterComposer`.
-
-The `st_write()` call is currently commented out. Remove the initial `#` when
-ready to write the file.
+Save the area of interest sections as a GeoPackage. The `st_write()` call is currently commented out. Remove the initial `#` when ready to write the file.
 
 ```{r save-area-of-interest}
 # save the Areas of Interest
 #st_write(aoi,paste0(data_dir,cc_input_path,"aoi_DeiralBalah.gpkg"),delete_dsn=TRUE)
 ```
 
-## 14. Create sampling frame from `clusterComposer`
+## 10. Create sampling frame from `clusterComposer`
+
+In this example, we work with number of housing units and so this is the unit of measure for our population parameters. We set the target population per cluster/enumeration zone (`pop_per_EZ` parameter) to 150 housing units and we set our maximum and minimum population per cluster/enumeration zone to 200 and 100 housing units, respectively.
 
 ```{r run-cluster-composer}
 ncores <- parallel::detectCores() - 1
@@ -336,20 +360,33 @@ ncores <- parallel::detectCores() - 1
 # run clusterComposer function
 clusterComposer(
   aoi = aoi,
-  bf_file_path = paste0(data_dir, cc_input_path, "bld_tent_points.gpkg"),
-  run_id = "gaza_test_dab_20261119",
+  bf_file_path = paste0(data_dir, cc_input_path, "dwelling_buffered_points.gpkg"),
+  run_id = "gaza_dab_20261128_broadinitbuff",
   output_file_path = paste0(data_dir, cc_output_path),
-  pop_per_EZ = 250,
-  max_pop_per_EZ = 350,
-  min_pop_per_EZ = 150,
+  pop_per_EZ = 150,
+  max_pop_per_EZ = 200,
+  min_pop_per_EZ = 100,
   n_cores = ncores,
+  initial_buffer_dist_max = 50,
+  initial_buffer_dist_min = 50/8,
   delete_temp_files = FALSE
 )
 ```
 
+Now we can read in the sampling frame and take a look at the results.
 
-## 15. Evaluating results
+``` {r results}
+# read in the frame
+sframe <- st_read(paste0(data_dir, cc_output_path,"gaza_dab_20261128_clusters.gpkg"))
 
-## References
+# the sframe has a column "pop" which in this example is number of housing units
+# plot number of housing units per cluster
+plot(sframe[,"pop"], main = "Number of housing units per cluster")
+# plot histogram of housing units per cluster
+hist(sframe$pop,xlab = "Housing units per cluster",main = "Histogram of housing units per cluster",breaks=100)
+# count how many clusters 
+length(sframe$pop[sframe$pop<100])
+length(sframe$pop[sframe$pop>=100 & sframe$pop<=200])
+length(sframe$pop[sframe$pop>200])
+```
 
-State of Palestine Ministry of Planning and Administrative Development (PA MOP), Joint Research Centre (JRC), and United Nations Office for the Coordination of Humanitarian Affairs (OCHA). 2021. State of Palestine – Roads. Humanitarian Data Exchange. Updated 18 November 2021. Accessed November 2026. Dataset.
